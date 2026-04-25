@@ -481,7 +481,7 @@ def main():
     print("IPTV频道源处理脚本")
     print("=" * 60)
     
-    template = ChannelTemplate("freetv/doem.txt")
+    template = ChannelTemplate("freetv/dome.txt")
     if not template.load_template():
         return
     
