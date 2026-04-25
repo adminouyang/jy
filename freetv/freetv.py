@@ -530,16 +530,16 @@ def main():
     print("IPTV频道源处理脚本 (多源版本)")
     print("=" * 60)
     
-    template = ChannelTemplate("freetv/doem.txt")
+    template = ChannelTemplate("freetv/dome.txt")
     if not template.load_template():
         return
     
     # 2. 从多个URL获取频道列表
     print("\n从多个网络源获取频道列表...")
     
-    # 定义多个源URL
+    # 定义多个源URLhttps://gh-proxy.com/
     source_urls = [
-        "https://gh-proxy.com/https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/Hotel/IPTV.txt",
+        "https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/Hotel/IPTV.txt",
         "https://freetv.fun/test_channels_original_new.txt"
         # 可以继续添加更多源URL
     ]
