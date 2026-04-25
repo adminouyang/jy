@@ -26,7 +26,9 @@ jobs:
         pip install beautifulsoup4
         
     - name: freetv
-      run: | freetv/freetv.py
+      run: |
+        echo "开始运行freetv.py脚本..."
+        python freetv/freetv.py
 
     - name: 提交更新
       run: |
