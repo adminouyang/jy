@@ -102,6 +102,7 @@ sctv-4高清,[BD]sctv-4高清
 上海都市,[BD]上海都市
 上海纪实人文,[BD]上海纪实人文
 第一财经,[BD]第一财经
+生活时尚,[BD]生活时尚
 哈哈炫动,[BD]哈哈炫动
 动漫秀场,[BD]动漫秀场
 
@@ -593,7 +594,7 @@ tvbs欢乐,[HD]tvbs欢乐
 j2,[BD]j2
 nowsports,[BD]nowsports
 now新聞,[BD]now新聞
-tvb 翡翠,[BD]tvb 翡翠
+
 tvbs亚洲,[BD]tvbs亚洲
 tvbs亚洲台,[BD]tvbs亚洲台
 tvbs亞洲,[BD]tvbs亞洲
@@ -612,10 +613,9 @@ tvbs新闻,[BD]tvbs新闻
 环球电视,[BD]环球电视
 电影01,[BD]电影01
 第一卫视,[BD]第一卫视
-翡翠,[BD]翡翠
-翡翠台,[BD]翡翠台
+翡翠台,[BD]翡翠台,[BD]翡翠,[BD]tvb 翡翠
 tvbs新闻,[HD]tvbs新闻
-tvb星河,[HD]tvb星河
+TVB星河,[HD]tvb星河
 凤凰中文,[HD]凤凰中文
 凤凰资讯,[HD]凤凰资讯
 凤凰香港,[HD]凤凰香港
@@ -639,10 +639,11 @@ skysports,[BD]skysports
 usa nba,[HD]usa nba
 
 📡其它,#genre#
-电影,[BD]电影
+电影1,[BD]电影
+电影2,[HD]电影
+刘德华—电影,[HD]刘德华
 家庭影院,[BD]家庭影院
 影视文化,[BD]影视文化
-电影,[HD]电影
 电影4,[HD]电影4
 求索纪录,[BD]求索纪录
 公共新闻,[BD]公共新闻
@@ -655,7 +656,6 @@ usa nba,[HD]usa nba
 综艺体育,[BD]综艺体育
 公共应急,[HD]公共应急
 洪金宝,[HD]洪金宝
-刘德华,[HD]刘德华
 文化影视,[HD]文化影视
 
 
