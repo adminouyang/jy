@@ -354,9 +354,9 @@ def batch_speed_test_optimized(channel_list, template):
             
             if speed >= config.SPEED_THRESHOLD:
                 source_results.append((channel_url, speed))
-                print(f"  ✅ 通过 | 速度: {speed:7.1f}KB/s")
+                print(f"  ✅ 通过 | channel_name, channel_url 速度: {speed:7.1f}KB/s")
             else:
-                print(f"  ❌ 失败 | 速度: {speed:7.1f}KB/s")
+                print(f"  ❌ 失败 | channel_name, channel_url 速度: {speed:7.1f}KB/s")
         
         # 按速度从大到小排序
         if source_results:
