@@ -8,10 +8,10 @@ CCTV5,[BD]cctv（hd）5,[BD]cctv5,[BD]cctv-5,[BD]cctv-5 hd,[BD]cctv-5 体育,[BD
 CCTV5+,[BD]cctv（hd）5 plus,[BD]cctv5 plus,[BD]cctv5 plus 高清,[BD]cctv5 plus 体育赛事,[BD]cctv-5 plus 体育赛事,[BD]cctv5+,[BD]cctv-5+,[BD]cctv-5＋ hd,[BD]cctv-5＋高清,[BD]cctv5+体育赛事
 CCTV6,[BD]cctv 6,[BD]cctv（hd）6,[BD]cctv06,[BD]cctv6,[BD]cctv-6,[BD]cctv-6 hd,[BD]cctv6 电影,[BD]cctv-6 电影,[BD]cctv-6hd,[BD]cctv6高清,[BD]cctv-6高清,[BD]cctv6电影,[BD]cctv6-电影,[BD]cctv-6电影
 CCTV7,[BD]cctv 7,[BD]cctv（hd）7,[BD]cctv07,[BD]cctv7,[BD]cctv-7,[BD]cctv-7 hd,[BD]cctv-7hd,[BD]cctv7高清,[BD]cctv-7高清,[BD]cctv7-国防军事,[BD]cctv-7国防军事,[BD]cctv7-军农
-CCTV8,[BD]cctv 8,[BD]cctv（hd）8,[BD]cctv8,[BD]cctv-8,[BD]cctv-8 hd,[BD]cctv-8hd,[BD]cctv8高清,[BD]cctv8-电视剧,[BD]cctv-8电视剧
+CCTV8,[BD]cctv 8,[BD]cctv（hd）8,[BD]cctv8,[BD]cctv-8,[BD]cctv-8 hd,[BD]cctv-8hd,[BD]cctv8高清,[BD]cctv8-电视剧,[BD]cctv-8电视剧,[HD]cctv-8hd
 CCTV9,[BD]cctv 9,[BD]cctv（hd）9,[BD]cctv09,[BD]cctv9,[BD]cctv-9,[BD]cctv-9 hd,[BD]cctv9高清,[BD]cctv-9高清,[BD]cctv9-纪录,[BD]cctv-9纪录,[BD]cctv9记录
 CCTV10,[BD]cctv（hd）10,[BD]cctv10,[BD]cctv-10,[BD]cctv-10 hd,[BD]cctv-10hd,[BD]cctv10科教,[BD]cctv10-科教,[BD]cctv-10科教,[BD]cctv10高清,[BD]cctv-10高清
-CCTV11,[BD]cctv（hd）11,[BD]cctv11,[BD]cctv-11,[BD]cctv-11 hd,[BD]cctv-11hd,[BD]cctv11高清,[BD]cctv-11高清,[BD]cctv11戏曲,[BD]cctv11-戏曲,[BD]cctv-11戏曲,[BD]cctv11戏剧,[HD]cctv11,[HD]cctv-11,[HD]cctv-11 戏曲,[HD]cctv11戏剧
+CCTV11,[SD]cctv-11戏曲,[BD]cctv（hd）11,[BD]cctv11,[BD]cctv-11,[BD]cctv-11 hd,[BD]cctv-11hd,[BD]cctv11高清,[BD]cctv-11高清,[BD]cctv11戏曲,[BD]cctv11-戏曲,[BD]cctv-11戏曲,[BD]cctv11戏剧,[HD]cctv11,[HD]cctv-11,[HD]cctv-11 戏曲,[HD]cctv11戏剧,[HD]cctv-11hd
 CCTV12,[BD]cctv（hd）12,[BD]cctv12,[BD]cctv-12,[BD]cctv-12 hd,[BD]cctv-12 社会与法,[BD]cctv-12hd,[BD]cctv12高清,[BD]cctv-12高清,[BD]cctv12-社会与法,[BD]cctv-12社会与法
 CCTV13,[BD]cctv 13,[BD]cctv（hd）13,[BD]cctv13,[BD]cctv-13,[BD]cctv-13 hd,[BD]cctv-13hd,[BD]cctv13高清,[BD]cctv-13高清,[BD]cctv13新闻,[BD]cctv13-新闻,[BD]cctv-13新闻,[HD]cctv13,[HD]cctv-13,[HD]cctv-13hd,[HD]cctv13新闻
 CCTV14,[BD]cctv（hd）14,[BD]cctv14,[BD]cctv-14,[BD]cctv-14 hd,[BD]cctv-14 少儿,[BD]cctv-14hd,[BD]cctv14高清,[BD]cctv-14高清,[BD]cctv14少儿,[BD]cctv14-少儿,[BD]cctv-14少儿
@@ -26,7 +26,7 @@ CCTV4欧洲,[BD]cctv4欧洲
 CCTV4美洲,[BD]cctv4国际美洲,[BD]cctv4美洲
 CCTVNews,[BD]cctvnews,[BD]cctv-news
 CCTV4K,[HD]cctv4k
-
+CCTV8K,cctv-8k超高清
 CETV-1,[HD]cetv-1,[BD]cetv1
 CETV-4,[HD]cetv-4
 CGTN,[HD]cgtn,[BD]cgtn
