@@ -97,8 +97,8 @@ class SpeedTestEngine:
         except Exception as e:
             return False, f"URL解析失败: {str(e)[:30]}"
             
-    def _get_speed_with_retry(self, url, group_name, retry_count=0):
-        """带重试的测速函数"""
+    def _get_speed_with_retry(self, url, group_name, channel_name, retry_count=0):
+        """带重试的测速函数 - 增加channel_name参数"""
         if url in self.failed_urls and retry_count == 0:
             return 0.0
             
@@ -124,7 +124,7 @@ class SpeedTestEngine:
                 response.close()
                 return 0.0
                 
-            result = self._deep_speed_test(url, response, ttfb)
+            result = self._deep_speed_test(url, response, ttfb, channel_name)
             
             if result > 0:
                 self._set_cache(url, group_name, result)
@@ -138,7 +138,7 @@ class SpeedTestEngine:
             elif retry_count < self.config.MAX_RETRIES:
                 time.sleep(self.config.RETRY_DELAY * (retry_count + 1))
                 self.stats['retried'] += 1
-                return self._get_speed_with_retry(url, group_name, retry_count + 1)
+                return self._get_speed_with_retry(url, group_name, channel_name, retry_count + 1)
             else:
                 return 0.0
                 
@@ -146,7 +146,7 @@ class SpeedTestEngine:
             if retry_count < self.config.MAX_RETRIES:
                 time.sleep(self.config.RETRY_DELAY * (retry_count + 1))
                 self.stats['retried'] += 1
-                return self._get_speed_with_retry(url, group_name, retry_count + 1)
+                return self._get_speed_with_retry(url, group_name, channel_name, retry_count + 1)
             else:
                 self.failed_urls.add(url)
                 return 0.0
@@ -154,8 +154,8 @@ class SpeedTestEngine:
         except Exception as e:
             return 0.0
                 
-    def _deep_speed_test(self, url, response, ttfb):
-        """深度测速实现"""
+    def _deep_speed_test(self, url, response, ttfb, channel_name):
+        """深度测速实现 - 增加channel_name参数"""
         downloaded = 0
         speed_samples = []
         test_start = time.time()
@@ -209,7 +209,15 @@ class SpeedTestEngine:
             self.stats['speed_samples'].append(final_speed)
             
             ttfb_ms = ttfb * 1000
-            print(f"  ✓ 下载: {downloaded/1024:6.1f}KB | 速度: {final_speed:7.1f}KB/s | TTFB: {ttfb_ms:5.1f}ms")
+            
+            # 修改这里的打印输出，增加频道名和链接
+            # 截断频道名和链接，避免输出过长
+            channel_display = channel_name[:20] if len(channel_name) > 20 else channel_name
+            url_display = url[:60] if len(url) > 60 else url
+            
+            print(f"  ✓ 频道: {channel_display:<20} | 链接: {url_display:<60} | "
+                  f"下载: {downloaded/1024:6.1f}KB | 速度: {final_speed:7.1f}KB/s | "
+                  f"TTFB: {ttfb_ms:5.1f}ms")
                   
             return final_speed
             
@@ -225,6 +233,7 @@ class SpeedTestEngine:
         if self.stats['speed_samples']:
             self.stats['avg_speed'] = sum(self.stats['speed_samples']) / len(self.stats['speed_samples'])
         return self.stats
+
 
 
 # ====================== 频道模板处理 ======================
@@ -327,7 +336,7 @@ def batch_speed_test_optimized(channel_list, template):
     engine = SpeedTestEngine(config)
     
     print(f"开始对 {len(channel_list)} 个频道源进行速度测试...")
-    print("-" * 80)
+    print("-" * 100)
     
     # 按主频道分组，每个主频道可能有多个源
     channels_by_main = {}
@@ -343,52 +352,67 @@ def batch_speed_test_optimized(channel_list, template):
     completed = 0
     
     for main_channel, sources in channels_by_main.items():
-        print(f"测试 {main_channel}: {len(sources)} 个源")
+        print(f"\n📺 测试频道: {main_channel} ({len(sources)} 个源)")
+        print("-" * 100)
         
         source_results = []
         
         for channel_name, channel_url in sources:
             completed += 1
-            print(f"  [{completed}/{total_to_test}] 源: {channel_name[:40]:<40}")
-            speed = engine._get_speed_with_retry(channel_url, "freetv")
+            # 修改这里，传递频道名参数
+            speed = engine._get_speed_with_retry(channel_url, "freetv", channel_name)
             
             if speed >= config.SPEED_THRESHOLD:
                 source_results.append((channel_url, speed))
-                print(f"  ✅ 通过 | channel_name, channel_url 速度: {speed:7.1f}KB/s")
             else:
-                print(f"  ❌ 失败 | channel_name, channel_url 速度: {speed:7.1f}KB/s")
+                # 如果速度不达标，也记录但标记为失败
+                source_results.append((channel_url, speed))
         
         # 按速度从大到小排序
         if source_results:
             source_results.sort(key=lambda x: x[1], reverse=True)
             all_channels[main_channel] = source_results
+            
+            # 显示这个频道的测试结果摘要
+            fast_sources = [s for s in source_results if s[1] >= config.SPEED_THRESHOLD]
+            print(f"\n  📊 {main_channel} 测试结果: 通过 {len(fast_sources)}/{len(source_results)} 个源")
+            for i, (url, speed) in enumerate(source_results[:3], 1):  # 只显示前3个
+                status = "✅" if speed >= config.SPEED_THRESHOLD else "❌"
+                print(f"    {status} 第{i}名: {speed:7.1f}KB/s")
         
         # 进度显示
         if completed % 5 == 0 or completed == total_to_test:
-            current_passed = sum(len(sources) for sources in all_channels.values())
+            current_passed = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
+                               for sources in all_channels.values())
             pass_rate = (current_passed / completed * 100) if completed > 0 else 0
-            print(f"\n进度: {completed}/{total_to_test} | 通过: {current_passed} ({pass_rate:.1f}%)")
-            print("-" * 80)
+            print(f"\n📈 进度: {completed}/{total_to_test} 个源 ({completed/total_to_test*100:.1f}%) | "
+                  f"通过: {current_passed} 个源 ({pass_rate:.1f}%)")
+            print("-" * 100)
     
     engine.stats['total_tested'] = total_to_test
-    engine.stats['passed'] = sum(len(sources) for sources in all_channels.values())
+    engine.stats['passed'] = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
+                               for sources in all_channels.values())
     engine.stats['failed'] = total_to_test - engine.stats['passed']
     
     # 计算最终统计
     stats = engine.get_stats()
     
-    print("\n" + "=" * 80)
-    print(f"速度测试完成!")
-    print(f"总计测试: {stats['total_tested']} 个频道源")
-    print(f"通过测试: {stats['passed']} 个 (速度 ≥ {config.SPEED_THRESHOLD} KB/s)")
-    print(f"失败: {stats['failed']} 个")
+    print("\n" + "=" * 100)
+    print("🎉 速度测试完成!")
+    print("=" * 100)
+    print(f"📊 统计信息:")
+    print(f"  总计测试: {stats['total_tested']} 个频道源")
+    print(f"  通过测试: {stats['passed']} 个源 (速度 ≥ {config.SPEED_THRESHOLD} KB/s)")
+    print(f"  失败: {stats['failed']} 个源")
     
     if stats['total_tested'] > 0:
         pass_rate = stats['passed'] / stats['total_tested'] * 100
-        print(f"通过率: {pass_rate:.1f}%")
-        print(f"平均速度: {stats['avg_speed']:.1f} KB/s")
+        print(f"  通过率: {pass_rate:.1f}%")
+        print(f"  平均速度: {stats['avg_speed']:.1f} KB/s")
+        print(f"  最高速度: {stats['max_speed']:.1f} KB/s")
+        print(f"  最低速度: {stats['min_speed']:.1f} KB/s" if stats['min_speed'] != float('inf') else "  最低速度: 0.0 KB/s")
     
-    print("=" * 80)
+    print("=" * 100)
     
     return all_channels, stats
 
