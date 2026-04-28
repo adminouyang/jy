@@ -6,7 +6,7 @@ on:
     - cron: '0 10,22 * * *'
   workflow_dispatch:  # 支持手动触发
 permissions:
-  contents: write
+          contents: write
 
 jobs:
   hotel-ip:
@@ -26,21 +26,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         
-    - name: Create config directory
+    - name: Create directories
       run: |
         mkdir -p Hotel/ip/ip
+        mkdir -p Hotel/ip/results
         
     - name: 创建示例配置文件（如果不存在）
       run: |
         CONFIG_FILE="Hotel/ip/ip/Hotel_ips.txt"
         if [ ! -f "$CONFIG_FILE" ]; then
           cat > "$CONFIG_FILE" << 'EOF'
-        # 酒店IP配置文件格式说明:
-        # 1. option=0格式: IP:端口$地区，扫描D段1-255
-        # 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255
-        # 示例:
-        #192.168.1.1:8081$北京电信
-        #192.168.1-30.1:8081,1$上海联通
+          # 酒店IP配置文件格式说明:
+          # 1. option=0格式: IP:端口$地区，扫描D段1-255
+          # 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255
+          # 示例:
+          192.168.1.1:8081$北京电信
+          192.168.1-30.1:8081,1$上海联通
         EOF
           echo "已创建示例配置文件: $CONFIG_FILE"
         else
@@ -59,6 +60,7 @@ jobs:
         import argparse
         from typing import List, Tuple
         import sys
+        import re
 
         # 代理设置（如果需要的话）
         proxies = None
@@ -126,33 +128,34 @@ jobs:
                     ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
 
-        def check_ip_port(ip_port: str, url_end: str, timeout: int = 2) -> str:
-            """发送get请求检测url是否可访问"""
-            try:
-                url = f"http://{ip_port}{url_end}"
-                resp = requests.get(url, timeout=timeout, proxies=proxies)
-                resp.raise_for_status()
-                if "tsfile" in resp.text or "hls" in resp.text:
-                    print(f"✓ {url} 访问成功")
-                    return ip_port
-            except Exception as e:
-                return None
-            return None
-
-        def check_with_url_ends(ip_port: str, url_ends: List[str], timeout: int = 2) -> bool:
-            """用多个URL端点检查IP端口"""
-            for url_end in url_ends:
+        def check_ip_port(ip_port: str, timeout: int = 2) -> str:
+            """发送get请求检测两个URL端点是否可访问"""
+            # 定义要检查的两个端点
+            endpoints = [
+                "/iptv/live/1000.json?key=txiptv",
+                "/ZHGXTV/Public/json/live_interface.txt"
+            ]
+            
+            for endpoint in endpoints:
                 try:
-                    url = f"http://{ip_port}{url_end}"
+                    url = f"http://{ip_port}{endpoint}"
                     resp = requests.get(url, timeout=timeout, proxies=proxies)
                     if resp.status_code == 200:
-                        print(f"✓ 二次验证成功: {url}")
-                        return True
-                except:
+                        # 检查响应内容是否为有效格式
+                        if (endpoint.endswith('.json') and 
+                            ('channels' in resp.text or 'programs' in resp.text or 'live' in resp.text)):
+                            print(f"✓ {url} 访问成功 (JSON端点)")
+                            return ip_port
+                        elif (endpoint.endswith('.txt') and 
+                              (len(resp.text.strip()) > 0 and not resp.text.startswith('<'))):
+                            print(f"✓ {url} 访问成功 (TXT端点)")
+                            return ip_port
+                except Exception as e:
                     continue
-            return False
+            
+            return None
 
-        def scan_ip_port(ip: str, port: str, option: int, url_end: str, progress_queue: Queue = None) -> List[str]:
+        def scan_ip_port(ip: str, port: str, option: int, progress_queue: Queue = None) -> List[str]:
             """扫描IP端口"""
             valid_ip_ports = []
             ip_ports = generate_ip_ports(ip, port, option)
@@ -161,18 +164,19 @@ jobs:
             print(f"开始扫描: {ip}:{port}, option={option}, 总IP数: {total}")
             
             # 设置线程数
-            max_workers = 100
+            max_workers = 50  # 减少线程数避免被封
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                futures = {executor.submit(check_ip_port, ip_port, url_end): ip_port for ip_port in ip_ports}
+                futures = {executor.submit(check_ip_port, ip_port): ip_port for ip_port in ip_ports}
             
                 for i, future in enumerate(as_completed(futures), 1):
                     result = future.result()
                     if result:
                         valid_ip_ports.append(result)
+                        print(f"找到有效IP: {result}")
                         
                     # 更新进度
-                    if progress_queue and i % 100 == 0:
+                    if progress_queue and i % 50 == 0:
                         progress_queue.put((i, total))
                     
             return valid_ip_ports
@@ -260,8 +264,6 @@ jobs:
                     print(f"第{line_num}行错误: 不支持的option值 - {line}")
                     return None
                 
-                url_end = "/status"
-                
                 return (base_ip, port, option, region, line_num, original_line)
                 
             except Exception as e:
@@ -332,9 +334,6 @@ jobs:
             # 按地区存储结果
             region_results = {}
             
-            # 二次验证的URL端点
-            url_ends = ["/iptv/live/1000.json?key=txiptv", "/ZHGXTV/Public/json/live_interface.txt"]
-            
             # 扫描每个配置
             for i, (base_ip, port, option, region, line_num, original_line) in enumerate(ip_configs, 1):
                 print(f"\n{'='*60}")
@@ -349,32 +348,15 @@ jobs:
                     print("  扫描范围: C段范围和D段1-255")
                 
                 # 扫描IP端口
-                url_end = "/status"
-                valid_ips = scan_ip_port(base_ip, port, option, url_end, progress_queue)
+                valid_ips = scan_ip_port(base_ip, port, option, progress_queue)
                 
                 if valid_ips:
                     print(f"找到 {len(valid_ips)} 个有效IP")
                     
-                    # 二次验证
-                    print("开始二次验证...")
-                    final_valid_ips = []
-                    
-                    with ThreadPoolExecutor(max_workers=50) as executor:
-                        futures = {}
-                        for ip_port in valid_ips:
-                            future = executor.submit(check_with_url_ends, ip_port, url_ends)
-                            futures[future] = ip_port
-                            
-                        for future in as_completed(futures):
-                            if future.result():
-                                final_valid_ips.append(futures[future])
-                                
-                    print(f"二次验证后剩余 {len(final_valid_ips)} 个IP")
-                    
                     # 将结果按地区存储
                     if region not in region_results:
                         region_results[region] = []
-                    region_results[region].extend(final_valid_ips)
+                    region_results[region].extend(valid_ips)
                     
                 else:
                     print("没有找到有效IP")
@@ -383,7 +365,7 @@ jobs:
                 progress_queue.put("CONFIG_COMPLETE")
                 
                 # 短暂延时避免请求过于频繁
-                time.sleep(1)
+                time.sleep(2)
             
             # 发送结束信号
             progress_queue.put(None)
@@ -402,7 +384,6 @@ jobs:
                     
                     # 生成输出文件路径
                     # 清理文件名中的非法字符
-                    import re
                     safe_region = re.sub(r'[\\/*?:"<>|]', "_", region)
                     output_file = os.path.join(output_dir, f"{safe_region}.txt")
                     
@@ -460,6 +441,12 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        # 添加所有扫描结果文件
-        git add Hotel/ip/*.txt
-        git diff --quiet && git diff --staged --quiet || (git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')" && git push)
+        # 检查是否有文件需要提交
+        if [ -n "$(git status --porcelain Hotel/ip/*.txt 2>/dev/null)" ]; then
+          # 添加所有扫描结果文件
+          git add Hotel/ip/*.txt
+          git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')"
+          git push
+        else
+          echo "没有发现文件变化，跳过提交"
+        fi
