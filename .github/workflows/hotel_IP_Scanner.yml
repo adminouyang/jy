@@ -72,6 +72,10 @@ jobs:
             return ip_list
 
         def generate_ip_ports(ip: str, port: str, option: int) -> List[str]:
+            # 检查IP是否为空
+            if not ip or ip == '':
+                return []
+                
             ip_parts = ip.split('.')
             if len(ip_parts) != 4:
                 return []
@@ -121,11 +125,13 @@ jobs:
                         if not content:
                             continue
                         
-                        # 调试日志
-                        if '219.139.228.178' in url:
-                            print(f"调试: 检查 {url}")
-                            print(f"调试: 响应状态码: {resp.status_code}")
-                            print(f"调试: 响应内容前500字符: {content[:500]}")
+                        # 检查是否是XML包装的JSON（您提供的链接格式）
+                        if content.startswith('<?xml'):
+                            # 提取XML中的JSON
+                            import re
+                            json_match = re.search(r'\{.*\}', content, re.DOTALL)
+                            if json_match:
+                                content = json_match.group(0)
                         
                         if endpoint.endswith('.json'):
                             try:
@@ -188,7 +194,11 @@ jobs:
             
             print(f"开始扫描: {ip}:{port}, option={option}, 总IP数: {total}")
             
-            max_workers = 20  # 进一步减少线程数避免被封
+            if total == 0:
+                print(f"警告: 没有生成有效的IP地址，跳过扫描")
+                return []
+            
+            max_workers = 20
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = {}
@@ -204,7 +214,7 @@ jobs:
                     
                     if progress_queue and i % 20 == 0:
                         progress_queue.put((i, total))
-                        time.sleep(0.2)  # 添加延迟避免请求过快
+                        time.sleep(0.2)
             
             return valid_ip_ports
 
@@ -274,7 +284,7 @@ jobs:
                             return None
                     
                     a, b, c, d = ip_parts
-                    base_ip = f"{a}.{b}.{c}.{d}"  # 使用完整的IP，不修改D段
+                    base_ip = f"{a}.{b}.{c}.{d}"
                     
                 elif option == 1:
                     # option=1: 格式为192.168.1-30.1:8081,1$地区
@@ -318,7 +328,7 @@ jobs:
                         ip_configs.append(config)
                         print(f"  解析成功: IP={config[0]}, 端口={config[1]}, option={config[2]}, 地区={config[3]}")
                     else:
-                        print(f"  解析失败")
+                        print(f"  解析失败，跳过该配置")
                         
                 return ip_configs, original_lines
                 
@@ -350,7 +360,7 @@ jobs:
                 print(f"文件中没有有效的配置: {input_file}")
                 return
             
-            print(f"找到 {len(ip_configs)} 个IP配置")
+            print(f"找到 {len(ip_configs)} 个有效的IP配置")
             
             progress_queue = Queue()
             progress_thread = threading.Thread(target=progress_monitor, args=(progress_queue, len(ip_configs)))
@@ -430,17 +440,20 @@ jobs:
                 with open(args.input, 'w', encoding='utf-8') as f:
                     f.write("# 酒店IP配置文件格式说明:\n")
                     f.write("# 1. option=0格式: IP:端口$地区，扫描D段1-255\n")
-                    f.write("# 示例: 192.168.1.1:8081$北京电信\n")
-                    f.write("# 示例: 219.139.228.1:7777$湖北电信  (这会扫描219.139.228.1-255:7777)\n")
+                    f.write("# 示例: 218.13.170.98:9901$广东电信  (这会扫描218.13.170.1-255:9901)\n")
+                    f.write("# 示例: 219.139.228.178:7777$湖北电信  (这会扫描219.139.228.1-255:7777)\n")
                     f.write("# 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255\n")
                     f.write("# 示例: 192.168.1-30.1:8081,1$上海联通\n")
                     f.write("\n# 实际配置示例:\n")
-                    f.write("219.139.228.1:7777$湖北电信\n")
-                    f.write("192.168.1.1:8081$北京电信\n")
-                    f.write("192.168.1-30.1:8081,1$上海联通\n")
+                    f.write("218.13.170.98:9901$广东电信\n")
+                    f.write("219.139.228.178:7777$湖北电信\n")
+                    f.write("61.184.46.85:9901$湖北联通\n")
+                    f.write("124.116.183.146:9901$山西电信\n")
+                    f.write("222.214.208.34:59901$四川电信\n")
+                    f.write("120.70.60.179:9901$新疆电信\n")
                 
                 print(f"已创建示例配置文件: {args.input}")
-                print("请编辑此文件，添加真实的IPTV服务器IP地址")
+                print("请检查并修正配置文件，确保每行都有正确的IP地址")
 
         if __name__ == "__main__":
             main()
