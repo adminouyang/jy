@@ -1362,7 +1362,7 @@ jobs:
            """处理外部IP文件，在原文件上直接更新，不生成备份"""
            print("🔍 开始处理外部IP文件...")
        
-           external_files = ["ip.txt", "hotel_ip.txt", "iplist.txt"]  # 支持的文件名
+           external_files = ["ip.txt", "hotel_ip.txt", "Hotel_ips.txt"]  # 支持的文件名
        
            for ext_file in external_files:
                ext_filepath = os.path.join(IP_DIR, ext_file)
