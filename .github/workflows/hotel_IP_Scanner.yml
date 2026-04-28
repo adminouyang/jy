@@ -120,30 +120,52 @@ jobs:
                         
                         if not content:
                             continue
-                            
+                        
+                        # 调试日志
+                        if '219.139.228.178' in url:
+                            print(f"调试: 检查 {url}")
+                            print(f"调试: 响应状态码: {resp.status_code}")
+                            print(f"调试: 响应内容前500字符: {content[:500]}")
+                        
                         if endpoint.endswith('.json'):
                             try:
                                 data = json.loads(content)
-                                # 宽松的JSON验证
-                                if isinstance(data, (dict, list)):
-                                    print(f"✓ 找到有效IPTV JSON: {url}")
-                                    return ip_port
-                            except:
-                                # 检查是否可能是不标准的JSON但包含IPTV数据
+                                # 验证JSON结构
+                                if isinstance(data, dict):
+                                    # 检查是否是有效的IPTV JSON结构
+                                    if 'code' in data and data.get('code') == 0:
+                                        if 'data' in data and isinstance(data['data'], list):
+                                            print(f"✓ 找到标准格式IPTV JSON: {url}")
+                                            return ip_port
+                                    # 其他可能的IPTV JSON格式
+                                    elif 'channels' in data or 'programs' in data or 'live' in data:
+                                        print(f"✓ 找到常见格式IPTV JSON: {url}")
+                                        return ip_port
+                                    # 宽松条件：任何包含频道信息的JSON
+                                    elif len(data) > 0:
+                                        # 检查是否包含频道信息
+                                        for key, value in data.items():
+                                            if isinstance(value, list) and len(value) > 0:
+                                                if isinstance(value[0], dict):
+                                                    channel_keys = ['name', 'url', 'title', 'channel', 'chid']
+                                                    if any(k in value[0] for k in channel_keys):
+                                                        print(f"✓ 找到频道列表格式IPTV JSON: {url}")
+                                                        return ip_port
+                            except json.JSONDecodeError as e:
+                                # 如果不是JSON，检查是否包含IPTV关键词
                                 if any(keyword in content.lower() for keyword in 
-                                      ['channel', 'tv', 'iptv', 'live', 'm3u8', '.ts']):
-                                    print(f"✓ 找到疑似IPTV JSON: {url}")
+                                      ['channel', 'tv', 'iptv', 'live', 'm3u8', '.ts', 'cctv']):
+                                    print(f"✓ 找到疑似IPTV JSON（非标准格式）: {url}")
                                     return ip_port
                                 
                         elif endpoint.endswith('.txt'):
                             # 检查是否是IPTV频道列表
                             lines = [line.strip() for line in content.split('\n') if line.strip()]
                             if lines:
-                                # 检查是否包含常见IPTV格式
                                 iptv_indicators = 0
-                                for line in lines[:10]:  # 只检查前10行
+                                for line in lines[:10]:
                                     if any(indicator in line.lower() for indicator in 
-                                          ['#extinf', 'http://', '.m3u8', '.ts', ',', '|']):
+                                          ['#extinf', 'http://', 'https://', '.m3u8', '.ts', ',', '|', 'channel']):
                                         iptv_indicators += 1
                                 
                                 if iptv_indicators > 0:
@@ -166,7 +188,7 @@ jobs:
             
             print(f"开始扫描: {ip}:{port}, option={option}, 总IP数: {total}")
             
-            max_workers = 30  # 进一步减少线程数
+            max_workers = 20  # 进一步减少线程数避免被封
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = {}
@@ -178,11 +200,11 @@ jobs:
                     result = future.result()
                     if result:
                         valid_ip_ports.append(result)
-                        print(f"已找到 {len(valid_ip_ports)} 个有效IP")
+                        print(f"已找到 {len(valid_ip_ports)} 个有效IP: {result}")
                     
                     if progress_queue and i % 20 == 0:
                         progress_queue.put((i, total))
-                        time.sleep(0.1)  # 添加短暂延迟
+                        time.sleep(0.2)  # 添加延迟避免请求过快
             
             return valid_ip_ports
 
@@ -203,6 +225,11 @@ jobs:
                 config_part = config_part.strip()
                 region = region.strip()
                 
+                if not config_part or not region:
+                    print(f"第{line_num}行格式错误: 配置部分或地区为空 - {line}")
+                    return None
+                
+                # 解析option
                 option = 0
                 if ',' in config_part:
                     ip_port_part, option_part = config_part.split(',')
@@ -218,24 +245,39 @@ jobs:
                     ip_port_part = config_part
                     option = 0
                 
+                # 解析IP和端口
                 if ":" not in ip_port_part:
                     print(f"第{line_num}行格式错误: 缺少端口号 - {line}")
                     return None
                 
+                # 分离IP和端口
                 ip_part, port = ip_port_part.split(':')
                 ip_part = ip_part.strip()
                 port = port.strip()
                 
+                if not ip_part or not port:
+                    print(f"第{line_num}行格式错误: IP或端口为空 - {line}")
+                    return None
+                
+                # 验证IP格式
                 if option == 0:
+                    # option=0: 格式为192.168.1.1:8081$地区
                     ip_parts = ip_part.split('.')
                     if len(ip_parts) != 4:
                         print(f"第{line_num}行格式错误: IP地址格式不正确 - {line}")
                         return None
                     
+                    # 验证每个部分是否为数字
+                    for part in ip_parts:
+                        if not part.replace('-', '').isdigit():
+                            print(f"第{line_num}行格式错误: IP包含非数字字符 - {line}")
+                            return None
+                    
                     a, b, c, d = ip_parts
-                    base_ip = f"{a}.{b}.{c}.1"
+                    base_ip = f"{a}.{b}.{c}.{d}"  # 使用完整的IP，不修改D段
                     
                 elif option == 1:
+                    # option=1: 格式为192.168.1-30.1:8081,1$地区
                     ip_parts = ip_part.split('.')
                     if len(ip_parts) != 4:
                         print(f"第{line_num}行格式错误: IP地址格式不正确 - {line}")
@@ -270,9 +312,13 @@ jobs:
                     original_line = line.rstrip('\n')
                     original_lines.append(original_line)
                     
+                    print(f"解析第{line_num}行: {original_line}")
                     config = parse_config_line(original_line, line_num)
                     if config:
                         ip_configs.append(config)
+                        print(f"  解析成功: IP={config[0]}, 端口={config[1]}, option={config[2]}, 地区={config[3]}")
+                    else:
+                        print(f"  解析失败")
                         
                 return ip_configs, original_lines
                 
@@ -316,7 +362,7 @@ jobs:
             for i, (base_ip, port, option, region, line_num, original_line) in enumerate(ip_configs, 1):
                 print(f"\n{'='*60}")
                 print(f"处理配置 {i}/{len(ip_configs)}: {original_line}")
-                print(f"  地区: {region}, option={option}, IP: {base_ip}, 端口: {port}")
+                print(f"  地区: {region}, option={option}, 基础IP: {base_ip}, 端口: {port}")
                 print('='*60)
                 
                 if option == 0:
@@ -377,6 +423,24 @@ jobs:
                 scan_configs(args.input, args.output)
             else:
                 print(f"配置文件不存在: {args.input}")
+                # 创建正确的示例配置文件
+                example_dir = os.path.dirname(args.input)
+                os.makedirs(example_dir, exist_ok=True)
+                
+                with open(args.input, 'w', encoding='utf-8') as f:
+                    f.write("# 酒店IP配置文件格式说明:\n")
+                    f.write("# 1. option=0格式: IP:端口$地区，扫描D段1-255\n")
+                    f.write("# 示例: 192.168.1.1:8081$北京电信\n")
+                    f.write("# 示例: 219.139.228.1:7777$湖北电信  (这会扫描219.139.228.1-255:7777)\n")
+                    f.write("# 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255\n")
+                    f.write("# 示例: 192.168.1-30.1:8081,1$上海联通\n")
+                    f.write("\n# 实际配置示例:\n")
+                    f.write("219.139.228.1:7777$湖北电信\n")
+                    f.write("192.168.1.1:8081$北京电信\n")
+                    f.write("192.168.1-30.1:8081,1$上海联通\n")
+                
+                print(f"已创建示例配置文件: {args.input}")
+                print("请编辑此文件，添加真实的IPTV服务器IP地址")
 
         if __name__ == "__main__":
             main()
