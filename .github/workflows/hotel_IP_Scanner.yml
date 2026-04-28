@@ -5,6 +5,8 @@ on:
     # 每天UTC时间10点和22点自动运行（北京时间18点和次日6点）
     - cron: '0 10,22 * * *'
   workflow_dispatch:  # 支持手动触发
+permissions:
+  contents: write
 
 jobs:
   hotel-ip:
