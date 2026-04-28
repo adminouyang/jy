@@ -36,13 +36,13 @@ jobs:
         CONFIG_FILE="Hotel/ip/ip/Hotel_ips.txt"
         if [ ! -f "$CONFIG_FILE" ]; then
           cat > "$CONFIG_FILE" << 'EOF'
-# 酒店IP配置文件格式说明:
-# 1. option=0格式: IP:端口$地区，扫描D段1-255
-# 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255
-# 示例:
-192.168.1.1:8081$北京电信
-192.168.1-30.1:8081,1$上海联通
-EOF
+        # 酒店IP配置文件格式说明:
+        # 1. option=0格式: IP:端口$地区，扫描D段1-255
+        # 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255
+        # 示例:
+        #192.168.1.1:8081$北京电信
+        #192.168.1-30.1:8081,1$上海联通
+        EOF
           echo "已创建示例配置文件: $CONFIG_FILE"
         else
           echo "配置文件已存在: $CONFIG_FILE"
