@@ -2,9 +2,8 @@ name: hotel IP Scanner
 
 on:
   schedule:
-    # 每天UTC时间10点和22点自动运行（北京时间18点和次日6点）
     - cron: '0 10,22 * * *'
-  workflow_dispatch:  # 支持手动触发
+  workflow_dispatch:
 permissions:
           contents: write
 
@@ -29,24 +28,6 @@ jobs:
     - name: Create directories
       run: |
         mkdir -p Hotel/ip/ip
-        mkdir -p Hotel/ip/results
-        
-    - name: 创建示例配置文件（如果不存在）
-      run: |
-        CONFIG_FILE="Hotel/ip/ip/Hotel_ips.txt"
-        if [ ! -f "$CONFIG_FILE" ]; then
-          cat > "$CONFIG_FILE" << 'EOF'
-          # 酒店IP配置文件格式说明:
-          # 1. option=0格式: IP:端口$地区，扫描D段1-255
-          # 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255
-          # 示例:
-          192.168.1.1:8081$北京电信
-          192.168.1-30.1:8081,1$上海联通
-        EOF
-          echo "已创建示例配置文件: $CONFIG_FILE"
-        else
-          echo "配置文件已存在: $CONFIG_FILE"
-        fi
         
     - name: 扫描hotel IP
       run: |
@@ -54,19 +35,18 @@ jobs:
         import os
         import time
         import requests
+        import json
         import threading
         from concurrent.futures import ThreadPoolExecutor, as_completed
         from queue import Queue
         import argparse
         from typing import List, Tuple
-        import sys
         import re
 
-        # 代理设置（如果需要的话）
+        # 代理设置
         proxies = None
 
         def expand_part(part: str) -> List[str]:
-            """扩展单个部分，支持范围和单个值"""
             if '-' in part:
                 start, end = part.split('-')
                 return [str(i) for i in range(int(start), int(end) + 1)]
@@ -74,21 +54,16 @@ jobs:
                 return [part]
 
         def expand_ip_range(ip_str: str) -> List[str]:
-            """扩展IP范围，返回IP列表"""
             ip_list = []
-            
-            # 分割IP的四个部分
             parts = ip_str.split('.')
             if len(parts) != 4:
                 return [ip_str]
             
-            # 扩展每个部分
             a_list = expand_part(parts[0])
             b_list = expand_part(parts[1])
             c_list = expand_part(parts[2])
             d_list = expand_part(parts[3])
             
-            # 生成所有IP组合
             for a in a_list:
                 for b in b_list:
                     for c in c_list:
@@ -97,40 +72,32 @@ jobs:
             return ip_list
 
         def generate_ip_ports(ip: str, port: str, option: int) -> List[str]:
-            """根据选项生成要扫描的IP地址列表"""
             ip_parts = ip.split('.')
-            
             if len(ip_parts) != 4:
                 return []
             
             a, b, c, d = ip_parts
             
-            if option == 0:  # 扫描D段1-255
-                # 固定A、B、C段，扫描D段1-255
+            if option == 0:
                 ip_ports = []
                 for y in range(1, 256):
                     ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
             
-            elif option == 1:  # 扫描C段和D段
-                # 解析C段范围
+            elif option == 1:
                 c_parts = expand_part(c)
                 ip_ports = []
-                
                 for c_val in c_parts:
                     for d_val in range(1, 256):
                         ip_ports.append(f"{a}.{b}.{c_val}.{d_val}:{port}")
                 return ip_ports
-            
-            else:  # 默认使用option=0的逻辑
+            else:
                 ip_ports = []
                 for y in range(1, 256):
                     ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
 
-        def check_ip_port(ip_port: str, timeout: int = 2) -> str:
-            """发送get请求检测两个URL端点是否可访问"""
-            # 定义要检查的两个端点
+        def check_ip_port(ip_port: str, timeout: int = 3) -> str:
             endpoints = [
                 "/iptv/live/1000.json?key=txiptv",
                 "/ZHGXTV/Public/json/live_interface.txt"
@@ -139,50 +106,87 @@ jobs:
             for endpoint in endpoints:
                 try:
                     url = f"http://{ip_port}{endpoint}"
-                    resp = requests.get(url, timeout=timeout, proxies=proxies)
+                    headers = {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                        'Accept': 'application/json,text/plain,*/*',
+                        'Accept-Language': 'zh-CN,zh;q=0.9',
+                        'Connection': 'keep-alive'
+                    }
+                    
+                    resp = requests.get(url, timeout=timeout, proxies=proxies, headers=headers)
+                    
                     if resp.status_code == 200:
-                        # 检查响应内容是否为有效格式
-                        if (endpoint.endswith('.json') and 
-                            ('channels' in resp.text or 'programs' in resp.text or 'live' in resp.text)):
-                            print(f"✓ {url} 访问成功 (JSON端点)")
-                            return ip_port
-                        elif (endpoint.endswith('.txt') and 
-                              (len(resp.text.strip()) > 0 and not resp.text.startswith('<'))):
-                            print(f"✓ {url} 访问成功 (TXT端点)")
-                            return ip_port
+                        content = resp.text.strip()
+                        
+                        if not content:
+                            continue
+                            
+                        if endpoint.endswith('.json'):
+                            try:
+                                data = json.loads(content)
+                                # 宽松的JSON验证
+                                if isinstance(data, (dict, list)):
+                                    print(f"✓ 找到有效IPTV JSON: {url}")
+                                    return ip_port
+                            except:
+                                # 检查是否可能是不标准的JSON但包含IPTV数据
+                                if any(keyword in content.lower() for keyword in 
+                                      ['channel', 'tv', 'iptv', 'live', 'm3u8', '.ts']):
+                                    print(f"✓ 找到疑似IPTV JSON: {url}")
+                                    return ip_port
+                                
+                        elif endpoint.endswith('.txt'):
+                            # 检查是否是IPTV频道列表
+                            lines = [line.strip() for line in content.split('\n') if line.strip()]
+                            if lines:
+                                # 检查是否包含常见IPTV格式
+                                iptv_indicators = 0
+                                for line in lines[:10]:  # 只检查前10行
+                                    if any(indicator in line.lower() for indicator in 
+                                          ['#extinf', 'http://', '.m3u8', '.ts', ',', '|']):
+                                        iptv_indicators += 1
+                                
+                                if iptv_indicators > 0:
+                                    print(f"✓ 找到有效IPTV TXT: {url}")
+                                    return ip_port
+                                    
+                except requests.exceptions.Timeout:
+                    continue
+                except requests.exceptions.ConnectionError:
+                    continue
                 except Exception as e:
                     continue
             
             return None
 
         def scan_ip_port(ip: str, port: str, option: int, progress_queue: Queue = None) -> List[str]:
-            """扫描IP端口"""
             valid_ip_ports = []
             ip_ports = generate_ip_ports(ip, port, option)
             total = len(ip_ports)
             
             print(f"开始扫描: {ip}:{port}, option={option}, 总IP数: {total}")
             
-            # 设置线程数
-            max_workers = 50  # 减少线程数避免被封
+            max_workers = 30  # 进一步减少线程数
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                futures = {executor.submit(check_ip_port, ip_port): ip_port for ip_port in ip_ports}
-            
+                futures = {}
+                for ip_port in ip_ports:
+                    future = executor.submit(check_ip_port, ip_port)
+                    futures[future] = ip_port
+                
                 for i, future in enumerate(as_completed(futures), 1):
                     result = future.result()
                     if result:
                         valid_ip_ports.append(result)
-                        print(f"找到有效IP: {result}")
-                        
-                    # 更新进度
-                    if progress_queue and i % 50 == 0:
-                        progress_queue.put((i, total))
+                        print(f"已找到 {len(valid_ip_ports)} 个有效IP")
                     
+                    if progress_queue and i % 20 == 0:
+                        progress_queue.put((i, total))
+                        time.sleep(0.1)  # 添加短暂延迟
+            
             return valid_ip_ports
 
         def parse_config_line(line: str, line_num: int) -> Tuple[str, str, int, str, int, str]:
-            """解析配置文件行，返回(ip, port, option, region, line_num, original_line)"""
             line = line.strip()
             original_line = line
             
@@ -190,25 +194,21 @@ jobs:
                 return None
             
             try:
-                # 分割IP配置和地区
                 if '$' in line:
                     config_part, region = line.rsplit('$', 1)
                 else:
                     config_part = line
                     region = "未知地区"
                 
-                # 去掉空格
                 config_part = config_part.strip()
                 region = region.strip()
                 
-                # 解析option
                 option = 0
                 if ',' in config_part:
                     ip_port_part, option_part = config_part.split(',')
                     ip_port_part = ip_port_part.strip()
                     option_part = option_part.strip()
                     
-                    # 验证option是否有效
                     if option_part in ['0', '1']:
                         option = int(option_part)
                     else:
@@ -216,34 +216,26 @@ jobs:
                         option = 0
                 else:
                     ip_port_part = config_part
-                    option = 0  # 默认值
+                    option = 0
                 
-                # 解析IP和端口
                 if ":" not in ip_port_part:
                     print(f"第{line_num}行格式错误: 缺少端口号 - {line}")
                     return None
                 
-                # 分离IP和端口
                 ip_part, port = ip_port_part.split(':')
                 ip_part = ip_part.strip()
                 port = port.strip()
                 
-                # 根据option解析IP
                 if option == 0:
-                    # option=0: 格式为192.168.1.1:8081$北京电信
-                    # 解析完整IP
                     ip_parts = ip_part.split('.')
                     if len(ip_parts) != 4:
                         print(f"第{line_num}行格式错误: IP地址格式不正确 - {line}")
                         return None
                     
-                    # 提取基础IP（前三个部分）
                     a, b, c, d = ip_parts
-                    base_ip = f"{a}.{b}.{c}.1"  # 使用1作为D段的起始，实际扫描时会覆盖1-255
+                    base_ip = f"{a}.{b}.{c}.1"
                     
                 elif option == 1:
-                    # option=1: 格式为192.168.1-30.1:8081,1$上海联通
-                    # 解析带范围的IP
                     ip_parts = ip_part.split('.')
                     if len(ip_parts) != 4:
                         print(f"第{line_num}行格式错误: IP地址格式不正确 - {line}")
@@ -251,17 +243,12 @@ jobs:
                     
                     a, b, c_part, d = ip_parts
                     
-                    # 验证C段范围格式
                     if '-' not in c_part:
-                        print(f"第{line_num}行格式错误: option=1时C段应包含范围(如1-30) - {line}")
+                        print(f"第{line_num}行格式错误: option=1时C段应包含范围 - {line}")
                         return None
                     
-                    # 使用原始C段部分，generate_ip_ports会处理范围
                     base_ip = f"{a}.{b}.{c_part}.{d}"
-                
                 else:
-                    # 不应该发生，因为我们已经过滤了option
-                    print(f"第{line_num}行错误: 不支持的option值 - {line}")
                     return None
                 
                 return (base_ip, port, option, region, line_num, original_line)
@@ -271,7 +258,6 @@ jobs:
                 return None
 
         def read_config(config_file: str) -> Tuple[List[Tuple], List[str]]:
-            """读取配置文件，返回配置行列表和原始行列表"""
             print(f"读取设置文件：{config_file}")
             ip_configs = []
             original_lines = []
@@ -295,12 +281,11 @@ jobs:
                 return [], []
 
         def progress_monitor(progress_queue: Queue, total_configs: int):
-            """进度监视器"""
             config_count = 0
             while True:
                 try:
-                    item = progress_queue.get(timeout=300)  # 5分钟超时
-                    if item is None:  # 结束信号
+                    item = progress_queue.get(timeout=300)
+                    if item is None:
                         break
                         
                     if isinstance(item, tuple) and len(item) == 2:
@@ -313,8 +298,6 @@ jobs:
                     break
 
         def scan_configs(input_file: str, output_dir: str = "Hotel/ip"):
-            """扫描配置文件中的所有IP配置"""
-            # 读取配置
             ip_configs, original_lines = read_config(input_file)
             
             if not ip_configs:
@@ -323,37 +306,29 @@ jobs:
             
             print(f"找到 {len(ip_configs)} 个IP配置")
             
-            # 创建进度队列
             progress_queue = Queue()
-            
-            # 启动进度监视器
             progress_thread = threading.Thread(target=progress_monitor, args=(progress_queue, len(ip_configs)))
             progress_thread.daemon = True
             progress_thread.start()
             
-            # 按地区存储结果
             region_results = {}
             
-            # 扫描每个配置
             for i, (base_ip, port, option, region, line_num, original_line) in enumerate(ip_configs, 1):
                 print(f"\n{'='*60}")
                 print(f"处理配置 {i}/{len(ip_configs)}: {original_line}")
                 print(f"  地区: {region}, option={option}, IP: {base_ip}, 端口: {port}")
                 print('='*60)
                 
-                # 解释option的含义
                 if option == 0:
                     print("  扫描范围: D段1-255")
                 elif option == 1:
                     print("  扫描范围: C段范围和D段1-255")
                 
-                # 扫描IP端口
                 valid_ips = scan_ip_port(base_ip, port, option, progress_queue)
                 
                 if valid_ips:
                     print(f"找到 {len(valid_ips)} 个有效IP")
                     
-                    # 将结果按地区存储
                     if region not in region_results:
                         region_results[region] = []
                     region_results[region].extend(valid_ips)
@@ -361,33 +336,23 @@ jobs:
                 else:
                     print("没有找到有效IP")
                 
-                # 发送配置完成信号
                 progress_queue.put("CONFIG_COMPLETE")
-                
-                # 短暂延时避免请求过于频繁
                 time.sleep(2)
             
-            # 发送结束信号
             progress_queue.put(None)
             progress_thread.join(timeout=10)
             
-            # 保存结果到地区文件
             if region_results:
-                # 确保输出目录存在
                 os.makedirs(output_dir, exist_ok=True)
                 
                 total_ips = 0
                 for region, ips in region_results.items():
-                    # 去重
                     unique_ips = list(set(ips))
                     total_ips += len(unique_ips)
                     
-                    # 生成输出文件路径
-                    # 清理文件名中的非法字符
                     safe_region = re.sub(r'[\\/*?:"<>|]', "_", region)
                     output_file = os.path.join(output_dir, f"{safe_region}.txt")
                     
-                    # 保存到文件
                     with open(output_file, 'w', encoding='utf-8') as f:
                         for ip in unique_ips:
                             f.write(f"{ip}\n")
@@ -399,37 +364,19 @@ jobs:
                 print("\n没有找到有效IP")
 
         def main():
-            """主函数"""
             parser = argparse.ArgumentParser(description='酒店IP扫描工具')
-            parser.add_argument('--input', type=str, default='Hotel/ip/ip/Hotel_ips.txt', help='输入配置文件路径，默认为 Hotel/ip/ip/Hotel_ips.txt')
-            parser.add_argument('--output', type=str, default='Hotel/ip', help='输出目录，默认为 Hotel/ip')
+            parser.add_argument('--input', type=str, default='Hotel/ip/ip/Hotel_ips.txt', 
+                              help='输入配置文件路径，默认为 Hotel/ip/ip/Hotel_ips.txt')
+            parser.add_argument('--output', type=str, default='Hotel/ip', 
+                              help='输出目录，默认为 Hotel/ip')
             
             args = parser.parse_args()
             
-            # 设置requests超时和重试
-            import requests.adapters
-            requests.adapters.DEFAULT_RETRIES = 2
-            
-            # 扫描配置文件
             if os.path.exists(args.input):
                 print(f"开始扫描配置文件: {args.input}")
                 scan_configs(args.input, args.output)
             else:
                 print(f"配置文件不存在: {args.input}")
-                # 尝试创建示例配置文件
-                example_dir = os.path.dirname(args.input)
-                os.makedirs(example_dir, exist_ok=True)
-                
-                with open(args.input, 'w', encoding='utf-8') as f:
-                    f.write("# 酒店IP配置文件格式说明:\n")
-                    f.write("# 1. option=0格式: IP:端口$地区，扫描D段1-255\n")
-                    f.write("# 2. option=1格式: IP:端口,1$地区，扫描C段范围和D段1-255\n")
-                    f.write("# 示例:\n")
-                    f.write("192.168.1.1:8081$北京电信\n")
-                    f.write("192.168.1-30.1:8081,1$上海联通\n")
-                
-                print(f"已创建示例配置文件: {args.input}")
-                print("请编辑此文件后重新运行程序")
 
         if __name__ == "__main__":
             main()
@@ -441,9 +388,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        # 检查是否有文件需要提交
         if [ -n "$(git status --porcelain Hotel/ip/*.txt 2>/dev/null)" ]; then
-          # 添加所有扫描结果文件
           git add Hotel/ip/*.txt
           git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')"
           git push
