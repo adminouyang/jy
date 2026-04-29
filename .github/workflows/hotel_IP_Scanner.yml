@@ -72,6 +72,10 @@ jobs:
             return ip_list
 
         def generate_ip_ports(ip: str, port: str, option: int) -> List[str]:
+            # 检查IP是否为空
+            if not ip or ip == '':
+                return []
+                
             ip_parts = ip.split('.')
             if len(ip_parts) != 4:
                 return []
@@ -79,10 +83,13 @@ jobs:
             a, b, c, d = ip_parts
             
             if option == 0:
-                # 关键修复：只使用A、B、C段，扫描D段1-255
                 ip_ports = []
+                # 首先包含基础IP本身
+                ip_ports.append(f"{a}.{b}.{c}.{d}:{port}")
+                # 然后扫描D段的其他IP
                 for y in range(1, 256):
-                    ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
+                    if y != int(d):  # 避免重复添加基础IP
+                        ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
             
             elif option == 1:
@@ -94,65 +101,100 @@ jobs:
                 return ip_ports
             else:
                 ip_ports = []
+                ip_ports.append(f"{a}.{b}.{c}.{d}:{port}")
                 for y in range(1, 256):
-                    ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
+                    if y != int(d):
+                        ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
 
-        def test_url(url: str, timeout: int = 5) -> bool:
-            """测试URL是否可访问，返回布尔值"""
-            try:
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                    'Accept': 'application/json,text/plain,*/*',
-                    'Accept-Language': 'zh-CN,zh;q=0.9',
-                    'Connection': 'keep-alive'
-                }
-                
-                resp = requests.get(url, timeout=timeout, proxies=proxies, headers=headers)
-                
-                if resp.status_code == 200:
-                    content = resp.text.strip()
-                    
-                    # 简单的验证：内容不为空，不是错误页面
-                    if not content or content.startswith('<') or '404' in content or 'error' in content.lower():
-                        return False
-                    
-                    # 对于JSON端点
-                    if url.endswith('.json'):
-                        # 尝试解析JSON
-                        try:
-                            data = json.loads(content)
-                            # 只要能够解析为JSON，就认为是有效的
-                            if data is not None:
-                                return True
-                        except:
-                            # 即使不是标准JSON，检查是否包含IPTV关键词
-                            if any(keyword in content.lower() for keyword in 
-                                  ['channel', 'tv', 'iptv', 'live', 'm3u8', '.ts', 'cctv']):
-                                return True
-                    
-                    # 对于TXT端点
-                    elif url.endswith('.txt'):
-                        # 简单的TXT验证
-                        if content and not content.startswith('<'):
-                            return True
-                    
-                return False
-            except:
-                return False
-
-        def check_ip_port(ip_port: str, timeout: int = 5) -> str:
-            """检查IP端口是否有效"""
+        def check_ip_port_with_retry(ip_port: str, timeout: int = 5, max_retries: int = 2) -> str:
             endpoints = [
                 "/iptv/live/1000.json?key=txiptv",
                 "/ZHGXTV/Public/json/live_interface.txt"
             ]
             
-            for endpoint in endpoints:
-                url = f"http://{ip_port}{endpoint}"
-                if test_url(url, timeout):
-                    print(f"✓ 找到有效IPTV: {url}")
-                    return ip_port
+            for retry in range(max_retries):
+                for endpoint in endpoints:
+                    try:
+                        url = f"http://{ip_port}{endpoint}"
+                        headers = {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                            'Accept': 'application/json,text/plain,*/*',
+                            'Accept-Language': 'zh-CN,zh;q=0.9',
+                            'Connection': 'keep-alive',
+                            'Cache-Control': 'no-cache',
+                            'Pragma': 'no-cache'
+                        }
+                        
+                        # 打印调试信息
+                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
+                            print(f"调试: 尝试连接 {url} (重试 {retry+1}/{max_retries})")
+                        
+                        resp = requests.get(url, timeout=timeout, proxies=proxies, headers=headers, verify=False)
+                        
+                        if resp.status_code == 200:
+                            content = resp.text.strip()
+                            
+                            if not content:
+                                continue
+                            
+                            # 打印响应信息用于调试
+                            if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
+                                print(f"调试: {url} 响应状态: {resp.status_code}")
+                                print(f"调试: 响应内容前200字符: {content[:200]}")
+                            
+                            # 检查是否是XML包装的JSON
+                            if content.startswith('<?xml'):
+                                import re
+                                json_match = re.search(r'\{.*\}', content, re.DOTALL)
+                                if json_match:
+                                    content = json_match.group(0)
+                            
+                            if endpoint.endswith('.json'):
+                                # 尝试解析JSON
+                                try:
+                                    data = json.loads(content)
+                                    # 非常宽松的验证：只要是有效的JSON，就认为是有效的
+                                    if isinstance(data, (dict, list)):
+                                        print(f"✓ 找到有效IPTV JSON: {url}")
+                                        return ip_port
+                                except json.JSONDecodeError:
+                                    # 检查是否包含IPTV关键词
+                                    if any(keyword in content.lower() for keyword in 
+                                          ['channel', 'tv', 'iptv', 'live', 'm3u8', '.ts', 'cctv', 'code']):
+                                        print(f"✓ 找到疑似IPTV JSON: {url}")
+                                        return ip_port
+                                    
+                            elif endpoint.endswith('.txt'):
+                                # 检查是否是IPTV频道列表
+                                lines = [line.strip() for line in content.split('\n') if line.strip()]
+                                if lines:
+                                    iptv_indicators = 0
+                                    for line in lines[:10]:
+                                        if any(indicator in line.lower() for indicator in 
+                                              ['#extinf', 'http://', 'https://', '.m3u8', '.ts', ',', '|', 'channel']):
+                                            iptv_indicators += 1
+                                    
+                                    if iptv_indicators > 0:
+                                        print(f"✓ 找到有效IPTV TXT: {url}")
+                                        return ip_port
+                                        
+                    except requests.exceptions.Timeout:
+                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
+                            print(f"调试: {ip_port} 连接超时")
+                        continue
+                    except requests.exceptions.ConnectionError:
+                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
+                            print(f"调试: {ip_port} 连接错误")
+                        continue
+                    except Exception as e:
+                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
+                            print(f"调试: {ip_port} 异常: {str(e)}")
+                        continue
+                
+                # 重试前等待
+                if retry < max_retries - 1:
+                    time.sleep(1)
             
             return None
 
@@ -167,22 +209,15 @@ jobs:
                 print(f"警告: 没有生成有效的IP地址，跳过扫描")
                 return []
             
-            # 首先测试配置的原始IP
-            original_ip_port = f"{ip}:{port}"
-            print(f"首先测试原始IP: {original_ip_port}")
-            if check_ip_port(original_ip_port):
-                valid_ip_ports.append(original_ip_port)
-                print(f"原始IP有效: {original_ip_port}")
+            # 打印前5个IP用于调试
+            print(f"前5个待扫描IP: {ip_ports[:5]}")
             
-            max_workers = 5  # 进一步减少线程数
+            max_workers = 10  # 进一步减少线程数
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = {}
                 for ip_port in ip_ports:
-                    # 跳过已经测试过的原始IP
-                    if ip_port == original_ip_port:
-                        continue
-                    future = executor.submit(check_ip_port, ip_port)
+                    future = executor.submit(check_ip_port_with_retry, ip_port)
                     futures[future] = ip_port
                 
                 for i, future in enumerate(as_completed(futures), 1):
@@ -262,8 +297,7 @@ jobs:
                             return None
                     
                     a, b, c, d = ip_parts
-                    # 只使用A、B、C段
-                    base_ip = f"{a}.{b}.{c}.1"
+                    base_ip = f"{a}.{b}.{c}.{d}"
                     
                 elif option == 1:
                     ip_parts = ip_part.split('.')
@@ -277,8 +311,7 @@ jobs:
                         print(f"第{line_num}行格式错误: option=1时C段应包含范围 - {line}")
                         return None
                     
-                    # 只使用A、B、C段
-                    base_ip = f"{a}.{b}.{c_part}.1"
+                    base_ip = f"{a}.{b}.{c_part}.{d}"
                 else:
                     return None
                 
@@ -355,7 +388,7 @@ jobs:
                 print('='*60)
                 
                 if option == 0:
-                    print("  扫描范围: D段1-255")
+                    print("  扫描范围: D段1-255 (包含基础IP本身)")
                 elif option == 1:
                     print("  扫描范围: C段范围和D段1-255")
                 
@@ -418,6 +451,15 @@ jobs:
         EOF
         
         python hotel_IP_Scanner.py
+      
+    - name: 测试单个IP连接
+      run: |
+        echo "测试单个IP连接:"
+        echo "1. 测试 218.13.170.98:9901"
+        curl -s -o /dev/null -w "状态码: %{http_code}\n" "http://218.13.170.98:9901/iptv/live/1000.json?key=txiptv" --connect-timeout 10 || echo "连接失败"
+        echo ""
+        echo "2. 测试 219.139.228.178:7777"
+        curl -s -o /dev/null -w "状态码: %{http_code}\n" "http://219.139.228.178:7777/iptv/live/1000.json?key=txiptv" --connect-timeout 10 || echo "连接失败"
       
     - name: Commit and push if changes
       run: |
