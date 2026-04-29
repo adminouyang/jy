@@ -45,6 +45,12 @@ jobs:
 
         # 代理设置
         proxies = None
+        HEADERS = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept': 'application/json,text/plain,*/*',
+            'Accept-Language': 'zh-CN,zh;q=0.9',
+            'Connection': 'keep-alive'
+        }
 
         def expand_part(part: str) -> List[str]:
             if '-' in part:
@@ -107,98 +113,41 @@ jobs:
                         ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
 
-        def check_ip_port_with_retry(ip_port: str, timeout: int = 5, max_retries: int = 2) -> str:
-            endpoints = [
-                "/iptv/live/1000.json?key=txiptv",
-                "/ZHGXTV/Public/json/live_interface.txt"
-            ]
-            
-            for retry in range(max_retries):
-                for endpoint in endpoints:
+        def check_ip_availability(ip_port: str, timeout: int = 3) -> bool:
+            """检测IP:端口是否可用"""
+            try:
+                # 尝试连接HTTP服务
+                test_urls = [
+                    f"http://{ip_port}/",
+                    f"http://{ip_port}/iptv/live/1000.json?key=txiptv",
+                    f"http://{ip_port}/ZHGXTV/Public/json/live_interface.txt"
+                ]
+                for url in test_urls:
                     try:
-                        url = f"http://{ip_port}{endpoint}"
-                        headers = {
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                            'Accept': 'application/json,text/plain,*/*',
-                            'Accept-Language': 'zh-CN,zh;q=0.9',
-                            'Connection': 'keep-alive',
-                            'Cache-Control': 'no-cache',
-                            'Pragma': 'no-cache'
-                        }
-                        
-                        # 打印调试信息
-                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
-                            print(f"调试: 尝试连接 {url} (重试 {retry+1}/{max_retries})")
-                        
-                        resp = requests.get(url, timeout=timeout, proxies=proxies, headers=headers, verify=False)
-                        
-                        if resp.status_code == 200:
-                            content = resp.text.strip()
-                            
-                            if not content:
-                                continue
-                            
-                            # 打印响应信息用于调试
-                            if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
-                                print(f"调试: {url} 响应状态: {resp.status_code}")
-                                print(f"调试: 响应内容前200字符: {content[:200]}")
-                            
-                            # 检查是否是XML包装的JSON
-                            if content.startswith('<?xml'):
-                                import re
-                                json_match = re.search(r'\{.*\}', content, re.DOTALL)
-                                if json_match:
-                                    content = json_match.group(0)
-                            
-                            if endpoint.endswith('.json'):
-                                # 尝试解析JSON
-                                try:
-                                    data = json.loads(content)
-                                    # 非常宽松的验证：只要是有效的JSON，就认为是有效的
-                                    if isinstance(data, (dict, list)):
-                                        print(f"✓ 找到有效IPTV JSON: {url}")
-                                        return ip_port
-                                except json.JSONDecodeError:
-                                    # 检查是否包含IPTV关键词
-                                    if any(keyword in content.lower() for keyword in 
-                                          ['channel', 'tv', 'iptv', 'live', 'm3u8', '.ts', 'cctv', 'code']):
-                                        print(f"✓ 找到疑似IPTV JSON: {url}")
-                                        return ip_port
-                                    
-                            elif endpoint.endswith('.txt'):
-                                # 检查是否是IPTV频道列表
-                                lines = [line.strip() for line in content.split('\n') if line.strip()]
-                                if lines:
-                                    iptv_indicators = 0
-                                    for line in lines[:10]:
-                                        if any(indicator in line.lower() for indicator in 
-                                              ['#extinf', 'http://', 'https://', '.m3u8', '.ts', ',', '|', 'channel']):
-                                            iptv_indicators += 1
-                                    
-                                    if iptv_indicators > 0:
-                                        print(f"✓ 找到有效IPTV TXT: {url}")
-                                        return ip_port
-                                        
-                    except requests.exceptions.Timeout:
-                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
-                            print(f"调试: {ip_port} 连接超时")
+                        response = requests.get(url, timeout=timeout, headers=HEADERS, verify=False)
+                        if response.status_code == 200:
+                            return True
+                    except:
                         continue
-                    except requests.exceptions.ConnectionError:
-                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
-                            print(f"调试: {ip_port} 连接错误")
-                        continue
-                    except Exception as e:
-                        if '218.13.170.98' in ip_port or '219.139.228.178' in ip_port:
-                            print(f"调试: {ip_port} 异常: {str(e)}")
-                        continue
-                
-                # 重试前等待
-                if retry < max_retries - 1:
-                    time.sleep(1)
-            
+                return False
+            except Exception as e:
+                return False
+
+        def check_ip_port(ip_port: str, url_end: str) -> str:
+            """发送get请求检测url是否可访问"""
+            try:
+                url = f"http://{ip_port}{url_end}"
+                resp = requests.get(url, timeout=3, headers=HEADERS, verify=False)
+                resp.raise_for_status()
+                if "tsfile" in resp.text or "hls" in resp.text or "m3u8" in resp.text:
+                    print(f"✓ {url} 访问成功")
+                    return ip_port
+            except Exception as e:
+                return None
             return None
 
         def scan_ip_port(ip: str, port: str, option: int, progress_queue: Queue = None) -> List[str]:
+            """扫描IP端口"""
             valid_ip_ports = []
             ip_ports = generate_ip_ports(ip, port, option)
             total = len(ip_ports)
@@ -212,23 +161,27 @@ jobs:
             # 打印前5个IP用于调试
             print(f"前5个待扫描IP: {ip_ports[:5]}")
             
-            max_workers = 10  # 进一步减少线程数
+            max_workers = 20
+            
+            # 使用两个URL端点进行扫描
+            url_ends = ["/iptv/live/1000.json?key=txiptv", "/ZHGXTV/Public/json/live_interface.txt"]
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
                 futures = {}
                 for ip_port in ip_ports:
-                    future = executor.submit(check_ip_port_with_retry, ip_port)
-                    futures[future] = ip_port
+                    for url_end in url_ends:
+                        future = executor.submit(check_ip_port, ip_port, url_end)
+                        futures[future] = ip_port
                 
                 for i, future in enumerate(as_completed(futures), 1):
                     result = future.result()
-                    if result:
+                    if result and result not in valid_ip_ports:
                         valid_ip_ports.append(result)
-                        print(f"已找到 {len(valid_ip_ports)} 个有效IP: {result}")
+                        print(f"✓ 已找到有效IP: {result}")
                     
-                    if progress_queue and i % 10 == 0:
+                    if progress_queue and i % 20 == 0:
                         progress_queue.put((i, total))
-                        time.sleep(0.5)  # 增加延迟
+                        time.sleep(0.2)  # 增加延迟
             
             return valid_ip_ports
 
