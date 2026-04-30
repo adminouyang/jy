@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取所有历史记录
+          fetch-depth: 0
           
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
           
@@ -27,27 +27,38 @@ jobs:
           pip install lxml
           pip install beautifulsoup4
           
-      - name: freetv
+      - name: Run freetv script
         run: |
           echo "开始运行freetv.py脚本..."
           python freetv/freetv.py
           
-      - name: 提交更新
+      - name: Configure Git
         run: |
-          cd $GITHUB_WORKSPACE
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # 先拉取远程的最新更改
-          git pull origin main --rebase
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "检测到有更改需要提交"
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "没有检测到更改，跳过提交"
+          fi
           
-          # 然后添加、提交和推送
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          # 添加所有更改
           git add .
           
-          # 检查是否有更改需要提交
-          if git diff --cached --quiet; then
-            echo "没有更改，跳过提交"
-          else
-            git commit -m "增加频道链接速度检测 $(date +'%Y-%m-%d %H:%M:%S')"
-            git push
-          fi
+          # 创建提交
+          git commit -m "频道链接速度检测更新 $(date +'%Y-%m-%d %H:%M:%S')"
+          
+          # 先拉取最新更改，使用--rebase避免合并冲突
+          git pull origin main --rebase
+          
+          # 推送更改
+          git push origin main
