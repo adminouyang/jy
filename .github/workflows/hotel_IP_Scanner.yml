@@ -14,7 +14,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+      with:
+        # 添加fetch-depth参数，获取完整历史记录
+        fetch-depth: 0
+        # 设置拉取策略
+        ref: main
+        
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -78,7 +83,6 @@ jobs:
             return ip_list
 
         def generate_ip_ports(ip: str, port: str, option: int) -> List[str]:
-            # 检查IP是否为空
             if not ip or ip == '':
                 return []
                 
@@ -90,11 +94,9 @@ jobs:
             
             if option == 0:
                 ip_ports = []
-                # 首先包含基础IP本身
                 ip_ports.append(f"{a}.{b}.{c}.{d}:{port}")
-                # 然后扫描D段的其他IP
                 for y in range(1, 256):
-                    if y != int(d):  # 避免重复添加基础IP
+                    if y != int(d):
                         ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
             
@@ -113,28 +115,7 @@ jobs:
                         ip_ports.append(f"{a}.{b}.{c}.{y}:{port}")
                 return ip_ports
 
-        def check_ip_availability(ip_port: str, timeout: int = 3) -> bool:
-            """检测IP:端口是否可用"""
-            try:
-                # 尝试连接HTTP服务
-                test_urls = [
-                    f"http://{ip_port}/",
-                    f"http://{ip_port}/iptv/live/1000.json?key=txiptv",
-                    f"http://{ip_port}/ZHGXTV/Public/json/live_interface.txt"
-                ]
-                for url in test_urls:
-                    try:
-                        response = requests.get(url, timeout=timeout, headers=HEADERS, verify=False)
-                        if response.status_code == 200:
-                            return True
-                    except:
-                        continue
-                return False
-            except Exception as e:
-                return False
-
         def check_ip_port(ip_port: str, url_end: str) -> str:
-            """发送get请求检测url是否可访问"""
             try:
                 url = f"http://{ip_port}{url_end}"
                 resp = requests.get(url, timeout=3, headers=HEADERS, verify=False)
@@ -147,7 +128,6 @@ jobs:
             return None
 
         def scan_ip_port(ip: str, port: str, option: int, progress_queue: Queue = None) -> List[str]:
-            """扫描IP端口"""
             valid_ip_ports = []
             ip_ports = generate_ip_ports(ip, port, option)
             total = len(ip_ports)
@@ -158,12 +138,7 @@ jobs:
                 print(f"警告: 没有生成有效的IP地址，跳过扫描")
                 return []
             
-            # 打印前5个IP用于调试
-            print(f"前5个待扫描IP: {ip_ports[:5]}")
-            
             max_workers = 20
-            
-            # 使用两个URL端点进行扫描
             url_ends = ["/iptv/live/1000.json?key=txiptv", "/ZHGXTV/Public/json/live_interface.txt"]
             
             with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -181,7 +156,7 @@ jobs:
                     
                     if progress_queue and i % 20 == 0:
                         progress_queue.put((i, total))
-                        time.sleep(0.2)  # 增加延迟
+                        time.sleep(0.2)
             
             return valid_ip_ports
 
@@ -206,7 +181,6 @@ jobs:
                     print(f"第{line_num}行格式错误: 配置部分或地区为空 - {line}")
                     return None
                 
-                # 解析option
                 option = 0
                 if ',' in config_part:
                     ip_port_part, option_part = config_part.split(',')
@@ -222,12 +196,10 @@ jobs:
                     ip_port_part = config_part
                     option = 0
                 
-                # 解析IP和端口
                 if ":" not in ip_port_part:
                     print(f"第{line_num}行格式错误: 缺少端口号 - {line}")
                     return None
                 
-                # 分离IP和端口
                 ip_part, port = ip_port_part.split(':')
                 ip_part = ip_part.strip()
                 port = port.strip()
@@ -236,14 +208,12 @@ jobs:
                     print(f"第{line_num}行格式错误: IP或端口为空 - {line}")
                     return None
                 
-                # 验证IP格式
                 if option == 0:
                     ip_parts = ip_part.split('.')
                     if len(ip_parts) != 4:
                         print(f"第{line_num}行格式错误: IP地址格式不正确 - {line}")
                         return None
                     
-                    # 验证每个部分是否为数字
                     for part in ip_parts:
                         if not part.replace('-', '').isdigit():
                             print(f"第{line_num}行格式错误: IP包含非数字字符 - {line}")
@@ -287,13 +257,9 @@ jobs:
                     original_line = line.rstrip('\n')
                     original_lines.append(original_line)
                     
-                    print(f"解析第{line_num}行: {original_line}")
                     config = parse_config_line(original_line, line_num)
                     if config:
                         ip_configs.append(config)
-                        print(f"  解析成功: IP={config[0]}, 端口={config[1]}, option={config[2]}, 地区={config[3]}")
-                    else:
-                        print(f"  解析失败，跳过该配置")
                         
                 return ip_configs, original_lines
                 
@@ -358,7 +324,7 @@ jobs:
                     print("没有找到有效IP")
                 
                 progress_queue.put("CONFIG_COMPLETE")
-                time.sleep(3)  # 增加配置之间的延迟
+                time.sleep(3)
             
             progress_queue.put(None)
             progress_thread.join(timeout=10)
@@ -405,23 +371,31 @@ jobs:
         
         python hotel_IP_Scanner.py
       
-    - name: 测试单个IP连接
+    - name: 同步远程更改
       run: |
-        echo "测试单个IP连接:"
-        echo "1. 测试 218.13.170.98:9901"
-        curl -s -o /dev/null -w "状态码: %{http_code}\n" "http://218.13.170.98:9901/iptv/live/1000.json?key=txiptv" --connect-timeout 10 || echo "连接失败"
-        echo ""
-        echo "2. 测试 219.139.228.178:7777"
-        curl -s -o /dev/null -w "状态码: %{http_code}\n" "http://219.139.228.178:7777/iptv/live/1000.json?key=txiptv" --connect-timeout 10 || echo "连接失败"
-      
-    - name: Commit and push if changes
-      run: |
+        # 配置Git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        
+        # 拉取远程最新更改，使用rebase避免合并提交
+        echo "正在拉取远程最新更改..."
+        git pull origin main --rebase
+        
+    - name: Commit and push if changes
+      run: |
+        # 检查是否有文件需要提交
         if [ -n "$(git status --porcelain Hotel/ip/*.txt 2>/dev/null)" ]; then
+          # 添加所有扫描结果文件
           git add Hotel/ip/*.txt
           git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')"
-          git push
+          
+          # 尝试推送，如果失败则重试一次
+          echo "正在推送到远程仓库..."
+          if ! git push origin main; then
+            echo "推送失败，正在拉取最新更改并重试..."
+            git pull origin main --rebase
+            git push origin main
+          fi
         else
           echo "没有发现文件变化，跳过提交"
         fi
