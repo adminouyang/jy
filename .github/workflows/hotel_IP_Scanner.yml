@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: '0 10,22 * * *'
   workflow_dispatch:
-permissions:
-          contents: write
 
 jobs:
   hotel-ip:
@@ -15,9 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        # 添加fetch-depth参数，获取完整历史记录
         fetch-depth: 0
-        # 设置拉取策略
         ref: main
         
     - name: Set up Python
@@ -371,17 +367,37 @@ jobs:
         
         python hotel_IP_Scanner.py
       
-    - name: 同步远程更改
+    - name: 配置Git用户
       run: |
-        # 配置Git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+      
+    - name: 暂存扫描结果
+      run: |
+        # 检查是否有新的IP文件生成
+        if [ -n "$(find Hotel/ip -name "*.txt" -newer hotel_IP_Scanner.py 2>/dev/null)" ]; then
+          echo "发现新的扫描结果文件"
+          # 添加所有扫描结果文件
+          git add Hotel/ip/*.txt
+        else
+          echo "没有发现新的扫描结果文件"
+        fi
+      
+    - name: 拉取远程更改
+      run: |
+        # 如果有暂存的更改，先提交它们
+        if git diff --cached --quiet; then
+          echo "没有暂存的更改，直接拉取"
+        else
+          echo "有暂存的更改，先提交再拉取"
+          git commit -m "临时提交: 扫描结果 $(date '+%Y-%m-%d %H:%M:%S')"
+        fi
         
-        # 拉取远程最新更改，使用rebase避免合并提交
+        # 拉取远程更改
         echo "正在拉取远程最新更改..."
         git pull origin main --rebase
-        
-    - name: Commit and push if changes
+      
+    - name: 提交最终更改
       run: |
         # 检查是否有文件需要提交
         if [ -n "$(git status --porcelain Hotel/ip/*.txt 2>/dev/null)" ]; then
@@ -389,13 +405,9 @@ jobs:
           git add Hotel/ip/*.txt
           git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')"
           
-          # 尝试推送，如果失败则重试一次
+          # 尝试推送
           echo "正在推送到远程仓库..."
-          if ! git push origin main; then
-            echo "推送失败，正在拉取最新更改并重试..."
-            git pull origin main --rebase
-            git push origin main
-          fi
+          git push origin main
         else
           echo "没有发现文件变化，跳过提交"
         fi
