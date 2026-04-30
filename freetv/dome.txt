@@ -1,43 +1,42 @@
 📡央视频道,#genre#
-CCTV1,[BD]cctv1,[BD]cctv-1,[BD]cctv-1 hd,[BD]cctv-1 综合,[BD]cctv1综合,[BD]cctv-1综合,[HD]cctv1,[HD]cctv-1
-CCTV2,[BD]cctv 2,[BD]cctv（hd）2,[BD]cctv02,[BD]cctv2,[BD]cctv2高清,[BD]cctv2财经,[BD]cctv2-财经,[HD]cctv2,[HD]cctv-2 财经,[HD]cctv2财经
-CCTV3,[BD]cctv 3,[BD]cctv（hd）3,[BD]cctv03,[BD]cctv3,[BD]cctv-3,[BD]cctv-3 hd,[BD]cctv-3 综艺,[BD]cctv-3hd,[BD]cctv-3高清,[BD]cctv3综艺,[BD]cctv3-综艺,[BD]cctv-3综艺
-CCTV4,[BD]cctv（hd）4,[BD]cctv04,[BD]cctv-04,[BD]cctv4,[BD]cctv-4,[BD]cctv-4 hd,[BD]cctv-4 中文国际,[BD]cctv-4hd,[BD]cctv4k,[BD]cctv4k高清,[BD]cctv4高清,[BD]cctv-4高清,[BD]cctv4-国际,[BD]cctv4中文国际,[BD]cctv4-中文国际,[BD]cctv-4中文国际,[HD]cctv4,[HD]cctv-4,[HD]cctv4中文国际,[HD]cctv-4 asia
+CCTV1,[BD]cctv-1,[BD]cctv-1hd,[BD]cctv1,[BD]cctv1 8m1080
+CCTV2,[BD]cctv2,[BD]cctv2 8m1080,[BD]cctv2财经,[HD]cctv2,[HD]cctv2财经,[SD]cctv2,[SD]cctv2财经
+CCTV3,[BD]cctv-3,[BD]cctv-3hd,[BD]cctv3,[BD]cctv3hd,[BD]cctv3综艺,[HD]cctv-3hd,[HD]cctv3综艺,[VGA]cctv3综艺
+CCTV4,[BD]cctv-4,[BD]cctv-4 中文国际,[BD]cctv-4hd,[BD]cctv-4中文国际,[BD]cctv4,[BD]cctv4中文国际,[HD]cctv-4 中文国际,[HD]cctv-4hd,[HD]cctv4,[HD]cctv4中文国际,[SD]cctv-4中文国际,[SD]cctv4中文国际
 
-CCTV5,[BD]cctv（hd）5,[BD]cctv5,[BD]cctv-5,[BD]cctv-5 hd,[BD]cctv-5 体育,[BD]cctv51920,[BD]cctv58,[BD]cctv-5hd,[BD]cctv5高清,[BD]cctv-5高清,[BD]cctv5体育,[BD]cctv5-体育,[BD]cctv-5体育,[HD]cctv5 plus,[HD]cctv-5 体育赛事
-CCTV5+,[BD]cctv（hd）5 plus,[BD]cctv5 plus,[BD]cctv5 plus 高清,[BD]cctv5 plus 体育赛事,[BD]cctv-5 plus 体育赛事,[BD]cctv5+,[BD]cctv-5+,[BD]cctv-5＋ hd,[BD]cctv-5＋高清,[BD]cctv5+体育赛事
-CCTV6,[BD]cctv 6,[BD]cctv（hd）6,[BD]cctv06,[BD]cctv6,[BD]cctv-6,[BD]cctv-6 hd,[BD]cctv6 电影,[BD]cctv-6 电影,[BD]cctv-6hd,[BD]cctv6高清,[BD]cctv-6高清,[BD]cctv6电影,[BD]cctv6-电影,[BD]cctv-6电影
-CCTV7,[BD]cctv 7,[BD]cctv（hd）7,[BD]cctv07,[BD]cctv7,[BD]cctv-7,[BD]cctv-7 hd,[BD]cctv-7hd,[BD]cctv7高清,[BD]cctv-7高清,[BD]cctv7-国防军事,[BD]cctv-7国防军事,[BD]cctv7-军农
-CCTV8,[BD]cctv 8,[BD]cctv（hd）8,[BD]cctv8,[BD]cctv-8,[BD]cctv-8 hd,[BD]cctv-8hd,[BD]cctv8高清,[BD]cctv8-电视剧,[BD]cctv-8电视剧,[HD]cctv-8hd
-CCTV9,[BD]cctv 9,[BD]cctv（hd）9,[BD]cctv09,[BD]cctv9,[BD]cctv-9,[BD]cctv-9 hd,[BD]cctv9高清,[BD]cctv-9高清,[BD]cctv9-纪录,[BD]cctv-9纪录,[BD]cctv9记录
-CCTV10,[BD]cctv（hd）10,[BD]cctv10,[BD]cctv-10,[BD]cctv-10 hd,[BD]cctv-10hd,[BD]cctv10科教,[BD]cctv10-科教,[BD]cctv-10科教,[BD]cctv10高清,[BD]cctv-10高清
-CCTV11,[SD]cctv-11戏曲,[BD]cctv（hd）11,[BD]cctv11,[BD]cctv-11,[BD]cctv-11 hd,[BD]cctv-11hd,[BD]cctv11高清,[BD]cctv-11高清,[BD]cctv11戏曲,[BD]cctv11-戏曲,[BD]cctv-11戏曲,[BD]cctv11戏剧,[HD]cctv11,[HD]cctv-11,[HD]cctv-11 戏曲,[HD]cctv11戏剧,[HD]cctv-11hd
-CCTV12,[BD]cctv（hd）12,[BD]cctv12,[BD]cctv-12,[BD]cctv-12 hd,[BD]cctv-12 社会与法,[BD]cctv-12hd,[BD]cctv12高清,[BD]cctv-12高清,[BD]cctv12-社会与法,[BD]cctv-12社会与法
-CCTV13,[BD]cctv 13,[BD]cctv（hd）13,[BD]cctv13,[BD]cctv-13,[BD]cctv-13 hd,[BD]cctv-13hd,[BD]cctv13高清,[BD]cctv-13高清,[BD]cctv13新闻,[BD]cctv13-新闻,[BD]cctv-13新闻,[HD]cctv13,[HD]cctv-13,[HD]cctv-13hd,[HD]cctv13新闻
-CCTV14,[BD]cctv（hd）14,[BD]cctv14,[BD]cctv-14,[BD]cctv-14 hd,[BD]cctv-14 少儿,[BD]cctv-14hd,[BD]cctv14高清,[BD]cctv-14高清,[BD]cctv14少儿,[BD]cctv14-少儿,[BD]cctv-14少儿
-CCTV15,[BD]cctv（hd）15,[BD]cctv15,[BD]cctv-15,[BD]cctv-15 hd,[BD]cctv-15hd,[BD]cctv15音乐,[BD]cctv15-音乐,[BD]cctv-15音乐,[BD]cctv15高清,[BD]cctv-15高清,[HD]cctv15,[HD]cctv-15,[HD]cctv-15 音乐,[HD]cctv15音乐
-CCTV16,[BD]cctv 16,[BD]cctv（hd）16,[BD]cctv（hd）16-4k,[BD]cctv16,[BD]cctv-16,[BD]cctv-16 hd,[BD]cctv16-4k,[BD]cctv-164k
-CCTV17,[BD]cctv 17,[BD]cctv（hd）17,[BD]cctv17,[BD]cctv-17,[BD]cctv-17 hd,[BD]cctv-17hd,[BD]cctv-17高清,[BD]cctv17-农业农村,[BD]cctv-17农业农村
-CCTV第一剧场,[BD]cctv（hd）第一剧场,[BD]cctv第一剧场
-CCTV风云足球,[BD]cctv（hd）风云足球,[BD]cctv风云足球
-CCTV风云音乐,[BD]cctv风云音乐
+CCTV5,[BD]cctv-5,[BD]cctv-5hd,[BD]cctv5,[BD]cctv5体育,[HD]cctv-5hd,[HD]cctv5体育,[SD]cctv5体育
+CCTV5+,[BD]cctv-5 plus体育赛事,[BD]cctv5 plus,[BD]cctv5 plus 8m1080,[HD]cctv-5 plus体育赛事,[HD]cctv5 plus,[HD]cctv5 plus体育赛事,[VGA]cctv5 plus体育赛事,[BD]cctv-5 plus
+CCTV6,[BD]cctv-6,[BD]cctv-6hd,[BD]cctv6,[BD]cctv6电影,[HD]cctv-6hd,[HD]cctv6,[HD]cctv6电影,[SD]cctv6电影
+CCTV7,[BD]cctv-7,[BD]cctv-7hd,[BD]cctv7,[HD]cctv-7hd,[HD]cctv7,[SD]cctv7
+CCTV8,[BD]cctv-8,[BD]cctv-8hd,[BD]cctv8,[HD]cctv-8hd,[BD]cctv-8电视剧
+CCTV9,[BD]cctv-9,[BD]cctv-9hd,[BD]cctv9,[BD]cctv9纪录,[HD]cctv-9hd,[HD]cctv9,[HD]cctv9纪录,[VGA]cctv9,[VGA]cctv9纪录,[BD]cctv-9纪录
+CCTV10,[BD]cctv-10,[BD]cctv-10hd,[BD]cctv-10科教,[BD]cctv10,[BD]cctv10科教,[BD]cctv10,[BD]cctv10科教,[HD]cctv-10,[HD]cctv-10hd,[HD]cctv10,[HD]cctv10科教,[SD]cctv-10科教,[SD]cctv10,[SD]cctv10科教
+CCTV11,[BD]cctv-11,[BD]cctv-11hd,[BD]cctv-11戏曲,[BD]cctv11,[BD]cctv11戏曲,[HD]cctv-11hd,[HD]cctv11戏曲,[SD]cctv-11戏曲,[SD]cctv11,[SD]cctv11戏曲
+CCTV12,[BD]cctv-12,[BD]cctv-12hd,[BD]cctv12,[HD]cctv-12hd,[BD]cctv-12社会与法
+CCTV13,[BD]cctv-13,[BD]cctv-13hd,[BD]cctv-13新闻,[BD]cctv13,[BD]cctv13新闻,[HD]cctv-13hd,[HD]cctv13新闻,[VGA]cctv13,[VGA]cctv13新闻,[SD]cctv-13新闻
+CCTV14,[BD]cctv-14,[BD]cctv-14hd,[BD]cctv-14少儿,[BD]cctv14,[BD]cctv14hd,[BD]cctv14少儿,[HD]cctv-14hd,[HD]cctv14,[HD]cctv14少儿,[SD]cctv-14少儿,[SD]cctv14少儿
+CCTV15,[BD]cctv-15,[BD]cctv-15hd,[BD]cctv-15音乐,[BD]cctv15,[BD]cctv15音乐,[HD]cctv-15hd,[HD]cctv15音乐,[VGA]cctv15音乐,[SD]cctv-15音乐
+CCTV16,[BD]cctv-16,[BD]cctv-16hd,[BD]cctv16,[HD]cctv-16hd,[HD]cctv16
+CCTV17,[BD]cctv-17,[BD]cctv-17hd,[BD]cctv17,[HD]cctv-17hd
+第一剧场,[BD]cctv-第一剧场,[BD]cctv第一剧场,[SD]cctv第一剧场
+风云足球,[BD]cctv-风云足球,[BD]cctv风云足球,[HD]cctv-风云足球
+风云音乐,[BD]cctv-风云音乐,[HD]cctv-风云音乐
 
-CCTV4欧洲,[BD]cctv4欧洲
-CCTV4美洲,[BD]cctv4国际美洲,[BD]cctv4美洲
+CCTV4欧洲,[HD]cctv4欧洲,[VGA]cctv4欧洲
+CCTV4美洲,[VGA]cctv4美洲
 CCTVNews,[BD]cctvnews,[BD]cctv-news
-CCTV4K,[HD]cctv4k
-CCTV8K,cctv-8k超高清
+CCTV4K,[BD]cctv-4k,[BD]cctv-4k高清,[HD]cctv4k,[BD]cctv-4k超高清
+CCTV8K,[BD]cctv-8k超高清
 CETV-1,[HD]cetv-1,[BD]cetv1
 CETV-4,[HD]cetv-4
 CGTN,[HD]cgtn,[BD]cgtn
 
 cdtv-4,[BD]
 
-CHC影迷电影,[BD]chc影迷电影,[BD]chc高清电影,[BD]chc-高清电影,[HD]chc影迷电影
-CHC家庭影院,[BD]chc家庭影院,[BD]chc-家庭影院,[HD]chc家庭影院
-CHC动作电影,[BD]chc动作高清,[HD]chc动作电影,[BD]chc动作电影,[BD]chc-动作电影
+CHC影迷电影,[BD]chc影迷电影,[BD]chc电影,[HD]chc影迷电影,[VGA]chc影迷电影
+CHC家庭影院,[BD]chc家庭影院,[HD]chc家庭影院
+CHC动作电影,[BD]chc动作电影,[HD]chc动作电影
 
-chc电影,[BD]chc电影
 sctv-4高清,[BD]sctv-4高清
 
 📡卫视频道,#genre#
