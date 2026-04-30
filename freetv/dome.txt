@@ -641,7 +641,7 @@ usa nba,[HD]usa nba
 电影1,[BD]电影
 电影2,[HD]电影
 刘德华—电影,[HD]刘德华
-家庭影院,[BD]家庭影院
+华数家庭影院,[BD]家庭影院
 影视文化,[BD]影视文化
 电影4,[HD]电影4
 求索纪录,[BD]求索纪录
@@ -657,6 +657,8 @@ usa nba,[HD]usa nba
 洪金宝,[HD]洪金宝
 文化影视,[HD]文化影视
 
-
-
+📡香港,#genre#
+电影,[HD]mytime movie network
+📡美国,#genre#
+NEWSMAX2,[BD]newsmax 2,[VGA]newsmaxtv
 
