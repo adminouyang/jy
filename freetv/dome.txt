@@ -1,9 +1,8 @@
 📡央视频道,#genre#
-CCTV1,[BD]cctv-1,[BD]cctv-1hd,[BD]cctv1,[BD]cctv1 8m1080
-CCTV2,[BD]cctv2,[BD]cctv2 8m1080,[BD]cctv2财经,[HD]cctv2,[HD]cctv2财经,[SD]cctv2,[SD]cctv2财经
-CCTV3,[BD]cctv-3,[BD]cctv-3hd,[BD]cctv3,[BD]cctv3hd,[BD]cctv3综艺,[HD]cctv-3hd,[HD]cctv3综艺,[VGA]cctv3综艺
-CCTV4,[BD]cctv-4,[BD]cctv-4 中文国际,[BD]cctv-4hd,[BD]cctv-4中文国际,[BD]cctv4,[BD]cctv4中文国际,[HD]cctv-4 中文国际,[HD]cctv-4hd,[HD]cctv4,[HD]cctv4中文国际,[SD]cctv-4中文国际,[SD]cctv4中文国际
-
+CCTV1,[BD]cctv-1,[BD]cctv-1hd,[BD]cctv1,[BD]cctv1 8m1080,[SD]cctv1综合,[HD]cctv-1hd,[HD]cctv1综合,[SD]cctv1
+CCTV2,[BD]cctv2,[BD]cctv2 8m1080,[BD]cctv2财经,[HD]cctv2,[HD]cctv2财经,[SD]cctv2,[SD]cctv2财经,[BD]cctv2 高清
+CCTV3,[BD]cctv-3,[BD]cctv-3hd,[BD]cctv3,[BD]cctv3hd,[BD]cctv3综艺,[HD]cctv-3hd,[HD]cctv3综艺,[VGA]cctv3综艺,[BD]cctv3-综艺,[BD]cctv3综艺,[BD]cctv3 高清
+CCTV4,[BD]cctv-4,[HD]cctv4,[BD]cctv-4 中文国际,[BD]cctv-4hd,[BD]cctv-4中文国际,[BD]cctv4,[BD]cctv4中文国际,[HD]cctv-4 中文国际,[HD]cctv-4hd,[HD]cctv4,[HD]cctv4中文国际,[SD]cctv-4中文国[SD]cctv4中文国际,[BD]cctv4 高清
 CCTV5,[BD]cctv-5,[BD]cctv-5hd,[BD]cctv5,[BD]cctv5体育,[HD]cctv-5hd,[HD]cctv5体育,[SD]cctv5体育
 CCTV5+,[BD]cctv-5 plus体育赛事,[BD]cctv5 plus,[BD]cctv5 plus 8m1080,[HD]cctv-5 plus体育赛事,[HD]cctv5 plus,[HD]cctv5 plus体育赛事,[VGA]cctv5 plus体育赛事,[BD]cctv-5 plus
 CCTV6,[BD]cctv-6,[BD]cctv-6hd,[BD]cctv6,[BD]cctv6电影,[HD]cctv-6hd,[HD]cctv6,[HD]cctv6电影,[SD]cctv6电影
