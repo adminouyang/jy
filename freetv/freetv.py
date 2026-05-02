@@ -563,7 +563,7 @@ def main():
     
     # 定义多个源URLhttps://gh-proxy.com/
     source_urls = [
-        "https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/Hotel/IPTV.txt",
+        #"https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/Hotel/IPTV.txt",
         "https://freetv.fun/test_channels_original_new.txt"
         # 可以继续添加更多源URL
     ]
