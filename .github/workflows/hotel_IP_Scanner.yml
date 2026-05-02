@@ -39,7 +39,7 @@ jobs:
     - name: 扫描hotel IP
       run: |
         cat > hotel_IP_Scanner.py << 'EOF'
-                import os
+        import os
         import time
         import requests
         import json
