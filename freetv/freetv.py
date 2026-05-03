@@ -16,9 +16,9 @@ ssl._create_default_https_context = ssl._create_unverified_context
 class SpeedTestConfig:
     """测速配置类"""
     # 测速阈值
-    SPEED_THRESHOLD = 100  # KB/s
+    SPEED_THRESHOLD = 600  # KB/s
     CHECK_TIMEOUT = 5
-    MAX_WORKERS = 20
+    MAX_WORKERS = 30
     
     # 深度测速参数
     DEEP_TEST_SIZE = 1024 * 1024  # 1MB
