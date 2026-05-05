@@ -436,7 +436,7 @@ def save_freetv_files(all_channels, template, epg_url, output_dir="freetv"):
     # 2. 保存freetv.m3u文件
     m3u_file = os.path.join(output_dir, "freetv.m3u")
     m3u_lines = [
-        "#EXTM3U" f'x-tvg-url="{epg_url}"',
+        "#EXTM3U"  f'x-tvg-url="{epg_url}"',
         #f'x-tvg-url="{epg_url}"',
         ""
     ]
