@@ -1771,8 +1771,8 @@ jobs:
        
            try:
                with open(output_file, 'w', encoding='utf-8') as f:
-                   f.write("#EXTM3U\n")
-                   f.write('x-tvg-url=""\n')
+                   f.write("#EXTM3U x-tvg-url=""\n")
+                   # f.write('x-tvg-url=""\n')
        
                    for category in sorted_categories:
                        channels = categorized_channels[category]
