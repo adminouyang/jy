@@ -1,7 +1,7 @@
 name: freetv
 on:
   schedule:
-    - cron: 0 11,23 * * *
+    - cron: 0 10,23 * * *
   workflow_dispatch:
 
 permissions:
