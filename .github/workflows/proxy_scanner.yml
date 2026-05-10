@@ -34,7 +34,7 @@ jobs:
         
     - name: proxy_scanner
       run: |
-        cat > hotel_IP_Scanner.py << 'EOF'
+        python << 'EOF'
         import requests
         import socket
         import concurrent.futures
@@ -398,8 +398,6 @@ jobs:
         if __name__ == "__main__":
             main()
         EOF
-        
-        python proxy_scanner.py
     - name: Commit and push if changes
       run: |
         git config --local user.email "action@github.com"
