@@ -206,7 +206,7 @@ jobs:
                             new_url = f"http://{ip_port}/{path}"
 
                             # 构建新行：频道名,http://ip:port/路径$地区代理ip
-                            new_line = f"{channel_name},{new_url}${region}ip"
+                            new_line = f"{channel_name},{new_url}${region}"
                             new_lines.append(new_line)
                 else:
                     new_lines.append(line)
