@@ -1,0 +1,418 @@
+name: proxy_scanner
+
+on:
+  schedule:
+    - cron: '0 10,22 * * *'
+  workflow_dispatch:
+permissions:
+          contents: write
+
+env:
+  # 提前测试 Node.js 24
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  hotel-ip:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        ref: main
+        
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+        
+    - name: Create directories
+      run: |
+        mkdir -p Hotel/ip/ip
+        
+    - name: 扫描hotel IP
+      run: |
+        cat > hotel_IP_Scanner.py << 'EOF'
+        import requests
+        import socket
+        import concurrent.futures
+        import re
+        import os
+        import time
+        from datetime import datetime
+        from urllib.parse import urlparse
+
+
+        def read_ip_file(file_path):
+            """读取IP文件"""
+            ip_list = []
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            ip_list.append(line)
+                print(f"成功读取 {len(ip_list)} 个IP地址")
+                return ip_list
+            except Exception as e:
+                print(f"读取IP文件失败: {e}")
+                return []
+
+
+        def parse_ip_info(ip_info):
+            """解析IP信息"""
+            try:
+                # 格式: a.b.c.d:1234$xx代理
+                if '$' in ip_info:
+                    ip_port, region = ip_info.split('$')
+                else:
+                    ip_port = ip_info
+                    region = "未知代理"
+
+                ip, port = ip_port.split(':')
+                a, b, c, d = ip.split('.')
+
+                return {
+                    'base_ip': f"{a}.{b}.{c}",
+                    'd': int(d),
+                    'port': port,
+                    'region': region,
+                    'original': ip_port
+                }
+            except Exception as e:
+                print(f"解析IP信息失败: {ip_info}, 错误: {e}")
+                return None
+
+
+        def scan_ip_range(base_ip, d, port, region):
+            """扫描IP段"""
+            results = []
+            for i in range(1, 257):  # 扫描1-256
+                ip = f"{base_ip}.{i}"
+                ip_port = f"{ip}:{port}"
+                results.append({
+                    'ip': ip,
+                    'port': port,
+                    'ip_port': ip_port,
+                    'region': region
+                })
+            return results
+
+
+        def test_ip_speed(ip_info, test_path="/608807420", timeout=3):
+            """测试IP速度"""
+            url = f"http://{ip_info['ip_port']}{test_path}"
+
+            try:
+                start_time = time.time()
+                response = requests.get(url, timeout=timeout, headers={
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                })
+                end_time = time.time()
+
+                if response.status_code == 200 and len(response.content) > 0:
+                    speed = round((end_time - start_time) * 1000, 2)  # 转换为毫秒
+                    return {
+                        'ip': ip_info['ip'],
+                        'port': ip_info['port'],
+                        'ip_port': ip_info['ip_port'],
+                        'region': ip_info['region'],
+                        'speed': speed,
+                        'status': 'success'
+                    }
+            except requests.exceptions.Timeout:
+                return {'ip_port': ip_info['ip_port'], 'status': 'timeout'}
+            except Exception as e:
+                return {'ip_port': ip_info['ip_port'], 'status': 'error', 'error': str(e)}
+
+            return {'ip_port': ip_info['ip_port'], 'status': 'failed'}
+
+
+        def save_valid_ips(valid_ips, output_dir):
+            """保存有效的IP到对应地区的文件"""
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+
+            # 按地区分组
+            ip_by_region = {}
+            for ip_info in valid_ips:
+                region = ip_info['region']
+                if region not in ip_by_region:
+                    ip_by_region[region] = []
+                ip_by_region[region].append(ip_info)
+
+            # 保存到文件
+            saved_files = []
+            for region, ips in ip_by_region.items():
+                # 清理文件名中的非法字符
+                safe_region = re.sub(r'[\\/*?:"<>|]', '_', region)
+                filename = f"{safe_region}ip.txt"
+                filepath = os.path.join(output_dir, filename)
+
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    for ip_info in sorted(ips, key=lambda x: x.get('speed', 9999)):
+                        f.write(f"{ip_info['ip_port']} 延迟:{ip_info.get('speed', 0)}ms\n")
+
+                saved_files.append(filepath)
+                print(f"已保存 {len(ips)} 个IP到: {filename}")
+
+            return saved_files, ip_by_region
+
+
+        def read_demo_file(file_path):
+            """读取demo.txt文件"""
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    return f.readlines()
+            except Exception as e:
+                print(f"读取demo文件失败: {e}")
+                return []
+
+
+        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region):
+            """替换demo中的ip-port，支持多个地区IP"""
+            if not ip_by_region:
+                print("没有有效的IP可用，无法替换")
+                return demo_lines
+
+            new_lines = []
+
+            for line in demo_lines:
+                line = line.strip('\n')
+                if not line or line.startswith('#'):
+                    new_lines.append(line)
+                    continue
+
+                # 检查是否是分组行
+                if '#genre#' in line:
+                    new_lines.append(line)
+                # 检查是否是频道行
+                elif ',' in line and 'http://ip-port/' in line:
+                    channel_name, url_template = line.split(',', 1)
+
+                    # 获取路径部分
+                    path = url_template.split('/')[-1]
+
+                    # 为每个地区生成一行
+                    for region, ips in ip_by_region.items():
+                        if ips:
+                            # 选择该地区最快的IP
+                            best_ip = min(ips, key=lambda x: x.get('speed', 9999))
+                            ip_port = best_ip['ip_port']
+
+                            # 构建新的URL
+                            new_url = f"http://{ip_port}/{path}"
+
+                            # 构建新行：频道名,http://ip:port/路径$地区代理ip
+                            new_line = f"{channel_name},{new_url}${region}ip"
+                            new_lines.append(new_line)
+                else:
+                    new_lines.append(line)
+
+            return new_lines
+
+
+        def save_mg_txt(content, output_path):
+            """保存mg.txt文件"""
+            try:
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    for line in content:
+                        f.write(line + '\n')
+                print(f"已保存mg.txt到: {output_path}")
+                return True
+            except Exception as e:
+                print(f"保存mg.txt失败: {e}")
+                return False
+
+
+        def convert_txt_to_m3u(txt_lines, epg_url, logo_url, output_path):
+            """将txt文件转换为m3u格式"""
+            m3u_lines = []
+
+            # 添加M3U头
+            m3u_lines.append(f'#EXTM3U x-tvg-url="{epg_url}"\n')
+
+            current_group = ""
+
+            for line in txt_lines:
+                if not line or line.startswith('#'):
+                    continue
+
+                # 检查是否是分组行
+                if '#genre#' in line:
+                    group_name = line.replace(',#genre#', '').strip()
+                    current_group = group_name
+                # 检查是否是频道行
+                elif ',' in line and 'http://' in line:
+                    # 处理格式: 频道名,http://ip:port/路径$地区代理ip
+                    parts = line.split(',')
+                    if len(parts) >= 2:
+                        channel_name = parts[0].strip()
+                        url_with_region = parts[1].strip()
+
+                        # 分离URL和地区
+                        if '$' in url_with_region:
+                            url, region_info = url_with_region.split('$', 1)
+                        else:
+                            url = url_with_region
+                            region_info = ""
+
+                        # 清理频道名称，用于台标文件名
+                        clean_channel_name = channel_name.replace(' ', '').replace('+', 'plus')
+
+                        # 生成EXTINF行
+                        extinf_line = f'#EXTINF:-1 tvg-name="{channel_name}" '
+                        extinf_line += f'tvg-logo="{logo_url}{clean_channel_name}.png" '
+
+                        # 添加地区信息到group-title
+                        if region_info:
+                            extinf_line += f'group-title="{current_group} ", {channel_name}\n'    #[{region_info}]
+                        else:
+                            extinf_line += f'group-title="{current_group}", {channel_name}'
+
+                        m3u_lines.append(extinf_line)
+                        m3u_lines.append(url + '\n')
+
+            # 保存m3u文件
+            try:
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    f.writelines(m3u_lines)
+                print(f"已生成 {len(m3u_lines) // 2} 个频道到m3u文件")
+                return True
+            except Exception as e:
+                print(f"保存m3u文件失败: {e}")
+                return False
+
+
+        def main():
+            # 配置参数
+            ip_file_path = "proxy/ips.txt"
+            demo_file_path = "proxy/demo.txt"
+            output_ip_dir = "proxy/IP"
+            mg_txt_path = "proxy/mg.txt"
+            mg_m3u_path = "proxy/mg.m3u"
+
+            epg_url = "https://gh-proxy.com/https://raw.githubusercontent.com/adminouyang/231006/refs/heads/main/py/TV/EPG/epg.xml"
+            logo_url = "https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/"
+
+            print("=" * 50)
+            print("开始IP代理扫描和频道列表生成")
+            print("=" * 50)
+
+            # 1. 读取IP文件
+            print("\n[步骤1] 读取IP文件...")
+            ip_list = read_ip_file(ip_file_path)
+            if not ip_list:
+                print("没有读取到IP地址，程序退出")
+                return
+
+            # 2. 解析IP并生成扫描列表
+            print("\n[步骤2] 解析IP并生成扫描列表...")
+            all_ips_to_scan = []
+            for ip_info in ip_list:
+                parsed = parse_ip_info(ip_info)
+                if parsed:
+                    scanned = scan_ip_range(parsed['base_ip'], parsed['d'], parsed['port'], parsed['region'])
+                    all_ips_to_scan.extend(scanned)
+
+            print(f"共生成 {len(all_ips_to_scan)} 个IP需要扫描")
+
+            # 3. 并发扫描IP
+            print("\n[步骤3] 开始扫描IP...")
+            valid_ips = []
+
+            # 使用线程池并发扫描
+            with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+                # 提交所有扫描任务
+                future_to_ip = {executor.submit(test_ip_speed, ip): ip for ip in all_ips_to_scan}
+
+                completed = 0
+                total = len(all_ips_to_scan)
+
+                for future in concurrent.futures.as_completed(future_to_ip):
+                    completed += 1
+                    result = future.result()
+
+                    if result.get('status') == 'success':
+                        valid_ips.append(result)
+                        print(f"✓ [{completed}/{total}] {result['ip_port']} 延迟: {result['speed']}ms")
+                    else:
+                        if completed % 50 == 0 or completed == total:
+                            print(f"[{completed}/{total}] 扫描中...")
+
+            print(f"\n扫描完成，找到 {len(valid_ips)} 个有效IP")
+
+            # 4. 保存有效的IP
+            print("\n[步骤4] 保存有效的IP...")
+            saved_files, ip_by_region = save_valid_ips(valid_ips, output_ip_dir)
+
+            # 5. 读取demo文件
+            print("\n[步骤5] 处理demo.txt...")
+            demo_lines = read_demo_file(demo_file_path)
+            if not demo_lines:
+                print("demo.txt文件为空或读取失败")
+                return
+
+            # 6. 替换IP并生成mg.txt（支持多个地区IP）
+            print("\n[步骤6] 生成mg.txt（支持多个地区IP）...")
+            mg_lines = replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region)
+
+            # 计算频道数量
+            channel_count = 0
+            for line in mg_lines:
+                if ',' in line and 'http://' in line and '$' in line:
+                    channel_count += 1
+
+            save_mg_txt(mg_lines, mg_txt_path)
+
+            # 7. 生成m3u文件
+            print("\n[步骤7] 从mg.txt生成mg.m3u...")
+            convert_txt_to_m3u(mg_lines, epg_url, logo_url, mg_m3u_path)
+
+            # 8. 生成报告
+            print("\n" + "=" * 50)
+            print("任务完成！")
+            print("=" * 50)
+            print(f"扫描IP总数: {len(all_ips_to_scan)}")
+            print(f"有效IP数量: {len(valid_ips)}")
+            print(f"地区数量: {len(ip_by_region)}")
+            print(f"生成的频道行数: {channel_count}")
+            print(f"保存的IP文件: {len(saved_files)} 个")
+            print(f"生成的频道文件: mg.txt, mg.m3u")
+
+            # 显示各地区IP数量
+            print("\n各地区IP统计:")
+            for region, ips in ip_by_region.items():
+                print(f"  {region}: {len(ips)} 个IP")
+
+            # 显示最快的5个IP
+            if valid_ips:
+                print("\n最快的5个IP:")
+                sorted_ips = sorted(valid_ips, key=lambda x: x.get('speed', 9999))
+                for i, ip_info in enumerate(sorted_ips[:5], 1):
+                    print(f"{i}. {ip_info['ip_port']} ({ip_info['region']}) - 延迟: {ip_info.get('speed', 0)}ms")
+
+
+        if __name__ == "__main__":
+            main()
+        EOF
+        
+        python proxy_scanner.py
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        git add "proxy/mg.txt" "proxy/mg.m3u" "proxy/IP/*.txt" 2>/dev/null || true
+        git commit -m "扫描更新 proxy IP $(date '+%Y-%m-%d %H:%M:%S')"
+        git push
+        else
+          echo "没有发现文件变化，跳过提交"
+        fi
+      
