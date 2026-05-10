@@ -398,17 +398,17 @@ jobs:
         if __name__ == "__main__":
             main()
         EOF
-        - name: Commit and push if changes
-              run: |
-                git config --local user.email "action@github.com"
-                git config --local user.name "GitHub Action"
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         
-                # 检查是否有文件变化
-                if [[ -n $(git status --porcelain) ]]; then
-                  git add "proxy/mg.txt" "proxy/mg.m3u" "proxy/IP/*.txt" 2>/dev/null || true
-                  git commit -m "扫描更新 proxy IP $(date '+%Y-%m-%d %H:%M:%S')"
-                  git push
-                else
-                  echo "没有发现文件变化，跳过提交"
-                fi
+        # 检查是否有文件变化
+        if [[ -n $(git status --porcelain) ]]; then
+          git add "proxy/mg.txt" "proxy/mg.m3u" "proxy/IP/*.txt" 2>/dev/null || true
+          git commit -m "扫描更新 proxy IP $(date '+%Y-%m-%d %H:%M:%S')"
+          git push
+        else
+          echo "没有发现文件变化，跳过提交"
+        fi
       
