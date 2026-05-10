@@ -404,7 +404,7 @@ jobs:
                 git config --local user.name "GitHub Action"
         
                 # 检查是否有文件变化
-                if git status --porcelain | grep -q .; then
+                if [[ -n $(git status --porcelain) ]]; then
                   git add "proxy/mg.txt" "proxy/mg.m3u" "proxy/IP/*.txt" 2>/dev/null || true
                   git commit -m "扫描更新 proxy IP $(date '+%Y-%m-%d %H:%M:%S')"
                   git push
