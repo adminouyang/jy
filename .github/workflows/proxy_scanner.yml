@@ -32,11 +32,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         
-    - name: Create directories
-      run: |
-        mkdir -p Hotel/ip/ip
-        
-    - name: 扫描hotel IP
+    - name: proxy_scanner
       run: |
         cat > hotel_IP_Scanner.py << 'EOF'
         import requests
