@@ -1,0 +1,112 @@
+央视频道,#genre#
+CCTV1,http://ip-port/608807420
+CCTV2,http://ip-port/631780532
+CCTV3,http://ip-port/624878271
+CCTV4,http://ip-port/631780421
+CCTV5,http://ip-port/641886683
+CCTV5+,http://ip-port/641886773
+CCTV6,http://ip-port/624878396
+CCTV7,http://ip-port/673168121
+CCTV8,http://ip-port/624878356
+CCTV9,http://ip-port/673168140
+CCTV10,http://ip-port/624878405
+CCTV11,http://ip-port/667987558
+CCTV12,http://ip-port/673168185
+CCTV13,http://ip-port/608807423
+CCTV14,http://ip-port/624878440
+CCTV15,http://ip-port/673168223
+CCTV17,http://ip-port/673168256
+CCTV4欧洲,http://ip-port/608807419
+CCTV4美洲,http://ip-port/608807416
+CETV1 ,http://ip-port/923287154 
+CETV2 ,http://ip-port/923287211 
+CETV4 ,http://ip-port/923287339 
+老故事,http://ip-port/884121956
+发现之旅,http://ip-port/624878970
+中学生,http://ip-port/708869532
+中国天气 ,http://ip-port/959986621 
+CGTN,http://ip-port/609017205
+CGTN外语纪录,http://ip-port/609006487
+CGTN阿拉伯语,http://ip-port/609154345
+CGTN西班牙语,http://ip-port/609006450
+CGTN法语,http://ip-port/609006476
+CGTN俄语,http://ip-port/609006446
+卫视频道,#genre#
+东方卫视,http://ip-port/651632648
+江苏卫视,http://ip-port/623899368
+广东卫视 ,http://ip-port/608831231 
+北京卫视 ,http://ip-port/630287636 
+辽宁卫视 ,http://ip-port/630291707 
+河北卫视 ,http://ip-port/962042070 
+江西卫视 ,http://ip-port/783847495 
+河南卫视 ,http://ip-port/790187291 
+陕西卫视 ,http://ip-port/738910838 
+大湾区卫视 ,http://ip-port/608917627 
+湖北卫视 ,http://ip-port/947472496 
+吉林卫视 ,http://ip-port/947472500 
+青海卫视 ,http://ip-port/947472506 
+东南卫视 ,http://ip-port/849116810 
+海南卫视 ,http://ip-port/947472502 
+海峡卫视 ,http://ip-port/849119120 
+农林卫视 ,http://ip-port/956904896 
+兵团卫视 ,http://ip-port/956923145 
+宁夏卫视 ,http://ip-port/738910535 
+重庆卫视 ,http://ip-port/738910914 
+三沙卫视 ,http://ip-port/961023778 
+山东教育卫视 ,http://ip-port/609154353 
+电影频道,#genre#
+CHC影迷电影 ,http://ip-port/952383261 
+CHC动作电影 ,http://ip-port/644368714 
+CHC家庭影院 ,http://ip-port/644368373 
+经典香港电影 ,http://ip-port/625703337 
+抗战经典影片 ,http://ip-port/617432318 
+新片放映厅 ,http://ip-port/619495952 
+梨园频道 ,http://ip-port/961930369
+南方影视 ,http://ip-port/614961829 
+最强综艺趴 ,http://ip-port/629942228 
+江苏频道,#genre#
+上海新闻综合 ,http://ip-port/651632657 
+上视东方影视 ,http://ip-port/617290047 
+上海第一财经 ,http://ip-port/608780988 
+南京新闻综合频道 ,http://ip-port/838109047 
+南京教科频道 ,http://ip-port/838153729 
+南京十八频道 ,http://ip-port/838151753 
+体育休闲频道 ,http://ip-port/626064707 
+江苏城市频道 ,http://ip-port/626064714 
+江苏国际 ,http://ip-port/626064674 
+江苏教育 ,http://ip-port/628008321 
+江苏影视频道 ,http://ip-port/626064697 
+江苏综艺频道 ,http://ip-port/626065193 
+公共新闻频道 ,http://ip-port/626064693 
+盐城新闻综合 ,http://ip-port/639731825 
+淮安新闻综合 ,http://ip-port/639731826 
+泰州新闻综合 ,http://ip-port/639731818 
+连云港新闻综合 ,http://ip-port/639731715 
+宿迁新闻综合 ,http://ip-port/639731832 
+徐州新闻综合 ,http://ip-port/639731747 
+优漫卡通频道 ,http://ip-port/626064703 
+江阴新闻综合 ,http://ip-port/955227979 
+南通新闻综合 ,http://ip-port/955227985 
+宜兴新闻综合 ,http://ip-port/955227996 
+溧水新闻综合 ,http://ip-port/639737327 
+镇江新闻综合 ,http://ip-port/639731783 
+陕西频道,#genre#
+陕西银龄频道 ,http://ip-port/956909362 
+陕西都市青春频道 ,http://ip-port/956909358 
+陕西秦腔频道 ,http://ip-port/956909303 
+陕西新闻资讯频道 ,http://ip-port/956909289 
+陕西体育休闲频道 ,http://ip-port/956909356 
+其它频道,#genre#
+嘉佳卡通 ,http://ip-port/614952364 
+经典动画大集合 ,http://ip-port/629942219 
+新动漫 ,http://ip-port/961930269 
+赛事最经典 ,http://ip-port/646596895 
+体坛名栏汇 ,http://ip-port/629943305 
+四海钓鱼 ,http://ip-port/637444975 
+24小时城市联赛轮播台 ,http://ip-port/915512915 
+武术世界 ,http://ip-port/958475359 
+快乐垂钓 ,http://ip-port/961930263 
+和美乡途轮播台 ,http://ip-port/713591450 
+新动力量创一流 ,http://ip-port/713589837 
+中华特产 ,http://ip-port/959986618 
+环球旅游 ,http://ip-port/958475356 
