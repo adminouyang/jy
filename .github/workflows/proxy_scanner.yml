@@ -171,7 +171,7 @@ jobs:
                 return []
 
 
-        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region, speed_range=(50, 500)):
+        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region, speed_range=(900, 5000)):
 
             if not ip_by_region:
                 print("没有有效的IP可用，无法替换")
