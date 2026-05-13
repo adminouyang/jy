@@ -247,7 +247,7 @@ jobs:
                         
                                 # 添加速度信息到备注
                                 speed = ip_info.get('speed', '未知')
-                                new_line = f"{channel_name},{new_url}${region} (速度: {speed}ms)"
+                                new_line = f"{channel_name},{new_url}${region}"   #(速度: {speed}ms)
                                 new_lines.append(new_line)
                     except (ValueError, KeyError, IndexError) as e:
                         print(f"处理行失败: {line}, 错误: {e}")
