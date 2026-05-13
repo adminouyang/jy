@@ -389,26 +389,21 @@ jobs:
 
             # 显示最快的5个IP
             if valid_ips:
-                print("\n指定区间内的IP（从高到低排序）:")
+                # 设置延迟区间
+                min_speed = 900  # 最小延迟
+                max_speed = 5000  # 最大延迟
     
-                # 设置延迟区间（单位：ms）
-                min_delay = 900  # 最小延迟
-                max_delay = 4000  # 最大延迟
-    
-                # 筛选区间内的IP
-                filtered_ips = [
-                    ip_info for ip_info in valid_ips 
-                    if min_delay <= ip_info.get('speed', 0) <= max_delay
-                ]
+                # 筛选在指定区间内的IP
+                filtered_ips = [ip_info for ip_info in valid_ips 
+                                if min_speed <= ip_info.get('speed', 9999) <= max_speed]
     
                 if filtered_ips:
-                    # 从高到低排序（延迟大的在前）
-                    sorted_ips = sorted(filtered_ips, key=lambda x: x.get('speed', 0), reverse=True)
-        
-                    for i, ip_info in enumerate(sorted_ips[:10], 1):
+                    print(f"\n延迟在{min_speed}-{max_speed}ms区间内的IP（按延迟从低到高排序）:")
+                    sorted_ips = sorted(filtered_ips, key=lambda x: x.get('speed', 9999))
+                    for i, ip_info in enumerate(sorted_ips, 1):
                         print(f"{i}. {ip_info['ip_port']} ({ip_info['region']}) - 延迟: {ip_info.get('speed', 0)}ms")
                 else:
-                    print(f"在区间[{min_delay}ms, {max_delay}ms]内没有找到IP")
+                    print(f"\n在{min_speed}-{max_speed}ms区间内没有找到可用的IP")
 
 
         if __name__ == "__main__":
