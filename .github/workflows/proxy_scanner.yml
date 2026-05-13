@@ -171,46 +171,100 @@ jobs:
                 return []
 
 
-        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region):
-            """替换demo中的ip-port，支持多个地区IP"""
+        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region, speed_range=(50, 500)):
+
             if not ip_by_region:
                 print("没有有效的IP可用，无法替换")
                 return demo_lines
-
+    
+            min_speed, max_speed = speed_range
+            print(f"使用IP速度区间: {min_speed}ms - {max_speed}ms")
+    
+            # 预处理：筛选每个地区在有效区间内的IP，并按速度排序
+            valid_ips_by_region = {}
+    
+            for region, ips in ip_by_region.items():
+                if not ips:
+                    print(f"地区 {region} 没有IP数据，已跳过")
+                    continue
+        
+                # 筛选在有效区间内的IP
+                valid_ips = []
+                for ip_info in ips:
+                    speed = ip_info.get('speed', 9999)
+                    if min_speed <= speed <= max_speed:
+                        valid_ips.append(ip_info)
+        
+                if not valid_ips:
+                    print(f"地区 {region} 没有在有效速度区间内的IP")
+                    # 可选：如果该地区没有有效IP，可以尝试使用最快的一个
+                    # fastest_ip = min(ips, key=lambda x: x.get('speed', 9999))
+                    # if fastest_ip:
+                    #     print(f"  使用该地区最快的IP: {fastest_ip['ip_port']} (速度: {fastest_ip.get('speed', '未知')}ms)")
+                    #     valid_ips = [fastest_ip]
+                    continue
+        
+                # 按速度从低到高排序
+                valid_ips.sort(key=lambda x: x.get('speed', 9999))
+                valid_ips_by_region[region] = valid_ips
+        
+                # 打印该地区有效IP信息
+                print(f"地区 {region}: 找到 {len(valid_ips)} 个有效IP (速度: {valid_ips[0].get('speed')}ms - {valid_ips[-1].get('speed')}ms)")
+    
+            if not valid_ips_by_region:
+                print("所有地区都没有在有效速度区间内的IP，无法替换")
+                return demo_lines
+    
             new_lines = []
-
+    
             for line in demo_lines:
-                line = line.strip('\n')
+                line = line.rstrip('\n')
+        
+                # 跳过空行和注释行
                 if not line or line.startswith('#'):
                     new_lines.append(line)
                     continue
-
-                # 检查是否是分组行
+        
+                # 分组行
                 if '#genre#' in line:
                     new_lines.append(line)
-                # 检查是否是频道行
-                elif ',' in line and 'http://ip-port/' in line:
-                    channel_name, url_template = line.split(',', 1)
-
-                    # 获取路径部分
-                    path = url_template.split('/')[-1]
-
-                    # 为每个地区生成一行
-                    for region, ips in ip_by_region.items():
-                        if ips:
-                            # 选择该地区最快的IP
-                            best_ip = min(ips, key=lambda x: x.get('speed', 9999))
-                            ip_port = best_ip['ip_port']
-
-                            # 构建新的URL
-                            new_url = f"http://{ip_port}/{path}"
-
-                            # 构建新行：频道名,http://ip:port/路径$地区代理ip
-                            new_line = f"{channel_name},{new_url}${region}"
-                            new_lines.append(new_line)
+                    continue
+        
+                # 处理频道行
+                if ',' in line and 'http://ip-port/' in line:
+                    try:
+                        channel_name, url_template = line.split(',', 1)
+                
+                        # 获取路径部分
+                        if '/' in url_template:
+                            path = url_template.split('/')[-1]
+                        else:
+                            path = ''
+                
+                        # 为每个地区生成一行
+                        for region, valid_ips in valid_ips_by_region.items():
+                            if valid_ips:
+                                # 可以选择使用第几个IP，默认使用最快的（第一个）
+                                # 如果想要使用其他策略，可以修改这里的索引
+                                use_index = 0  # 0:最快，-1:最慢，或使用随机选择
+                        
+                                if 0 <= use_index < len(valid_ips):
+                                            ip_info = valid_ips[use_index]
+                                            ip_port = ip_info['ip_port']
+                            
+                                    # 构建新的URL
+                                    new_url = f"http://{ip_port}/{path}"
+                            
+                                    # 添加速度信息到备注
+                                    speed = ip_info.get('speed', '未知')
+                                    new_line = f"{channel_name},{new_url}${region} (速度: {speed}ms)"
+                                    new_lines.append(new_line)
+                    except (ValueError, KeyError, IndexError) as e:
+                        print(f"处理行失败: {line}, 错误: {e}")
+                        new_lines.append(line)
                 else:
                     new_lines.append(line)
-
+    
             return new_lines
 
 
