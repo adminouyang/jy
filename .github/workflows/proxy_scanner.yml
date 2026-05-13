@@ -148,7 +148,7 @@ jobs:
             for region, ips in ip_by_region.items():
                 # 清理文件名中的非法字符
                 safe_region = re.sub(r'[\\/*?:"<>|]', '_', region)
-                filename = f"{safe_region}ip.txt"
+                filename = f"{safe_region}.txt"
                 filepath = os.path.join(output_dir, filename)
 
                 with open(filepath, 'w', encoding='utf-8') as f:
