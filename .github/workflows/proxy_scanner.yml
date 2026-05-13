@@ -171,8 +171,7 @@ jobs:
                 return []
 
 
-        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region, speed_range=(900, 5000)):
-
+        def replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region, speed_range=(50, 500)):
             if not ip_by_region:
                 print("没有有效的IP可用，无法替换")
                 return demo_lines
@@ -197,11 +196,6 @@ jobs:
         
                 if not valid_ips:
                     print(f"地区 {region} 没有在有效速度区间内的IP")
-                    # 可选：如果该地区没有有效IP，可以尝试使用最快的一个
-                    # fastest_ip = min(ips, key=lambda x: x.get('speed', 9999))
-                    # if fastest_ip:
-                    #     print(f"  使用该地区最快的IP: {fastest_ip['ip_port']} (速度: {fastest_ip.get('speed', '未知')}ms)")
-                    #     valid_ips = [fastest_ip]
                     continue
         
                 # 按速度从低到高排序
@@ -244,21 +238,17 @@ jobs:
                         # 为每个地区生成一行
                         for region, valid_ips in valid_ips_by_region.items():
                             if valid_ips:
-                                # 可以选择使用第几个IP，默认使用最快的（第一个）
-                                # 如果想要使用其他策略，可以修改这里的索引
-                                use_index = 0  # 0:最快，-1:最慢，或使用随机选择
+                                # 使用最快的IP（第一个）
+                                ip_info = valid_ips[0]
+                                ip_port = ip_info['ip_port']
                         
-                                if 0 <= use_index < len(valid_ips):
-                                            ip_info = valid_ips[use_index]
-                                            ip_port = ip_info['ip_port']
-                            
-                                    # 构建新的URL
-                                    new_url = f"http://{ip_port}/{path}"
-                            
-                                    # 添加速度信息到备注
-                                    speed = ip_info.get('speed', '未知')
-                                    new_line = f"{channel_name},{new_url}${region} (速度: {speed}ms)"
-                                    new_lines.append(new_line)
+                                # 构建新的URL
+                                new_url = f"http://{ip_port}/{path}"
+                        
+                                # 添加速度信息到备注
+                                speed = ip_info.get('speed', '未知')
+                                new_line = f"{channel_name},{new_url}${region} (速度: {speed}ms)"
+                                new_lines.append(new_line)
                     except (ValueError, KeyError, IndexError) as e:
                         print(f"处理行失败: {line}, 错误: {e}")
                         new_lines.append(line)
