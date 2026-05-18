@@ -1,0 +1,40 @@
+name: update migu
+on: 
+  #schedule: 
+    #- cron: 0 * * * *
+  workflow_dispatch:
+  repository_dispatch: #允许外部触发,cf worker定时任务延迟在1分钟以内
+    types: [mgcron]
+jobs:
+  main:
+    name: update migu
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 允许推送代码
+    steps: 
+    - name: Checkout code
+      uses: actions/checkout@v5
+    - name: fetch and modify
+      run: |
+          pip install requests
+
+          python migu/migu_proxy.py || true
+
+    - name: CommitAndPush
+      run: |
+        # 获取仓库名称（${VAR#*/} 是 Bash 的字符串操作，去掉 owner/ 前缀）
+        REPO_NAME="${GITHUB_REPOSITORY#*/}"
+        git config --global user.email "github@github.com"
+        git config --global user.name "Github Actions"
+        
+        # 克隆仓库（使用 HTTPS + TOKEN 避免权限问题）
+        git clone "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        cd "$REPO_NAME" || exit 1  # 强制失败时退出
+
+        git add .
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Update: $(date +'%Y-%m-%d %H:%M:%S') UTC"
+          git push origin main
+        fi
