@@ -14,16 +14,19 @@ jobs:
     steps: 
     - name: Checkout code
       uses: actions/checkout@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
     - name: fetch and modify
       run: |
-          pip install requests
+          python -m pip install --upgrade pip
 
           python migu/migu_proxy.py || true
 
     - name: CommitAndPush
       run: |
         # 获取仓库名称（${VAR#*/} 是 Bash 的字符串操作，去掉 owner/ 前缀）
-        REPO_NAME="${GITHUB_REPOSITORY#*/}"
+        # REPO_NAME="${GITHUB_REPOSITORY#*/}"
         git config --global user.email "github@github.com"
         git config --global user.name "Github Actions"
         
