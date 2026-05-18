@@ -4,19 +4,19 @@ on:
   # 手动触发
   workflow_dispatch:
   # 定时触发：每天UTC时间4:00和16:00运行（北京时间12:00和0:00）
-  schedule:
-    - cron: '0 4,16 * * *'
-  # 当migu720plist.txt文件有更新时触发
-  push:
-    paths:
-      - 'migu720plist.txt'
-  # 当脚本文件有更新时触发
-  push:
-    paths:
-      - 'migu_generator.py'
-  # 创建release时触发
-  release:
-    types: [published]
+  # schedule:
+  #   - cron: '0 4,16 * * *'
+  # # 当migu720plist.txt文件有更新时触发
+  # push:
+  #   paths:
+  #     - 'migu720plist.txt'
+  # # 当脚本文件有更新时触发
+  # push:
+  #   paths:
+  #     - 'migu_generator.py'
+  # # 创建release时触发
+  # release:
+  #   types: [published]
 
 # 设置权限
 permissions:
@@ -58,14 +58,14 @@ jobs:
         echo "生成完成!"
         
         # 检查生成的文件
-        if [ -f "migu.txt" ]; then
+        if [ -f "migu/migu.txt" ]; then
           echo "migu.txt 文件大小: $(wc -l < migu.txt) 行"
         else
           echo "错误: migu.txt 文件未生成"
           exit 1
         fi
         
-        if [ -f "migu.m3u" ]; then
+        if [ -f "migu/migu.m3u" ]; then
           echo "migu.m3u 文件大小: $(wc -l < migu.m3u) 行"
         else
           echo "错误: migu.m3u 文件未生成"
