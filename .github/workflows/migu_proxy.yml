@@ -28,8 +28,8 @@ jobs:
         git config --global user.name "Github Actions"
         
         # 克隆仓库（使用 HTTPS + TOKEN 避免权限问题）
-        git clone "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-        cd "$REPO_NAME" || exit 1  # 强制失败时退出
+        # git clone "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        # cd "$REPO_NAME" || exit 1  # 强制失败时退出
 
         git add .
         if git diff --cached --quiet; then
