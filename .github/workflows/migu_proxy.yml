@@ -1,43 +1,167 @@
-name: update migu
-on: 
-  #schedule: 
-    #- cron: 0 * * * *
+name: 更新咪咕直播源
+
+on:
+  # 手动触发
   workflow_dispatch:
-  repository_dispatch: #允许外部触发,cf worker定时任务延迟在1分钟以内
-    types: [mgcron]
+  # 定时触发：每天UTC时间4:00和16:00运行（北京时间12:00和0:00）
+  schedule:
+    - cron: '0 4,16 * * *'
+  # 当migu720plist.txt文件有更新时触发
+  push:
+    paths:
+      - 'migu720plist.txt'
+  # 当脚本文件有更新时触发
+  push:
+    paths:
+      - 'migu_generator.py'
+  # 创建release时触发
+  release:
+    types: [published]
+
+# 设置权限
+permissions:
+  contents: write
+
 jobs:
-  main:
-    name: update migu
+  update-migu:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # 允许推送代码
-    steps: 
-    - name: Checkout code
-      uses: actions/checkout@v5
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 设置Python环境
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         cache: 'pip'
-    - name: fetch and modify
+    
+    - name: 安装依赖
       run: |
-          python -m pip install --upgrade pip
-
-          python migu/migu_proxy.py || true
-
-    - name: CommitAndPush
+        python -m pip install --upgrade pip
+    
+    - name: 运行咪咕直播源生成脚本
+      env:
+        # 设置请求超时和重试参数
+        REQUEST_TIMEOUT: 15
+        MAX_RETRIES: 3
       run: |
-        # 获取仓库名称（${VAR#*/} 是 Bash 的字符串操作，去掉 owner/ 前缀）
-        # REPO_NAME="${GITHUB_REPOSITORY#*/}"
-        git config --global user.email "github@github.com"
-        git config --global user.name "Github Actions"
+        echo "开始生成咪咕直播源..."
+        echo "当前时间: $(date '+%Y-%m-%d %H:%M:%S')"
         
-        # 克隆仓库（使用 HTTPS + TOKEN 避免权限问题）
-        # git clone "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-        # cd "$REPO_NAME" || exit 1  # 强制失败时退出
-
-        git add .
-        if git diff --cached --quiet; then
-          echo "No changes to commit."
+        # 运行Python脚本
+        python migu/migu_proxy.py
+        
+        echo "生成完成!"
+        
+        # 检查生成的文件
+        if [ -f "migu.txt" ]; then
+          echo "migu.txt 文件大小: $(wc -l < migu.txt) 行"
         else
-          git commit -m "Update: $(date +'%Y-%m-%d %H:%M:%S') UTC"
-          git push origin main
+          echo "错误: migu.txt 文件未生成"
+          exit 1
         fi
+        
+        if [ -f "migu.m3u" ]; then
+          echo "migu.m3u 文件大小: $(wc -l < migu.m3u) 行"
+        else
+          echo "错误: migu.m3u 文件未生成"
+          exit 1
+        fi
+    
+    - name: 检查文件是否有变化
+      id: check_changes
+      run: |
+        echo "检查文件变化..."
+        git add migu.txt migu.m3u
+        if git diff --cached --quiet; then
+          echo "没有检测到变化"
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "检测到文件变化"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: 提交更新的文件
+      if: steps.check_changes.outputs.has_changes == 'true'
+      run: |
+        echo "提交更新的直播源文件..."
+        
+        # 配置Git
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "GitHub Actions"
+        
+        # 提交更改
+        git add migu.txt migu.m3u
+        git commit -m "🚀 自动更新咪咕直播源 [$(date '+%Y-%m-%d %H:%M:%S')]"
+        
+        # 推送到仓库
+        git push origin HEAD:${{ github.ref_name }}
+        
+        echo "文件已提交并推送!"
+    
+    - name: 创建版本文件
+      run: |
+        # 创建版本信息文件
+        echo "咪咕直播源自动生成系统" > VERSION.md
+        echo "==========================" >> VERSION.md
+        echo "" >> VERSION.md
+        echo "生成时间: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> VERSION.md
+        echo "GitHub Actions 运行ID: ${{ github.run_id }}" >> VERSION.md
+        echo "" >> VERSION.md
+        
+        # 统计文件信息
+        if [ -f "migu.txt" ]; then
+          echo "migu.txt 统计:" >> VERSION.md
+          echo "- 总行数: $(wc -l < migu.txt)" >> VERSION.md
+          echo "- 文件大小: $(stat -c%s migu.txt) 字节" >> VERSION.md
+          echo "" >> VERSION.md
+        fi
+        
+        if [ -f "migu.m3u" ]; then
+          echo "migu.m3u 统计:" >> VERSION.md
+          echo "- 总行数: $(wc -l < migu.m3u)" >> VERSION.md
+          echo "- 频道数: $(grep -c "^#EXTINF:" migu.m3u)" >> VERSION.md
+          echo "- 文件大小: $(stat -c%s migu.m3u) 字节" >> VERSION.md
+          echo "" >> VERSION.md
+        fi
+        
+        if [ -f "migu720plist.txt" ]; then
+          echo "源频道列表统计:" >> VERSION.md
+          echo "- 总行数: $(wc -l < migu720plist.txt)" >> VERSION.md
+          echo "- 频道数: $(grep -c "id=" migu720plist.txt)" >> VERSION.md
+          echo "- 分类数: $(grep -c "#genre#" migu720plist.txt)" >> VERSION.md
+        fi
+    
+    - name: 上传生成的文件作为制品
+      uses: actions/upload-artifact@v4
+      with:
+        name: migu-live-sources
+        path: |
+          migu.txt
+          migu.m3u
+          VERSION.md
+        retention-days: 7
+    
+    - name: 输出运行结果
+      run: |
+        echo "🎉 咪咕直播源更新工作流执行完成!"
+        echo ""
+        echo "📊 运行摘要:"
+        echo "  - 工作流: ${{ github.workflow }}"
+        echo "  - 运行ID: ${{ github.run_id }}"
+        echo "  - 触发者: ${{ github.actor }}"
+        echo "  - 触发事件: ${{ github.event_name }}"
+        echo ""
+        echo "📁 生成的文件:"
+        if [ -f "migu.txt" ]; then
+          echo "  - migu.txt: $(wc -l < migu.txt) 行"
+        fi
+        if [ -f "migu.m3u" ]; then
+          echo "  - migu.m3u: $(grep -c "^#EXTINF:" migu.m3u) 个频道"
+        fi
+        echo ""
+        echo "⏰ 下次运行时间: 按计划，将在 UTC 时间 4:00 和 16:00 自动运行"
