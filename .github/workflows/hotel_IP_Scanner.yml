@@ -379,7 +379,8 @@ jobs:
         if [ -n "$(git status --porcelain Hotel/ip/*.txt 2>/dev/null)" ]; then
           git add Hotel/ip/*.txt
           git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')"
-          git push --rebase origin main
+          git pull --rebase origin main
+          git push origin main
         else
           echo "没有发现文件变化，跳过提交"
         fi
