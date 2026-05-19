@@ -36,34 +36,34 @@ def get_sign_config(contId):
     sign = hashlib.md5(text.encode('utf-8')).hexdigest()
     return timestampMs, [salt, sign]
 
-# def send_get_request(url, headers):
-#     """发送GET请求"""
-#     try:
-#         req = urllib.request.Request(url)
-#         for key, value in headers.items():
-#             req.add_header(key, value)
-        
-#         with urllib.request.urlopen(req, timeout=10) as response:
-#             return response.read().decode('utf-8')
-#     except Exception as e:
-#         print(f"请求失败: {e}")
-#         return None
 def send_get_request(url, headers):
+    """发送GET请求"""
     try:
         req = urllib.request.Request(url)
         for key, value in headers.items():
             req.add_header(key, value)
-        
-        # 添加代理设置
-        proxy = urllib.request.ProxyHandler({'http': '61.53.173.35:7788', 'https': '61.53.173.35:7788'})
-        opener = urllib.request.build_opener(proxy)
-        urllib.request.install_opener(opener)
         
         with urllib.request.urlopen(req, timeout=10) as response:
             return response.read().decode('utf-8')
     except Exception as e:
         print(f"请求失败: {e}")
         return None
+# def send_get_request(url, headers):
+#     try:
+#         req = urllib.request.Request(url)
+#         for key, value in headers.items():
+#             req.add_header(key, value)
+        
+#         # 添加代理设置
+#         proxy = urllib.request.ProxyHandler({'http': '61.53.173.35:7788', 'https': '61.53.173.35:7788'})
+#         opener = urllib.request.build_opener(proxy)
+#         urllib.request.install_opener(opener)
+        
+#         with urllib.request.urlopen(req, timeout=10) as response:
+#             return response.read().decode('utf-8')
+#     except Exception as e:
+#         print(f"请求失败: {e}")
+#         return None
 
 def get_code_point(char):
     """获取字符的Unicode码点（兼容函数）"""
