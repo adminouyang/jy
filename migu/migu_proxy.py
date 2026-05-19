@@ -419,7 +419,7 @@ def test_single_channel(channel_id, channel_name="测试频道"):
         print(f"✗ 测试失败!")
         return False
 
-def generate_files_with_categories(categories, output_txt="migu.txt", output_m3u="migu.m3u"):
+def generate_files_with_categories(categories, output_txt="migu/migu.txt", output_m3u="migu/migu.m3u"):
     """按分类生成文件"""
     print(f"\n开始获取直播地址...")
     print(f"{'='*60}")
@@ -524,8 +524,7 @@ def main():
     print("=" * 60)
     
     # 频道列表文件名
-    channel_list_file = "migu720plist.txt"
-    
+    channel_list_file = "migu/migu720plist.txt"
     # 检查文件是否存在
     if not os.path.exists(channel_list_file):
         print(f"错误: 未找到频道列表文件 {channel_list_file}")
