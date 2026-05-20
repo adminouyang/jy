@@ -1865,4 +1865,5 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "更新酒店源ip，增加频道链接可用性检查，处理UDP/RTP链接"
-        git push
+        git pull --rebase origin main
+        git push origin main
