@@ -351,7 +351,7 @@ def batch_speed_test_optimized(channel_list, template):
     total_to_test = sum(len(sources) for sources in channels_by_main.values())
     completed = 0
     
-    for main_channel, sources in channels_by_main.items():
+    for main_channel, sources in channels_by_main.values():
         print(f"\n📺 测试频道: {main_channel} ({len(sources)} 个源)")
         print("-" * 100)
         
@@ -512,8 +512,79 @@ def clean_channel_name(name):
     # 移除开头和结尾的空格
     return cleaned.strip()
 
+def clean_m3u_channel_name(name):
+    """清理M3U格式的频道名称，去除括号和分辨率信息"""
+    # 移除括号及其中的内容，包括括号和分辨率信息
+    # 例如: "CCTV+ 1 (600p) [Not 24/7]" -> "CCTV+ 1"
+    # 1. 移除(XXX)格式的内容
+    cleaned = re.sub(r'\([^)]*\)', '', name)
+    # 2. 移除[XXX]格式的内容
+    cleaned = re.sub(r'\[[^\]]*\]', '', cleaned)
+    # 3. 移除开头和结尾的空格
+    cleaned = cleaned.strip()
+    # 4. 移除可能的额外空格
+    cleaned = re.sub(r'\s+', ' ', cleaned)
+    return cleaned
+
+def parse_m3u_content(content):
+    """解析M3U格式的内容"""
+    channels = []
+    lines = content.strip().split('\n')
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        
+        # 跳过空行和注释行（除了#EXTINF）
+        if not line or (line.startswith('#') and not line.startswith('#EXTINF')):
+            i += 1
+            continue
+            
+        if line.startswith('#EXTINF'):
+            # 提取频道名称
+            # EXTINF行的格式通常是: #EXTINF:-1 属性,频道名称
+            # 我们需要提取最后一个逗号后面的内容
+            parts = line.split(',')
+            if len(parts) >= 2:
+                channel_name = parts[-1].strip()
+                # 清理频道名称
+                channel_name = clean_m3u_channel_name(channel_name)
+                
+                # 寻找下一个非注释行作为URL
+                j = i + 1
+                while j < len(lines) and (not lines[j].strip() or lines[j].startswith('#')):
+                    j += 1
+                    
+                if j < len(lines):
+                    url = lines[j].strip()
+                    if url and (url.startswith('http://') or url.startswith('https://')):
+                        channels.append((channel_name, url))
+                        i = j  # 跳过URL行
+        i += 1
+    
+    return channels
+
+def parse_txt_content(content):
+    """解析TXT格式的内容（原来的格式）"""
+    channels = []
+    lines = content.split('\n')
+    
+    for line in lines:
+        line = line.strip()
+        if "#genre#" not in line and "," in line and "://" in line:
+            try:
+                channel_name, channel_address = line.split(',', 1)
+                if channel_address.startswith(('http://', 'https://')):
+                    # 清理频道名称
+                    clean_name = clean_channel_name(channel_name)
+                    channels.append((clean_name, channel_address))
+            except:
+                continue
+                
+    return channels
+
 def fetch_channel_list_from_url(url):
-    """从单个URL获取频道列表"""
+    """从单个URL获取频道列表，支持M3U和TXT格式"""
     try:
         req = urllib.request.Request(url)
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3')
@@ -521,23 +592,15 @@ def fetch_channel_list_from_url(url):
         with urllib.request.urlopen(req) as response:
             data = response.read()
             text = data.decode('utf-8')
-            lines = text.split('\n')
-            print(f"从 {url} 获取到 {len(lines)} 行数据")
             
-            channels = []
-            for line in lines:
-                line = line.strip()
-                if "#genre#" not in line and "," in line and "://" in line:
-                    try:
-                        channel_name, channel_address = line.split(',', 1)
-                        if channel_address.startswith(('http://', 'https://')):
-                            # 清理频道名称
-                            clean_name = clean_channel_name(channel_name)
-                            channels.append((clean_name, channel_address))
-                    except:
-                        continue
-                        
-            print(f"从 {url} 解析到 {len(channels)} 个有效频道")
+            # 判断是M3U格式还是TXT格式
+            if text.strip().startswith('#EXTM3U'):
+                channels = parse_m3u_content(text)
+                print(f"从 {url} 解析M3U格式: {len(channels)} 个有效频道")
+            else:
+                channels = parse_txt_content(text)
+                print(f"从 {url} 解析TXT格式: {len(channels)} 个有效频道")
+                
             return channels
             
     except Exception as e:
@@ -560,7 +623,7 @@ def main():
     # 2. 从多个URL获取频道列表
     print("\n从多个网络源获取频道列表...")
     
-    # 定义多个源URLhttps://gh-proxy.com/
+    # 定义多个源URL
     source_urls = [
         "https://iptv-org.github.io/iptv/index.m3u",
         #"https://freetv.fun/test_channels_original_new.txt"
