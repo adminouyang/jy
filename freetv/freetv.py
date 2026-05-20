@@ -327,6 +327,10 @@ class ChannelTemplate:
     def get_channels_by_category(self, category):
         """获取指定分类下的所有主频道"""
         return self.category_channels.get(category, [])
+    
+    def get_template_channels(self):
+        """获取模板中的所有频道名称（主频道+别名）"""
+        return set(self.channel_map.keys())
 
 
 # ====================== 批量测速函数 ======================
@@ -351,44 +355,52 @@ def batch_speed_test_optimized(channel_list, template):
     total_to_test = sum(len(sources) for sources in channels_by_main.values())
     completed = 0
     
-    # 修改这里：使用items()来获取键值对
-    for main_channel, sources in channels_by_main.items():
-        print(f"\n📺 测试频道: {main_channel} ({len(sources)} 个源)")
-        print("-" * 100)
+    # 按照模板中的分类和主频道顺序进行测试
+    for category in template.categories:
+        main_channels_in_category = template.get_channels_by_category(category)
         
-        source_results = []
-        
-        for channel_name, channel_url in sources:
-            completed += 1
-            # 修改这里，传递频道名参数
-            speed = engine._get_speed_with_retry(channel_url, "freetv", channel_name)
+        for main_channel in main_channels_in_category:
+            if main_channel not in channels_by_main:
+                continue
+                
+            sources = channels_by_main[main_channel]
             
-            if speed >= config.SPEED_THRESHOLD:
-                source_results.append((channel_url, speed))
-            else:
-                # 如果速度不达标，也记录但标记为失败
-                source_results.append((channel_url, speed))
-        
-        # 按速度从大到小排序
-        if source_results:
-            source_results.sort(key=lambda x: x[1], reverse=True)
-            all_channels[main_channel] = source_results
-            
-            # 显示这个频道的测试结果摘要
-            fast_sources = [s for s in source_results if s[1] >= config.SPEED_THRESHOLD]
-            print(f"\n  📊 {main_channel} 测试结果: 通过 {len(fast_sources)}/{len(source_results)} 个源")
-            for i, (url, speed) in enumerate(source_results[:3], 1):  # 只显示前3个
-                status = "✅" if speed >= config.SPEED_THRESHOLD else "❌"
-                print(f"    {status} 第{i}名: {speed:7.1f}KB/s")
-        
-        # 进度显示
-        if completed % 5 == 0 or completed == total_to_test:
-            current_passed = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
-                               for sources in all_channels.values())
-            pass_rate = (current_passed / completed * 100) if completed > 0 else 0
-            print(f"\n📈 进度: {completed}/{total_to_test} 个源 ({completed/total_to_test*100:.1f}%) | "
-                  f"通过: {current_passed} 个源 ({pass_rate:.1f}%)")
+            print(f"\n📺 测试频道: {main_channel} ({len(sources)} 个源)")
             print("-" * 100)
+            
+            source_results = []
+            
+            for channel_name, channel_url in sources:
+                completed += 1
+                # 修改这里，传递频道名参数
+                speed = engine._get_speed_with_retry(channel_url, "freetv", channel_name)
+                
+                if speed >= config.SPEED_THRESHOLD:
+                    source_results.append((channel_url, speed))
+                else:
+                    # 如果速度不达标，也记录但标记为失败
+                    source_results.append((channel_url, speed))
+            
+            # 按速度从大到小排序
+            if source_results:
+                source_results.sort(key=lambda x: x[1], reverse=True)
+                all_channels[main_channel] = source_results
+                
+                # 显示这个频道的测试结果摘要
+                fast_sources = [s for s in source_results if s[1] >= config.SPEED_THRESHOLD]
+                print(f"\n  📊 {main_channel} 测试结果: 通过 {len(fast_sources)}/{len(source_results)} 个源")
+                for i, (url, speed) in enumerate(source_results[:3], 1):  # 只显示前3个
+                    status = "✅" if speed >= config.SPEED_THRESHOLD else "❌"
+                    print(f"    {status} 第{i}名: {speed:7.1f}KB/s")
+            
+            # 进度显示
+            if completed % 5 == 0 or completed == total_to_test:
+                current_passed = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
+                                   for sources in all_channels.values())
+                pass_rate = (current_passed / completed * 100) if completed > 0 else 0
+                print(f"\n📈 进度: {completed}/{total_to_test} 个源 ({completed/total_to_test*100:.1f}%) | "
+                      f"通过: {current_passed} 个源 ({pass_rate:.1f}%)")
+                print("-" * 100)
     
     engine.stats['total_tested'] = total_to_test
     engine.stats['passed'] = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
@@ -438,7 +450,6 @@ def save_freetv_files(all_channels, template, epg_url, output_dir="freetv"):
     m3u_file = os.path.join(output_dir, "freetv.m3u")
     m3u_lines = [
         f'#EXTM3U x-tvg-url="{epg_url}"'
-        #f'x-tvg-url="{epg_url}"'
     ]
     
     # 按分类和模板顺序输出
@@ -608,13 +619,25 @@ def fetch_channel_list_from_url(url):
         print(f"获取频道列表失败 {url}: {e}")
         return []
 
+def filter_channels_by_template(channels, template):
+    """过滤频道，只保留模板中存在的频道（主频道或别名）"""
+    template_channels = template.get_template_channels()
+    filtered_channels = []
+    
+    for channel_name, channel_url in channels:
+        # 检查频道名是否在模板中
+        if channel_name in template_channels:
+            filtered_channels.append((channel_name, channel_url))
+    
+    return filtered_channels
+
 def main():
     # 初始化配置
     config = SpeedTestConfig()
     
     # 1. 加载频道模板
     print("=" * 60)
-    print("IPTV频道源处理脚本 (多源版本)")
+    print("IPTV频道源处理脚本 (只检测dome.txt中的频道)")
     print("=" * 60)
     
     template = ChannelTemplate("freetv/dome.txt")
@@ -627,7 +650,7 @@ def main():
     # 定义多个源URL
     source_urls = [
         "https://iptv-org.github.io/iptv/index.m3u",
-        #"https://freetv.fun/test_channels_original_new.txt"
+        # "https://freetv.fun/test_channels_original_new.txt"
         # 可以继续添加更多源URL
     ]
     
@@ -643,28 +666,25 @@ def main():
         print("错误: 没有获取到任何频道源")
         return
     
-    # 3. 使用模板标准化频道名称
+    # 3. 过滤频道，只保留模板中存在的频道
+    print("\n过滤频道，只保留dome.txt中存在的频道...")
+    filtered_channels = filter_channels_by_template(all_channels, template)
+    
+    print(f"过滤后保留: {len(filtered_channels)} 个频道源")
+    
+    if not filtered_channels:
+        print("错误: 没有找到模板中存在的频道源")
+        return
+    
+    # 4. 使用模板标准化频道名称
     print("\n使用模板标准化频道名称...")
     standardized_channels = []
-    unmatched_channels = []
     
-    for channel_name, channel_url in all_channels:
+    for channel_name, channel_url in filtered_channels:
         main_channel = template.get_main_channel(channel_name)
-        if main_channel in template.main_channels or main_channel == channel_name:
-            standardized_channels.append((main_channel, channel_url))
-        else:
-            unmatched_channels.append((channel_name, channel_url))
+        standardized_channels.append((main_channel, channel_url))
     
     print(f"标准化后频道: {len(standardized_channels)} 个")
-    print(f"未匹配频道: {len(unmatched_channels)} 个")
-    
-    # 4. 合并未匹配频道到"其它"分类
-    for channel_name, channel_url in unmatched_channels:
-        standardized_channels.append((channel_name, channel_url))
-        if channel_name not in template.main_channels:
-            template.main_channels[channel_name] = "其它"
-            if channel_name not in template.category_channels["其它"]:
-                template.category_channels["其它"].append(channel_name)
     
     # 5. 进行速度测试
     print("\n开始速度测试...")
@@ -689,9 +709,17 @@ def main():
     channel_source_counts.sort(key=lambda x: x[1], reverse=True)
     
     print(f"原始源数: {len(all_channels)}")
+    print(f"模板匹配源数: {len(filtered_channels)}")
     print(f"通过测速的频道数: {len(all_channels_with_speeds)}")
     print(f"通过测速的源数: {sum(len(sources) for sources in all_channels_with_speeds.values())}")
-    print(f"通过率: {sum(len(sources) for sources in all_channels_with_speeds.values())/len(all_channels)*100:.1f}%")
+    
+    if len(all_channels) > 0:
+        match_rate = len(filtered_channels) / len(all_channels) * 100
+        print(f"模板匹配率: {match_rate:.1f}%")
+    
+    if len(filtered_channels) > 0:
+        pass_rate = sum(len(sources) for sources in all_channels_with_speeds.values()) / len(filtered_channels) * 100
+        print(f"通过率: {pass_rate:.1f}%")
     
     # 按分类统计
     print("\n分类统计:")
@@ -704,10 +732,11 @@ def main():
                 print(f"  {category}: {len(available_channels)}/{total_channels} 个频道, {available_sources} 个源")
     
     # 显示源最多的10个频道
-    print("\n源最多的10个频道:")
-    for i, (channel, count) in enumerate(channel_source_counts[:10], 1):
-        category = template.get_category(channel)
-        print(f"  {i:2d}. {channel[:30]:<30} - {count:3d} 个源 ({category})")
+    if channel_source_counts:
+        print("\n源最多的10个频道:")
+        for i, (channel, count) in enumerate(channel_source_counts[:10], 1):
+            category = template.get_category(channel)
+            print(f"  {i:2d}. {channel[:30]:<30} - {count:3d} 个源 ({category})")
     
     print(f"\n输出文件:")
     print(f"  {txt_file}")
