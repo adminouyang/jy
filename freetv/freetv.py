@@ -351,7 +351,8 @@ def batch_speed_test_optimized(channel_list, template):
     total_to_test = sum(len(sources) for sources in channels_by_main.values())
     completed = 0
     
-    for main_channel, sources in channels_by_main.values():
+    # 修改这里：使用items()来获取键值对
+    for main_channel, sources in channels_by_main.items():
         print(f"\n📺 测试频道: {main_channel} ({len(sources)} 个源)")
         print("-" * 100)
         
