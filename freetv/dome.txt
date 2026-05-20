@@ -1,32 +1,33 @@
 📡央视频道,#genre#
-CCTV1,cctv-1,cctv-1hd,cctv1,cctv1 8m1080,cctv1综合
-CCTV2,cctv2,cctv2 8m1080,cctv2财经,cctv2 高清
-CCTV3,cctv-3,cctv-3hd,cctv3,cctv3综艺,cctv3-综艺,cctv3 高清
-CCTV4,cctv-4,cctv4,cctv-4 中文国际,cctv-4hd,cctv-4中文国际,cctv4中文国际,cctv4 高清
-CCTV5,cctv-5,cctv-5hd,cctv5,cctv5体育
-CCTV5+,cctv-5 plus体育赛事,cctv5 plus,cctv5 plus 8m1080,cctv5 plus体育赛事,cctv-5 plus
+CCTV1,cctv-1,cctv-1hd,cctv1,cctv1 8m1080,cctv1综合,CCTV+ 1 (600p) [Not 24/7],CCTV-1 (720p)
+CCTV2,cctv2,cctv2 8m1080,cctv2财经,cctv2 高清,CCTV+ 2 (600p) [Not 24/7],CCTV-2 (720p)
+CCTV3,cctv-3,cctv-3hd,cctv3,cctv3综艺,cctv3-综艺,cctv3 高清,CCTV-3 (720p)
+CCTV4,cctv-4,cctv4,cctv-4 中文国际,cctv-4hd,cctv-4中文国际,cctv4中文国际,cctv4 高清,CCTV-4 (720p)
+CCTV5,cctv-5,cctv-5hd,cctv5,cctv5体育,CCTV-5 (720p)
+CCTV5+,cctv-5 plus体育赛事,cctv5 plus,cctv5 plus 8m1080,cctv5 plus体育赛事,cctv-5 plus,CCTV-5+ (720p)
 CCTV6,cctv-6,cctv-6hd,cctv6,cctv6电影
-CCTV7,cctv-7,cctv-7hd,cctv7
-CCTV8,cctv-8,cctv-8hd,cctv8,cctv-8电视剧
-CCTV9,cctv-9,cctv-9hd,cctv9,cctv9纪录,cctv-9纪录
-CCTV10,cctv-10,cctv-10hd,cctv-10科教,cctv10,cctv10科教
-CCTV11,cctv-11,cctv-11hd,cctv-11戏曲,cctv11,cctv11戏曲
-CCTV12,cctv-12,cctv-12hd,cctv12,cctv-12社会与法
-CCTV13,cctv-13,cctv-13hd,cctv-13新闻,cctv13,cctv13新闻
-CCTV14,cctv-14,cctv-14hd,cctv-14少儿,cctv14,cctv14hd,cctv14少儿
-CCTV15,cctv-15,cctv-15hd,cctv-15音乐,cctv15,cctv15音乐
-CCTV16,cctv-16,cctv-16hd,cctv16
-CCTV17,cctv-17,cctv-17hd,cctv17
+CCTV7,cctv-7,cctv-7hd,cctv7,CCTV-7 (720p)
+CCTV8,cctv-8,cctv-8hd,cctv8,cctv-8电视剧,CCTV-8 (720p)
+CCTV9,cctv-9,cctv-9hd,cctv9,cctv9纪录,cctv-9纪录,CCTV-9 (576i)
+CCTV10,cctv-10,cctv-10hd,cctv-10科教,cctv10,cctv10科教,CCTV-10 (720p)
+CCTV11,cctv-11,cctv-11hd,cctv-11戏曲,cctv11,cctv11戏曲,CCTV-11 (720p)
+CCTV12,cctv-12,cctv-12hd,cctv12,cctv-12社会与法,CCTV-12 (720p)
+CCTV13,cctv-13,cctv-13hd,cctv-13新闻,cctv13,cctv13新闻,CCTV-13 (1080p)
+CCTV14,cctv-14,cctv-14hd,cctv-14少儿,cctv14,cctv14hd,cctv14少儿,CCTV-14 (1080p)
+CCTV15,cctv-15,cctv-15hd,cctv-15音乐,cctv15,cctv15音乐,CCTV-15 (720p)
+CCTV16,cctv-16,cctv-16hd,cctv16,CCTV-16 (1080p)
+CCTV17,cctv-17,cctv-17hd,cctv17,CCTV-17 (1080p)
 第一剧场,cctv-第一剧场,cctv第一剧场,cctv第一剧场
 风云足球,cctv-风云足球,cctv风云足球,cctv-风云足球
 风云音乐,cctv-风云音乐,cctv-风云音乐
 
-CCTV4欧洲
-CCTV4美洲
+CCTV4欧洲,CCTV-4 Europe
+CCTV4美洲,CCTV-4 America (1080p)
 CCTVNews,cctvnews,cctv-news
-CCTV4K,cctv-4k,cctv-4k高清,cctv4k,cctv-4k超高清
-CCTV8K,cctv-8k超高清
-CETV-1,cetv-1,cetv1
+CCTV4K,cctv-4k,cctv-4k高清,cctv4k,cctv-4k超高清,CCTV-4K (1080p)
+CCTV8K,cctv-8k超高清,CCTV-8K (1080p)
+CETV-1,cetv-1,cetv1,CETV1 (576p)
+CETV2,CETV2 (576p)
 CETV-4,cetv-4
 CGTN,cgtn,cgtn
 
