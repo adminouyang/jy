@@ -1,6 +1,6 @@
 📡央视频道,#genre#
-CCTV1,cctv-1,cctv-1hd,cctv1,cctv1 8m1080,cctv1综合,CCTV+ 1,CCTV-1
-CCTV2,cctv2,cctv2 8m1080,cctv2财经,cctv2 高清,CCTV+ 2,CCTV-2
+CCTV1,cctv-1,cctv-1hd,cctv1,cctv1 8m1080,cctv1综合,CCTV-1
+CCTV2,cctv2,cctv2 8m1080,cctv2财经,cctv2 高清,CCTV-2
 CCTV3,cctv-3,cctv-3hd,cctv3,cctv3综艺,cctv3-综艺,cctv3 高清,CCTV-3
 CCTV4,cctv-4,cctv4,cctv-4 中文国际,cctv-4hd,cctv-4中文国际,cctv4中文国际,cctv4 高清,CCTV-4
 CCTV5,cctv-5,cctv-5hd,cctv5,cctv5体育,CCTV-5
@@ -29,7 +29,7 @@ CCTV8K,cctv-8k超高清,CCTV-8K (1080p)
 CETV-1,cetv-1,cetv1,CETV1 (576p)
 CETV2,CETV2 (576p)
 CETV-4,cetv-4
-CGTN,cgtn,cgtn
+CGTN,cgtn,cgtn,CCTV+ 1,CCTV+ 2
 
 cdtv-4,
 中国气象
