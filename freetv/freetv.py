@@ -377,9 +377,9 @@ def batch_speed_test_optimized(channel_list, template):
                 
                 if speed >= config.SPEED_THRESHOLD:
                     source_results.append((channel_url, speed))
-                else:
-                    # 如果速度不达标，也记录但标记为失败
-                    source_results.append((channel_url, speed))
+                # 注意：这里不再保存速度不达标的源
+                # 只记录在统计中，不添加到source_results中
+                # 这样可以确保最终输出的all_channels中只包含通过的源
             
             # 按速度从大到小排序
             if source_results:
@@ -388,23 +388,21 @@ def batch_speed_test_optimized(channel_list, template):
                 
                 # 显示这个频道的测试结果摘要
                 fast_sources = [s for s in source_results if s[1] >= config.SPEED_THRESHOLD]
-                print(f"\n  📊 {main_channel} 测试结果: 通过 {len(fast_sources)}/{len(source_results)} 个源")
+                print(f"\n  📊 {main_channel} 测试结果: 通过 {len(fast_sources)}/{len(sources)} 个源")
                 for i, (url, speed) in enumerate(source_results[:3], 1):  # 只显示前3个
-                    status = "✅" if speed >= config.SPEED_THRESHOLD else "❌"
+                    status = "✅"
                     print(f"    {status} 第{i}名: {speed:7.1f}KB/s")
             
             # 进度显示
             if completed % 5 == 0 or completed == total_to_test:
-                current_passed = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
-                                   for sources in all_channels.values())
+                current_passed = sum(len(sources) for sources in all_channels.values())
                 pass_rate = (current_passed / completed * 100) if completed > 0 else 0
                 print(f"\n📈 进度: {completed}/{total_to_test} 个源 ({completed/total_to_test*100:.1f}%) | "
                       f"通过: {current_passed} 个源 ({pass_rate:.1f}%)")
                 print("-" * 100)
     
     engine.stats['total_tested'] = total_to_test
-    engine.stats['passed'] = sum(len([s for s in sources if s[1] >= config.SPEED_THRESHOLD]) 
-                               for sources in all_channels.values())
+    engine.stats['passed'] = sum(len(sources) for sources in all_channels.values())
     engine.stats['failed'] = total_to_test - engine.stats['passed']
     
     # 计算最终统计
@@ -457,10 +455,10 @@ def save_freetv_files(all_channels, template, epg_url, output_dir="freetv"):
         # 获取该分类下的主频道（按模板顺序）
         main_channels_in_category = template.get_channels_by_category(category)
         
-        # 过滤出已通过测速的频道
+        # 过滤出有通过测速的频道
         available_channels_in_category = []
         for main_channel in main_channels_in_category:
-            if main_channel in all_channels:
+            if main_channel in all_channels and all_channels[main_channel]:
                 available_channels_in_category.append(main_channel)
         
         if not available_channels_in_category:
@@ -509,7 +507,7 @@ def save_freetv_files(all_channels, template, epg_url, output_dir="freetv"):
         for category in template.categories:
             if category in template.category_channels:
                 total_channels = len(template.category_channels[category])
-                available_channels = [c for c in template.category_channels[category] if c in all_channels]
+                available_channels = [c for c in template.category_channels[category] if c in all_channels and all_channels[c]]
                 available_sources = sum(len(all_channels[c]) for c in available_channels)
                 f.write(f"  {category}: {len(available_channels)}/{total_channels} 个频道, {available_sources} 个源\n")
     
@@ -637,7 +635,7 @@ def main():
     
     # 1. 加载频道模板
     print("=" * 60)
-    print("IPTV频道源处理脚本 (只检测dome.txt中的频道)")
+    print("IPTV频道源处理脚本 (只检测dome.txt中的频道，只输出通过测速的源)")
     print("=" * 60)
     
     template = ChannelTemplate("freetv/dome.txt")
@@ -650,6 +648,7 @@ def main():
     # 定义多个源URL
     source_urls = [
         "https://iptv-org.github.io/iptv/index.m3u",
+        "https://sub.ottiptv.cc/yylunbo.m3u",
         # "https://freetv.fun/test_channels_original_new.txt"
         # 可以继续添加更多源URL
     ]
@@ -726,7 +725,7 @@ def main():
     for category in template.categories:
         if category in template.category_channels:
             total_channels = len(template.category_channels[category])
-            available_channels = [c for c in template.category_channels[category] if c in all_channels_with_speeds]
+            available_channels = [c for c in template.category_channels[category] if c in all_channels_with_speeds and all_channels_with_speeds[c]]
             available_sources = sum(len(all_channels_with_speeds[c]) for c in available_channels)
             if total_channels > 0:
                 print(f"  {category}: {len(available_channels)}/{total_channels} 个频道, {available_sources} 个源")
