@@ -1,5 +1,5 @@
 #genre#
-更新时间,20260521 07:41:05
+更新时间,20260521 20:28:45
 
 央视频道,,#genre#
 CCTV1,http://74.91.26.218:82/live/cctv1hd.m3u8
@@ -51,8 +51,8 @@ CHC影迷电影,http://39.134.19.76/dbiptv.sn.chinamobile.com/PLTV/88888888/224/
 重庆卫视,http://118.81.195.79:9003/hls/22/index.m3u8
 云南卫视,https://hwapi.yunshicloud.com/8xughf/e0bx15.m3u8
 四川卫视,http://39.134.115.163:8080/PLTV/88888910/224/3221225733/index.m3u8
-贵州卫视,http://183.207.248.71/gitv/live1/G_GUIZHOU/G_GUIZHOU
 贵州卫视,http://39.134.115.163:8080/PLTV/88888910/224/3221225728/index.m3u8
+贵州卫视,http://183.207.248.71/gitv/live1/G_GUIZHOU/G_GUIZHOU
 康巴卫视,http://scgctvshow.sctv.com/hdlive/kangba/1.m3u8
 黑龙江卫视,http://118.81.195.79:9003/hls/31/index.m3u8
 吉林卫视,http://118.81.195.79:9003/hls/34/index.m3u8
