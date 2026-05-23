@@ -161,6 +161,30 @@ jobs:
             return saved_files, ip_by_region
 
 
+        def clean_old_ip_files(current_files, ip_dir="proxy/IP"):
+            """清理旧的不在本次生成列表中的IP文件"""
+            try:
+                if not os.path.exists(ip_dir):
+                    return []
+                    
+                # 获取当前目录下所有.txt文件
+                existing_files = [f for f in os.listdir(ip_dir) if f.endswith('.txt')]
+                current_filenames = [os.path.basename(f) for f in current_files]
+                
+                deleted_files = []
+                for filename in existing_files:
+                    if filename not in current_filenames:
+                        filepath = os.path.join(ip_dir, filename)
+                        os.remove(filepath)
+                        deleted_files.append(filename)
+                        print(f"已删除过期IP文件: {filename}")
+                
+                return deleted_files
+            except Exception as e:
+                print(f"清理旧IP文件失败: {e}")
+                return []
+
+
         def read_demo_file(file_path):
             """读取demo.txt文件"""
             try:
@@ -392,15 +416,23 @@ jobs:
             print("\n[步骤4] 保存有效的IP...")
             saved_files, ip_by_region = save_valid_ips(valid_ips, output_ip_dir)
 
-            # 5. 读取demo文件
-            print("\n[步骤5] 处理demo.txt...")
+            # 5. 清理过期的IP文件
+            print("\n[步骤5] 清理过期IP文件...")
+            deleted_files = clean_old_ip_files(saved_files, output_ip_dir)
+            if deleted_files:
+                print(f"已清理 {len(deleted_files)} 个过期IP文件: {', '.join(deleted_files)}")
+            else:
+                print("没有需要清理的过期IP文件")
+
+            # 6. 读取demo文件
+            print("\n[步骤6] 处理demo.txt...")
             demo_lines = read_demo_file(demo_file_path)
             if not demo_lines:
                 print("demo.txt文件为空或读取失败")
                 return
 
-            # 6. 替换IP并生成mg.txt（支持多个地区IP）
-            print("\n[步骤6] 生成mg.txt（支持多个地区IP）...")
+            # 7. 替换IP并生成mg.txt（支持多个地区IP）
+            print("\n[步骤7] 生成mg.txt（支持多个地区IP）...")
             mg_lines = replace_ip_in_demo_with_multiple_ips(demo_lines, ip_by_region)
 
             # 计算频道数量
@@ -411,11 +443,11 @@ jobs:
 
             save_mg_txt(mg_lines, mg_txt_path)
 
-            # 7. 生成m3u文件
-            print("\n[步骤7] 从mg.txt生成mg.m3u...")
+            # 8. 生成m3u文件
+            print("\n[步骤8] 从mg.txt生成mg.m3u...")
             convert_txt_to_m3u(mg_lines, epg_url, logo_url, mg_m3u_path)
 
-            # 8. 生成报告
+            # 9. 生成报告
             print("\n" + "=" * 50)
             print("任务完成！")
             print("=" * 50)
@@ -424,6 +456,7 @@ jobs:
             print(f"地区数量: {len(ip_by_region)}")
             print(f"生成的频道行数: {channel_count}")
             print(f"保存的IP文件: {len(saved_files)} 个")
+            print(f"清理的IP文件: {len(deleted_files)} 个")
             print(f"生成的频道文件: mg.txt, mg.m3u")
 
             # 显示各地区IP数量
@@ -466,4 +499,3 @@ jobs:
         else
           echo "没有发现文件变化，跳过提交"
         fi
-      
