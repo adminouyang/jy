@@ -43,22 +43,28 @@ jobs:
         import time
         import asyncio
         import aiohttp
-        import json
         import argparse
-        from typing import List, Tuple, Set, Dict
+        from typing import List, Tuple, Set, Dict, AsyncGenerator
         import re
-        from datetime import datetime
         import sys
         from dataclasses import dataclass
-        from concurrent.futures import ProcessPoolExecutor
         import signal
+        from functools import partial
+        import json
 
-        # 全局配置
-        MAX_CONCURRENT = 200  # 最大并发连接数
-        REQUEST_TIMEOUT = 2.5  # 请求超时时间
-        CONNECT_TIMEOUT = 2.0  # 连接超时时间
+        # 优化配置
+        MAX_CONCURRENT = 300
+        BATCH_SIZE = 1000
+        REQUEST_TIMEOUT = 2.5
+        CONNECT_TIMEOUT = 2.0
+        USER_AGENTS = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36',
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/537.36'
+        ]
+
         HEADERS = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             'Accept': 'application/json,text/plain,*/*',
             'Accept-Language': 'zh-CN,zh;q=0.9',
             'Connection': 'keep-alive',
@@ -73,37 +79,93 @@ jobs:
             region: str
             original_line: str
     
-        class Scanner:
-            def __init__(self, max_workers: int = 50):
+            def get_ip_count(self) -> int:
+                """计算此配置会生成的IP数量"""
+                parts = self.base_ip.split('.')
+                a, b_part, c_part, d = parts
+        
+                if self.option == 0:
+                    # D段1-255
+                    return 255
+            
+                elif self.option == 1:
+                    # C段范围和D段1-255
+                    c_range = self.parse_range(c_part)
+                    return len(c_range) * 255
+            
+                elif self.option == 3:
+                    # B段、C段、D段
+                    b_range = self.parse_range(b_part)
+                    c_range = self.parse_range(c_part)
+                    return len(b_range) * len(c_range) * 255
+            
+                return 0
+    
+            @staticmethod
+            def parse_range(part: str) -> List[int]:
+                """解析范围，如 1-10 -> [1,2,...,10]"""
+                if '-' in part:
+                    start, end = map(int, part.split('-'))
+                    return list(range(start, end + 1))
+                return [int(part)]
+    
+            def ip_generator(self) -> AsyncGenerator[str, None]:
+                """生成器：生成所有要扫描的IP"""
+                parts = self.base_ip.split('.')
+                a, b_part, c_part, d = parts
+        
+                b_range = self.parse_range(b_part)
+                c_range = self.parse_range(c_part)
+        
+                if self.option == 0:
+                    # 只扫描D段
+                    for d_val in range(1, 256):
+                        yield f"{a}.{b_range[0]}.{c_range[0]}.{d_val}"
+                
+                elif self.option == 1:
+                    # 扫描C段范围和D段
+                    for c_val in c_range:
+                        for d_val in range(1, 256):
+                            yield f"{a}.{b_range[0]}.{c_val}.{d_val}"
+                    
+                elif self.option == 3:
+                    # 扫描B段、C段、D段
+                    for b_val in b_range:
+                        for c_val in c_range:
+                            for d_val in range(1, 256):
+                                yield f"{a}.{b_val}.{c_val}.{d_val}"
+
+        class FastScanner:
+            """高速扫描器"""
+    
+            def __init__(self, max_workers: int = 200):
                 self.max_workers = max_workers
-                self.session = None
                 self.connector = None
+                self.session = None
                 self.found_ips = set()
-                self.lock = asyncio.Lock()
-                self.total_scanned = 0
-                self.total_found = 0
+                self.scanned_count = 0
+                self.found_count = 0
                 self.start_time = None
         
             async def __aenter__(self):
-                # 创建连接器，启用连接池
+                # 创建连接器
                 self.connector = aiohttp.TCPConnector(
                     limit=self.max_workers,
-                    limit_per_host=10,
+                    limit_per_host=20,
                     ttl_dns_cache=300,
                     force_close=False,
-                    enable_cleanup_closed=True
+                    enable_cleanup_closed=True,
+                    use_dns_cache=True
                 )
         
                 # 创建会话
                 self.session = aiohttp.ClientSession(
                     connector=self.connector,
-                    headers=HEADERS,
                     timeout=aiohttp.ClientTimeout(
                         total=REQUEST_TIMEOUT,
                         connect=CONNECT_TIMEOUT,
-                        sock_read=REQUEST_TIMEOUT
-                    ),
-                    trust_env=True
+                        sock_read=2.0
+                    )
                 )
         
                 return self
@@ -113,237 +175,196 @@ jobs:
                     await self.session.close()
                 if self.connector:
                     await self.connector.close()
-            
-            def expand_part(self, part: str) -> List[int]:
-                """展开IP段范围，如 1-10 -> [1,2,...,10]"""
-                if '-' in part:
-                    start, end = map(int, part.split('-'))
-                    return list(range(start, end + 1))
-                return [int(part)]
-        
-            def generate_ip_list(self, ip: str, port: str, option: int) -> List[str]:
-                """生成要扫描的IP列表"""
-                parts = ip.split('.')
-                if len(parts) != 4:
-                    return []
-            
-                a, b, c, d = parts
-        
-                if option == 0:
-                    # 只扫描D段
-                    ips = []
-                    d_val = int(d)
-                    for d_range in range(1, 256):
-                        ips.append(f"{a}.{b}.{c}.{d_range}:{port}")
-                    return ips
-            
-                elif option == 1:
-                    # 扫描C段范围和D段
-                    ips = []
-                    c_range = self.expand_part(c)
-                    for c_val in c_range:
-                        for d_val in range(1, 256):
-                            ips.append(f"{a}.{b}.{c_val}.{d_val}:{port}")
-                    return ips
-            
-                elif option == 3:
-                    # 扫描B段、C段、D段
-                    ips = []
-                    b_range = self.expand_part(b)
-                    c_range = self.expand_part(c)
-            
-                    for b_val in b_range:
-                        for c_val in c_range:
-                            for d_val in range(1, 256):
-                                ips.append(f"{a}.{b_val}.{c_val}.{d_val}:{port}")
-                    return ips
-            
-                return []
-        
-            async def check_ip(self, ip_port: str) -> str:
-                """检查单个IP地址，返回有效的IP或None"""
-                url_endpoints = [
+    
+            async def check_ip(self, ip: str, port: str) -> str:
+                """检查单个IP，返回有效的IP:PORT或None"""
+                endpoints = [
                     "/iptv/live/1000.json?key=txiptv",
-                    "/ZHGXTV/Public/json/live_interface.txt"
+                    "/ZHGXTV/Public/json/live_interface.txt",
+                    "/live/1000.json?key=txiptv",
+                    "/iptv/live/1000.json"
                 ]
         
-                for endpoint in url_endpoints:
-                    url = f"http://{ip_port}{endpoint}"
+                # 随机User-Agent
+                headers = HEADERS.copy()
+                headers['User-Agent'] = USER_AGENTS[self.scanned_count % len(USER_AGENTS)]
+        
+                for endpoint in endpoints:
+                    url = f"http://{ip}:{port}{endpoint}"
                     try:
                         async with self.session.get(
                             url,
+                            headers=headers,
                             ssl=False,
                             allow_redirects=True
                         ) as response:
                             if response.status == 200:
-                                text = await response.text()
-                                if "tsfile" in text or "hls" in text or "m3u8" in text or "live" in text.lower():
-                                    return ip_port
+                                # 读取并解码响应
+                                try:
+                                    text = await response.text()
+                                    if (("tsfile" in text.lower()) or 
+                                        ("hls" in text.lower()) or 
+                                        ("m3u8" in text.lower()) or
+                                        ("live" in text.lower()) or
+                                        ("channel" in text.lower())):
+                                        return f"{ip}:{port}"
+                                except:
+                                    # 如果文本解码失败，检查响应头
+                                    content_type = response.headers.get('content-type', '').lower()
+                                    if 'json' in content_type or 'text' in content_type:
+                                        return f"{ip}:{port}"
                     except (aiohttp.ClientError, asyncio.TimeoutError, OSError):
                         continue
                     except Exception as e:
                         continue
                 
                 return None
-        
-            async def scan_batch(self, ip_list: List[str], batch_num: int, total_batches: int) -> Set[str]:
-                """扫描一批IP地址"""
-                batch_found = set()
-                batch_size = len(ip_list)
-        
-                # 创建异步任务列表
+    
+            async def scan_batch(self, ip_list: List[str], port: str, 
+                                 semaphore: asyncio.Semaphore) -> Set[str]:
+                """扫描一批IP"""
                 tasks = []
-                for ip_port in ip_list:
-                    task = asyncio.create_task(self.check_ip(ip_port))
-                    tasks.append(task)
-            
-                # 等待所有任务完成
-                completed = 0
-                for task in asyncio.as_completed(tasks):
-                    try:
-                        result = await task
-                        if result:
-                            batch_found.add(result)
-                    except Exception as e:
-                        pass
-                
-                    completed += 1
-                    if completed % 50 == 0:
-                        # 更新进度
-                        async with self.lock:
-                            self.total_scanned += 50
-                    
-                async with self.lock:
-                    self.total_scanned += completed % 50
-                    self.total_found += len(batch_found)
-            
-                return batch_found
+                batch_found = set()
         
-            async def scan_ips(self, ip_list: List[str], region: str) -> Set[str]:
-                """扫描IP列表"""
-                if not ip_list:
-                    return set()
-            
-                total_ips = len(ip_list)
-                print(f"  开始扫描 {region}，共 {total_ips} 个IP")
-        
-                if total_ips > 10000:
-                    batch_size = 1000
-                elif total_ips > 1000:
-                    batch_size = 500
-                else:
-                    batch_size = 200
-            
-                batches = []
-                for i in range(0, total_ips, batch_size):
-                    batches.append(ip_list[i:i + batch_size])
-            
-                total_batches = len(batches)
-                found_ips = set()
-        
-                # 使用信号量控制并发批次
-                semaphore = asyncio.Semaphore(5)
-        
-                async def process_batch(batch: List[str], batch_num: int):
+                for ip in ip_list:
                     async with semaphore:
-                        batch_found = await self.scan_batch(batch, batch_num, total_batches)
-                        if batch_found:
-                            async with self.lock:
-                                found_ips.update(batch_found)
-                        
-                        # 显示进度
-                        elapsed = time.time() - self.start_time
-                        ips_per_second = self.total_scanned / elapsed if elapsed > 0 else 0
-                        remaining = (total_ips - self.total_scanned) / ips_per_second if ips_per_second > 0 else 0
+                        task = asyncio.create_task(self.check_ip(ip, port))
+                        tasks.append(task)
+                        self.scanned_count += 1
                 
-                        print(f"  进度: {self.total_scanned}/{total_ips} ({self.total_scanned/total_ips*100:.1f}%) | "
-                              f"速度: {ips_per_second:.1f} IP/s | "
-                              f"已找到: {self.total_found} | "
-                              f"预计剩余: {remaining:.0f}s")
+                        # 每扫描100个IP显示一次进度
+                        if self.scanned_count % 100 == 0:
+                            elapsed = time.time() - self.start_time
+                            speed = self.scanned_count / elapsed if elapsed > 0 else 0
+                            print(f"\r扫描进度: {self.scanned_count} IPs | "
+                                  f"速度: {speed:.1f} IP/s | "
+                                  f"找到: {self.found_count}", end='')
         
-                # 创建批次任务
-                batch_tasks = []
-                for i, batch in enumerate(batches, 1):
-                    task = asyncio.create_task(process_batch(batch, i))
-                    batch_tasks.append(task)
+                # 等待所有任务完成
+                for task in asyncio.as_completed(tasks):
+                    result = await task
+                    if result:
+                        batch_found.add(result)
+                        self.found_count += 1
+                
+                return batch_found
+    
+            async def scan_config(self, config: IPConfig) -> Set[str]:
+                """扫描单个配置"""
+                print(f"\n{'='*60}")
+                print(f"扫描配置: {config.original_line}")
+                print(f"地区: {config.region}, option={config.option}")
+        
+                total_ips = config.get_ip_count()
+                if total_ips > 10000:
+                    print(f"警告: 此配置将生成 {total_ips:,} 个IP，需要较长时间")
+        
+                semaphore = asyncio.Semaphore(self.max_workers)
+                found_ips = set()
+                batch = []
+        
+                # 重置计数器
+                config_start_time = time.time()
+                config_scanned = 0
+                config_found = 0
+        
+                async for ip in config.ip_generator():
+                    batch.append(ip)
             
-                # 等待所有批次完成
-                await asyncio.gather(*batch_tasks)
+                    if len(batch) >= BATCH_SIZE:
+                        # 扫描当前批次
+                        batch_found = await self.scan_batch(batch, config.port, semaphore)
+                        found_ips.update(batch_found)
+                        config_found += len(batch_found)
+                        config_scanned += len(batch)
+                        batch.clear()
+                
+                        # 显示当前配置进度
+                        elapsed = time.time() - config_start_time
+                        if config_scanned > 0:
+                            speed = config_scanned / elapsed
+                            remaining = (total_ips - config_scanned) / speed if speed > 0 else 0
+                            print(f"\r配置进度: {config_scanned}/{total_ips} "
+                                  f"({config_scanned/total_ips*100:.1f}%) | "
+                                  f"速度: {speed:.1f} IP/s | "
+                                  f"剩余: {remaining:.0f}s | "
+                                  f"找到: {config_found}", end='')
         
+                # 扫描剩余IP
+                if batch:
+                    batch_found = await self.scan_batch(batch, config.port, semaphore)
+                    found_ips.update(batch_found)
+                    config_found += len(batch_found)
+        
+                print(f"\n配置扫描完成: 找到 {config_found} 个有效IP")
                 return found_ips
-        
-        def parse_config_line(line: str, line_num: int) -> IPConfig:
+
+        def parse_config_line(line: str) -> IPConfig:
             """解析配置文件行"""
             line = line.strip()
-            original_line = line
-    
-            if not line or line.startswith("#"):
+            if not line or line.startswith('#'):
                 return None
         
             try:
-                # 解析地区
+                # 分离配置和地区
                 if '$' in line:
                     config_part, region = line.rsplit('$', 1)
                 else:
-                    config_part = line
-                    region = "未知地区"
+                    config_part, region = line, "未知地区"
             
                 config_part = config_part.strip()
                 region = region.strip()
         
-                if not config_part or not region:
+                if not config_part:
                     return None
             
                 # 解析option
                 option = 0
                 if ',' in config_part:
-                    ip_port_part, option_part = config_part.split(',')
-                    ip_port_part = ip_port_part.strip()
-                    option_part = option_part.strip()
+                    ip_part, option_str = config_part.split(',')
+                    ip_part = ip_part.strip()
+                    option_str = option_str.strip()
             
-                    if option_part in ['0', '1', '3']:
-                        option = int(option_part)
+                    if option_str in ['0', '1', '3']:
+                        option = int(option_str)
                     else:
                         option = 0
                 else:
-                    ip_port_part = config_part
+                    ip_part = config_part
                     option = 0
             
                 # 解析IP和端口
-                if ":" not in ip_port_part:
+                if ':' not in ip_part:
                     return None
             
-                ip_part, port = ip_port_part.split(':')
-                ip_part = ip_part.strip()
+                ip_str, port = ip_part.split(':')
+                ip_str = ip_str.strip()
                 port = port.strip()
         
-                if not ip_part or not port:
+                if not ip_str or not port:
                     return None
             
                 # 验证IP格式
-                parts = ip_part.split('.')
+                parts = ip_str.split('.')
                 if len(parts) != 4:
                     return None
             
-                # 验证option=3的特殊格式
-                if option == 3:
-                    a, b_part, c_part, d = parts
-                    # 验证b段和c段格式
-                    for part in [b_part, c_part]:
-                        if not re.match(r'^\d+(-\d+)?$', part):
-                            return None
-                    
+                # 验证各段格式
+                for part in parts:
+                    if not re.match(r'^\d+(-\d+)?$', part):
+                        return None
+                
                 return IPConfig(
-                    base_ip=ip_part,
+                    base_ip=ip_str,
                     port=port,
                     option=option,
                     region=region,
-                    original_line=original_line
+                    original_line=line
                 )
         
             except Exception as e:
                 return None
-        
+
         def read_config(config_file: str) -> List[IPConfig]:
             """读取配置文件"""
             configs = []
@@ -351,134 +372,125 @@ jobs:
             try:
                 with open(config_file, 'r', encoding='utf-8') as f:
                     for line_num, line in enumerate(f, 1):
-                        config = parse_config_line(line, line_num)
+                        config = parse_config_line(line)
                         if config:
                             configs.append(config)
-                    
+                        else:
+                            if line.strip() and not line.strip().startswith('#'):
+                                print(f"警告: 第{line_num}行格式错误: {line.strip()}")
+                        
             except Exception as e:
                 print(f"读取配置文件错误: {e}")
         
             return configs
-    
-        async def process_config(config: IPConfig, scanner: Scanner) -> Set[str]:
-            """处理单个配置"""
-            print(f"\n{'='*60}")
-            print(f"配置: {config.original_line}")
-            print(f"  地区: {config.region}, option={config.option}")
-    
-            # 生成IP列表
-            ip_list = scanner.generate_ip_list(config.base_ip, config.port, config.option)
-    
-            if not ip_list:
-                print("  错误: 无法生成IP列表")
-                return set()
-        
-            print(f"  生成 {len(ip_list)} 个IP地址")
-    
-            if config.option == 0:
-                print("  扫描范围: D段1-255")
-            elif config.option == 1:
-                print("  扫描范围: C段范围和D段1-255")
-            elif config.option == 3:
-                print("  扫描范围: B段、C段、D段1-255")
-        
-            # 重置扫描计数器
-            scanner.total_scanned = 0
-            scanner.total_found = 0
-    
-            # 开始扫描
-            found_ips = await scanner.scan_ips(ip_list, config.region)
-    
-            print(f"  扫描完成，找到 {len(found_ips)} 个有效IP")
-    
-            return found_ips
-    
+
         async def main():
-            parser = argparse.ArgumentParser(description='高效酒店IP扫描工具')
-            parser.add_argument('--input', type=str, default='Hotel/ip/ip/Hotel_ips.txt', 
-                              help='输入配置文件路径')
-            parser.add_argument('--output', type=str, default='Hotel/ip', 
-                              help='输出目录')
-            parser.add_argument('--workers', type=int, default=200,
-                              help='并发连接数，默认200')
+            parser = argparse.ArgumentParser(description='超高速酒店IP扫描工具')
+            parser.add_argument('--input', type=str, default='Hotel/ip/ip/Hotel_ips.txt',
+                              help='输入配置文件路径，默认: Hotel/ip/ip/Hotel_ips.txt')
+            parser.add_argument('--output', type=str, default='Hotel/ip',
+                              help='输出目录，默认: Hotel/ip')
+            parser.add_argument('--workers', type=int, default=300,
+                              help='并发连接数，默认300')
+            parser.add_argument('--timeout', type=float, default=2.0,
+                              help='请求超时时间(秒)，默认2.0')
     
             args = parser.parse_args()
+    
+            # 更新超时设置
+            global REQUEST_TIMEOUT, CONNECT_TIMEOUT
+            REQUEST_TIMEOUT = args.timeout
+            CONNECT_TIMEOUT = args.timeout * 0.8
     
             if not os.path.exists(args.input):
                 print(f"错误: 配置文件不存在: {args.input}")
                 return
         
             # 读取配置
+            print("正在读取配置文件...")
             configs = read_config(args.input)
+    
             if not configs:
-                print(f"没有找到有效配置: {args.input}")
+                print("错误: 没有找到有效配置")
                 return
         
             print(f"找到 {len(configs)} 个有效配置")
     
-            # 按option排序，让option=0的先扫描（IP数量较少）
-            configs.sort(key=lambda x: (x.option, len(scanner.generate_ip_list(x.base_ip, x.port, x.option))))
+            # 按IP数量排序，让IP少的先扫描
+            configs.sort(key=lambda c: c.get_ip_count())
     
-            # 创建扫描器
-            async with Scanner(max_workers=args.workers) as scanner:
-                scanner.start_time = time.time()
-        
-                # 按地区分组结果
-                region_results = {}
+            # 创建输出目录
+            os.makedirs(args.output, exist_ok=True)
+    
+            # 扫描配置
+            region_results = {}
+            all_start_time = time.time()
+    
+            async with FastScanner(max_workers=args.workers) as scanner:
+                scanner.start_time = all_start_time
         
                 for i, config in enumerate(configs, 1):
-                    print(f"\n[处理配置 {i}/{len(configs)}]")
+                    print(f"\n[配置 {i}/{len(configs)}]")
             
-                    # 计算配置的IP数量
-                    ip_count = len(scanner.generate_ip_list(config.base_ip, config.port, config.option))
-            
-                    # 如果IP数量太多，提示用户
-                    if ip_count > 100000:
-                        print(f"警告: 此配置将生成 {ip_count:,} 个IP，可能需要较长时间")
-                        print("按 Ctrl+C 可中断扫描")
-                
-                    found_ips = await process_config(config, scanner)
+                    config_start_time = time.time()
+                    found_ips = await scanner.scan_config(config)
+                    config_time = time.time() - config_start_time
             
                     if found_ips:
                         if config.region not in region_results:
                             region_results[config.region] = set()
                         region_results[config.region].update(found_ips)
                 
-                    # 扫描间隔
+                    # 配置间间隔
                     if i < len(configs):
-                        print("等待3秒后继续...")
-                        await asyncio.sleep(3)
-                
+                        print(f"等待2秒后继续扫描下一个配置...")
+                        await asyncio.sleep(2)
+    
             # 保存结果
             if region_results:
-                os.makedirs(args.output, exist_ok=True)
+                print(f"\n{'='*60}")
+                print("正在保存扫描结果...")
         
                 total_ips = 0
                 for region, ips in region_results.items():
                     if ips:
-                        safe_region = re.sub(r'[\\/*?:"<>|]', "_", region)
+                        # 清理地区名称中的非法字符
+                        safe_region = re.sub(r'[\\/*?:"<>|]', '_', region)
                         output_file = os.path.join(args.output, f"{safe_region}.txt")
                 
+                        # 去重并排序
+                        unique_ips = sorted(ips)
+                
                         with open(output_file, 'w', encoding='utf-8') as f:
-                            for ip in sorted(ips):
+                            for ip in unique_ips:
                                 f.write(f"{ip}\n")
                         
-                        print(f"地区 '{region}' 的 {len(ips)} 个IP已保存到: {output_file}")
-                        total_ips += len(ips)
-                
+                        print(f"地区 '{region}': 保存 {len(unique_ips)} 个IP到 {output_file}")
+                        total_ips += len(unique_ips)
+        
+                all_time = time.time() - all_start_time
                 print(f"\n{'='*60}")
-                print(f"扫描完成! 共找到 {total_ips} 个唯一有效IP")
-                elapsed = time.time() - scanner.start_time
-                print(f"总用时: {elapsed:.1f}秒")
+                print(f"扫描完成!")
+                print(f"总用时: {all_time:.1f}秒")
+                print(f"总扫描IP数: {scanner.scanned_count}")
+                print(f"总有效IP数: {total_ips}")
+                print(f"平均速度: {scanner.scanned_count/all_time:.1f} IP/秒")
         
             else:
                 print("\n没有找到有效IP")
-        
+
         if __name__ == "__main__":
             # 设置事件循环策略
             if sys.platform == 'win32':
                 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-        
+    
+            # 设置信号处理
+            def signal_handler(signum, frame):
+                print("\n\n扫描被用户中断")
+                sys.exit(0)
+    
+            signal.signal(signal.SIGINT, signal_handler)
+    
             # 运行主程序
             try:
                 asyncio.run(main())
@@ -486,6 +498,8 @@ jobs:
                 print("\n\n扫描被用户中断")
             except Exception as e:
                 print(f"\n发生错误: {e}")
+                import traceback
+                traceback.print_exc()
         EOF
         
         python hotel_IP_Scanner.py
