@@ -2,7 +2,7 @@ name: hotel IP Scanner
 
 on:
   schedule:
-    - cron: '0 10,22 * * *'
+    - cron: '0 9,21 * * *'
   workflow_dispatch:
 permissions:
           contents: write
