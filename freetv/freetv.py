@@ -517,7 +517,7 @@ def save_freetv_files(all_channels, template, epg_url, output_dir="freetv"):
         if not available_channels_in_category:
             continue
         
-        txt_lines.append(f"{category},#genre#")
+        txt_lines.append(f"{category} #genre#")
         
         for main_channel in available_channels_in_category:
             sources = all_channels[main_channel]
@@ -528,7 +528,7 @@ def save_freetv_files(all_channels, template, epg_url, output_dir="freetv"):
             logo_url = template.get_logo_url(main_channel)
             for url, speed in sources:
                 m3u_lines.extend([
-                    f'#EXTINF:-1 tvg-name="{main_channel}" tvg-logo="{logo_url}" group-title="{category}", {main_channel}',
+                    f'#EXTINF:-1 tvg-name="{main_channel}" tvg-logo="{logo_url}" group-title="{category}"  {main_channel}',
                     url
                 ])
     
