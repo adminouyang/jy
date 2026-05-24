@@ -109,8 +109,8 @@ jobs:
                     return list(range(start, end + 1))
                 return [int(part)]
     
-            def ip_generator(self) -> AsyncGenerator[str, None]:
-                """生成器：生成所有要扫描的IP"""
+            async def ip_generator(self) -> AsyncGenerator[str, None]:
+                """异步生成器：生成所有要扫描的IP"""
                 parts = self.base_ip.split('.')
                 a, b_part, c_part, d = parts
         
@@ -240,7 +240,7 @@ jobs:
                                   f"速度: {speed:.1f} IP/s | "
                                   f"找到: {self.found_count}", end='')
         
-                # 等待所有任务完成
+                 等待所有任务完成
                 for task in asyncio.as_completed(tasks):
                     result = await task
                     if result:
@@ -268,6 +268,7 @@ jobs:
                 config_scanned = 0
                 config_found = 0
         
+                # 使用异步迭代器
                 async for ip in config.ip_generator():
                     batch.append(ip)
             
@@ -308,7 +309,7 @@ jobs:
             try:
                 # 分离配置和地区
                 if '$' in line:
-                    config_part, region = line.rsplit('$', 1)
+            config_part, region = line.rsplit('$', 1)
                 else:
                     config_part, region = line, "未知地区"
             
@@ -484,7 +485,7 @@ jobs:
             if sys.platform == 'win32':
                 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     
-            # 设置信号处理
+            # 设置信号处理        
             def signal_handler(signum, frame):
                 print("\n\n扫描被用户中断")
                 sys.exit(0)
