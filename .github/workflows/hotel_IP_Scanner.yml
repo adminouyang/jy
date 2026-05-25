@@ -180,7 +180,8 @@ jobs:
                     "/iptv/live/1000.json?key=txiptv",
                     "/ZHGXTV/Public/json/live_interface.txt",
                     "/live/1000.json?key=txiptv",
-                    "/iptv/live/1000.json"
+                    "/iptv/live/1000.json",
+                    "/streamer/list"
                 ]
                 
                 # 随机User-Agent
