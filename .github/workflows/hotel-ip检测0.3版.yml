@@ -1772,100 +1772,180 @@ jobs:
        
        
        def generate_iptv_txt(channels_dict):
-           """生成IPTV.txt文件 - 修复编码和排序问题"""
+           """生成IPTV.txt文件 - 按照CHANNEL_CATEGORIES顺序排序"""
            output_file = os.path.join(CHANNEL_DIR, "IPTV.txt")
-       
+    
            # 按分类组织频道
            categorized_channels = {}
            for channel_info in channels_dict.values():
                category = channel_info["category"]
                categorized_channels.setdefault(category, []).append(channel_info)
-       
+    
            # 按分类顺序排序
            sorted_categories = []
            for cat in CHANNEL_CATEGORIES.keys():
                if cat in categorized_channels:
                    sorted_categories.append(cat)
-       
+    
            try:
                with open(output_file, 'w', encoding='utf-8', errors='ignore') as f:
                    update_time = datetime.now().strftime('%Y/%m/%d %H:%M')
                    f.write(f"{update_time},#genre#\n\n")
-       
+            
                    for category in sorted_categories:
                        f.write(f"{category},#genre#\n")
                        channels = categorized_channels[category]
-       
-                       # 先按频道名称分组
-                       channel_groups = {}
-                       for channel in channels:
-                           channel_name = channel["name"]
-                           if channel_name not in channel_groups:
-                               channel_groups[channel_name] = []
-                           channel_groups[channel_name].append(channel)
-       
-                       # 对每个频道组内的URL按速度排序
-                       for channel_name, channel_list in channel_groups.items():
-                           # 按速度降序排序
-                           channel_list.sort(key=lambda x: x["speed"], reverse=True)
-       
-                           for channel in channel_list:
-                               f.write(f"{channel['name']},{channel['url']}\n")
-       
+                
+                       # 获取该分类下定义的频道顺序
+                       if category in CHANNEL_CATEGORIES:
+                           defined_order = CHANNEL_CATEGORIES[category]
+                           # 构建排序映射
+                           order_map = {}
+                           for i, channel_name in enumerate(defined_order):
+                               order_map[channel_name] = i
+                    
+                           # 先按频道名称分组
+                           channel_groups = {}
+                           for channel in channels:
+                               channel_name = channel["name"]
+                               if channel_name not in channel_groups:
+                                   channel_groups[channel_name] = []
+                               channel_groups[channel_name].append(channel)
+                    
+                           # 按照定义的顺序排序频道
+                           for channel_name in defined_order:
+                               if channel_name in channel_groups:
+                                   channel_list = channel_groups[channel_name]
+                                   # 组内按速度降序排序
+                                   channel_list.sort(key=lambda x: x["speed"], reverse=True)
+                                   for channel in channel_list:
+                                       f.write(f"{channel['name']},{channel['url']}\n")
+                                   # 从字典中移除已处理的频道
+                                   del channel_groups[channel_name]
+                    
+                           # 处理未在定义列表中的频道（如果有的话）
+                           if channel_groups:
+                               remaining_channels = []
+                               for channel_list in channel_groups.values():
+                                   remaining_channels.extend(channel_list)
+                               # 按频道名称字母顺序排序
+                               remaining_channels.sort(key=lambda x: x["name"])
+                               for channel in remaining_channels:
+                                   f.write(f"{channel['name']},{channel['url']}\n")
+                       else:
+                           # 如果该分类没有在CHANNEL_CATEGORIES中定义顺序，则按原来方式处理
+                           channel_groups = {}
+                           for channel in channels:
+                               channel_name = channel["name"]
+                               if channel_name not in channel_groups:
+                                   channel_groups[channel_name] = []
+                               channel_groups[channel_name].append(channel)
+                    
+                           # 对频道名称按字母排序
+                           sorted_channel_names = sorted(channel_groups.keys())
+                    
+                           for channel_name in sorted_channel_names:
+                               channel_list = channel_groups[channel_name]
+                               # 组内按速度降序排序
+                               channel_list.sort(key=lambda x: x["speed"], reverse=True)
+                               for channel in channel_list:
+                                   f.write(f"{channel['name']},{channel['url']}\n")
+                
                        f.write("\n")
-       
+        
                print(f"💾 已生成IPTV.txt，共 {len(channels_dict)} 个频道，{len(sorted_categories)} 个分类")
                return True
-       
+    
            except Exception as e:
                print(f"❌ 生成IPTV.txt失败: {e}")
                return False
        
        
        def generate_iptv_m3u(channels_dict):
-           """生成IPTV.m3u文件 - 修复排序问题"""
+           """生成IPTV.m3u文件 - 按照CHANNEL_CATEGORIES顺序排序"""
            output_file = os.path.join(CHANNEL_DIR, "IPTV.m3u")
-       
+    
            categorized_channels = {}
            for channel_info in channels_dict.values():
                category = channel_info["category"]
                categorized_channels.setdefault(category, []).append(channel_info)
-       
+    
            sorted_categories = []
            for cat in CHANNEL_CATEGORIES.keys():
                if cat in categorized_channels:
                    sorted_categories.append(cat)
-       
+    
            try:
                with open(output_file, 'w', encoding='utf-8') as f:
                    f.write("#EXTM3U x-tvg-url=""\n")
-                   # f.write('x-tvg-url=""\n')
-       
+            
                    for category in sorted_categories:
                        channels = categorized_channels[category]
-       
-                       # 先按频道名称分组
-                       channel_groups = {}
-                       for channel in channels:
-                           channel_name = channel["name"]
-                           if channel_name not in channel_groups:
-                               channel_groups[channel_name] = []
-                           channel_groups[channel_name].append(channel)
-       
-                       # 对每个频道组内的URL按速度排序
-                       for channel_name, channel_list in channel_groups.items():
-                           # 按速度降序排序
-                           channel_list.sort(key=lambda x: x["speed"], reverse=True)
-       
-                           for channel in channel_list:
-                               logo_info = f' tvg-logo="{channel["logo"]}"' if channel["logo"] else ""
-                               f.write(
-                                   f'#EXTINF:-1 tvg-name="{channel["name"]}"{logo_info} group-title="{category}",{channel["name"]}\n')
-                               f.write(f'{channel["url"]}\n')
-       
+                
+                       # 获取该分类下定义的频道顺序
+                       if category in CHANNEL_CATEGORIES:
+                           defined_order = CHANNEL_CATEGORIES[category]
+                           # 构建排序映射
+                           order_map = {}
+                           for i, channel_name in enumerate(defined_order):
+                               order_map[channel_name] = i
+                    
+                           # 先按频道名称分组
+                           channel_groups = {}
+                           for channel in channels:
+                               channel_name = channel["name"]
+                               if channel_name not in channel_groups:
+                                   channel_groups[channel_name] = []
+                               channel_groups[channel_name].append(channel)
+                    
+                           # 按照定义的顺序排序频道
+                           for channel_name in defined_order:
+                               if channel_name in channel_groups:
+                                   channel_list = channel_groups[channel_name]
+                                   # 组内按速度降序排序
+                                   channel_list.sort(key=lambda x: x["speed"], reverse=True)
+                                   for channel in channel_list:
+                                       logo_info = f' tvg-logo="{channel["logo"]}"' if channel["logo"] else ""
+                                       f.write(f'#EXTINF:-1 tvg-name="{channel["name"]}"{logo_info} group-title="{category}",{channel["name"]}\n')
+                                       f.write(f'{channel["url"]}\n')
+                                   # 从字典中移除已处理的频道
+                                   del channel_groups[channel_name]
+                    
+                           # 处理未在定义列表中的频道（如果有的话）
+                           if channel_groups:
+                               remaining_channels = []
+                               for channel_list in channel_groups.values():
+                                   remaining_channels.extend(channel_list)
+                               # 按频道名称字母顺序排序
+                               remaining_channels.sort(key=lambda x: x["name"])
+                               for channel in remaining_channels:
+                                   logo_info = f' tvg-logo="{channel["logo"]}"' if channel["logo"] else ""
+                                   f.write(f'#EXTINF:-1 tvg-name="{channel["name"]}"{logo_info} group-title="{category}",{channel["name"]}\n')
+                                   f.write(f'{channel["url"]}\n')
+                       else:
+                           # 如果该分类没有在CHANNEL_CATEGORIES中定义顺序，则按原来方式处理
+                           channel_groups = {}
+                           for channel in channels:
+                               channel_name = channel["name"]
+                               if channel_name not in channel_groups:
+                                   channel_groups[channel_name] = []
+                               channel_groups[channel_name].append(channel)
+                    
+                           # 对频道名称按字母排序
+                           sorted_channel_names = sorted(channel_groups.keys())
+                    
+                           for channel_name in sorted_channel_names:
+                               channel_list = channel_groups[channel_name]
+                               # 组内按速度降序排序
+                               channel_list.sort(key=lambda x: x["speed"], reverse=True)
+                               for channel in channel_list:
+                                   logo_info = f' tvg-logo="{channel["logo"]}"' if channel["logo"] else ""
+                                   f.write(f'#EXTINF:-1 tvg-name="{channel["name"]}"{logo_info} group-title="{category}",{channel["name"]}\n')
+                                   f.write(f'{channel["url"]}\n')
+        
                print(f"💾 已生成IPTV.m3u，共 {len(channels_dict)} 个频道，{len(sorted_categories)} 个分类")
                return True
-       
+    
            except Exception as e:
                print(f"❌ 生成IPTV.m3u失败: {e}")
                return False
