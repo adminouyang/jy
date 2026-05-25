@@ -987,14 +987,52 @@ jobs:
        
        
        def test_ip_availability(ip_port):
-           """测试IP可用性，支持JSON和TXT两种格式"""
+           """测试IP可用性，支持 streamer/list、JSON 和 TXT 三种格式"""
            try:
                # 先验证IP端口格式
                if not re.match(r'^\d+\.\d+\.\d+\.\d+:\d+$', ip_port):
                    print(f"❌ 无效的IP端口格式: {ip_port}")
                    return False, None
-       
-               # 先尝试JSON格式接口
+
+               # 新增：优先尝试 streamer/list 接口 (格式1)
+               streamer_url = f"http://{ip_port}/streamer/list"
+               try:
+                   response = requests.get(streamer_url, timeout=5)
+                   if response.status_code == 200:
+                       # 尝试解析JSON响应
+                       data_list = response.json()
+                       if isinstance(data_list, list) and len(data_list) > 0:
+                           channel_data = []
+                           for item in data_list:
+                               # 提取 key 和 name
+                               channel_key = item.get("key")
+                               channel_name = item.get("name")
+                               if channel_key and channel_name:
+                                   # 根据您的要求，通过 {host}/hls/{key}/index.m3u8 拼接链接
+                                   channel_url = f"http://{ip_port}/hls/{channel_key}/index.m3u8"
+                                   channel_data.append({
+                                       "name": channel_name,
+                                       "url": channel_url
+                                   })
+                    
+                           if channel_data:
+                               # 转换为与现有代码兼容的结构
+                               data = {
+                                   "code": 0,
+                                   "data": channel_data
+                               }
+                               print(f"✅ {ip_port} streamer/list 接口可用，找到{len(channel_data)}个频道")
+                               return True, data
+                           else:
+                               print(f"❌ {ip_port} streamer/list 接口返回的数据无法解析出有效的 key 和 name")
+                       else:
+                           print(f"❌ {ip_port} streamer/list 接口返回的数据格式不符或为空列表")
+               except json.JSONDecodeError:
+                   print(f"❌ {ip_port} streamer/list 接口响应不是有效的JSON")
+               except Exception as e:
+                   print(f"❌ {ip_port} streamer/list 接口失败: {e}")
+
+               # 原有逻辑：尝试JSON格式接口 (格式2)
                json_url = f"http://{ip_port}/iptv/live/1000.json?key=txiptv"
                try:
                    response = requests.get(json_url, timeout=5)
@@ -1013,8 +1051,8 @@ jobs:
                            return True, data
                except Exception as e:
                    print(f"❌ {ip_port} JSON接口失败: {e}")
-       
-               # 如果JSON接口失败，尝试TXT格式接口
+
+               # 原有逻辑：如果JSON接口失败，尝试TXT格式接口 (格式3)
                txt_url = f"http://{ip_port}/ZHGXTV/Public/json/live_interface.txt"
                try:
                    response = requests.get(txt_url, timeout=5)
@@ -1035,7 +1073,7 @@ jobs:
                        print(f"❌ {ip_port} TXT接口HTTP状态码: {response.status_code}")
                except Exception as e:
                    print(f"❌ {ip_port} TXT接口失败: {e}")
-       
+
                print(f"❌ {ip_port} 所有接口均不可用")
                return False, None
            except Exception as e:
