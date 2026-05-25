@@ -25,7 +25,7 @@ jobs:
         pip install requests eventlet
         pip install python-dotenv
         
-    - name: hotel-ip检测0.3版
+    - name: hotel-ip检测0.5版
       run: |
        python << 'EOF'
        import os
