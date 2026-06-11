@@ -423,7 +423,7 @@ class ChannelTemplate:
                 if not line:
                     continue
                     
-                if "📡" in line and "," in line and "#genre#" in line:
+                if "📡" in line and "#genre#" in line:
                     parts = line.split('#genre#')
                     if len(parts) > 0:
                         current_category = parts[0].replace("📡", ",", "").strip()
