@@ -423,10 +423,10 @@ class ChannelTemplate:
                 if not line:
                     continue
                     
-                if "📡" in line and "#genre#" in line:
+                if "📡" in line and "," in line and "#genre#" in line:
                     parts = line.split('#genre#')
                     if len(parts) > 0:
-                        current_category = parts[0].replace("📡", "").strip()
+                        current_category = parts[0].replace("📡", ",", "").strip()
                         if current_category and current_category not in self.categories:
                             self.categories.append(current_category)
                             self.category_channels[current_category] = []
