@@ -1,6 +1,6 @@
 #EXTM3U x-tvg-url="https://gh-proxy.com/https://raw.githubusercontent.com/adminouyang/231006/refs/heads/main/py/TV/EPG/epg.xml"
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
-http://183.162.104.153:1234/608807420
+http://223.247.25.230:1234/608807420
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
 http://222.130.32.214:7788/608807420
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
@@ -12,6 +12,8 @@ http://101.132.26.106:3566/608807420
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
 http://116.236.204.18:1234/608807420
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
+http://182.61.15.47:80/608807420
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
 http://14.153.176.157:1234/608807420
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
 http://119.88.243.98:17231/608807420
@@ -22,7 +24,7 @@ http://27.12.12.105:1234/608807420
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV1.png" group-title="央视频道 ", CCTV1
 http://36.104.221.222:7788/608807420
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
-http://183.162.104.153:1234/631780532
+http://223.247.25.230:1234/631780532
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
 http://222.130.32.214:7788/631780532
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
@@ -34,6 +36,8 @@ http://101.132.26.106:3566/631780532
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
 http://116.236.204.18:1234/631780532
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
+http://182.61.15.47:80/631780532
+#EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
 http://14.153.176.157:1234/631780532
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
 http://119.88.243.98:17231/631780532
@@ -44,7 +48,7 @@ http://27.12.12.105:1234/631780532
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV2.png" group-title="央视频道 ", CCTV2
 http://36.104.221.222:7788/631780532
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
-http://183.162.104.153:1234/624878271
+http://223.247.25.230:1234/624878271
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
 http://222.130.32.214:7788/624878271
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
@@ -56,6 +60,8 @@ http://101.132.26.106:3566/624878271
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
 http://116.236.204.18:1234/624878271
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
+http://182.61.15.47:80/624878271
+#EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
 http://14.153.176.157:1234/624878271
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
 http://119.88.243.98:17231/624878271
@@ -66,7 +72,7 @@ http://27.12.12.105:1234/624878271
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV3.png" group-title="央视频道 ", CCTV3
 http://36.104.221.222:7788/624878271
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
-http://183.162.104.153:1234/631780421
+http://223.247.25.230:1234/631780421
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
 http://222.130.32.214:7788/631780421
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
@@ -78,6 +84,8 @@ http://101.132.26.106:3566/631780421
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
 http://116.236.204.18:1234/631780421
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
+http://182.61.15.47:80/631780421
+#EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
 http://14.153.176.157:1234/631780421
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
 http://119.88.243.98:17231/631780421
@@ -88,7 +96,7 @@ http://27.12.12.105:1234/631780421
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4.png" group-title="央视频道 ", CCTV4
 http://36.104.221.222:7788/631780421
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
-http://183.162.104.153:1234/641886683
+http://223.247.25.230:1234/641886683
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
 http://222.130.32.214:7788/641886683
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
@@ -100,6 +108,8 @@ http://101.132.26.106:3566/641886683
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
 http://116.236.204.18:1234/641886683
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
+http://182.61.15.47:80/641886683
+#EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
 http://14.153.176.157:1234/641886683
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
 http://119.88.243.98:17231/641886683
@@ -110,7 +120,7 @@ http://27.12.12.105:1234/641886683
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5.png" group-title="央视频道 ", CCTV5
 http://36.104.221.222:7788/641886683
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
-http://183.162.104.153:1234/641886773
+http://223.247.25.230:1234/641886773
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
 http://222.130.32.214:7788/641886773
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
@@ -122,6 +132,8 @@ http://101.132.26.106:3566/641886773
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
 http://116.236.204.18:1234/641886773
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
+http://182.61.15.47:80/641886773
+#EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
 http://14.153.176.157:1234/641886773
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
 http://119.88.243.98:17231/641886773
@@ -132,7 +144,7 @@ http://27.12.12.105:1234/641886773
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV5plus.png" group-title="央视频道 ", CCTV5+
 http://36.104.221.222:7788/641886773
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
-http://183.162.104.153:1234/624878396
+http://223.247.25.230:1234/624878396
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
 http://222.130.32.214:7788/624878396
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
@@ -144,6 +156,8 @@ http://101.132.26.106:3566/624878396
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
 http://116.236.204.18:1234/624878396
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
+http://182.61.15.47:80/624878396
+#EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
 http://14.153.176.157:1234/624878396
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
 http://119.88.243.98:17231/624878396
@@ -154,7 +168,7 @@ http://27.12.12.105:1234/624878396
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV6.png" group-title="央视频道 ", CCTV6
 http://36.104.221.222:7788/624878396
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
-http://183.162.104.153:1234/673168121
+http://223.247.25.230:1234/673168121
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
 http://222.130.32.214:7788/673168121
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
@@ -166,6 +180,8 @@ http://101.132.26.106:3566/673168121
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
 http://116.236.204.18:1234/673168121
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
+http://182.61.15.47:80/673168121
+#EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
 http://14.153.176.157:1234/673168121
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
 http://119.88.243.98:17231/673168121
@@ -176,7 +192,7 @@ http://27.12.12.105:1234/673168121
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV7.png" group-title="央视频道 ", CCTV7
 http://36.104.221.222:7788/673168121
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
-http://183.162.104.153:1234/624878356
+http://223.247.25.230:1234/624878356
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
 http://222.130.32.214:7788/624878356
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
@@ -188,6 +204,8 @@ http://101.132.26.106:3566/624878356
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
 http://116.236.204.18:1234/624878356
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
+http://182.61.15.47:80/624878356
+#EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
 http://14.153.176.157:1234/624878356
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
 http://119.88.243.98:17231/624878356
@@ -198,7 +216,7 @@ http://27.12.12.105:1234/624878356
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV8.png" group-title="央视频道 ", CCTV8
 http://36.104.221.222:7788/624878356
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
-http://183.162.104.153:1234/673168140
+http://223.247.25.230:1234/673168140
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
 http://222.130.32.214:7788/673168140
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
@@ -210,6 +228,8 @@ http://101.132.26.106:3566/673168140
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
 http://116.236.204.18:1234/673168140
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
+http://182.61.15.47:80/673168140
+#EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
 http://14.153.176.157:1234/673168140
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
 http://119.88.243.98:17231/673168140
@@ -220,7 +240,7 @@ http://27.12.12.105:1234/673168140
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV9.png" group-title="央视频道 ", CCTV9
 http://36.104.221.222:7788/673168140
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
-http://183.162.104.153:1234/624878405
+http://223.247.25.230:1234/624878405
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
 http://222.130.32.214:7788/624878405
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
@@ -232,6 +252,8 @@ http://101.132.26.106:3566/624878405
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
 http://116.236.204.18:1234/624878405
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
+http://182.61.15.47:80/624878405
+#EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
 http://14.153.176.157:1234/624878405
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
 http://119.88.243.98:17231/624878405
@@ -242,7 +264,7 @@ http://27.12.12.105:1234/624878405
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV10.png" group-title="央视频道 ", CCTV10
 http://36.104.221.222:7788/624878405
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
-http://183.162.104.153:1234/667987558
+http://223.247.25.230:1234/667987558
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
 http://222.130.32.214:7788/667987558
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
@@ -254,6 +276,8 @@ http://101.132.26.106:3566/667987558
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
 http://116.236.204.18:1234/667987558
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
+http://182.61.15.47:80/667987558
+#EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
 http://14.153.176.157:1234/667987558
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
 http://119.88.243.98:17231/667987558
@@ -264,7 +288,7 @@ http://27.12.12.105:1234/667987558
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV11.png" group-title="央视频道 ", CCTV11
 http://36.104.221.222:7788/667987558
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
-http://183.162.104.153:1234/673168185
+http://223.247.25.230:1234/673168185
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
 http://222.130.32.214:7788/673168185
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
@@ -276,6 +300,8 @@ http://101.132.26.106:3566/673168185
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
 http://116.236.204.18:1234/673168185
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
+http://182.61.15.47:80/673168185
+#EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
 http://14.153.176.157:1234/673168185
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
 http://119.88.243.98:17231/673168185
@@ -286,7 +312,7 @@ http://27.12.12.105:1234/673168185
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV12.png" group-title="央视频道 ", CCTV12
 http://36.104.221.222:7788/673168185
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
-http://183.162.104.153:1234/608807423
+http://223.247.25.230:1234/608807423
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
 http://222.130.32.214:7788/608807423
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
@@ -298,6 +324,8 @@ http://101.132.26.106:3566/608807423
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
 http://116.236.204.18:1234/608807423
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
+http://182.61.15.47:80/608807423
+#EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
 http://14.153.176.157:1234/608807423
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
 http://119.88.243.98:17231/608807423
@@ -308,7 +336,7 @@ http://27.12.12.105:1234/608807423
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV13.png" group-title="央视频道 ", CCTV13
 http://36.104.221.222:7788/608807423
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
-http://183.162.104.153:1234/624878440
+http://223.247.25.230:1234/624878440
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
 http://222.130.32.214:7788/624878440
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
@@ -320,6 +348,8 @@ http://101.132.26.106:3566/624878440
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
 http://116.236.204.18:1234/624878440
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
+http://182.61.15.47:80/624878440
+#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
 http://14.153.176.157:1234/624878440
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
 http://119.88.243.98:17231/624878440
@@ -330,7 +360,7 @@ http://27.12.12.105:1234/624878440
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV14.png" group-title="央视频道 ", CCTV14
 http://36.104.221.222:7788/624878440
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
-http://183.162.104.153:1234/673168223
+http://223.247.25.230:1234/673168223
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
 http://222.130.32.214:7788/673168223
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
@@ -342,6 +372,8 @@ http://101.132.26.106:3566/673168223
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
 http://116.236.204.18:1234/673168223
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
+http://182.61.15.47:80/673168223
+#EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
 http://14.153.176.157:1234/673168223
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
 http://119.88.243.98:17231/673168223
@@ -352,7 +384,7 @@ http://27.12.12.105:1234/673168223
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV15.png" group-title="央视频道 ", CCTV15
 http://36.104.221.222:7788/673168223
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
-http://183.162.104.153:1234/673168256
+http://223.247.25.230:1234/673168256
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
 http://222.130.32.214:7788/673168256
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
@@ -364,6 +396,8 @@ http://101.132.26.106:3566/673168256
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
 http://116.236.204.18:1234/673168256
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
+http://182.61.15.47:80/673168256
+#EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
 http://14.153.176.157:1234/673168256
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
 http://119.88.243.98:17231/673168256
@@ -374,7 +408,7 @@ http://27.12.12.105:1234/673168256
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV17.png" group-title="央视频道 ", CCTV17
 http://36.104.221.222:7788/673168256
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
-http://183.162.104.153:1234/608807419
+http://223.247.25.230:1234/608807419
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
 http://222.130.32.214:7788/608807419
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
@@ -386,6 +420,8 @@ http://101.132.26.106:3566/608807419
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
 http://116.236.204.18:1234/608807419
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
+http://182.61.15.47:80/608807419
+#EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
 http://14.153.176.157:1234/608807419
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
 http://119.88.243.98:17231/608807419
@@ -396,7 +432,7 @@ http://27.12.12.105:1234/608807419
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4欧洲.png" group-title="央视频道 ", CCTV4欧洲
 http://36.104.221.222:7788/608807419
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
-http://183.162.104.153:1234/608807416
+http://223.247.25.230:1234/608807416
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
 http://222.130.32.214:7788/608807416
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
@@ -408,6 +444,8 @@ http://101.132.26.106:3566/608807416
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
 http://116.236.204.18:1234/608807416
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
+http://182.61.15.47:80/608807416
+#EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
 http://14.153.176.157:1234/608807416
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
 http://119.88.243.98:17231/608807416
@@ -418,7 +456,7 @@ http://27.12.12.105:1234/608807416
 #EXTINF:-1 tvg-name="CCTV4美洲" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CCTV4美洲.png" group-title="央视频道 ", CCTV4美洲
 http://36.104.221.222:7788/608807416
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
-http://183.162.104.153:1234/923287154 
+http://223.247.25.230:1234/923287154 
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
 http://222.130.32.214:7788/923287154 
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
@@ -430,6 +468,8 @@ http://101.132.26.106:3566/923287154
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
 http://116.236.204.18:1234/923287154 
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
+http://182.61.15.47:80/923287154 
+#EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
 http://14.153.176.157:1234/923287154 
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
 http://119.88.243.98:17231/923287154 
@@ -440,7 +480,7 @@ http://27.12.12.105:1234/923287154
 #EXTINF:-1 tvg-name="CETV1" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV1.png" group-title="央视频道 ", CETV1
 http://36.104.221.222:7788/923287154 
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
-http://183.162.104.153:1234/923287211 
+http://223.247.25.230:1234/923287211 
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
 http://222.130.32.214:7788/923287211 
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
@@ -452,6 +492,8 @@ http://101.132.26.106:3566/923287211
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
 http://116.236.204.18:1234/923287211 
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
+http://182.61.15.47:80/923287211 
+#EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
 http://14.153.176.157:1234/923287211 
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
 http://119.88.243.98:17231/923287211 
@@ -462,7 +504,7 @@ http://27.12.12.105:1234/923287211
 #EXTINF:-1 tvg-name="CETV2" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV2.png" group-title="央视频道 ", CETV2
 http://36.104.221.222:7788/923287211 
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
-http://183.162.104.153:1234/923287339 
+http://223.247.25.230:1234/923287339 
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
 http://222.130.32.214:7788/923287339 
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
@@ -474,6 +516,8 @@ http://101.132.26.106:3566/923287339
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
 http://116.236.204.18:1234/923287339 
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
+http://182.61.15.47:80/923287339 
+#EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
 http://14.153.176.157:1234/923287339 
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
 http://119.88.243.98:17231/923287339 
@@ -484,7 +528,7 @@ http://27.12.12.105:1234/923287339
 #EXTINF:-1 tvg-name="CETV4" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CETV4.png" group-title="央视频道 ", CETV4
 http://36.104.221.222:7788/923287339 
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
-http://183.162.104.153:1234/884121956
+http://223.247.25.230:1234/884121956
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
 http://222.130.32.214:7788/884121956
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
@@ -496,6 +540,8 @@ http://101.132.26.106:3566/884121956
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
 http://116.236.204.18:1234/884121956
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
+http://182.61.15.47:80/884121956
+#EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
 http://14.153.176.157:1234/884121956
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
 http://119.88.243.98:17231/884121956
@@ -506,7 +552,7 @@ http://27.12.12.105:1234/884121956
 #EXTINF:-1 tvg-name="老故事" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/老故事.png" group-title="央视频道 ", 老故事
 http://36.104.221.222:7788/884121956
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
-http://183.162.104.153:1234/624878970
+http://223.247.25.230:1234/624878970
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
 http://222.130.32.214:7788/624878970
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
@@ -518,6 +564,8 @@ http://101.132.26.106:3566/624878970
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
 http://116.236.204.18:1234/624878970
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
+http://182.61.15.47:80/624878970
+#EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
 http://14.153.176.157:1234/624878970
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
 http://119.88.243.98:17231/624878970
@@ -528,7 +576,7 @@ http://27.12.12.105:1234/624878970
 #EXTINF:-1 tvg-name="发现之旅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/发现之旅.png" group-title="央视频道 ", 发现之旅
 http://36.104.221.222:7788/624878970
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
-http://183.162.104.153:1234/708869532
+http://223.247.25.230:1234/708869532
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
 http://222.130.32.214:7788/708869532
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
@@ -540,6 +588,8 @@ http://101.132.26.106:3566/708869532
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
 http://116.236.204.18:1234/708869532
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
+http://182.61.15.47:80/708869532
+#EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
 http://14.153.176.157:1234/708869532
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
 http://119.88.243.98:17231/708869532
@@ -550,7 +600,7 @@ http://27.12.12.105:1234/708869532
 #EXTINF:-1 tvg-name="中学生" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中学生.png" group-title="央视频道 ", 中学生
 http://36.104.221.222:7788/708869532
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
-http://183.162.104.153:1234/959986621 
+http://223.247.25.230:1234/959986621 
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
 http://222.130.32.214:7788/959986621 
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
@@ -562,6 +612,8 @@ http://101.132.26.106:3566/959986621
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
 http://116.236.204.18:1234/959986621 
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
+http://182.61.15.47:80/959986621 
+#EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
 http://14.153.176.157:1234/959986621 
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
 http://119.88.243.98:17231/959986621 
@@ -572,7 +624,7 @@ http://27.12.12.105:1234/959986621
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中国天气.png" group-title="央视频道 ", 中国天气
 http://36.104.221.222:7788/959986621 
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
-http://183.162.104.153:1234/609017205
+http://223.247.25.230:1234/609017205
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
 http://222.130.32.214:7788/609017205
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
@@ -584,6 +636,8 @@ http://101.132.26.106:3566/609017205
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
 http://116.236.204.18:1234/609017205
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
+http://182.61.15.47:80/609017205
+#EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
 http://14.153.176.157:1234/609017205
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
 http://119.88.243.98:17231/609017205
@@ -594,7 +648,7 @@ http://27.12.12.105:1234/609017205
 #EXTINF:-1 tvg-name="CGTN" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN.png" group-title="央视频道 ", CGTN
 http://36.104.221.222:7788/609017205
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
-http://183.162.104.153:1234/609006487
+http://223.247.25.230:1234/609006487
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
 http://222.130.32.214:7788/609006487
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
@@ -606,6 +660,8 @@ http://101.132.26.106:3566/609006487
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
 http://116.236.204.18:1234/609006487
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
+http://182.61.15.47:80/609006487
+#EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
 http://14.153.176.157:1234/609006487
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
 http://119.88.243.98:17231/609006487
@@ -616,7 +672,7 @@ http://27.12.12.105:1234/609006487
 #EXTINF:-1 tvg-name="CGTN外语纪录" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN外语纪录.png" group-title="央视频道 ", CGTN外语纪录
 http://36.104.221.222:7788/609006487
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
-http://183.162.104.153:1234/609154345
+http://223.247.25.230:1234/609154345
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
 http://222.130.32.214:7788/609154345
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
@@ -628,6 +684,8 @@ http://101.132.26.106:3566/609154345
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
 http://116.236.204.18:1234/609154345
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
+http://182.61.15.47:80/609154345
+#EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
 http://14.153.176.157:1234/609154345
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
 http://119.88.243.98:17231/609154345
@@ -638,7 +696,7 @@ http://27.12.12.105:1234/609154345
 #EXTINF:-1 tvg-name="CGTN阿拉伯语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN阿拉伯语.png" group-title="央视频道 ", CGTN阿拉伯语
 http://36.104.221.222:7788/609154345
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
-http://183.162.104.153:1234/609006450
+http://223.247.25.230:1234/609006450
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
 http://222.130.32.214:7788/609006450
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
@@ -650,6 +708,8 @@ http://101.132.26.106:3566/609006450
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
 http://116.236.204.18:1234/609006450
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
+http://182.61.15.47:80/609006450
+#EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
 http://14.153.176.157:1234/609006450
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
 http://119.88.243.98:17231/609006450
@@ -660,7 +720,7 @@ http://27.12.12.105:1234/609006450
 #EXTINF:-1 tvg-name="CGTN西班牙语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN西班牙语.png" group-title="央视频道 ", CGTN西班牙语
 http://36.104.221.222:7788/609006450
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
-http://183.162.104.153:1234/609006476
+http://223.247.25.230:1234/609006476
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
 http://222.130.32.214:7788/609006476
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
@@ -672,6 +732,8 @@ http://101.132.26.106:3566/609006476
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
 http://116.236.204.18:1234/609006476
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
+http://182.61.15.47:80/609006476
+#EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
 http://14.153.176.157:1234/609006476
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
 http://119.88.243.98:17231/609006476
@@ -682,7 +744,7 @@ http://27.12.12.105:1234/609006476
 #EXTINF:-1 tvg-name="CGTN法语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN法语.png" group-title="央视频道 ", CGTN法语
 http://36.104.221.222:7788/609006476
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
-http://183.162.104.153:1234/609006446
+http://223.247.25.230:1234/609006446
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
 http://222.130.32.214:7788/609006446
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
@@ -694,6 +756,8 @@ http://101.132.26.106:3566/609006446
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
 http://116.236.204.18:1234/609006446
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
+http://182.61.15.47:80/609006446
+#EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
 http://14.153.176.157:1234/609006446
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
 http://119.88.243.98:17231/609006446
@@ -704,7 +768,7 @@ http://27.12.12.105:1234/609006446
 #EXTINF:-1 tvg-name="CGTN俄语" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CGTN俄语.png" group-title="央视频道 ", CGTN俄语
 http://36.104.221.222:7788/609006446
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
-http://183.162.104.153:1234/651632648
+http://223.247.25.230:1234/651632648
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
 http://222.130.32.214:7788/651632648
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
@@ -716,6 +780,8 @@ http://101.132.26.106:3566/651632648
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
 http://116.236.204.18:1234/651632648
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
+http://182.61.15.47:80/651632648
+#EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
 http://14.153.176.157:1234/651632648
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
 http://119.88.243.98:17231/651632648
@@ -726,7 +792,7 @@ http://27.12.12.105:1234/651632648
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东方卫视.png" group-title="卫视频道 ", 东方卫视
 http://36.104.221.222:7788/651632648
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
-http://183.162.104.153:1234/623899368
+http://223.247.25.230:1234/623899368
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
 http://222.130.32.214:7788/623899368
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
@@ -738,6 +804,8 @@ http://101.132.26.106:3566/623899368
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
 http://116.236.204.18:1234/623899368
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
+http://182.61.15.47:80/623899368
+#EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
 http://14.153.176.157:1234/623899368
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
 http://119.88.243.98:17231/623899368
@@ -748,7 +816,7 @@ http://27.12.12.105:1234/623899368
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏卫视.png" group-title="卫视频道 ", 江苏卫视
 http://36.104.221.222:7788/623899368
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
-http://183.162.104.153:1234/608831231 
+http://223.247.25.230:1234/608831231 
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
 http://222.130.32.214:7788/608831231 
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
@@ -760,6 +828,8 @@ http://101.132.26.106:3566/608831231
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
 http://116.236.204.18:1234/608831231 
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
+http://182.61.15.47:80/608831231 
+#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
 http://14.153.176.157:1234/608831231 
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
 http://119.88.243.98:17231/608831231 
@@ -770,7 +840,7 @@ http://27.12.12.105:1234/608831231
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/广东卫视.png" group-title="卫视频道 ", 广东卫视
 http://36.104.221.222:7788/608831231 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
-http://183.162.104.153:1234/630287636 
+http://223.247.25.230:1234/630287636 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
 http://222.130.32.214:7788/630287636 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
@@ -782,6 +852,8 @@ http://101.132.26.106:3566/630287636
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
 http://116.236.204.18:1234/630287636 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
+http://182.61.15.47:80/630287636 
+#EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
 http://14.153.176.157:1234/630287636 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
 http://119.88.243.98:17231/630287636 
@@ -792,7 +864,7 @@ http://27.12.12.105:1234/630287636
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/北京卫视.png" group-title="卫视频道 ", 北京卫视
 http://36.104.221.222:7788/630287636 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
-http://183.162.104.153:1234/630291707 
+http://223.247.25.230:1234/630291707 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
 http://222.130.32.214:7788/630291707 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
@@ -804,6 +876,8 @@ http://101.132.26.106:3566/630291707
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
 http://116.236.204.18:1234/630291707 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
+http://182.61.15.47:80/630291707 
+#EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
 http://14.153.176.157:1234/630291707 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
 http://119.88.243.98:17231/630291707 
@@ -814,7 +888,7 @@ http://27.12.12.105:1234/630291707
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/辽宁卫视.png" group-title="卫视频道 ", 辽宁卫视
 http://36.104.221.222:7788/630291707 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
-http://183.162.104.153:1234/962042070 
+http://223.247.25.230:1234/962042070 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
 http://222.130.32.214:7788/962042070 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
@@ -826,6 +900,8 @@ http://101.132.26.106:3566/962042070
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
 http://116.236.204.18:1234/962042070 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
+http://182.61.15.47:80/962042070 
+#EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
 http://14.153.176.157:1234/962042070 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
 http://119.88.243.98:17231/962042070 
@@ -836,7 +912,7 @@ http://27.12.12.105:1234/962042070
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河北卫视.png" group-title="卫视频道 ", 河北卫视
 http://36.104.221.222:7788/962042070 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
-http://183.162.104.153:1234/783847495 
+http://223.247.25.230:1234/783847495 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
 http://222.130.32.214:7788/783847495 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
@@ -848,6 +924,8 @@ http://101.132.26.106:3566/783847495
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
 http://116.236.204.18:1234/783847495 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
+http://182.61.15.47:80/783847495 
+#EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
 http://14.153.176.157:1234/783847495 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
 http://119.88.243.98:17231/783847495 
@@ -858,7 +936,7 @@ http://27.12.12.105:1234/783847495
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江西卫视.png" group-title="卫视频道 ", 江西卫视
 http://36.104.221.222:7788/783847495 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
-http://183.162.104.153:1234/790187291 
+http://223.247.25.230:1234/790187291 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
 http://222.130.32.214:7788/790187291 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
@@ -870,6 +948,8 @@ http://101.132.26.106:3566/790187291
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
 http://116.236.204.18:1234/790187291 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
+http://182.61.15.47:80/790187291 
+#EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
 http://14.153.176.157:1234/790187291 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
 http://119.88.243.98:17231/790187291 
@@ -880,7 +960,7 @@ http://27.12.12.105:1234/790187291
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/河南卫视.png" group-title="卫视频道 ", 河南卫视
 http://36.104.221.222:7788/790187291 
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
-http://183.162.104.153:1234/738910838 
+http://223.247.25.230:1234/738910838 
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
 http://222.130.32.214:7788/738910838 
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
@@ -892,6 +972,8 @@ http://101.132.26.106:3566/738910838
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
 http://116.236.204.18:1234/738910838 
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
+http://182.61.15.47:80/738910838 
+#EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
 http://14.153.176.157:1234/738910838 
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
 http://119.88.243.98:17231/738910838 
@@ -902,7 +984,7 @@ http://27.12.12.105:1234/738910838
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西卫视.png" group-title="卫视频道 ", 陕西卫视
 http://36.104.221.222:7788/738910838 
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
-http://183.162.104.153:1234/608917627 
+http://223.247.25.230:1234/608917627 
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
 http://222.130.32.214:7788/608917627 
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
@@ -914,6 +996,8 @@ http://101.132.26.106:3566/608917627
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
 http://116.236.204.18:1234/608917627 
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
+http://182.61.15.47:80/608917627 
+#EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
 http://14.153.176.157:1234/608917627 
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
 http://119.88.243.98:17231/608917627 
@@ -924,7 +1008,7 @@ http://27.12.12.105:1234/608917627
 #EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/大湾区卫视.png" group-title="卫视频道 ", 大湾区卫视
 http://36.104.221.222:7788/608917627 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
-http://183.162.104.153:1234/947472496 
+http://223.247.25.230:1234/947472496 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
 http://222.130.32.214:7788/947472496 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
@@ -936,6 +1020,8 @@ http://101.132.26.106:3566/947472496
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
 http://116.236.204.18:1234/947472496 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
+http://182.61.15.47:80/947472496 
+#EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
 http://14.153.176.157:1234/947472496 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
 http://119.88.243.98:17231/947472496 
@@ -946,7 +1032,7 @@ http://27.12.12.105:1234/947472496
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/湖北卫视.png" group-title="卫视频道 ", 湖北卫视
 http://36.104.221.222:7788/947472496 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
-http://183.162.104.153:1234/947472500 
+http://223.247.25.230:1234/947472500 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
 http://222.130.32.214:7788/947472500 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
@@ -958,6 +1044,8 @@ http://101.132.26.106:3566/947472500
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
 http://116.236.204.18:1234/947472500 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
+http://182.61.15.47:80/947472500 
+#EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
 http://14.153.176.157:1234/947472500 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
 http://119.88.243.98:17231/947472500 
@@ -968,7 +1056,7 @@ http://27.12.12.105:1234/947472500
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/吉林卫视.png" group-title="卫视频道 ", 吉林卫视
 http://36.104.221.222:7788/947472500 
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
-http://183.162.104.153:1234/947472506 
+http://223.247.25.230:1234/947472506 
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
 http://222.130.32.214:7788/947472506 
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
@@ -980,6 +1068,8 @@ http://101.132.26.106:3566/947472506
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
 http://116.236.204.18:1234/947472506 
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
+http://182.61.15.47:80/947472506 
+#EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
 http://14.153.176.157:1234/947472506 
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
 http://119.88.243.98:17231/947472506 
@@ -990,7 +1080,7 @@ http://27.12.12.105:1234/947472506
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/青海卫视.png" group-title="卫视频道 ", 青海卫视
 http://36.104.221.222:7788/947472506 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
-http://183.162.104.153:1234/849116810 
+http://223.247.25.230:1234/849116810 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
 http://222.130.32.214:7788/849116810 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
@@ -1002,6 +1092,8 @@ http://101.132.26.106:3566/849116810
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
 http://116.236.204.18:1234/849116810 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
+http://182.61.15.47:80/849116810 
+#EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
 http://14.153.176.157:1234/849116810 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
 http://119.88.243.98:17231/849116810 
@@ -1012,7 +1104,7 @@ http://27.12.12.105:1234/849116810
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/东南卫视.png" group-title="卫视频道 ", 东南卫视
 http://36.104.221.222:7788/849116810 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
-http://183.162.104.153:1234/947472502 
+http://223.247.25.230:1234/947472502 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
 http://222.130.32.214:7788/947472502 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
@@ -1024,6 +1116,8 @@ http://101.132.26.106:3566/947472502
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
 http://116.236.204.18:1234/947472502 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
+http://182.61.15.47:80/947472502 
+#EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
 http://14.153.176.157:1234/947472502 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
 http://119.88.243.98:17231/947472502 
@@ -1034,7 +1128,7 @@ http://27.12.12.105:1234/947472502
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海南卫视.png" group-title="卫视频道 ", 海南卫视
 http://36.104.221.222:7788/947472502 
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
-http://183.162.104.153:1234/849119120 
+http://223.247.25.230:1234/849119120 
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
 http://222.130.32.214:7788/849119120 
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
@@ -1046,6 +1140,8 @@ http://101.132.26.106:3566/849119120
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
 http://116.236.204.18:1234/849119120 
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
+http://182.61.15.47:80/849119120 
+#EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
 http://14.153.176.157:1234/849119120 
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
 http://119.88.243.98:17231/849119120 
@@ -1056,7 +1152,7 @@ http://27.12.12.105:1234/849119120
 #EXTINF:-1 tvg-name="海峡卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/海峡卫视.png" group-title="卫视频道 ", 海峡卫视
 http://36.104.221.222:7788/849119120 
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
-http://183.162.104.153:1234/956904896 
+http://223.247.25.230:1234/956904896 
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
 http://222.130.32.214:7788/956904896 
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
@@ -1068,6 +1164,8 @@ http://101.132.26.106:3566/956904896
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
 http://116.236.204.18:1234/956904896 
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
+http://182.61.15.47:80/956904896 
+#EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
 http://14.153.176.157:1234/956904896 
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
 http://119.88.243.98:17231/956904896 
@@ -1078,7 +1176,7 @@ http://27.12.12.105:1234/956904896
 #EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/农林卫视.png" group-title="卫视频道 ", 农林卫视
 http://36.104.221.222:7788/956904896 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
-http://183.162.104.153:1234/956923145 
+http://223.247.25.230:1234/956923145 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
 http://222.130.32.214:7788/956923145 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
@@ -1090,6 +1188,8 @@ http://101.132.26.106:3566/956923145
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
 http://116.236.204.18:1234/956923145 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
+http://182.61.15.47:80/956923145 
+#EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
 http://14.153.176.157:1234/956923145 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
 http://119.88.243.98:17231/956923145 
@@ -1100,7 +1200,7 @@ http://27.12.12.105:1234/956923145
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/兵团卫视.png" group-title="卫视频道 ", 兵团卫视
 http://36.104.221.222:7788/956923145 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
-http://183.162.104.153:1234/738910535 
+http://223.247.25.230:1234/738910535 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
 http://222.130.32.214:7788/738910535 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
@@ -1112,6 +1212,8 @@ http://101.132.26.106:3566/738910535
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
 http://116.236.204.18:1234/738910535 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
+http://182.61.15.47:80/738910535 
+#EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
 http://14.153.176.157:1234/738910535 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
 http://119.88.243.98:17231/738910535 
@@ -1122,7 +1224,7 @@ http://27.12.12.105:1234/738910535
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宁夏卫视.png" group-title="卫视频道 ", 宁夏卫视
 http://36.104.221.222:7788/738910535 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
-http://183.162.104.153:1234/738910914 
+http://223.247.25.230:1234/738910914 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
 http://222.130.32.214:7788/738910914 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
@@ -1134,6 +1236,8 @@ http://101.132.26.106:3566/738910914
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
 http://116.236.204.18:1234/738910914 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
+http://182.61.15.47:80/738910914 
+#EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
 http://14.153.176.157:1234/738910914 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
 http://119.88.243.98:17231/738910914 
@@ -1144,7 +1248,7 @@ http://27.12.12.105:1234/738910914
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/重庆卫视.png" group-title="卫视频道 ", 重庆卫视
 http://36.104.221.222:7788/738910914 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
-http://183.162.104.153:1234/961023778 
+http://223.247.25.230:1234/961023778 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
 http://222.130.32.214:7788/961023778 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
@@ -1156,6 +1260,8 @@ http://101.132.26.106:3566/961023778
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
 http://116.236.204.18:1234/961023778 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
+http://182.61.15.47:80/961023778 
+#EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
 http://14.153.176.157:1234/961023778 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
 http://119.88.243.98:17231/961023778 
@@ -1166,7 +1272,7 @@ http://27.12.12.105:1234/961023778
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/三沙卫视.png" group-title="卫视频道 ", 三沙卫视
 http://36.104.221.222:7788/961023778 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
-http://183.162.104.153:1234/609154353 
+http://223.247.25.230:1234/609154353 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
 http://222.130.32.214:7788/609154353 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
@@ -1178,6 +1284,8 @@ http://101.132.26.106:3566/609154353
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
 http://116.236.204.18:1234/609154353 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
+http://182.61.15.47:80/609154353 
+#EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
 http://14.153.176.157:1234/609154353 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
 http://119.88.243.98:17231/609154353 
@@ -1188,7 +1296,7 @@ http://27.12.12.105:1234/609154353
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/山东教育卫视.png" group-title="卫视频道 ", 山东教育卫视
 http://36.104.221.222:7788/609154353 
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
-http://183.162.104.153:1234/952383261 
+http://223.247.25.230:1234/952383261 
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
 http://222.130.32.214:7788/952383261 
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
@@ -1200,6 +1308,8 @@ http://101.132.26.106:3566/952383261
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
 http://116.236.204.18:1234/952383261 
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
+http://182.61.15.47:80/952383261 
+#EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
 http://14.153.176.157:1234/952383261 
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
 http://119.88.243.98:17231/952383261 
@@ -1210,7 +1320,7 @@ http://27.12.12.105:1234/952383261
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC影迷电影.png" group-title="电影频道 ", CHC影迷电影
 http://36.104.221.222:7788/952383261 
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
-http://183.162.104.153:1234/644368714 
+http://223.247.25.230:1234/644368714 
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
 http://222.130.32.214:7788/644368714 
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
@@ -1222,6 +1332,8 @@ http://101.132.26.106:3566/644368714
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
 http://116.236.204.18:1234/644368714 
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
+http://182.61.15.47:80/644368714 
+#EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
 http://14.153.176.157:1234/644368714 
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
 http://119.88.243.98:17231/644368714 
@@ -1232,7 +1344,7 @@ http://27.12.12.105:1234/644368714
 #EXTINF:-1 tvg-name="CHC动作电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC动作电影.png" group-title="电影频道 ", CHC动作电影
 http://36.104.221.222:7788/644368714 
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
-http://183.162.104.153:1234/644368373 
+http://223.247.25.230:1234/644368373 
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
 http://222.130.32.214:7788/644368373 
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
@@ -1244,6 +1356,8 @@ http://101.132.26.106:3566/644368373
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
 http://116.236.204.18:1234/644368373 
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
+http://182.61.15.47:80/644368373 
+#EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
 http://14.153.176.157:1234/644368373 
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
 http://119.88.243.98:17231/644368373 
@@ -1254,7 +1368,7 @@ http://27.12.12.105:1234/644368373
 #EXTINF:-1 tvg-name="CHC家庭影院" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/CHC家庭影院.png" group-title="电影频道 ", CHC家庭影院
 http://36.104.221.222:7788/644368373 
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
-http://183.162.104.153:1234/625703337 
+http://223.247.25.230:1234/625703337 
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
 http://222.130.32.214:7788/625703337 
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
@@ -1266,6 +1380,8 @@ http://101.132.26.106:3566/625703337
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
 http://116.236.204.18:1234/625703337 
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
+http://182.61.15.47:80/625703337 
+#EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
 http://14.153.176.157:1234/625703337 
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
 http://119.88.243.98:17231/625703337 
@@ -1276,7 +1392,7 @@ http://27.12.12.105:1234/625703337
 #EXTINF:-1 tvg-name="经典香港电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典香港电影.png" group-title="电影频道 ", 经典香港电影
 http://36.104.221.222:7788/625703337 
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
-http://183.162.104.153:1234/617432318 
+http://223.247.25.230:1234/617432318 
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
 http://222.130.32.214:7788/617432318 
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
@@ -1288,6 +1404,8 @@ http://101.132.26.106:3566/617432318
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
 http://116.236.204.18:1234/617432318 
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
+http://182.61.15.47:80/617432318 
+#EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
 http://14.153.176.157:1234/617432318 
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
 http://119.88.243.98:17231/617432318 
@@ -1298,7 +1416,7 @@ http://27.12.12.105:1234/617432318
 #EXTINF:-1 tvg-name="抗战经典影片" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/抗战经典影片.png" group-title="电影频道 ", 抗战经典影片
 http://36.104.221.222:7788/617432318 
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
-http://183.162.104.153:1234/619495952 
+http://223.247.25.230:1234/619495952 
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
 http://222.130.32.214:7788/619495952 
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
@@ -1310,6 +1428,8 @@ http://101.132.26.106:3566/619495952
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
 http://116.236.204.18:1234/619495952 
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
+http://182.61.15.47:80/619495952 
+#EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
 http://14.153.176.157:1234/619495952 
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
 http://119.88.243.98:17231/619495952 
@@ -1320,7 +1440,7 @@ http://27.12.12.105:1234/619495952
 #EXTINF:-1 tvg-name="新片放映厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新片放映厅.png" group-title="电影频道 ", 新片放映厅
 http://36.104.221.222:7788/619495952 
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
-http://183.162.104.153:1234/961930369
+http://223.247.25.230:1234/961930369
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
 http://222.130.32.214:7788/961930369
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
@@ -1332,6 +1452,8 @@ http://101.132.26.106:3566/961930369
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
 http://116.236.204.18:1234/961930369
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
+http://182.61.15.47:80/961930369
+#EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
 http://14.153.176.157:1234/961930369
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
 http://119.88.243.98:17231/961930369
@@ -1342,7 +1464,7 @@ http://27.12.12.105:1234/961930369
 #EXTINF:-1 tvg-name="梨园频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/梨园频道.png" group-title="电影频道 ", 梨园频道
 http://36.104.221.222:7788/961930369
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
-http://183.162.104.153:1234/614961829 
+http://223.247.25.230:1234/614961829 
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
 http://222.130.32.214:7788/614961829 
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
@@ -1354,6 +1476,8 @@ http://101.132.26.106:3566/614961829
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
 http://116.236.204.18:1234/614961829 
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
+http://182.61.15.47:80/614961829 
+#EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
 http://14.153.176.157:1234/614961829 
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
 http://119.88.243.98:17231/614961829 
@@ -1364,7 +1488,7 @@ http://27.12.12.105:1234/614961829
 #EXTINF:-1 tvg-name="南方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南方影视.png" group-title="电影频道 ", 南方影视
 http://36.104.221.222:7788/614961829 
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
-http://183.162.104.153:1234/629942228 
+http://223.247.25.230:1234/629942228 
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
 http://222.130.32.214:7788/629942228 
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
@@ -1376,6 +1500,8 @@ http://101.132.26.106:3566/629942228
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
 http://116.236.204.18:1234/629942228 
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
+http://182.61.15.47:80/629942228 
+#EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
 http://14.153.176.157:1234/629942228 
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
 http://119.88.243.98:17231/629942228 
@@ -1386,7 +1512,7 @@ http://27.12.12.105:1234/629942228
 #EXTINF:-1 tvg-name="最强综艺趴" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/最强综艺趴.png" group-title="电影频道 ", 最强综艺趴
 http://36.104.221.222:7788/629942228 
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
-http://183.162.104.153:1234/651632657 
+http://223.247.25.230:1234/651632657 
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
 http://222.130.32.214:7788/651632657 
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
@@ -1398,6 +1524,8 @@ http://101.132.26.106:3566/651632657
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
 http://116.236.204.18:1234/651632657 
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
+http://182.61.15.47:80/651632657 
+#EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
 http://14.153.176.157:1234/651632657 
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
 http://119.88.243.98:17231/651632657 
@@ -1408,7 +1536,7 @@ http://27.12.12.105:1234/651632657
 #EXTINF:-1 tvg-name="上海新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海新闻综合.png" group-title="江苏频道 ", 上海新闻综合
 http://36.104.221.222:7788/651632657 
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
-http://183.162.104.153:1234/617290047 
+http://223.247.25.230:1234/617290047 
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
 http://222.130.32.214:7788/617290047 
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
@@ -1420,6 +1548,8 @@ http://101.132.26.106:3566/617290047
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
 http://116.236.204.18:1234/617290047 
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
+http://182.61.15.47:80/617290047 
+#EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
 http://14.153.176.157:1234/617290047 
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
 http://119.88.243.98:17231/617290047 
@@ -1430,7 +1560,7 @@ http://27.12.12.105:1234/617290047
 #EXTINF:-1 tvg-name="上视东方影视" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上视东方影视.png" group-title="江苏频道 ", 上视东方影视
 http://36.104.221.222:7788/617290047 
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
-http://183.162.104.153:1234/608780988 
+http://223.247.25.230:1234/608780988 
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
 http://222.130.32.214:7788/608780988 
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
@@ -1442,6 +1572,8 @@ http://101.132.26.106:3566/608780988
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
 http://116.236.204.18:1234/608780988 
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
+http://182.61.15.47:80/608780988 
+#EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
 http://14.153.176.157:1234/608780988 
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
 http://119.88.243.98:17231/608780988 
@@ -1452,7 +1584,7 @@ http://27.12.12.105:1234/608780988
 #EXTINF:-1 tvg-name="上海第一财经" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/上海第一财经.png" group-title="江苏频道 ", 上海第一财经
 http://36.104.221.222:7788/608780988 
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
-http://183.162.104.153:1234/838109047 
+http://223.247.25.230:1234/838109047 
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
 http://222.130.32.214:7788/838109047 
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
@@ -1464,6 +1596,8 @@ http://101.132.26.106:3566/838109047
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
 http://116.236.204.18:1234/838109047 
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
+http://182.61.15.47:80/838109047 
+#EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
 http://14.153.176.157:1234/838109047 
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
 http://119.88.243.98:17231/838109047 
@@ -1474,7 +1608,7 @@ http://27.12.12.105:1234/838109047
 #EXTINF:-1 tvg-name="南京新闻综合频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京新闻综合频道.png" group-title="江苏频道 ", 南京新闻综合频道
 http://36.104.221.222:7788/838109047 
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
-http://183.162.104.153:1234/838153729 
+http://223.247.25.230:1234/838153729 
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
 http://222.130.32.214:7788/838153729 
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
@@ -1486,6 +1620,8 @@ http://101.132.26.106:3566/838153729
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
 http://116.236.204.18:1234/838153729 
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
+http://182.61.15.47:80/838153729 
+#EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
 http://14.153.176.157:1234/838153729 
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
 http://119.88.243.98:17231/838153729 
@@ -1496,7 +1632,7 @@ http://27.12.12.105:1234/838153729
 #EXTINF:-1 tvg-name="南京教科频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京教科频道.png" group-title="江苏频道 ", 南京教科频道
 http://36.104.221.222:7788/838153729 
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
-http://183.162.104.153:1234/838151753 
+http://223.247.25.230:1234/838151753 
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
 http://222.130.32.214:7788/838151753 
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
@@ -1508,6 +1644,8 @@ http://101.132.26.106:3566/838151753
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
 http://116.236.204.18:1234/838151753 
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
+http://182.61.15.47:80/838151753 
+#EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
 http://14.153.176.157:1234/838151753 
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
 http://119.88.243.98:17231/838151753 
@@ -1518,7 +1656,7 @@ http://27.12.12.105:1234/838151753
 #EXTINF:-1 tvg-name="南京十八频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南京十八频道.png" group-title="江苏频道 ", 南京十八频道
 http://36.104.221.222:7788/838151753 
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
-http://183.162.104.153:1234/626064707 
+http://223.247.25.230:1234/626064707 
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
 http://222.130.32.214:7788/626064707 
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
@@ -1530,6 +1668,8 @@ http://101.132.26.106:3566/626064707
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
 http://116.236.204.18:1234/626064707 
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
+http://182.61.15.47:80/626064707 
+#EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
 http://14.153.176.157:1234/626064707 
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
 http://119.88.243.98:17231/626064707 
@@ -1540,7 +1680,7 @@ http://27.12.12.105:1234/626064707
 #EXTINF:-1 tvg-name="体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体育休闲频道.png" group-title="江苏频道 ", 体育休闲频道
 http://36.104.221.222:7788/626064707 
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
-http://183.162.104.153:1234/626064714 
+http://223.247.25.230:1234/626064714 
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
 http://222.130.32.214:7788/626064714 
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
@@ -1552,6 +1692,8 @@ http://101.132.26.106:3566/626064714
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
 http://116.236.204.18:1234/626064714 
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
+http://182.61.15.47:80/626064714 
+#EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
 http://14.153.176.157:1234/626064714 
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
 http://119.88.243.98:17231/626064714 
@@ -1562,7 +1704,7 @@ http://27.12.12.105:1234/626064714
 #EXTINF:-1 tvg-name="江苏城市频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏城市频道.png" group-title="江苏频道 ", 江苏城市频道
 http://36.104.221.222:7788/626064714 
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
-http://183.162.104.153:1234/626064674 
+http://223.247.25.230:1234/626064674 
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
 http://222.130.32.214:7788/626064674 
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
@@ -1574,6 +1716,8 @@ http://101.132.26.106:3566/626064674
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
 http://116.236.204.18:1234/626064674 
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
+http://182.61.15.47:80/626064674 
+#EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
 http://14.153.176.157:1234/626064674 
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
 http://119.88.243.98:17231/626064674 
@@ -1584,7 +1728,7 @@ http://27.12.12.105:1234/626064674
 #EXTINF:-1 tvg-name="江苏国际" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏国际.png" group-title="江苏频道 ", 江苏国际
 http://36.104.221.222:7788/626064674 
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
-http://183.162.104.153:1234/628008321 
+http://223.247.25.230:1234/628008321 
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
 http://222.130.32.214:7788/628008321 
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
@@ -1596,6 +1740,8 @@ http://101.132.26.106:3566/628008321
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
 http://116.236.204.18:1234/628008321 
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
+http://182.61.15.47:80/628008321 
+#EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
 http://14.153.176.157:1234/628008321 
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
 http://119.88.243.98:17231/628008321 
@@ -1606,7 +1752,7 @@ http://27.12.12.105:1234/628008321
 #EXTINF:-1 tvg-name="江苏教育" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏教育.png" group-title="江苏频道 ", 江苏教育
 http://36.104.221.222:7788/628008321 
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
-http://183.162.104.153:1234/626064697 
+http://223.247.25.230:1234/626064697 
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
 http://222.130.32.214:7788/626064697 
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
@@ -1618,6 +1764,8 @@ http://101.132.26.106:3566/626064697
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
 http://116.236.204.18:1234/626064697 
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
+http://182.61.15.47:80/626064697 
+#EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
 http://14.153.176.157:1234/626064697 
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
 http://119.88.243.98:17231/626064697 
@@ -1628,7 +1776,7 @@ http://27.12.12.105:1234/626064697
 #EXTINF:-1 tvg-name="江苏影视频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏影视频道.png" group-title="江苏频道 ", 江苏影视频道
 http://36.104.221.222:7788/626064697 
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
-http://183.162.104.153:1234/626065193 
+http://223.247.25.230:1234/626065193 
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
 http://222.130.32.214:7788/626065193 
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
@@ -1640,6 +1788,8 @@ http://101.132.26.106:3566/626065193
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
 http://116.236.204.18:1234/626065193 
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
+http://182.61.15.47:80/626065193 
+#EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
 http://14.153.176.157:1234/626065193 
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
 http://119.88.243.98:17231/626065193 
@@ -1650,7 +1800,7 @@ http://27.12.12.105:1234/626065193
 #EXTINF:-1 tvg-name="江苏综艺频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江苏综艺频道.png" group-title="江苏频道 ", 江苏综艺频道
 http://36.104.221.222:7788/626065193 
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
-http://183.162.104.153:1234/626064693 
+http://223.247.25.230:1234/626064693 
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
 http://222.130.32.214:7788/626064693 
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
@@ -1662,6 +1812,8 @@ http://101.132.26.106:3566/626064693
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
 http://116.236.204.18:1234/626064693 
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
+http://182.61.15.47:80/626064693 
+#EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
 http://14.153.176.157:1234/626064693 
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
 http://119.88.243.98:17231/626064693 
@@ -1672,7 +1824,7 @@ http://27.12.12.105:1234/626064693
 #EXTINF:-1 tvg-name="公共新闻频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/公共新闻频道.png" group-title="江苏频道 ", 公共新闻频道
 http://36.104.221.222:7788/626064693 
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
-http://183.162.104.153:1234/639731825 
+http://223.247.25.230:1234/639731825 
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
 http://222.130.32.214:7788/639731825 
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
@@ -1684,6 +1836,8 @@ http://101.132.26.106:3566/639731825
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
 http://116.236.204.18:1234/639731825 
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
+http://182.61.15.47:80/639731825 
+#EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
 http://14.153.176.157:1234/639731825 
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
 http://119.88.243.98:17231/639731825 
@@ -1694,7 +1848,7 @@ http://27.12.12.105:1234/639731825
 #EXTINF:-1 tvg-name="盐城新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/盐城新闻综合.png" group-title="江苏频道 ", 盐城新闻综合
 http://36.104.221.222:7788/639731825 
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
-http://183.162.104.153:1234/639731826 
+http://223.247.25.230:1234/639731826 
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
 http://222.130.32.214:7788/639731826 
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
@@ -1706,6 +1860,8 @@ http://101.132.26.106:3566/639731826
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
 http://116.236.204.18:1234/639731826 
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
+http://182.61.15.47:80/639731826 
+#EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
 http://14.153.176.157:1234/639731826 
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
 http://119.88.243.98:17231/639731826 
@@ -1716,7 +1872,7 @@ http://27.12.12.105:1234/639731826
 #EXTINF:-1 tvg-name="淮安新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/淮安新闻综合.png" group-title="江苏频道 ", 淮安新闻综合
 http://36.104.221.222:7788/639731826 
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
-http://183.162.104.153:1234/639731818 
+http://223.247.25.230:1234/639731818 
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
 http://222.130.32.214:7788/639731818 
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
@@ -1728,6 +1884,8 @@ http://101.132.26.106:3566/639731818
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
 http://116.236.204.18:1234/639731818 
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
+http://182.61.15.47:80/639731818 
+#EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
 http://14.153.176.157:1234/639731818 
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
 http://119.88.243.98:17231/639731818 
@@ -1738,7 +1896,7 @@ http://27.12.12.105:1234/639731818
 #EXTINF:-1 tvg-name="泰州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/泰州新闻综合.png" group-title="江苏频道 ", 泰州新闻综合
 http://36.104.221.222:7788/639731818 
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
-http://183.162.104.153:1234/639731715 
+http://223.247.25.230:1234/639731715 
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
 http://222.130.32.214:7788/639731715 
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
@@ -1750,6 +1908,8 @@ http://101.132.26.106:3566/639731715
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
 http://116.236.204.18:1234/639731715 
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
+http://182.61.15.47:80/639731715 
+#EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
 http://14.153.176.157:1234/639731715 
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
 http://119.88.243.98:17231/639731715 
@@ -1760,7 +1920,7 @@ http://27.12.12.105:1234/639731715
 #EXTINF:-1 tvg-name="连云港新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/连云港新闻综合.png" group-title="江苏频道 ", 连云港新闻综合
 http://36.104.221.222:7788/639731715 
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
-http://183.162.104.153:1234/639731832 
+http://223.247.25.230:1234/639731832 
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
 http://222.130.32.214:7788/639731832 
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
@@ -1772,6 +1932,8 @@ http://101.132.26.106:3566/639731832
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
 http://116.236.204.18:1234/639731832 
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
+http://182.61.15.47:80/639731832 
+#EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
 http://14.153.176.157:1234/639731832 
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
 http://119.88.243.98:17231/639731832 
@@ -1782,7 +1944,7 @@ http://27.12.12.105:1234/639731832
 #EXTINF:-1 tvg-name="宿迁新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宿迁新闻综合.png" group-title="江苏频道 ", 宿迁新闻综合
 http://36.104.221.222:7788/639731832 
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
-http://183.162.104.153:1234/639731747 
+http://223.247.25.230:1234/639731747 
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
 http://222.130.32.214:7788/639731747 
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
@@ -1794,6 +1956,8 @@ http://101.132.26.106:3566/639731747
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
 http://116.236.204.18:1234/639731747 
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
+http://182.61.15.47:80/639731747 
+#EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
 http://14.153.176.157:1234/639731747 
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
 http://119.88.243.98:17231/639731747 
@@ -1804,7 +1968,7 @@ http://27.12.12.105:1234/639731747
 #EXTINF:-1 tvg-name="徐州新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/徐州新闻综合.png" group-title="江苏频道 ", 徐州新闻综合
 http://36.104.221.222:7788/639731747 
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
-http://183.162.104.153:1234/626064703 
+http://223.247.25.230:1234/626064703 
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
 http://222.130.32.214:7788/626064703 
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
@@ -1816,6 +1980,8 @@ http://101.132.26.106:3566/626064703
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
 http://116.236.204.18:1234/626064703 
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
+http://182.61.15.47:80/626064703 
+#EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
 http://14.153.176.157:1234/626064703 
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
 http://119.88.243.98:17231/626064703 
@@ -1826,7 +1992,7 @@ http://27.12.12.105:1234/626064703
 #EXTINF:-1 tvg-name="优漫卡通频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/优漫卡通频道.png" group-title="江苏频道 ", 优漫卡通频道
 http://36.104.221.222:7788/626064703 
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
-http://183.162.104.153:1234/955227979 
+http://223.247.25.230:1234/955227979 
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
 http://222.130.32.214:7788/955227979 
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
@@ -1838,6 +2004,8 @@ http://101.132.26.106:3566/955227979
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
 http://116.236.204.18:1234/955227979 
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
+http://182.61.15.47:80/955227979 
+#EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
 http://14.153.176.157:1234/955227979 
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
 http://119.88.243.98:17231/955227979 
@@ -1848,7 +2016,7 @@ http://27.12.12.105:1234/955227979
 #EXTINF:-1 tvg-name="江阴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/江阴新闻综合.png" group-title="江苏频道 ", 江阴新闻综合
 http://36.104.221.222:7788/955227979 
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
-http://183.162.104.153:1234/955227985 
+http://223.247.25.230:1234/955227985 
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
 http://222.130.32.214:7788/955227985 
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
@@ -1860,6 +2028,8 @@ http://101.132.26.106:3566/955227985
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
 http://116.236.204.18:1234/955227985 
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
+http://182.61.15.47:80/955227985 
+#EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
 http://14.153.176.157:1234/955227985 
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
 http://119.88.243.98:17231/955227985 
@@ -1870,7 +2040,7 @@ http://27.12.12.105:1234/955227985
 #EXTINF:-1 tvg-name="南通新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/南通新闻综合.png" group-title="江苏频道 ", 南通新闻综合
 http://36.104.221.222:7788/955227985 
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
-http://183.162.104.153:1234/955227996 
+http://223.247.25.230:1234/955227996 
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
 http://222.130.32.214:7788/955227996 
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
@@ -1882,6 +2052,8 @@ http://101.132.26.106:3566/955227996
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
 http://116.236.204.18:1234/955227996 
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
+http://182.61.15.47:80/955227996 
+#EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
 http://14.153.176.157:1234/955227996 
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
 http://119.88.243.98:17231/955227996 
@@ -1892,7 +2064,7 @@ http://27.12.12.105:1234/955227996
 #EXTINF:-1 tvg-name="宜兴新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/宜兴新闻综合.png" group-title="江苏频道 ", 宜兴新闻综合
 http://36.104.221.222:7788/955227996 
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
-http://183.162.104.153:1234/639737327 
+http://223.247.25.230:1234/639737327 
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
 http://222.130.32.214:7788/639737327 
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
@@ -1904,6 +2076,8 @@ http://101.132.26.106:3566/639737327
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
 http://116.236.204.18:1234/639737327 
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
+http://182.61.15.47:80/639737327 
+#EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
 http://14.153.176.157:1234/639737327 
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
 http://119.88.243.98:17231/639737327 
@@ -1914,7 +2088,7 @@ http://27.12.12.105:1234/639737327
 #EXTINF:-1 tvg-name="溧水新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/溧水新闻综合.png" group-title="江苏频道 ", 溧水新闻综合
 http://36.104.221.222:7788/639737327 
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
-http://183.162.104.153:1234/639731783 
+http://223.247.25.230:1234/639731783 
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
 http://222.130.32.214:7788/639731783 
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
@@ -1926,6 +2100,8 @@ http://101.132.26.106:3566/639731783
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
 http://116.236.204.18:1234/639731783 
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
+http://182.61.15.47:80/639731783 
+#EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
 http://14.153.176.157:1234/639731783 
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
 http://119.88.243.98:17231/639731783 
@@ -1936,7 +2112,7 @@ http://27.12.12.105:1234/639731783
 #EXTINF:-1 tvg-name="镇江新闻综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/镇江新闻综合.png" group-title="江苏频道 ", 镇江新闻综合
 http://36.104.221.222:7788/639731783 
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
-http://183.162.104.153:1234/956909362 
+http://223.247.25.230:1234/956909362 
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
 http://222.130.32.214:7788/956909362 
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
@@ -1948,6 +2124,8 @@ http://101.132.26.106:3566/956909362
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
 http://116.236.204.18:1234/956909362 
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
+http://182.61.15.47:80/956909362 
+#EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
 http://14.153.176.157:1234/956909362 
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
 http://119.88.243.98:17231/956909362 
@@ -1958,7 +2136,7 @@ http://27.12.12.105:1234/956909362
 #EXTINF:-1 tvg-name="陕西银龄频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西银龄频道.png" group-title="陕西频道 ", 陕西银龄频道
 http://36.104.221.222:7788/956909362 
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
-http://183.162.104.153:1234/956909358 
+http://223.247.25.230:1234/956909358 
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
 http://222.130.32.214:7788/956909358 
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
@@ -1970,6 +2148,8 @@ http://101.132.26.106:3566/956909358
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
 http://116.236.204.18:1234/956909358 
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
+http://182.61.15.47:80/956909358 
+#EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
 http://14.153.176.157:1234/956909358 
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
 http://119.88.243.98:17231/956909358 
@@ -1980,7 +2160,7 @@ http://27.12.12.105:1234/956909358
 #EXTINF:-1 tvg-name="陕西都市青春频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西都市青春频道.png" group-title="陕西频道 ", 陕西都市青春频道
 http://36.104.221.222:7788/956909358 
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
-http://183.162.104.153:1234/956909303 
+http://223.247.25.230:1234/956909303 
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
 http://222.130.32.214:7788/956909303 
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
@@ -1992,6 +2172,8 @@ http://101.132.26.106:3566/956909303
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
 http://116.236.204.18:1234/956909303 
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
+http://182.61.15.47:80/956909303 
+#EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
 http://14.153.176.157:1234/956909303 
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
 http://119.88.243.98:17231/956909303 
@@ -2002,7 +2184,7 @@ http://27.12.12.105:1234/956909303
 #EXTINF:-1 tvg-name="陕西秦腔频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西秦腔频道.png" group-title="陕西频道 ", 陕西秦腔频道
 http://36.104.221.222:7788/956909303 
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
-http://183.162.104.153:1234/956909289 
+http://223.247.25.230:1234/956909289 
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
 http://222.130.32.214:7788/956909289 
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
@@ -2014,6 +2196,8 @@ http://101.132.26.106:3566/956909289
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
 http://116.236.204.18:1234/956909289 
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
+http://182.61.15.47:80/956909289 
+#EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
 http://14.153.176.157:1234/956909289 
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
 http://119.88.243.98:17231/956909289 
@@ -2024,7 +2208,7 @@ http://27.12.12.105:1234/956909289
 #EXTINF:-1 tvg-name="陕西新闻资讯频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西新闻资讯频道.png" group-title="陕西频道 ", 陕西新闻资讯频道
 http://36.104.221.222:7788/956909289 
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
-http://183.162.104.153:1234/956909356 
+http://223.247.25.230:1234/956909356 
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
 http://222.130.32.214:7788/956909356 
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
@@ -2036,6 +2220,8 @@ http://101.132.26.106:3566/956909356
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
 http://116.236.204.18:1234/956909356 
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
+http://182.61.15.47:80/956909356 
+#EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
 http://14.153.176.157:1234/956909356 
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
 http://119.88.243.98:17231/956909356 
@@ -2046,7 +2232,7 @@ http://27.12.12.105:1234/956909356
 #EXTINF:-1 tvg-name="陕西体育休闲频道" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/陕西体育休闲频道.png" group-title="陕西频道 ", 陕西体育休闲频道
 http://36.104.221.222:7788/956909356 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
-http://183.162.104.153:1234/614952364 
+http://223.247.25.230:1234/614952364 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
 http://222.130.32.214:7788/614952364 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
@@ -2058,6 +2244,8 @@ http://101.132.26.106:3566/614952364
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
 http://116.236.204.18:1234/614952364 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
+http://182.61.15.47:80/614952364 
+#EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
 http://14.153.176.157:1234/614952364 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
 http://119.88.243.98:17231/614952364 
@@ -2068,7 +2256,7 @@ http://27.12.12.105:1234/614952364
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/嘉佳卡通.png" group-title="其它频道 ", 嘉佳卡通
 http://36.104.221.222:7788/614952364 
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
-http://183.162.104.153:1234/629942219 
+http://223.247.25.230:1234/629942219 
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
 http://222.130.32.214:7788/629942219 
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
@@ -2080,6 +2268,8 @@ http://101.132.26.106:3566/629942219
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
 http://116.236.204.18:1234/629942219 
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
+http://182.61.15.47:80/629942219 
+#EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
 http://14.153.176.157:1234/629942219 
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
 http://119.88.243.98:17231/629942219 
@@ -2090,7 +2280,7 @@ http://27.12.12.105:1234/629942219
 #EXTINF:-1 tvg-name="经典动画大集合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/经典动画大集合.png" group-title="其它频道 ", 经典动画大集合
 http://36.104.221.222:7788/629942219 
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
-http://183.162.104.153:1234/961930269 
+http://223.247.25.230:1234/961930269 
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
 http://222.130.32.214:7788/961930269 
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
@@ -2102,6 +2292,8 @@ http://101.132.26.106:3566/961930269
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
 http://116.236.204.18:1234/961930269 
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
+http://182.61.15.47:80/961930269 
+#EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
 http://14.153.176.157:1234/961930269 
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
 http://119.88.243.98:17231/961930269 
@@ -2112,7 +2304,7 @@ http://27.12.12.105:1234/961930269
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动漫.png" group-title="其它频道 ", 新动漫
 http://36.104.221.222:7788/961930269 
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
-http://183.162.104.153:1234/646596895 
+http://223.247.25.230:1234/646596895 
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
 http://222.130.32.214:7788/646596895 
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
@@ -2124,6 +2316,8 @@ http://101.132.26.106:3566/646596895
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
 http://116.236.204.18:1234/646596895 
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
+http://182.61.15.47:80/646596895 
+#EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
 http://14.153.176.157:1234/646596895 
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
 http://119.88.243.98:17231/646596895 
@@ -2134,7 +2328,7 @@ http://27.12.12.105:1234/646596895
 #EXTINF:-1 tvg-name="赛事最经典" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/赛事最经典.png" group-title="其它频道 ", 赛事最经典
 http://36.104.221.222:7788/646596895 
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
-http://183.162.104.153:1234/629943305 
+http://223.247.25.230:1234/629943305 
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
 http://222.130.32.214:7788/629943305 
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
@@ -2146,6 +2340,8 @@ http://101.132.26.106:3566/629943305
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
 http://116.236.204.18:1234/629943305 
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
+http://182.61.15.47:80/629943305 
+#EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
 http://14.153.176.157:1234/629943305 
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
 http://119.88.243.98:17231/629943305 
@@ -2156,7 +2352,7 @@ http://27.12.12.105:1234/629943305
 #EXTINF:-1 tvg-name="体坛名栏汇" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/体坛名栏汇.png" group-title="其它频道 ", 体坛名栏汇
 http://36.104.221.222:7788/629943305 
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
-http://183.162.104.153:1234/637444975 
+http://223.247.25.230:1234/637444975 
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
 http://222.130.32.214:7788/637444975 
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
@@ -2168,6 +2364,8 @@ http://101.132.26.106:3566/637444975
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
 http://116.236.204.18:1234/637444975 
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
+http://182.61.15.47:80/637444975 
+#EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
 http://14.153.176.157:1234/637444975 
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
 http://119.88.243.98:17231/637444975 
@@ -2178,7 +2376,7 @@ http://27.12.12.105:1234/637444975
 #EXTINF:-1 tvg-name="四海钓鱼" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/四海钓鱼.png" group-title="其它频道 ", 四海钓鱼
 http://36.104.221.222:7788/637444975 
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
-http://183.162.104.153:1234/915512915 
+http://223.247.25.230:1234/915512915 
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
 http://222.130.32.214:7788/915512915 
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
@@ -2190,6 +2388,8 @@ http://101.132.26.106:3566/915512915
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
 http://116.236.204.18:1234/915512915 
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
+http://182.61.15.47:80/915512915 
+#EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
 http://14.153.176.157:1234/915512915 
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
 http://119.88.243.98:17231/915512915 
@@ -2200,7 +2400,7 @@ http://27.12.12.105:1234/915512915
 #EXTINF:-1 tvg-name="24小时城市联赛轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/24小时城市联赛轮播台.png" group-title="其它频道 ", 24小时城市联赛轮播台
 http://36.104.221.222:7788/915512915 
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
-http://183.162.104.153:1234/958475359 
+http://223.247.25.230:1234/958475359 
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
 http://222.130.32.214:7788/958475359 
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
@@ -2212,6 +2412,8 @@ http://101.132.26.106:3566/958475359
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
 http://116.236.204.18:1234/958475359 
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
+http://182.61.15.47:80/958475359 
+#EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
 http://14.153.176.157:1234/958475359 
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
 http://119.88.243.98:17231/958475359 
@@ -2222,7 +2424,7 @@ http://27.12.12.105:1234/958475359
 #EXTINF:-1 tvg-name="武术世界" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/武术世界.png" group-title="其它频道 ", 武术世界
 http://36.104.221.222:7788/958475359 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
-http://183.162.104.153:1234/961930263 
+http://223.247.25.230:1234/961930263 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
 http://222.130.32.214:7788/961930263 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
@@ -2234,6 +2436,8 @@ http://101.132.26.106:3566/961930263
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
 http://116.236.204.18:1234/961930263 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
+http://182.61.15.47:80/961930263 
+#EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
 http://14.153.176.157:1234/961930263 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
 http://119.88.243.98:17231/961930263 
@@ -2244,7 +2448,7 @@ http://27.12.12.105:1234/961930263
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/快乐垂钓.png" group-title="其它频道 ", 快乐垂钓
 http://36.104.221.222:7788/961930263 
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
-http://183.162.104.153:1234/713591450 
+http://223.247.25.230:1234/713591450 
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
 http://222.130.32.214:7788/713591450 
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
@@ -2256,6 +2460,8 @@ http://101.132.26.106:3566/713591450
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
 http://116.236.204.18:1234/713591450 
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
+http://182.61.15.47:80/713591450 
+#EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
 http://14.153.176.157:1234/713591450 
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
 http://119.88.243.98:17231/713591450 
@@ -2266,7 +2472,7 @@ http://27.12.12.105:1234/713591450
 #EXTINF:-1 tvg-name="和美乡途轮播台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/和美乡途轮播台.png" group-title="其它频道 ", 和美乡途轮播台
 http://36.104.221.222:7788/713591450 
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
-http://183.162.104.153:1234/713589837 
+http://223.247.25.230:1234/713589837 
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
 http://222.130.32.214:7788/713589837 
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
@@ -2278,6 +2484,8 @@ http://101.132.26.106:3566/713589837
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
 http://116.236.204.18:1234/713589837 
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
+http://182.61.15.47:80/713589837 
+#EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
 http://14.153.176.157:1234/713589837 
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
 http://119.88.243.98:17231/713589837 
@@ -2288,7 +2496,7 @@ http://27.12.12.105:1234/713589837
 #EXTINF:-1 tvg-name="新动力量创一流" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/新动力量创一流.png" group-title="其它频道 ", 新动力量创一流
 http://36.104.221.222:7788/713589837 
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
-http://183.162.104.153:1234/959986618 
+http://223.247.25.230:1234/959986618 
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
 http://222.130.32.214:7788/959986618 
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
@@ -2300,6 +2508,8 @@ http://101.132.26.106:3566/959986618
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
 http://116.236.204.18:1234/959986618 
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
+http://182.61.15.47:80/959986618 
+#EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
 http://14.153.176.157:1234/959986618 
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
 http://119.88.243.98:17231/959986618 
@@ -2310,7 +2520,7 @@ http://27.12.12.105:1234/959986618
 #EXTINF:-1 tvg-name="中华特产" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/中华特产.png" group-title="其它频道 ", 中华特产
 http://36.104.221.222:7788/959986618 
 #EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
-http://183.162.104.153:1234/958475356 
+http://223.247.25.230:1234/958475356 
 #EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
 http://222.130.32.214:7788/958475356 
 #EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
@@ -2321,6 +2531,8 @@ http://111.231.6.102:1234/958475356
 http://101.132.26.106:3566/958475356 
 #EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
 http://116.236.204.18:1234/958475356 
+#EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
+http://182.61.15.47:80/958475356 
 #EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
 http://14.153.176.157:1234/958475356 
 #EXTINF:-1 tvg-name="环球旅游" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/环球旅游.png" group-title="其它频道 ", 环球旅游
