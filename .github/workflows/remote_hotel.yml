@@ -1,10 +1,8 @@
 name: IPTV Playlist Auto Update
 
 on:
-  # 定时触发：每天 UTC 0:00（北京时间 08:00）
   schedule:
-    - cron: '0 0 * * *'
-  # 允许手动触发
+    - cron: '0 0 * * *'   # 每天 UTC 0:00（北京时间 08:00）
   workflow_dispatch:
 
 jobs:
@@ -12,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Hotel/Remote Access   # 切换到脚本所在目录
+        working-directory: Hotel/Remote Access
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,7 +19,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-          cache: 'pip'
+          # 移除 cache，因为仓库没有 requirements.txt
 
       - name: Install dependencies
         run: pip install requests
@@ -31,13 +29,10 @@ jobs:
 
       - name: Run IPTV update script
         env:
-          # 可通过 Secrets 覆盖默认值
           EPG_URL: ${{ secrets.EPG_URL || 'https://epg.112114.xyz/pp.xml' }}
           LOGO_BASE_URL: ${{ secrets.LOGO_BASE_URL || 'https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/' }}
-          # 输出文件（将在当前工作目录生成）
           OUTPUT_M3U8: output.m3u8
           OUTPUT_TXT: output.txt
-          # 日志文件（相对路径）
           LOG_FILE: logs/cron.log
         run: python remote_hotel.py
 
