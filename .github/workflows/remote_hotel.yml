@@ -24,7 +24,7 @@ jobs:
         run: pip install requests
 
       - name: Create logs directory
-        run: mkdir -p /app/logs
+        run: mkdir -p Hotel/Remote Access/logs
 
       - name: Run remote_hotel script
         env:
