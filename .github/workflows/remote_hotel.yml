@@ -1,7 +1,7 @@
-name: remote_hotel
+name: IPTV Playlist Auto Update
 
 on:
-  # 定时触发：每天 UTC 00:00（北京时间 08:00）
+  # 定时触发：每天 UTC 0:00（北京时间 08:00）
   schedule:
     - cron: '0 0 * * *'
   # 允许手动触发
@@ -10,6 +10,9 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Hotel/Remote Access   # 切换到脚本所在目录
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,19 +27,19 @@ jobs:
         run: pip install requests
 
       - name: Create logs directory
-        run: mkdir -p Hotel/Remote Access/logs
+        run: mkdir -p logs
 
-      - name: Run remote_hotel script
+      - name: Run IPTV update script
         env:
-          # 可选：通过 Secrets 覆盖默认值
+          # 可通过 Secrets 覆盖默认值
           EPG_URL: ${{ secrets.EPG_URL || 'https://epg.112114.xyz/pp.xml' }}
           LOGO_BASE_URL: ${{ secrets.LOGO_BASE_URL || 'https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/' }}
-          # 输出文件路径（相对于工作目录）
+          # 输出文件（将在当前工作目录生成）
           OUTPUT_M3U8: output.m3u8
           OUTPUT_TXT: output.txt
-          # 日志文件（保留在 Hotel/Remote Access/logs 下）
-          LOG_FILE: Hotel/Remote Access/logs/cron.log
-        run: python Hotel/Remote Access/remote_hotel.py
+          # 日志文件（相对路径）
+          LOG_FILE: logs/cron.log
+        run: python remote_hotel.py
 
       - name: Verify output files
         run: |
@@ -50,6 +53,7 @@ jobs:
         with:
           name: iptv-playlist-${{ github.run_id }}
           path: |
-            output.m3u8
-            output.txt
-          retention-days: 30   # 保留30天
+            Hotel/Remote Access/output.m3u8
+            Hotel/Remote Access/output.txt
+            Hotel/Remote Access/logs/cron.log
+          retention-days: 30
