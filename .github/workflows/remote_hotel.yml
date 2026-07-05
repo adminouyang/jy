@@ -1,0 +1,55 @@
+name: remote_hotel
+
+on:
+  # 定时触发：每天 UTC 00:00（北京时间 08:00）
+  schedule:
+    - cron: '0 0 * * *'
+  # 允许手动触发
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Create logs directory
+        run: mkdir -p /app/logs
+
+      - name: Run remote_hotel script
+        env:
+          # 可选：通过 Secrets 覆盖默认值
+          EPG_URL: ${{ secrets.EPG_URL || 'https://epg.112114.xyz/pp.xml' }}
+          LOGO_BASE_URL: ${{ secrets.LOGO_BASE_URL || 'https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/' }}
+          # 输出文件路径（相对于工作目录）
+          OUTPUT_M3U8: output.m3u8
+          OUTPUT_TXT: output.txt
+          # 日志文件（保留在 Hotel/Remote Access/logs 下）
+          LOG_FILE: Hotel/Remote Access/logs/cron.log
+        run: python Hotel/Remote Access/remote_hotel.py
+
+      - name: Verify output files
+        run: |
+          echo "Checking generated files..."
+          ls -lh output.m3u8 output.txt
+          echo "Lines in M3U8: $(wc -l < output.m3u8)"
+          echo "Lines in TXT: $(wc -l < output.txt)"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: iptv-playlist-${{ github.run_id }}
+          path: |
+            output.m3u8
+            output.txt
+          retention-days: 30   # 保留30天
