@@ -437,7 +437,7 @@ def fetch_remote_sources():
     log(f"测速完成: {valid_hosts}/{total_hosts} 个有效源")
 
     # 筛选速度 > 1.5 MB/s 的源
-    valid_results = [r for r in results_with_speed if r['speed'] > 1.5]
+    valid_results = [r for r in results_with_speed if r['speed'] > 1.1]
     valid_results.sort(key=lambda x: x['speed'], reverse=True)
 
     # 确保每种类型至少选一个（排除已移除的 hsmdtv）
@@ -460,7 +460,7 @@ def fetch_remote_sources():
 
     final_sources.sort(key=lambda x: x['speed'], reverse=True)
 
-    if len(final_sources) < 3:
+    if len(final_sources) < 2:
         log(f"⚠️ 有效源不足 ({len(final_sources)} < 3)，放弃远程源")
         return None
 
