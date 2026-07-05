@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * *'   # 每天 UTC 0:00（北京时间 08:00）
   workflow_dispatch:
 
+permissions:
+  contents: write   # 允许提交代码
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -19,7 +22,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-          # 移除 cache，因为仓库没有 requirements.txt
 
       - name: Install dependencies
         run: pip install requests
@@ -36,19 +38,12 @@ jobs:
           LOG_FILE: logs/cron.log
         run: python remote_hotel.py
 
-      - name: Verify output files
+      - name: Commit and push generated files
         run: |
-          echo "Checking generated files..."
-          ls -lh output.m3u8 output.txt
-          echo "Lines in M3U8: $(wc -l < output.m3u8)"
-          echo "Lines in TXT: $(wc -l < output.txt)"
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: iptv-playlist-${{ github.run_id }}
-          path: |
-            Hotel/Remote Access/output.m3u8
-            Hotel/Remote Access/output.txt
-            Hotel/Remote Access/logs/cron.log
-          retention-days: 30
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 将生成的文件移动到仓库根目录对应的路径（因为 working-directory 是 Hotel/Remote Access）
+          # 当前目录就是 Hotel/Remote Access，所以文件已经在正确位置
+          git add output.m3u8 output.txt logs/cron.log
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update IPTV playlist [$(date +'%Y-%m-%d %H:%M')]"
+          git push
