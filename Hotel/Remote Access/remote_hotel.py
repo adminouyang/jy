@@ -510,13 +510,35 @@ def fetch_remote_sources():
         for entry in entries_list:
             m3u8_lines.append(entry['content'])
 
-    # 生成 TXT（同一频道多个源都输出）
+    # 生成 TXT（按分组输出，格式：分组名,#genre# 后跟频道名,URL）
     txt_lines = []
-    for name in unique_names:
-        entries_list = sorted(grouped[name], key=lambda x: x.get('index', 999))
-        group = entries_list[0]['group']
-        for entry in entries_list:
-            txt_lines.append(f"{group},#genre#\n{name},{entry['url']}")     #txt_lines.append(f"{name},{entry['url']},{group}")
+    # 按分组整理条目
+    grouped_by_group = {}
+    for entry in all_entries:
+        grp = entry['group']
+        if grp not in grouped_by_group:
+            grouped_by_group[grp] = []
+        grouped_by_group[grp].append((entry['name'], entry['url']))
+
+    # 按 GROUP_ORDER 顺序输出，未定义的分组放在最后
+    seen_groups = set()
+    for grp in GROUP_ORDER:
+        if grp in grouped_by_group:
+            seen_groups.add(grp)
+            txt_lines.append(f"{grp},#genre#")
+            for name, url in grouped_by_group[grp]:
+                txt_lines.append(f"{name},{url}")
+            txt_lines.append("")  # 空行分隔
+
+    # 输出不在 GROUP_ORDER 中的分组
+    for grp in grouped_by_group:
+        if grp not in seen_groups:
+            txt_lines.append(f"{grp},#genre#")
+            for name, url in grouped_by_group[grp]:
+                txt_lines.append(f"{name},{url}")
+            txt_lines.append("")
+
+    txt_content = "\n".join(txt_lines).strip()  # 去掉末尾多余空行
 
     m3u8_content = "\n".join(m3u8_lines)
     txt_content = "\n".join(txt_lines)
