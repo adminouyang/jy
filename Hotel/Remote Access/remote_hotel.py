@@ -516,7 +516,7 @@ def fetch_remote_sources():
     unique_names = sorted(grouped.keys(), key=channel_sort_key)
 
     # 生成 M3U8（同一频道按速度降序排列）
-    update_time = time.strftime("%Y/%m/%d %H:%M:%S")
+    update_time = time.strftime("%y/%m/%d %H:%M:%S", time.localtime())
     m3u8_lines = [f'#EXTM3U x-tvg-url="{EPG_URL}"', f"#EXT-X-UPDATED: {update_time}"]
     for name in unique_names:
         entries_list = sorted(grouped[name], key=lambda x: x['speed'], reverse=True)
