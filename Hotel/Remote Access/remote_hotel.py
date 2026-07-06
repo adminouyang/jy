@@ -26,7 +26,6 @@ TOP_N = 5
 MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
-HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "/app/hsmd_address_list.txt")
 ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
 
 # 分组定义（按显示顺序）
@@ -36,7 +35,7 @@ GROUP_ORDER = [
     "数字频道", "解说频道", "春晚频道", "直播中国", "其他"
 ]
 
-LOG_FILE = "/app/logs/cron.log"
+LOG_FILE = "/Hotel/Remote Access/logs/cron.log"
 
 def log(msg):
     ts = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -165,6 +164,9 @@ def test_host_speed(item, fetch_channels=False):
                                 full_url = urlx if 'http' in urlx else (
                                     f"http://{host}{urlx}" if urlx.startswith('/') else f"http://{host}/{urlx}"
                                 )
+                                # 过滤 udp/rtp 链接
+                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
+                                    continue
                                 if fetch_channels:
                                     channels.append({'name': name, 'url': full_url})
                                 if not valid_channel_url:
@@ -194,6 +196,9 @@ def test_host_speed(item, fetch_channels=False):
                         if not name or not key:
                             continue
                         full_url = f"http://{host}/hls/{key}/index.m3u8"
+                        # jsmpeg 一般不会出现 udp/rtp，但为了安全也过滤
+                        if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
+                            continue
                         if fetch_channels:
                             channels.append({'name': name, 'url': full_url})
                         if not valid_channel_url:
@@ -233,6 +238,9 @@ def test_host_speed(item, fetch_channels=False):
                                     full_url = f"http://{host}{url_part}"
                                 else:
                                     full_url = f"http://{host}/{url_part}"
+                                # 过滤 udp/rtp
+                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
+                                    continue
                                 if fetch_channels:
                                     channels.append({'name': name, 'url': full_url})
                                 if not valid_channel_url:
@@ -436,8 +444,8 @@ def fetch_remote_sources():
 
     log(f"测速完成: {valid_hosts}/{total_hosts} 个有效源")
 
-    # 筛选速度 > 1.5 MB/s 的源
-    valid_results = [r for r in results_with_speed if r['speed'] > 1.1]
+    # 筛选速度 > 0.5 MB/s 的源（降低阈值以适应 GitHub Actions 环境）
+    valid_results = [r for r in results_with_speed if r['speed'] > 0.5]
     valid_results.sort(key=lambda x: x['speed'], reverse=True)
 
     # 确保每种类型至少选一个（排除已移除的 hsmdtv）
@@ -460,8 +468,8 @@ def fetch_remote_sources():
 
     final_sources.sort(key=lambda x: x['speed'], reverse=True)
 
-    if len(final_sources) < 2:
-        log(f"⚠️ 有效源不足 ({len(final_sources)} < 3)，放弃远程源")
+    if len(final_sources) < 1:  # 放宽最小源数量要求
+        log(f"⚠️ 有效源不足 ({len(final_sources)} < 1)，放弃远程源")
         return None
 
     log(f"选中 Top {len(final_sources)} 源:")
@@ -480,9 +488,12 @@ def fetch_remote_sources():
                 name = clean_channel_name(ch['name'])
                 group = get_channel_group(name)
                 all_entries.append({
-                    'name': name, 'url': ch['url'], 'group': group,
+                    'name': name,
+                    'url': ch['url'],
+                    'group': group,
                     'content': build_m3u8_entry(name, ch['url'], group),
-                    'index': idx
+                    'index': idx,
+                    'speed': source['speed']  # 记录源速度用于排序
                 })
 
     if not all_entries:
@@ -502,46 +513,54 @@ def fetch_remote_sources():
     # 排序频道名
     unique_names = sorted(grouped.keys(), key=channel_sort_key)
 
-    # 生成 M3U8
+    # 生成 M3U8（同一频道按速度降序排列）
     update_time = time.strftime("%Y/%m/%d %H:%M:%S")
     m3u8_lines = [f'#EXTM3U x-tvg-url="{EPG_URL}"', f"#EXT-X-UPDATED: {update_time}"]
     for name in unique_names:
-        entries_list = sorted(grouped[name], key=lambda x: x['index'])
+        entries_list = sorted(grouped[name], key=lambda x: x['speed'], reverse=True)  # 速度高的在前
         for entry in entries_list:
             m3u8_lines.append(entry['content'])
 
-    # 生成 TXT（按分组输出，格式：分组名,#genre# 后跟频道名,URL）
-    txt_lines = []
-    # 按分组整理条目
+    # 生成 TXT（按分组输出，同一频道按速度降序排列）
+    # 先按分组整理
     grouped_by_group = {}
     for entry in all_entries:
         grp = entry['group']
         if grp not in grouped_by_group:
-            grouped_by_group[grp] = []
-        grouped_by_group[grp].append((entry['name'], entry['url']))
+            grouped_by_group[grp] = {}
+        name = entry['name']
+        if name not in grouped_by_group[grp]:
+            grouped_by_group[grp][name] = []
+        grouped_by_group[grp][name].append((entry['url'], entry['speed']))
 
-    # 按 GROUP_ORDER 顺序输出，未定义的分组放在最后
+    txt_lines = []
+    # 按 GROUP_ORDER 顺序输出
     seen_groups = set()
     for grp in GROUP_ORDER:
         if grp in grouped_by_group:
             seen_groups.add(grp)
             txt_lines.append(f"{grp},#genre#")
-            for name, url in grouped_by_group[grp]:
-                txt_lines.append(f"{name},{url}")
-            txt_lines.append("")  # 空行分隔
+            # 频道名称排序
+            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
+            for name in names:
+                # 对同一频道的多个URL按速度降序排列
+                urls_sorted = sorted(grouped_by_group[grp][name], key=lambda x: x[1], reverse=True)
+                for url, _ in urls_sorted:
+                    txt_lines.append(f"{name},{url}")
+            txt_lines.append("")  # 分组间空行
 
     # 输出不在 GROUP_ORDER 中的分组
     for grp in grouped_by_group:
         if grp not in seen_groups:
             txt_lines.append(f"{grp},#genre#")
-            for name, url in grouped_by_group[grp]:
-                txt_lines.append(f"{name},{url}")
+            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
+            for name in names:
+                urls_sorted = sorted(grouped_by_group[grp][name], key=lambda x: x[1], reverse=True)
+                for url, _ in urls_sorted:
+                    txt_lines.append(f"{name},{url}")
             txt_lines.append("")
 
-    txt_content = "\n".join(txt_lines).strip()  # 去掉末尾多余空行
-
-    m3u8_content = "\n".join(m3u8_lines)
-    txt_content = "\n".join(txt_lines)
+    txt_content = "\n".join(txt_lines).strip()
 
     del results_with_speed, valid_results, final_sources, all_entries, grouped
     gc.collect()
