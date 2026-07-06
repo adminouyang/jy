@@ -516,7 +516,7 @@ def fetch_remote_sources():
         entries_list = sorted(grouped[name], key=lambda x: x.get('index', 999))
         group = entries_list[0]['group']
         for entry in entries_list:
-            txt_lines.append(f"{name},{entry['url']},{group}")
+            txt_lines.append(f"{group},#genre#\n{name},{entry['url']}")     #txt_lines.append(f"{name},{entry['url']},{group}")
 
     m3u8_content = "\n".join(m3u8_lines)
     txt_content = "\n".join(txt_lines)
