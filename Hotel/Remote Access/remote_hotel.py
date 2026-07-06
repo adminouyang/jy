@@ -16,7 +16,7 @@ from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 EPG_URL = os.environ.get("EPG_URL", "https://epg.112114.xyz/pp.xml")
 LOGO_BASE_URL = "https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/"
 
-# 输出文件路径（可通过环境变量自定义）
+# 输出文件路径（可通过环境变量自定义，默认为当前目录下的文件）
 OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", "/Hotel/Remote Access/output.m3u8")
 OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "/Hotel/Remote Access/output.txt")
 
@@ -35,14 +35,14 @@ GROUP_ORDER = [
     "数字频道", "解说频道", "春晚频道", "直播中国", "其他"
 ]
 
-LOG_FILE = "/Hotel/Remote Access/logs/cron.log"
+LOG_FILE = os.environ.get("LOG_FILE", "/Hotel/Remote Access/logs/cron.log")
 
 def log(msg):
     ts = time.strftime("%Y-%m-%d %H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line)
     try:
-        os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+        os.makedirs(os.path.dirname(LOG_FILE) or '.', exist_ok=True)
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(line + "\n")
     except Exception:
@@ -196,7 +196,6 @@ def test_host_speed(item, fetch_channels=False):
                         if not name or not key:
                             continue
                         full_url = f"http://{host}/hls/{key}/index.m3u8"
-                        # jsmpeg 一般不会出现 udp/rtp，但为了安全也过滤
                         if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
                             continue
                         if fetch_channels:
@@ -238,7 +237,6 @@ def test_host_speed(item, fetch_channels=False):
                                     full_url = f"http://{host}{url_part}"
                                 else:
                                     full_url = f"http://{host}/{url_part}"
-                                # 过滤 udp/rtp
                                 if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
                                     continue
                                 if fetch_channels:
@@ -384,6 +382,10 @@ def fetch_remote_sources():
     从远程 API 抓取 IPTV 源，测速选优，返回 (m3u8_content, txt_content)
     失败返回 None
     """
+    # 初始化返回值，防止意外未定义
+    m3u8_content = None
+    txt_content = None
+
     data = fetch_api_data()
     if not data or not isinstance(data, dict) or "results" not in data:
         return None
@@ -517,9 +519,11 @@ def fetch_remote_sources():
     update_time = time.strftime("%Y/%m/%d %H:%M:%S")
     m3u8_lines = [f'#EXTM3U x-tvg-url="{EPG_URL}"', f"#EXT-X-UPDATED: {update_time}"]
     for name in unique_names:
-        entries_list = sorted(grouped[name], key=lambda x: x['speed'], reverse=True)  # 速度高的在前
+        entries_list = sorted(grouped[name], key=lambda x: x['speed'], reverse=True)
         for entry in entries_list:
             m3u8_lines.append(entry['content'])
+
+    m3u8_content = "\n".join(m3u8_lines)
 
     # 生成 TXT（按分组输出，同一频道按速度降序排列）
     # 先按分组整理
