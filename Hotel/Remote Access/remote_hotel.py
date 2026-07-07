@@ -1022,7 +1022,7 @@ def fetch_remote_sources():
         channels = source.get('channels', [])
         if channels:
             for ch in channels:
-                name = clean_channel_name(ch['name'])
+                name = normalize_channel_name(ch['name'])
                 group = get_channel_group(name)
                 all_entries.append({
                     'name': name,
