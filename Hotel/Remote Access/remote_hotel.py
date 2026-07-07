@@ -165,7 +165,7 @@ def test_host_speed(item, fetch_channels=False):
                                     f"http://{host}{urlx}" if urlx.startswith('/') else f"http://{host}/{urlx}"
                                 )
                                 # 过滤 udp/rtp 链接
-                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
+                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower() or 'PLTV' in full_url.lower() or 'AHBKLIVE' in full_url.lower():
                                     continue
                                 if fetch_channels:
                                     channels.append({'name': name, 'url': full_url})
@@ -196,7 +196,7 @@ def test_host_speed(item, fetch_channels=False):
                         if not name or not key:
                             continue
                         full_url = f"http://{host}/hls/{key}/index.m3u8"
-                        if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
+                        if 'udp' in full_url.lower() or 'rtp' in full_url.lower() or 'PLTV' in full_url.lower() or 'AHBKLIVE' in full_url.lower():
                             continue
                         if fetch_channels:
                             channels.append({'name': name, 'url': full_url})
@@ -237,7 +237,7 @@ def test_host_speed(item, fetch_channels=False):
                                     full_url = f"http://{host}{url_part}"
                                 else:
                                     full_url = f"http://{host}/{url_part}"
-                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower():
+                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower() or 'PLTV' in full_url.lower() or 'AHBKLIVE' in full_url.lower():
                                     continue
                                 if fetch_channels:
                                     channels.append({'name': name, 'url': full_url})
