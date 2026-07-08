@@ -8,6 +8,7 @@ import requests
 import os
 import re
 import time
+from datetime import datetime, timezone, timedelta
 import gc
 from urllib.parse import quote, urlparse
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
@@ -982,7 +983,7 @@ def fetch_remote_sources():
     log(f"测速完成: {valid_hosts}/{total_hosts} 个有效源")
 
     # 筛选速度 > 0.5 MB/s 的源（降低阈值以适应 GitHub Actions 环境）
-    valid_results = [r for r in results_with_speed if r['speed'] > 0.5]
+    valid_results = [r for r in results_with_speed if r['speed'] > 1]
     valid_results.sort(key=lambda x: x['speed'], reverse=True)
 
     # 确保每种类型至少选一个（排除已移除的 hsmdtv）
@@ -1050,13 +1051,43 @@ def fetch_remote_sources():
     # 排序频道名
     unique_names = sorted(grouped.keys(), key=channel_sort_key)
 
-    # 生成 M3U8（同一频道按速度降序排列）
-    update_time = time.strftime("%y/%m/%d %H:%M:%S", time.localtime())
+    # 生成 M3U8（按分组顺序，同一频道按速度降序排列）
+    beijing_tz = timezone(timedelta(hours=8))
+    beijing_now = datetime.now(beijing_tz)
+    update_time = beijing_now.strftime("%y/%m/%d %H:%M:%S")
     m3u8_lines = [f'#EXTM3U x-tvg-url="{EPG_URL}"', f"#EXT-X-UPDATED: {update_time}"]
-    for name in unique_names:
-        entries_list = sorted(grouped[name], key=lambda x: x['speed'], reverse=True)
-        for entry in entries_list:
-            m3u8_lines.append(entry['content'])
+
+    # 按分组整理频道
+    grouped_by_group = {}
+    for entry in all_entries:
+        grp = entry['group']
+        if grp not in grouped_by_group:
+            grouped_by_group[grp] = {}
+        name = entry['name']
+        if name not in grouped_by_group[grp]:
+            grouped_by_group[grp][name] = []
+        grouped_by_group[grp][name].append(entry)
+
+    # 按 GROUP_ORDER 顺序输出
+    seen_groups = set()
+    for grp in GROUP_ORDER:
+        if grp in grouped_by_group:
+            seen_groups.add(grp)
+            # 分组内频道按 channel_sort_key 排序
+            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
+            for name in names:
+                entries_list = sorted(grouped_by_group[grp][name], key=lambda x: x['speed'], reverse=True)
+                for entry in entries_list:
+                    m3u8_lines.append(entry['content'])
+
+    # 处理不在 GROUP_ORDER 中的分组（如果有的话）
+    for grp in grouped_by_group:
+        if grp not in seen_groups:
+            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
+            for name in names:
+                entries_list = sorted(grouped_by_group[grp][name], key=lambda x: x['speed'], reverse=True)
+                for entry in entries_list:
+                    m3u8_lines.append(entry['content'])
 
     m3u8_content = "\n".join(m3u8_lines)
 
