@@ -500,9 +500,11 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        # 修改提交信息，包含北京时间
+        BEIJING_TIME=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
         if [ -n "$(git status --porcelain Hotel/ip/*.txt 2>/dev/null)" ]; then
           git add Hotel/ip/*.txt
-          git commit -m "扫描更新 hotel IP $(date '+%Y-%m-%d %H:%M:%S')"
+          git commit -m "扫描更新 hotel IP $BEIJING_TIME"
           git pull --rebase origin main
           git push origin main
         else
