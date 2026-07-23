@@ -1028,7 +1028,7 @@ def fetch_remote_sources():
     # 确保每种类型至少选一个（排除已移除的 hsmdtv）
     final_sources = []
     selected_hosts = set()
-    for m in ['txiptv', 'zhgxtv', 'jsmpeg']:
+    for m in ['txiptv', 'zhgxtv', 'jsmpeg', 'hsmdtv']:
         for res in valid_results:
             if res['matchType'] == m and res['host'] not in selected_hosts:
                 final_sources.append(res)
@@ -1176,6 +1176,37 @@ def fetch_remote_sources():
 
     return m3u8_content, txt_content
 
+def process_hsmdtv_channels(host, source_index):
+    """处理 hsmdtv 源频道"""
+    entries = []
+    try:
+        if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
+            log(f"⚠️ {HSMD_ADDRESS_LIST_FILE} 不存在，跳过 hsmdtv 源")
+            return entries
+        with open(HSMD_ADDRESS_LIST_FILE, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            match = re.search(r'(http://[^\s]+)', line)
+            if match:
+                url_in_file = match.group(1)
+                part_before_url = line.split(url_in_file)[0]
+                name = re.sub(r'^\s*\d+\s+', '', part_before_url).strip()
+                name = name.replace("（默认频道）", "").strip()
+                name = clean_channel_name(name)
+                parsed = urlparse(url_in_file)
+                new_url = f"http://{host}{parsed.path}"
+                group = get_channel_group(name)
+                entries.append({
+                    'name': name, 'url': new_url, 'group': group,
+                    'content': build_m3u8_entry(name, new_url, group),
+                    'index': source_index
+                })
+    except Exception as e:
+        log(f"⚠️ 处理 hsmdtv 频道失败: {e}")
+    return entries
 
 # ==================== 主流程 ====================
 
