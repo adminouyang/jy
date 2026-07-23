@@ -467,8 +467,8 @@ jobs:
             # 显示最快的5个IP
             if valid_ips:
                 # 设置延迟区间
-                min_speed = 900  # 最小延迟
-                max_speed = 5000  # 最大延迟
+                min_speed = 1000  # 最小延迟
+                max_speed = 4000  # 最大延迟
     
                 # 筛选在指定区间内的IP
                 filtered_ips = [ip_info for ip_info in valid_ips 
