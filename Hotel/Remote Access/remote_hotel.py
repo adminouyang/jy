@@ -1059,7 +1059,12 @@ def fetch_remote_sources():
         log(f"抓取频道: 源{idx+1} {source['host']} ({source['matchType']})...")
         fetch_channels_for_source(source)
 
+        match_type = source['matchType']
         channels = source.get('channels', [])
+
+        if match_type == 'hsmdtv':
+            # hsmdtv 需要从 hsmd_address_list.txt 生成频道
+            entries = process_hsmdtv_channels(source['host'], idx)
         if channels:
             for ch in channels:
                 name = normalize_channel_name(ch['name'])
