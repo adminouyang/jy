@@ -28,7 +28,7 @@ MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
 ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
-HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "/Hotel/Remote Access/hsmd_address_list.txt")
+HSMD_ADDRESS_LIST_FILE = "/Hotel/Remote Access/hsmd_address_list.txt"
 HSMDTV_TEST_URI = "/newlive/live/hls/1/live.m3u8"
 LOG_FILE = os.environ.get("LOG_FILE", "/Hotel/Remote Access/logs/cron.log")
 
