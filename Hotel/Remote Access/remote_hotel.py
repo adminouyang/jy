@@ -1200,8 +1200,8 @@ def process_hsmdtv_channels(host, source_index):
                 new_url = f"http://{host}{parsed.path}"
                 group = get_channel_group(name)
                 entries.append({
-                    'name': name, 'url': new_url, 'group': group,
-                    'content': build_m3u8_entry(name, new_url, group),
+                    'name': name, 'url': new_url, #'group': group,
+                    'content': build_m3u8_entry(name, new_url),  #, group
                     'index': source_index
                 })
     except Exception as e:
