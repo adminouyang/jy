@@ -1144,7 +1144,7 @@ def save_to_files(m3u8_content, txt_content):
         log(f"✅ 已保存 M3U8 到 {OUTPUT_M3U8}")
         log(f"✅ 已保存 TXT 到 {OUTPUT_TXT}")
         return True
-    except Exception as e:for p in [OUTPUT_M3U8, OUTPUT_TXT]:
+    except Exception as e:
         log(f"❌ 保存文件失败: {e}")
         return False
 
