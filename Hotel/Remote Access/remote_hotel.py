@@ -22,13 +22,13 @@ TOP_N = 5
 MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
-HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "/Hotel/Remote Access/hsmd_address_list.txt")
+HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "Hotel/Remote Access/hsmd_address_list.txt")
 ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
 HSMDTV_TEST_URI = "/newlive/live/hls/1/live.m3u8"
 
 # 输出文件路径
-OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", "/Hotel/Remote Access/output.m3u8")
-OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "/Hotel/Remote Access/output.txt")
+OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", "Hotel/Remote Access/output.m3u8")
+OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "Hotel/Remote Access/output.txt")
 
 # 分组定义（按显示顺序）
 GROUP_ORDER = [
