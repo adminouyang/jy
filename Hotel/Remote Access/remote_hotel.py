@@ -1133,8 +1133,10 @@ def process_hsmdtv_channels(host, source_index):
 def save_to_files(m3u8_content, txt_content):
     """将生成的播放列表写入本地文件"""
     try:
-        os.makedirs(os.path.dirname(OUTPUT_M3U8), exist_ok=True)
-        os.makedirs(os.path.dirname(OUTPUT_TXT), exist_ok=True)
+        for p in [OUTPUT_M3U8, OUTPUT_TXT]:
+            d = os.path.dirname(p)
+            if d:                          # ← 加这个判断，防止空字符串
+                os.makedirs(d, exist_ok=True)
         with open(OUTPUT_M3U8, 'w', encoding='utf-8') as f:
             f.write(m3u8_content)
         with open(OUTPUT_TXT, 'w', encoding='utf-8') as f:
@@ -1142,7 +1144,7 @@ def save_to_files(m3u8_content, txt_content):
         log(f"✅ 已保存 M3U8 到 {OUTPUT_M3U8}")
         log(f"✅ 已保存 TXT 到 {OUTPUT_TXT}")
         return True
-    except Exception as e:
+    except Exception as e:for p in [OUTPUT_M3U8, OUTPUT_TXT]:
         log(f"❌ 保存文件失败: {e}")
         return False
 
