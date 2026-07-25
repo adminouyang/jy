@@ -1,33 +1,43 @@
 #!/usr/bin/env python3
 """
-IPTV 播放列表自动更新脚本（精简版 - 修复 hsmdtv 频道抓取）
-从远程 API 抓取 IPTV 源（测速选优），生成 M3U8/TXT 文件
+IPTV 播放列表自动更新脚本（增强版）
+优先从远程 API 抓取 IPTV 源（测速选优）
 """
+
 import requests
 import os
 import re
 import time
-from datetime import datetime, timezone, timedelta
 import gc
 from urllib.parse import quote, urlparse
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
-import traceback as tb_mod
+
 # ==================== 配置 ====================
 EPG_URL = os.environ.get("EPG_URL", "https://epg.112114.xyz/pp.xml")
 LOGO_BASE_URL = "https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/"
 
-OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", "/Hotel/Remote Access/output.m3u8")
-OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "/Hotel/Remote Access/output.txt")
-
+# 远程源配置
 API_URL = "https://iptvs.pes.im"
 TOP_N = 5
 MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
-ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
 HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "/Hotel/Remote Access/hsmd_address_list.txt")
+ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
 HSMDTV_TEST_URI = "/newlive/live/hls/1/live.m3u8"
-LOG_FILE = os.environ.get("LOG_FILE", "/Hotel/Remote Access/logs/cron.log")
+
+# 输出文件路径
+OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", "/Hotel/Remote Access/output.m3u8")
+OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "/Hotel/Remote Access/output.txt")
+
+# 分组定义（按显示顺序）
+GROUP_ORDER = [
+    "央视频道", "卫视频道", "电影频道", "儿童频道",
+    "体育频道", "纪录频道", "音乐频道", "地方频道",
+    "数字频道", "解说频道", "春晚频道", "直播中国", "其他"
+]
+
+LOG_FILE = "/Hotel/Remote Access/logs/cron.log"
 
 GROUP_ORDER = [
     "央视频道", "卫视频道", "4K频道", "数字频道", "港澳台频道", "少儿频道",
@@ -587,18 +597,42 @@ CHANNEL_MAPPING = {
     "网络棋牌": ["网络棋牌", "IPTV网络棋牌"],
 }
 
+# 预编译反查表：原始名(大写去空格) -> 标准名
+def _build_reverse_mapping():
+    rev = {}
+    for std_name, variants in CHANNEL_MAPPING.items():
+        for v in variants:
+            key = v.upper().replace(" ", "")
+            rev[key] = std_name
+        # 标准名本身也要能反查到自己
+        rev[std_name.upper().replace(" ", "")] = std_name
+    return rev
+
+REVERSE_MAPPING = _build_reverse_mapping()
+
+# 预编译 标准名 -> 分组
+def _build_name_to_group():
+    m = {}
+    for grp, names in CHANNEL_CATEGORIES.items():
+        for n in names:
+            if n:  # 跳过空串
+                m[n] = grp
+    return m
+
+NAME_TO_GROUP = _build_name_to_group()
+
 def log(msg):
     ts = time.strftime("%Y-%m-%d %H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line)
     try:
-        os.makedirs(os.path.dirname(LOG_FILE) or '.', exist_ok=True)
+        os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
         with open(LOG_FILE, "a", encoding="utf-8") as f:
             f.write(line + "\n")
     except Exception:
         pass
 
-# ==================== 远程源抓取逻辑 ====================
+# ==================== 远程源抓取逻辑（复用 app.py 核心） ====================
 
 def _get_remaining_timeout(deadline, fallback_timeout):
     if deadline is None:
@@ -618,7 +652,7 @@ def fetch_api_data():
                 return data
         except Exception as e:
             log(f"⚠️ 远程源获取失败: {e}")
-            time.sleep(3)
+        time.sleep(3)
     return None
 
 def get_ts_url(m3u8_url, deadline=None):
@@ -709,8 +743,6 @@ def test_host_speed(item, fetch_channels=False):
                                 full_url = urlx if 'http' in urlx else (
                                     f"http://{host}{urlx}" if urlx.startswith('/') else f"http://{host}/{urlx}"
                                 )
-                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower() or 'PLTV' in full_url or 'AHBKLIVE' in full_url:
-                                    continue
                                 if fetch_channels:
                                     channels.append({'name': name, 'url': full_url})
                                 if not valid_channel_url:
@@ -748,8 +780,6 @@ def test_host_speed(item, fetch_channels=False):
                         if not name or not key:
                             continue
                         full_url = f"http://{host}/hls/{key}/index.m3u8"
-                        if 'udp' in full_url.lower() or 'rtp' in full_url.lower() or 'PLTV' in full_url or 'AHBKLIVE' in full_url:
-                            continue
                         if fetch_channels:
                             channels.append({'name': name, 'url': full_url})
                         if not valid_channel_url:
@@ -789,8 +819,6 @@ def test_host_speed(item, fetch_channels=False):
                                     full_url = f"http://{host}{url_part}"
                                 else:
                                     full_url = f"http://{host}/{url_part}"
-                                if 'udp' in full_url.lower() or 'rtp' in full_url.lower() or 'PLTV' in full_url or 'AHBKLIVE' in full_url:
-                                    continue
                                 if fetch_channels:
                                     channels.append({'name': name, 'url': full_url})
                                 if not valid_channel_url:
@@ -807,71 +835,90 @@ def test_host_speed(item, fetch_channels=False):
     return speed, channels
 
 def fetch_channels_for_source(source):
-    """获取指定源的所有频道（含 hsmdtv）"""
+    """获取指定源的所有频道"""
     match_type = source.get('matchType')
-    host = source.get('host')
     if match_type in ('txiptv', 'jsmpeg', 'zhgxtv'):
         _, channels = test_host_speed(
-            {'host': host, 'matchType': match_type},
+            {'host': source.get('host'), 'matchType': match_type},
             fetch_channels=True
         )
         source['channels'] = channels or []
-    elif match_type == 'hsmdtv':
-        # hsmdtv 通过本地地址列表文件生成频道
-        entries = process_hsmdtv_channels(host, 0)
-        source['channels'] = [
-            {'name': e['name'], 'url': e['url']} for e in entries
-        ]
-        source['_hsmd_entries'] = entries
 
-def clean_channel_name(name):
-    """清洗频道名称（去除前后空格和常见后缀）"""
-    name = name.strip()
-    for suffix in ["高清", "HD", "标清", "频道", "（默认频道）", "默认频道"]:
-        if name.endswith(suffix):
-            name = name[:-len(suffix)].strip()
-    return name
-
-def normalize_channel_name(name):
-    """按 CHANNEL_MAPPING 把抓到的原始名归一到标准名"""
-    name = name.replace("cctv", "CCTV").replace("中央", "CCTV").replace("央视", "CCTV")
-    for rep in ["高清", "超高", "HD", "标清", "频道", "-", " ", "PLUS", "＋", "(", ")"]:
-        name = name.replace(rep, "" if rep not in ("PLUS", "＋") else "+")
-    name = re.sub(r"CCTV(\d+)台", r"CCTV\1", name)
-    # 反查 CHANNEL_MAPPING
-    for std_name, aliases in CHANNEL_MAPPING.items():
-        if not std_name:
-            continue
-        if name in aliases:
-            return std_name
-    return name
+def normalize_channel_name(raw_name):
+    """
+    原始名 -> 标准名。
+    1. 先查 REVERSE_MAPPING（精确反查）
+    2. 查不到则做轻量清洗后再查一次
+    3. 还查不到则返回清洗后的原始名
+    """
+    if not raw_name:
+        return ""
+    s = raw_name.strip()
+    # 第一遍：直接反查
+    key = s.upper().replace(" ", "")
+    if key in REVERSE_MAPPING:
+        return REVERSE_MAPPING[key]
+    # 第二遍：清洗后反查（去掉常见修饰词）
+    cleaned = s
+    for rep in ["高清", "超高", "HD", "标清", "频道", "-", " ", "PLUS", "＋"]:
+        cleaned = cleaned.replace(rep, "")
+    cleaned = cleaned.replace("CCTV", "CCTV").replace("中央", "CCTV").replace("央视", "CCTV")
+    cleaned = re.sub(r"CCTV(\d+)台", r"CCTV\1", cleaned)
+    key2 = cleaned.upper().replace(" ", "")
+    if key2 in REVERSE_MAPPING:
+        return REVERSE_MAPPING[key2]
+    # 都没命中：返回清洗后的名字
+    return cleaned if cleaned else s
 
 # ==================== 分组 & 排序 & 生成 ====================
 
-def get_channel_group(name):
-    """按 CHANNEL_CATEGORIES 反查分组，'其他频道' 兜底"""
-    for grp, members in CHANNEL_CATEGORIES.items():
-        if not grp:
-            continue
-        if name in members:
-            return grp
+def get_channel_group(std_name):
+    """标准名 -> 分组（查表）；查不到走关键词兜底"""
+    if not std_name:
+        return "其他频道"
+    if std_name in NAME_TO_GROUP:
+        return NAME_TO_GROUP[std_name]
+    # ===== 兜底：关键词猜测（处理模板未覆盖的频道）=====
+    name_upper = std_name.upper()
+    if "CCTV" in name_upper or "CGTN" in name_upper:
+        return "央视频道"
+    if "卫视" in std_name:
+        return "卫视频道"
+    if any(kw in std_name for kw in ["电影", "CHC", "影院", "影视", "影剧"]):
+        return "数字频道"
+    if any(kw in std_name for kw in ["卡通", "少儿", "动画", "炫动", "动漫", "淘BABY", "淘萌宠"]):
+        return "少儿频道"
+    if any(kw in std_name for kw in ["凤凰", "星空", "CHANNEL[V]", "澳门莲花", "TVB", "翡翠", "明珠", "东森", "DMAX", "ANIMAX"]):
+        return "港澳台频道"
+    if any(kw in std_name for kw in ["体育", "足球", "篮球", "台球", "乒羽", "高尔夫"]):
+        return "数字频道"
+    if any(kw in std_name for kw in ["纪录", "纪实", "科教", "探索", "发现", "地理", "自然"]):
+        return "数字频道"
+    if any(kw in std_name for kw in ["音乐", "MV", "歌曲", "戏曲", "梨园"]):
+        return "数字频道"
+    # 地方频道兜底：匹配省份/城市关键词
+    local_kw = ["北京","上海","天津","重庆","河北","山西","辽宁","吉林","黑龙江","江苏","浙江","安徽",
+                "福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州","云南","陕西",
+                "甘肃","青海","台湾","内蒙古","广西","西藏","宁夏","新疆","香港","澳门",
+                "郑州","南阳","安阳","洛阳","新乡","许昌","平顶山","焦作","石家庄","唐山","邯郸",
+                "保定","太原","大同","济南","青岛","南京","苏州","杭州","宁波","合肥","福州","厦门",
+                "南昌","武汉","长沙","广州","深圳","南宁","海口","成都","贵阳","昆明","西安","兰州",
+                "西宁","银川","乌鲁木齐","长春","沈阳","哈尔滨","呼和浩特","拉萨","BTV"]
+    for kw in local_kw:
+        if kw in std_name:
+            return f"{kw}频道" if f"{kw}频道" in CHANNEL_CATEGORIES else "其他频道"
     return "其他频道"
-
 def channel_sort_key(name):
-    """频道排序：CCTV 数字优先，然后卫视，然后其他"""
-    name_upper = name.upper()
-    if "CCTV" in name_upper:
-        match = re.search(r"CCTV(\d+)", name_upper)
-        if match:
-            return (0, int(match.group(1)))
-        if "5+" in name_upper or "5PLUS" in name_upper:
-            return (0, 5.5)
-        return (0, 999)
-    if "CGTN" in name_upper:
-        return (1, name)
-    if "卫视" in name:
-        return (2, name)
-    return (3, name)
+    grp = get_channel_group(name)
+    grp_idx = GROUP_ORDER.index(grp) if grp in GROUP_ORDER else len(GROUP_ORDER)
+    # 组内序号：在标准名列表中的位置
+    sub_idx = 0
+    if grp in CHANNEL_CATEGORIES:
+        try:
+            sub_idx = CHANNEL_CATEGORIES[grp].index(name) + 1
+        except ValueError:
+            sub_idx = 999
+    return (grp_idx, sub_idx, name)
 
 def build_logo_url(name):
     return f"{LOGO_BASE_URL}{quote(name, safe='')}.png"
@@ -889,9 +936,6 @@ def fetch_remote_sources():
     从远程 API 抓取 IPTV 源，测速选优，返回 (m3u8_content, txt_content)
     失败返回 None
     """
-    m3u8_content = None
-    txt_content = None
-
     data = fetch_api_data()
     if not data or not isinstance(data, dict) or "results" not in data:
         return None
@@ -935,7 +979,7 @@ def fetch_remote_sources():
                         pass
                     finally:
                         completed_hosts += 1
-                        if completed_hosts % 10 == 0 or completed_hosts == 0:
+                        if completed_hosts % 10 == 0 or completed_hosts == total_hosts:
                             log(f"测速进度: {completed_hosts}/{total_hosts} (有效: {valid_hosts})")
 
                 now = time.time()
@@ -952,14 +996,14 @@ def fetch_remote_sources():
 
     log(f"测速完成: {valid_hosts}/{total_hosts} 个有效源")
 
-    # 筛选速度 > 1 MB/s 的源
-    valid_results = [r for r in results_with_speed if r['speed'] > 1]
+    # 筛选速度 > 1.5 MB/s 的源
+    valid_results = [r for r in results_with_speed if r['speed'] > 1.5]
     valid_results.sort(key=lambda x: x['speed'], reverse=True)
 
     # 确保每种类型至少选一个
     final_sources = []
     selected_hosts = set()
-    for m in ['txiptv', 'zhgxtv', 'jsmpeg', 'hsmdtv']:
+    for m in ['txiptv', 'hsmdtv', 'zhgxtv', 'jsmpeg']:
         for res in valid_results:
             if res['matchType'] == m and res['host'] not in selected_hosts:
                 final_sources.append(res)
@@ -976,8 +1020,8 @@ def fetch_remote_sources():
 
     final_sources.sort(key=lambda x: x['speed'], reverse=True)
 
-    if len(final_sources) < 1:
-        log(f"⚠️ 有效源不足 ({len(final_sources)} < 1)，放弃远程源")
+    if len(final_sources) < 3:
+        log(f"⚠️ 有效源不足 ({len(final_sources)} < 3)，放弃远程源")
         return None
 
     log(f"选中 Top {len(final_sources)} 源:")
@@ -993,30 +1037,23 @@ def fetch_remote_sources():
         match_type = source['matchType']
         channels = source.get('channels', [])
 
-        # 对于 hsmdtv，优先使用 _hsmd_entries（包含完整的 group/content 信息）
-        hsmd_entries = source.get('_hsmd_entries', [])
-        if match_type == 'hsmdtv' and hsmd_entries:
-            for entry in hsmd_entries:
-                all_entries.append({
-                    'name': entry['name'],
-                    'url': entry['url'],
-                    'group': entry['group'],
-                    'content': entry['content'],
-                    'index': idx,
-                    'speed': source['speed']
-                })
+        if match_type == 'hsmdtv':
+            # hsmdtv 需要从 hsmd_address_list.txt 生成频道
+            entries = process_hsmdtv_channels(source['host'], idx)
         elif channels:
             for ch in channels:
                 name = normalize_channel_name(ch['name'])
                 group = get_channel_group(name)
                 all_entries.append({
-                    'name': name,
-                    'url': ch['url'],
-                    'group': group,
+                    'name': name, 'url': ch['url'], 'group': group,
                     'content': build_m3u8_entry(name, ch['url'], group),
-                    'index': idx,
-                    'speed': source['speed']
+                    'index': idx
                 })
+            continue
+        else:
+            continue
+
+        all_entries.extend(entries)
 
     if not all_entries:
         log("⚠️ 远程源未抓取到任何频道")
@@ -1024,87 +1061,43 @@ def fetch_remote_sources():
 
     log(f"远程源共抓取到 {len(all_entries)} 条频道记录")
 
-    # 生成 M3U8
-    beijing_tz = timezone(timedelta(hours=8))
-    beijing_now = datetime.now(beijing_tz)
-    update_time = beijing_now.strftime("%y/%m/%d %H:%M:%S")
-    m3u8_lines = [f'#EXTM3U x-tvg-url="{EPG_URL}"', f"#EXT-X-UPDATED: {update_time}"]
-
-    # 按分组整理频道
-    grouped_by_group = {}
+    # 按频道名分组（同名频道保留多个源）
+    grouped = {}
     for entry in all_entries:
-        grp = entry['group']
-        if grp not in grouped_by_group:
-            grouped_by_group[grp] = {}
         name = entry['name']
-        if name not in grouped_by_group[grp]:
-            grouped_by_group[grp][name] = []
-        grouped_by_group[grp][name].append(entry)
+        if name not in grouped:
+            grouped[name] = []
+        grouped[name].append(entry)
 
-    # 按 GROUP_ORDER 顺序输出
-    seen_groups = set()
-    for grp in GROUP_ORDER:
-        if grp in grouped_by_group:
-            seen_groups.add(grp)
-            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
-            for name in names:
-                entries_list = sorted(grouped_by_group[grp][name], key=lambda x: x['speed'], reverse=True)
-                for entry in entries_list:
-                    m3u8_lines.append(entry['content'])
+    # 排序频道名
+    unique_names = sorted(grouped.keys(), key=channel_sort_key)
 
-    for grp in grouped_by_group:
-        if grp not in seen_groups:
-            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
-            for name in names:
-                entries_list = sorted(grouped_by_group[grp][name], key=lambda x: x['speed'], reverse=True)
-                for entry in entries_list:
-                    m3u8_lines.append(entry['content'])
+    # 生成 M3U8
+    update_time = time.strftime("%Y/%m/%d %H:%M:%S")
+    m3u8_lines = [f'#EXTM3U x-tvg-url="{EPG_URL}"', f"#EXT-X-UPDATED: {update_time}"]
+    for name in unique_names:
+        entries_list = sorted(grouped[name], key=lambda x: x['index'])
+        for entry in entries_list:
+            m3u8_lines.append(entry['content'])
+
+    # 生成 TXT（同一频道多个源都输出）
+    txt_lines = []
+    for name in unique_names:
+        entries_list = sorted(grouped[name], key=lambda x: x.get('index', 999))
+        group = entries_list[0]['group']
+        for entry in entries_list:
+            txt_lines.append(f"{name},{entry['url']},{group}")
 
     m3u8_content = "\n".join(m3u8_lines)
+    txt_content = "\n".join(txt_lines)
 
-    # 生成 TXT
-    grouped_by_group = {}
-    for entry in all_entries:
-        grp = entry['group']
-        if grp not in grouped_by_group:
-            grouped_by_group[grp] = {}
-        name = entry['name']
-        if name not in grouped_by_group[grp]:
-            grouped_by_group[grp][name] = []
-        grouped_by_group[grp][name].append((entry['url'], entry['speed']))
-
-    txt_lines = []
-    seen_groups = set()
-    for grp in GROUP_ORDER:
-        if grp in grouped_by_group:
-            seen_groups.add(grp)
-            txt_lines.append(f"{grp},#genre#")
-            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
-            for name in names:
-                urls_sorted = sorted(grouped_by_group[grp][name], key=lambda x: x[1], reverse=True)
-                for url, _ in urls_sorted:
-                    txt_lines.append(f"{name},{url}")
-            txt_lines.append("")
-
-    for grp in grouped_by_group:
-        if grp not in seen_groups:
-            txt_lines.append(f"{grp},#genre#")
-            names = sorted(grouped_by_group[grp].keys(), key=channel_sort_key)
-            for name in names:
-                urls_sorted = sorted(grouped_by_group[grp][name], key=lambda x: x[1], reverse=True)
-                for url, _ in urls_sorted:
-                    txt_lines.append(f"{name},{url}")
-            txt_lines.append("")
-
-    txt_content = "\n".join(txt_lines).strip()
-
-    del results_with_speed, valid_results, final_sources, all_entries, grouped_by_group
+    del results_with_speed, valid_results, final_sources, all_entries, grouped
     gc.collect()
 
     return m3u8_content, txt_content
 
 def process_hsmdtv_channels(host, source_index):
-    """处理 hsmdtv 源频道：从 hsmd_address_list.txt 读取地址列表，替换为当前 host"""
+    """处理 hsmdtv 源频道"""
     entries = []
     try:
         if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
@@ -1112,73 +1105,53 @@ def process_hsmdtv_channels(host, source_index):
             return entries
         with open(HSMD_ADDRESS_LIST_FILE, 'r', encoding='utf-8') as f:
             lines = f.readlines()
-        log(f"📂 读取 {HSMD_ADDRESS_LIST_FILE}，共 {len(lines)} 行")
         for line in lines:
             line = line.strip()
-            if not line or line.startswith('#'):
+            if not line:
                 continue
-            # 匹配格式: "频道名 http://原host/path" 或 "1 频道名 http://..."
             match = re.search(r'(http://[^\s]+)', line)
             if match:
                 url_in_file = match.group(1)
                 part_before_url = line.split(url_in_file)[0]
                 name = re.sub(r'^\s*\d+\s+', '', part_before_url).strip()
                 name = name.replace("（默认频道）", "").strip()
-                # 使用 clean_channel_name 清洗名称
-                name = clean_channel_name(name)
-                if not name:
-                    continue
+                name = normalize_channel_name(name)
                 parsed = urlparse(url_in_file)
-                # 替换为当前选中的 host
                 new_url = f"http://{host}{parsed.path}"
-                if parsed.query:
-                    new_url += f"?{parsed.query}"
-                # 归一化频道名称
-                std_name = normalize_channel_name(name)
-                group = get_channel_group(std_name)
+                group = get_channel_group(name)
                 entries.append({
-                    'name': std_name,
-                    'url': new_url,
-                    'group': group,
-                    'content': build_m3u8_entry(std_name, new_url, group),
-                    'index': source_index,
-                    'speed': 0
+                    'name': name, 'url': new_url, 'group': group,
+                    'content': build_m3u8_entry(name, new_url, group),
+                    'index': source_index
                 })
-        log(f"   hsmdtv 解析到 {len(entries)} 个频道")
     except Exception as e:
         log(f"⚠️ 处理 hsmdtv 频道失败: {e}")
-        tb_mod.print_exc()
     return entries
+
+# ==================== 保存到本地文件 ====================
+
+def save_to_files(m3u8_content, txt_content):
+    """将生成的播放列表写入本地文件"""
+    try:
+        os.makedirs(os.path.dirname(OUTPUT_M3U8), exist_ok=True)
+        os.makedirs(os.path.dirname(OUTPUT_TXT), exist_ok=True)
+        with open(OUTPUT_M3U8, 'w', encoding='utf-8') as f:
+            f.write(m3u8_content)
+        with open(OUTPUT_TXT, 'w', encoding='utf-8') as f:
+            f.write(txt_content)
+        log(f"✅ 已保存 M3U8 到 {OUTPUT_M3U8}")
+        log(f"✅ 已保存 TXT 到 {OUTPUT_TXT}")
+        return True
+    except Exception as e:
+        log(f"❌ 保存文件失败: {e}")
+        return False
 
 # ==================== 主流程 ====================
 
-def save_output(m3u8_content, txt_content):
-    """将生成的内容保存到本地文件"""
-    try:
-        os.makedirs(os.path.dirname(OUTPUT_M3U8) or '.', exist_ok=True)
-        with open(OUTPUT_M3U8, 'w', encoding='utf-8') as f:
-            f.write(m3u8_content)
-        log(f"✅ M3U8 已保存到 {OUTPUT_M3U8} ({len(m3u8_content)} 字节)")
-
-        os.makedirs(os.path.dirname(OUTPUT_TXT) or '.', exist_ok=True)
-        with open(OUTPUT_TXT, 'w', encoding='utf-8') as f:
-            f.write(txt_content)
-        log(f"✅ TXT 已保存到 {OUTPUT_TXT} ({len(txt_content)} 字节)")
-        return True
-    except Exception as e:
-        log(f"❌ 保存文件异常: {e}")
-        return False
-
 def main():
     log("=" * 50)
-    log("IPTV 播放列表自动更新（远程源抓取 + 本地保存）")
+    log("IPTV 播放列表自动更新（远程源 + 本地保存）")
     log("=" * 50)
-
-    # 提前检查 hsmd_address_list.txt 是否存在
-    if os.path.exists(HSMD_ADDRESS_LIST_FILE):
-        log(f"✅ 找到 {HSMD_ADDRESS_LIST_FILE}")
-    else:
-        log(f"⚠️ {HSMD_ADDRESS_LIST_FILE} 不存在，hsmdtv 源将无法抓取频道列表")
 
     m3u8_content = None
     txt_content = None
@@ -1190,7 +1163,6 @@ def main():
             m3u8_content, txt_content = result
     except Exception as e:
         log(f"❌ 远程抓取异常: {e}")
-        tb_mod.print_exc()
 
     if not m3u8_content:
         log("❌ 远程源获取失败，本次更新跳过")
@@ -1199,12 +1171,13 @@ def main():
     log(f"📊 数据来源: 远程源")
     log(f"   M3U8: {len(m3u8_content)} 字节, TXT: {len(txt_content)} 字节")
 
-    success = save_output(m3u8_content, txt_content)
+    # 保存到本地文件
+    success = save_to_files(m3u8_content, txt_content)
 
     if success:
-        log("🎉 更新完成!")
+        log(f"🎉 更新完成!")
     else:
-        log("💔 保存失败")
+        log(f"💔 保存失败")
 
     return success
 
