@@ -851,6 +851,8 @@ def normalize_channel_name(raw_name):
     2. 查不到则做轻量清洗后再查一次
     3. 还查不到则返回清洗后的原始名
     """
+    name = name.replace("（默认频道）", "").replace("(默认频道)", "")
+    name = name.replace("（", "(").replace("）", ")")  # 全角转半角
     if not raw_name:
         return ""
     s = raw_name.strip()
@@ -1097,36 +1099,79 @@ def fetch_remote_sources():
     return m3u8_content, txt_content
 
 def process_hsmdtv_channels(host, source_index):
-    """处理 hsmdtv 源频道"""
+    """处理 hsmdtv 源频道 —— 兼容纯文本和 HTML 格式"""
     entries = []
+    path = HSMD_ADDRESS_LIST_FILE
+
+    if not os.path.exists(path):
+        log(f"⚠️ {path} 不存在，跳过 hsmdtv 源")
+        return entries
+
     try:
-        if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
-            log(f"⚠️ {HSMD_ADDRESS_LIST_FILE} 不存在，跳过 hsmdtv 源")
-            return entries
-        with open(HSMD_ADDRESS_LIST_FILE, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-            match = re.search(r'(http://[^\s]+)', line)
-            if match:
-                url_in_file = match.group(1)
-                part_before_url = line.split(url_in_file)[0]
-                name = re.sub(r'^\s*\d+\s+', '', part_before_url).strip()
-                name = name.replace("（默认频道）", "").strip()
-                name = normalize_channel_name(name)
-                parsed = urlparse(url_in_file)
-                new_url = f"http://{host}{parsed.path}"
-                group = get_channel_group(name)
-                entries.append({
-                    'name': name, 'url': new_url, 'group': group,
-                    'content': build_m3u8_entry(name, new_url, group),
-                    'index': source_index
-                })
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # 情况A：HTML 格式（含 <a href=...>CCTV1</a> 之类标签）
+        # 情况B：纯文本格式（每行有 "CCTV1  http://..."）
+        # 统一策略：用正则抓 (频道名, URL) 对
+
+        # 先尝试从 HTML 里抠 <a> 标签
+        pairs = re.findall(r'<a[^>]+>(.*?)</a>', content, re.IGNORECASE)
+        # 如果没挖到，就退化到逐行扫描
+        if not pairs:
+            for line in content.splitlines():
+                # 找行内的 http URL
+                m_url = re.search(r'(http://[^\s"<>\']+)', line)
+                if not m_url:
+                    continue
+                url = m_url.group(1)
+                # 频道名 = URL 前面的非空字段（去掉序号）
+                before = line[:m_url.start()].strip()
+                # 去掉行首数字序号
+                name = re.sub(r'^\d+\s*', '', before).strip()
+                name = re.split(r'\s{2,}', name)[0] if name else ""
+                if not name:
+                    # 最后兜底：从 URL 的 /hls/N/ 取数字
+                    m_num = re.search(r'/hls/(\d+)/', url)
+                    name = f"CCTV{m_num.group(1)}" if m_num else "未知频道"
+                name = clean_channel_name(name)
+                entries.append(_make_hsmd_entry(name, url, host, source_index))
+        else:
+            # 有 <a> 标签时，按"标签文本 + 最近 URL"配对
+            urls = re.findall(r'(http://[^\s"<>\']+)', content)
+            for i, txt in enumerate(pairs):
+                txt = txt.strip()
+                if not txt or txt.startswith('['):  # 跳过 [重启][修改] 这类按钮
+                    continue
+                url = urls[i] if i < len(urls) else None
+                if not url:
+                    continue
+                name = clean_channel_name(txt)
+                entries.append(_make_hsmd_entry(name, url, host, source_index))
+
+        # 去重（同名保留第一个）
+        seen, uniq = set(), []
+        for e in entries:
+            if e['name'] not in seen:
+                seen.add(e['name'])
+                uniq.append(e)
+        entries = uniq
+        log(f"  hsmdtv 解析到 {len(entries)} 个频道")
+
     except Exception as e:
         log(f"⚠️ 处理 hsmdtv 频道失败: {e}")
     return entries
+
+def _make_hsmd_entry(name, url_in_file, host, source_index):
+    """把地址列表里的 URL 替换成当前源 host"""
+    parsed = urlparse(url_in_file)
+    new_url = f"http://{host}{parsed.path}"
+    group = get_channel_group(name)
+    return {
+        'name': name, 'url': new_url, 'group': group,
+        'content': build_m3u8_entry(name, new_url, group),
+        'index': source_index
+    }
 
 # ==================== 保存到本地文件 ====================
 
