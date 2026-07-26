@@ -7,13 +7,21 @@ IPTV 播放列表自动更新脚本（精简版）
 import requests
 import os
 import sys
+import logging
 import re
 import time
 from datetime import datetime, timezone, timedelta
 import gc
 from urllib.parse import quote, urlparse
 from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
-
+# 配置日志格式
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(asctime)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    stream=sys.stdout
+)
+logger = logging.getLogger(__name__)
 # ==================== 配置 ====================
 EPG_URL = os.environ.get("EPG_URL", "https://epg.112114.xyz/pp.xml")
 LOGO_BASE_URL = "https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/"
