@@ -939,6 +939,17 @@ def normalize_channel_name(name):
             return std_name
     return name    # 没命中就返回清洗后的原名
 
+def normalize_entry(entry):
+    """将各种格式的 entry 统一为标准格式"""
+    return {
+        'channel': entry.get('channel') or entry.get('name') or entry.get('content') or entry.get('title', ''),
+        'url': entry.get('url', ''),
+        'group': entry.get('group', ''),
+        'speed': entry.get('speed', 0)
+    }
+
+# 在使用 all_entries 之前，对所有 entry 进行标准化
+all_entries = [normalize_entry(e) for e in all_entries]
 
 # ==================== 分组 & 排序 & 生成 ====================
 
