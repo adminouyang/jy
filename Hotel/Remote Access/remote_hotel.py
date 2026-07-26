@@ -1120,7 +1120,7 @@ def fetch_remote_sources():
     # 按频道名分组（同名频道保留多个源）
     grouped = {}
     for entry in all_entries:
-        name​ = entry.get('channel', entry.get('name', ''))
+        name = entry.get('channel', entry.get('name', ''))
         if name not in grouped:
             grouped[name] = []
         grouped[name].append(entry)
