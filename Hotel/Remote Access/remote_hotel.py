@@ -989,8 +989,7 @@ def normalize_entry(entry):
         'speed': entry.get('speed', 0)
     }
 
-# 在使用 all_entries 之前，对所有 entry 进行标准化
-all_entries = [normalize_entry(e) for e in all_entries]
+
 # ==================== 远程源：抓取 + 测速 + 生成 ====================
 
 def fetch_remote_sources():
@@ -1095,7 +1094,9 @@ def fetch_remote_sources():
         log(f"  源{idx+1}: {src['host']} ({src['matchType']}) {src['speed']:.2f}MB/s")
 
     # 抓取频道
-    all_entries = []
+    # 在使用 all_entries 之前，对所有 entry 进行标准化
+    all_entries = [normalize_entry(e) for e in all_entries]
+    #all_entries = []
     for idx, source in enumerate(final_sources):
         log(f"抓取频道: 源{idx+1} {source['host']} ({source['matchType']})...")
         fetch_channels_for_source(source)
