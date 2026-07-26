@@ -983,7 +983,7 @@ def build_m3u8_entry(name, url, group_title=None):
 def normalize_entry(entry):
     """将各种格式的 entry 统一为标准格式"""
     return {
-        'channel': entry.get('channel') or entry.get('name') or entry.get('content') or entry.get('title', ''),
+        'channel': entry.get('channel') or entry.get('name') or entry.get('content') or entry.get('title') or '',
         'url': entry.get('url', ''),
         'group': entry.get('group', ''),
         'speed': entry.get('speed', 0)
