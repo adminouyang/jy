@@ -1140,7 +1140,7 @@ def fetch_remote_sources():
         grp = entry['group']
         if grp not in grouped_by_group:
             grouped_by_group[grp] = {}
-        name​ = entry.get('channel', entry.get('name', ''))​
+        name = entry.get('channel', entry.get('name', ''))
         if name not in grouped_by_group[grp]:
             grouped_by_group[grp][name] = []
         grouped_by_group[grp][name].append(entry)
@@ -1175,7 +1175,7 @@ def fetch_remote_sources():
         grp = entry['group']
         if grp not in grouped_by_group:
             grouped_by_group[grp] = {}
-        name​ = entry.get('channel', entry.get('name', ''))
+        name = entry.get('channel', entry.get('name', ''))
         if name not in grouped_by_group[grp]:
             grouped_by_group[grp][name] = []
         grouped_by_group[grp][name].append((entry['url'], entry['speed']))
