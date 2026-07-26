@@ -1096,7 +1096,7 @@ def fetch_remote_sources():
     # 抓取频道
     # 在使用 all_entries 之前，对所有 entry 进行标准化
     all_entries = [normalize_entry(e) for e in all_entries]
-    #all_entries = []
+    all_entries = []
     for idx, source in enumerate(final_sources):
         log(f"抓取频道: 源{idx+1} {source['host']} ({source['matchType']})...")
         fetch_channels_for_source(source)
