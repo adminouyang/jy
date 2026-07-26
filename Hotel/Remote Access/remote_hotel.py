@@ -6,6 +6,7 @@ IPTV 播放列表自动更新脚本（精简版）
 
 import requests
 import os
+import sys
 import re
 import time
 from datetime import datetime, timezone, timedelta
@@ -28,7 +29,10 @@ MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
 ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
-HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "/Hotel/Remote Access/hsmd_address_list.txt")
+# 获取当前脚本所在的目录（绝对路径）
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# hsmd_address_list.txt 的完整路径
+HSMD_ADDRESS_FILE = os.path.join(SCRIPT_DIR, "hsmd_address_list.txt")
 HSMDTV_TEST_URI = "/newlive/live/hls/1/live.m3u8"
 LOG_FILE = os.environ.get("LOG_FILE", "/Hotel/Remote Access/logs/cron.log")
 
@@ -1081,12 +1085,10 @@ def fetch_remote_sources():
         channels = source.get('channels', [])
 
         if match_type == 'hsmdtv':
-            # hsmdtv 需要从 hsmd_address_list.txt 生成频道
-            # 同时将选中的 host IP:端口 替换到文件中并保存
             entries = process_hsmdtv_channels(source['host'], idx)
             # 将 hsmdtv 生成的 entries 追加到 all_entries
             for entry in entries:
-                entry['speed'] = source['speed']  # 补充速度信息
+                entry['speed'] = source.get('speed', 0)
                 all_entries.append(entry)
         if channels:
             for ch in channels:
@@ -1204,124 +1206,79 @@ def fetch_remote_sources():
 
     return m3u8_content, txt_content
 
-def process_hsmdtv_channels(host, source_index):
-    """处理 hsmdtv 源频道
-
-    读取 hsmd_address_list.txt，将其中的 IP:端口 替换为选中的 hsmdtv host，
-    同时将修改后的内容保存回文件，并生成频道 entries 列表。
+def process_hsmdtv_channels(host, idx):
+    """
+    处理 hsmdtv 源的频道列表
+    从 hsmd_address_list.txt 读取频道，将 IP:端口替换为选中的 host
     """
     entries = []
     try:
-        # 如果文件不存在，自动从 HSMDTV_TEST_URI 生成基础地址列表
-        if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
-            log(f"⚠️ {HSMD_ADDRESS_LIST_FILE} 不存在，自动创建基础地址列表")
+        # 1. 检查文件是否存在，不存在则创建默认列表
+        if not os.path.exists(HSMD_ADDRESS_FILE):
+            logger.warning(f"⚠️ {HSMD_ADDRESS_FILE} 不存在，自动创建基础地址列表")
             _create_default_hsmd_address_list(host)
-            if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
-                log(f"❌ 无法创建 {HSMD_ADDRESS_LIST_FILE}，跳过 hsmdtv 源")
-                return entries
 
-        # 读取原始内容（用于回写）
-        with open(HSMD_ADDRESS_LIST_FILE, 'r', encoding='utf-8') as f:
-            raw_lines = f.readlines()
-
-        # 正则：匹配 http://ip:port/path 或 http://ip/path
-        url_pattern = re.compile(r'(http://)([^\s/]+)(/[^\s]*)')
+        # 2. 读取文件，逐行替换 IP:端口
+        with open(HSMD_ADDRESS_FILE, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
 
         new_lines = []
-        for line in raw_lines:
-            stripped = line.strip()
-            if not stripped:
-                new_lines.append(line)
+        pattern = re.compile(r'(https?://)(\d+\.\d+\.\d+\.\d+:\d+)(/.+)')
+
+        for line in lines:
+            line = line.strip()
+            if not line or ',' not in line:
                 continue
+            channel, url = line.split(',', 1)
+            url = url.strip()
+            match = pattern.match(url)
+            if match:
+                protocol = match.group(1)
+                old_host = match.group(2)
+                path = match.group(3)
+                # 替换为新的 host
+                new_url = f"{protocol}{host}{path}"
+            else:
+                # 如果格式不匹配，保留原样（但通常不会发生）
+                new_url = url
+            new_lines.append(f"{channel},{new_url}\n")
 
-            # 提取 URL
-            match = url_pattern.search(stripped)
-            if not match:
-                new_lines.append(line)
-                continue
-
-            old_url = match.group(0)
-            path = match.group(3)  # /newlive/live/hls/1/live.m3u8
-
-            # 替换 IP:端口 为选中的 hsmdtv host
-            new_url = f"http://{host}{path}"
-
-            # 替换行中的 URL
-            new_line_content = url_pattern.sub(new_url, stripped)
-            new_lines.append(new_line_content + '\n')
-
-            # 解析频道名称
-            part_before_url = stripped.split(old_url)[0]
-            name = re.sub(r'^\s*\d+[\.\s、]*', '', part_before_url).strip()
-            name = name.replace("（默认频道）", "").strip()
-            name = clean_channel_name(name)
-
-            # 如果名称为空，尝试从 path 中提取
-            if not name:
-                m3u_match = re.search(r'/hls/(\d+)/', path)
-                if m3u_match:
-                    name = f"Channel{m3u_match.group(1)}"
-                else:
-                    name = f"HSMD{path.replace('/', '_')}"
-
-            group = get_channel_group(name)
-            entries.append({
-                'name': name,
-                'url': new_url,
-                'group': group,
-                'content': build_m3u8_entry(name, new_url, group),
-                'index': source_index,
-                'speed': 0  # hsmdtv 源速度由测速阶段决定
-            })
-
-        # 将替换后的内容写回文件
-        output_dir = os.path.dirname(HSMD_ADDRESS_LIST_FILE)
-        if output_dir:
-            os.makedirs(output_dir, exist_ok=True)
-
-        # 保存替换 IP 后的地址列表（覆盖原文件）
-        with open(HSMD_ADDRESS_LIST_FILE, 'w', encoding='utf-8') as f:
+        # 3. 写回文件（覆盖保存）
+        with open(HSMD_ADDRESS_FILE, 'w', encoding='utf-8') as f:
             f.writelines(new_lines)
-        log(f"✅ 已将 hsmdtv 地址列表中的 IP 替换为 {host}，保存到 {HSMD_ADDRESS_LIST_FILE}")
 
+        # 4. 生成 entries 列表（用于后续输出）
+        for line in new_lines:
+            line = line.strip()
+            if not line:
+                continue
+            channel, url = line.split(',', 1)
+            entry = {
+                'channel': clean_channel_name(channel),
+                'url': url.strip(),
+                'group': 'hsmdtv',
+                'speed': None  # 稍后在外部赋值
+            }
+            entries.append(entry)
+
+        logger.info(f"✅ 已处理 hsmdtv 源 {host}，共 {len(entries)} 个频道")
     except Exception as e:
-        log(f"⚠️ 处理 hsmdtv 频道失败: {e}")
+        logger.error(f"⚠️ 处理 hsmdtv 频道失败: {e}")
         import traceback
-        log(traceback.format_exc())
+        logger.error(traceback.format_exc())
     return entries
 
-
 def _create_default_hsmd_address_list(host):
-    """当 hsmd_address_list.txt 不存在时，自动创建基础版本"""
-    default_channels = [
-        ("CCTV1", 1),
-        ("CCTV2", 2),
-        ("CCTV3", 3),
-        ("CCTV4", 4),
-        ("CCTV5", 5),
-        ("CCTV6", 6),
-        ("CCTV7", 7),
-        ("CCTV8", 8),
-        ("CCTV9", 9),
-        ("CCTV10", 10),
-        ("CCTV11", 11),
-        ("CCTV12", 12),
-        ("CCTV13", 13),
-        ("CCTV14", 14),
-        ("CCTV15", 15),
-    ]
-    output_dir = os.path.dirname(HSMD_ADDRESS_LIST_FILE)
-    if output_dir:
-        os.makedirs(output_dir, exist_ok=True)
-
-    lines = []
-    for name, ch_num in default_channels:
-        url = f"http://{host}/newlive/live/hls/{ch_num}/live.m3u8"
-        lines.append(f"{name},{url}\n")
-
-    with open(HSMD_ADDRESS_LIST_FILE, 'w', encoding='utf-8') as f:
-        f.writelines(lines)
-    log(f"✅ 已创建默认 hsmd_address_list.txt，包含 {len(default_channels)} 个频道")
+    """自动创建默认的 hsmd_address_list.txt"""
+    try:
+        with open(HSMD_ADDRESS_FILE, 'w', encoding='utf-8') as f:
+            for i in range(1, 31):  # CCTV1 ~ CCTV30
+                channel = f"CCTV{i}"
+                url = f"http://{host}/newlive/live/hls/{i}/live.m3u8"
+                f.write(f"{channel},{url}\n")
+        logger.info(f"✅ 已创建默认地址列表: {HSMD_ADDRESS_FILE}")
+    except Exception as e:
+        logger.error(f"❌ 创建默认地址列表失败: {e}")
 
 # ==================== 主流程 ====================
 
