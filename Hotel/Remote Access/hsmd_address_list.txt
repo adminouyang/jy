@@ -1,40 +1,40 @@
-    1	CCTV1,http://ip/newlive/live/hls/1/live.m3u8
-  	2	CCTV2,http://ip/newlive/live/hls/2/live.m3u8
-  	3	CCTV3,http://ip/newlive/live/hls/3/live.m3u8
-  	4	CCTV4,http://ip/newlive/live/hls/4/live.m3u8
-  	5	CCTV5,http://ip/newlive/live/hls/5/live.m3u8
-  	6	CCTV5+,http://ip/newlive/live/hls/6/live.m3u8
-  	7	CCTV6,http://ip/newlive/live/hls/7/live.m3u8
-  	8	CCTV7,http://ip/newlive/live/hls/8/live.m3u8
-  	9	CCTV8,http://ip/newlive/live/hls/9/live.m3u8
-  	10	CCTV9,http://ip/newlive/live/hls/10/live.m3u8
-  	11	CCTV10,http://ip/newlive/live/hls/11/live.m3u8
-  	12	CCTV11,http://ip/newlive/live/hls/12/live.m3u8
-  	13	CCTV12,http://ip/newlive/live/hls/13/live.m3u8
-  	14	CCTV13,http://ip/newlive/live/hls/14/live.m3u8
-  	15	CCTV14,http://ip/newlive/live/hls/15/live.m3u8
-  	16	CCTV15,http://ip/newlive/live/hls/16/live.m3u8
-  	17	CCTV16,http://ip/newlive/live/hls/17/live.m3u8
-  	18	CGTN,http://ip/newlive/live/hls/18/live.m3u8
-  	19	福建综合,http://ip/newlive/live/hls/19/live.m3u8
-  	20	东南卫视,http://ip/newlive/live/hls/20/live.m3u8
-  	21	福建乡村振兴,http://ip/newlive/live/hls/21/live.m3u8
-  	22	福建新闻,http://ip/newlive/live/hls/22/live.m3u8
-  	23	福建电视剧,http://ip/newlive/live/hls/23/live.m3u8
-  	24	福建旅游,http://ip/newlive/live/hls/24/live.m3u8
-  	25	福建经济生活,http://ip/newlive/live/hls/25/live.m3u8
-  	26	福建少儿,http://ip/newlive/live/hls/26/live.m3u8
-  	27	海峡卫视,http://ip/newlive/live/hls/27/live.m3u8
-  	28	厦门卫视,http://ip/newlive/live/hls/28/live.m3u8	
-  	29	东方卫视,http://ip/newlive/live/hls/29/live.m3u8
-  	30	湖南卫视,http://ip/newlive/live/hls/30/live.m3u8
-  	31	江苏卫视,http://ip/newlive/live/hls/31/live.m3u8	
-  	32	浙江卫视,http://ip/newlive/live/hls/32/live.m3u8
-  	33	河北卫视,http://ip/newlive/live/hls/33/live.m3u8	
-  	34	广东卫视,http://ip/newlive/live/hls/34/live.m3u8
-  	35	山东卫视,http://ip/newlive/live/hls/35/live.m3u8
-  	36	湖北卫视,http://ip/newlive/live/hls/36/live.m3u8	
-  	37	深圳卫视,http://ip/newlive/live/hls/37/live.m3u8	
-  	38	黑龙江卫视,http://ip/newlive/live/hls/38/live.m3u8
-  	39	贵州卫视,http://ip/newlive/live/hls/39/live.m3u8	
-  	40	安徽卫视,http://ip/newlive/live/hls/40/live.m3u8
+CCTV1,http://ip/newlive/live/hls/1/live.m3u8
+CCTV2,http://ip/newlive/live/hls/2/live.m3u8
+CCTV3,http://ip/newlive/live/hls/3/live.m3u8
+CCTV4,http://ip/newlive/live/hls/4/live.m3u8
+CCTV5,http://ip/newlive/live/hls/5/live.m3u8
+CCTV5+,http://ip/newlive/live/hls/6/live.m3u8
+CCTV6,http://ip/newlive/live/hls/7/live.m3u8
+CCTV7,http://ip/newlive/live/hls/8/live.m3u8
+CCTV8,http://ip/newlive/live/hls/9/live.m3u8
+CCTV9,http://ip/newlive/live/hls/10/live.m3u8
+CCTV10,http://ip/newlive/live/hls/11/live.m3u8
+CCTV11,http://ip/newlive/live/hls/12/live.m3u8
+CCTV12,http://ip/newlive/live/hls/13/live.m3u8
+CCTV13,http://ip/newlive/live/hls/14/live.m3u8
+CCTV14,http://ip/newlive/live/hls/15/live.m3u8
+CCTV15,http://ip/newlive/live/hls/16/live.m3u8
+CCTV16,http://ip/newlive/live/hls/17/live.m3u8
+CGTN,http://ip/newlive/live/hls/18/live.m3u8
+福建综合,http://ip/newlive/live/hls/19/live.m3u8
+东南卫视,http://ip/newlive/live/hls/20/live.m3u8
+福建乡村振兴,http://ip/newlive/live/hls/21/live.m3u8
+福建新闻,http://ip/newlive/live/hls/22/live.m3u8
+福建电视剧,http://ip/newlive/live/hls/23/live.m3u8
+福建旅游,http://ip/newlive/live/hls/24/live.m3u8
+福建经济生活,http://ip/newlive/live/hls/25/live.m3u8
+福建少儿,http://ip/newlive/live/hls/26/live.m3u8
+海峡卫视,http://ip/newlive/live/hls/27/live.m3u8
+厦门卫视,http://ip/newlive/live/hls/28/live.m3u8	
+东方卫视,http://ip/newlive/live/hls/29/live.m3u8
+湖南卫视,http://ip/newlive/live/hls/30/live.m3u8
+江苏卫视,http://ip/newlive/live/hls/31/live.m3u8	
+浙江卫视,http://ip/newlive/live/hls/32/live.m3u8
+河北卫视,http://ip/newlive/live/hls/33/live.m3u8	
+广东卫视,http://ip/newlive/live/hls/34/live.m3u8
+山东卫视,http://ip/newlive/live/hls/35/live.m3u8
+湖北卫视,http://ip/newlive/live/hls/36/live.m3u8	
+深圳卫视,http://ip/newlive/live/hls/37/live.m3u8	
+黑龙江卫视,http://ip/newlive/live/hls/38/live.m3u8
+贵州卫视,http://ip/newlive/live/hls/39/live.m3u8	
+安徽卫视,http://ip/newlive/live/hls/40/live.m3u8
