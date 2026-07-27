@@ -19,9 +19,12 @@ from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 EPG_URL = os.environ.get("EPG_URL", "https://epg.112114.xyz/pp.xml")
 LOGO_BASE_URL = "https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/"
 
-# 输出文件路径（可通过环境变量自定义，默认为当前目录下的文件）
-OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", "/Hotel/Remote Access/output.m3u8")
-OUTPUT_TXT = os.environ.get("OUTPUT_TXT", "/Hotel/Remote Access/output.txt")
+# 脚本所在目录（自动定位，不依赖运行时的 cwd）
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 输出文件路径（可通过环境变量自定义，默认保存到脚本同目录）
+OUTPUT_M3U8 = os.environ.get("OUTPUT_M3U8", os.path.join(SCRIPT_DIR, "output.m3u8"))
+OUTPUT_TXT = os.environ.get("OUTPUT_TXT", os.path.join(SCRIPT_DIR, "output.txt"))
 
 # 远程源配置
 API_URL = "https://iptvs.pes.im"
@@ -30,9 +33,9 @@ MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
 ZHGXTV_INTERFACE = "/ZHGXTV/Public/json/live_interface.txt"
-HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", "/Hotel/Remote Access/hsmd_address_list.txt")
+HSMD_ADDRESS_LIST_FILE = os.environ.get("HSMD_ADDRESS_LIST_FILE", os.path.join(SCRIPT_DIR, "hsmd_address_list.txt"))
 HSMDTV_TEST_URI = "/newlive/live/hls/1/live.m3u8"
-LOG_FILE = os.environ.get("LOG_FILE", "/Hotel/Remote Access/logs/cron.log")
+LOG_FILE = os.environ.get("LOG_FILE", os.path.join(SCRIPT_DIR, "logs", "cron.log"))
 
 # 分组定义（按显示顺序）
 GROUP_ORDER = [
@@ -1000,21 +1003,60 @@ def replace_host_in_url(url, new_host):
     return f"http://{new_host}{parsed.path}" + (f"?{parsed.query}" if parsed.query else "")
 
 
+def _find_hsmd_file():
+    """
+    自动探测 hsmd_address_list.txt 的位置，按优先级尝试:
+    1. 环境变量 / 配置指定的路径
+    2. 脚本同目录
+    3. 脚本同目录的 'Remote Access' 子目录
+    4. 上级目录的 'Remote Access' 子目录
+    5. 当前工作目录
+    """
+    candidates = [
+        HSMD_ADDRESS_LIST_FILE,                              # 配置/环境变量指定
+        os.path.join(SCRIPT_DIR, "hsmd_address_list.txt"),   # 脚本同目录
+        os.path.join(SCRIPT_DIR, "Remote Access", "hsmd_address_list.txt"),  # 脚本同目录/Remote Access/
+        os.path.join(os.path.dirname(SCRIPT_DIR), "Remote Access", "hsmd_address_list.txt"),  # 上级/Remote Access/
+        os.path.join(os.getcwd(), "hsmd_address_list.txt"),  # 当前工作目录
+        os.path.join(os.getcwd(), "Remote Access", "hsmd_address_list.txt"),  # cwd/Remote Access/
+    ]
+    # 去重但保持顺序
+    seen = set()
+    unique_candidates = []
+    for c in candidates:
+        if c not in seen:
+            seen.add(c)
+            unique_candidates.append(c)
+
+    for path in unique_candidates:
+        if os.path.exists(path):
+            return path
+    return None
+
+
 def process_hsmdtv_channels(host, source_index):
     """
     处理 hsmdtv 源频道:
-    1. 读取 hsmd_address_list.txt
-    2. 将每条 URL 中的 IP:端口替换为测速选出的 hsmdtv 源 host
-    3. 返回 entries 列表
+    1. 自动探测 hsmd_address_list.txt 位置
+    2. 读取并解析频道列表
+    3. 将每条 URL 中的 IP:端口替换为测速选出的 hsmdtv 源 host
+    4. 返回 entries 列表
     """
     entries = []
     try:
-        if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
-            log(f"⚠️ {HSMD_ADDRESS_LIST_FILE} 不存在，跳过 hsmdtv 源")
+        # 自动探测文件路径
+        filepath = _find_hsmd_file()
+        if not filepath:
+            log(f"⚠️ hsmd_address_list.txt 未找到，已尝试以下位置:")
+            log(f"   配置路径: {HSMD_ADDRESS_LIST_FILE}")
+            log(f"   脚本目录: {os.path.join(SCRIPT_DIR, 'hsmd_address_list.txt')}")
+            log(f"   脚本目录/Remote Access/: {os.path.join(SCRIPT_DIR, 'Remote Access', 'hsmd_address_list.txt')}")
+            log(f"   当前目录: {os.path.join(os.getcwd(), 'hsmd_address_list.txt')}")
+            log(f"   ⚠️ 跳过 hsmdtv 源")
             return entries
 
-        log(f"📂 读取 hsmd_address_list.txt: {HSMD_ADDRESS_LIST_FILE}")
-        parsed_entries = parse_hsmd_address_list(HSMD_ADDRESS_LIST_FILE)
+        log(f"📂 找到 hsmd_address_list.txt: {filepath}")
+        parsed_entries = parse_hsmd_address_list(filepath)
         log(f"   共解析到 {len(parsed_entries)} 条频道记录")
 
         for item in parsed_entries:
@@ -1043,13 +1085,17 @@ def save_hsmd_updated_list(host, output_path=None):
     读取 hsmd_address_list.txt，替换 IP:端口后，
     保存为更新后的文件（供调试/查看用）
     """
+    filepath = _find_hsmd_file()
+    if not filepath:
+        log(f"⚠️ hsmd_address_list.txt 未找到，无法生成更新文件")
+        return None
+
     if output_path is None:
-        output_path = HSMD_ADDRESS_LIST_FILE + ".updated"
+        # 保存到脚本同目录，文件名带 .updated 后缀
+        output_path = os.path.join(SCRIPT_DIR, "hsmd_address_list.updated.txt")
+
     try:
-        if not os.path.exists(HSMD_ADDRESS_LIST_FILE):
-            log(f"⚠️ {HSMD_ADDRESS_LIST_FILE} 不存在，无法生成更新文件")
-            return None
-        parsed_entries = parse_hsmd_address_list(HSMD_ADDRESS_LIST_FILE)
+        parsed_entries = parse_hsmd_address_list(filepath)
         lines = []
         for item in parsed_entries:
             new_url = replace_host_in_url(item['url'], host)
@@ -1058,7 +1104,7 @@ def save_hsmd_updated_list(host, output_path=None):
         os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        log(f"✅ hsmd 更新地址列表已保存: {output_path}")
+        log(f"✅ hsmd 更新地址列表已保存: {output_path} ({len(parsed_entries)} 条)")
         return content
     except Exception as e:
         log(f"⚠️ 保存 hsmd 更新列表失败: {e}")
