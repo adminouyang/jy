@@ -495,6 +495,7 @@ jobs:
         if [[ -n $(git status --porcelain) ]]; then
           git add "proxy/mg.txt" "proxy/mg.m3u" "proxy/IP/*.txt" 2>/dev/null || true
           git commit -m "扫描更新 proxy IP $(date '+%Y-%m-%d %H:%M:%S')"
+          git pull origin main --rebase
           git push
         else
           echo "没有发现文件变化，跳过提交"
