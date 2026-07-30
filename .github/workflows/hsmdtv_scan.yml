@@ -1,0 +1,218 @@
+name: HSMDTV 直播源扫描
+
+# 加引号防止 YAML 把 on 解析为布尔值
+"on":
+  # 每天凌晨 3 点（北京时间）自动运行
+  schedule:
+    - cron: "0 19 * * *"   # UTC 19:00 = 北京时间次日 03:00
+
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      max_workers:
+        description: "并发线程数"
+        required: false
+        default: "20"
+      speed_test_timeout:
+        description: "测速超时(秒)"
+        required: false
+        default: "15"
+      debug_mode:
+        description: "开启DEBUG日志"
+        required: false
+        default: "false"
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120   # 最多运行2小时
+
+    env:
+      TZ: Asia/Shanghai    # 设置时区为北京时间
+      OUTPUT_M3U8: ${{ github.workspace }}/output/hsmd.m3u8
+      OUTPUT_TXT: ${{ github.workspace }}/output/hsmd.txt
+      EPG_URL: "https://epg.112114.xyz/pp.xml"
+      MAX_WORKERS: ${{ github.event.inputs.max_workers || '20' }}
+      HOST_SPEED_TEST_TIMEOUT: ${{ github.event.inputs.speed_test_timeout || '15' }}
+
+    steps:
+      # ========== Step 1: 检出代码 ==========
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ========== Step 2: 安装 Python ==========
+      - name: 安装 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # ========== Step 3: 安装依赖 ==========
+      - name: 安装依赖库
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # ========== Step 4: 准备数据目录 ==========
+      - name: 准备目录结构
+        run: |
+          mkdir -p /Hotel/HSMDTV/ip
+          mkdir -p ${{ github.workspace }}/output
+
+      # ========== Step 5: 恢复缓存的IP数据 ==========
+      - name: 恢复缓存
+        uses: actions/cache@v4
+        with:
+          path: |
+            /Hotel/HSMDTV/ip/
+            ${{ github.workspace }}/.scan_cache/
+          key: hsmdtv-ip-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            hsmdtv-ip-cache-${{ runner.os }}-
+
+      # ========== Step 6: 检查数据文件是否存在 ==========
+      - name: 检查数据文件
+        id: check_files
+        run: |
+          echo "检查必需的数据文件..."
+          MISSING=0
+
+          if [ ! -f "/Hotel/HSMDTV/ip/hsmd_ip.txt" ]; then
+            echo "⚠️ 缺少: /Hotel/HSMDTV/ip/hsmd_ip.txt"
+            echo "请在仓库中创建此文件，格式: IP:PORT\$运营商"
+            MISSING=1
+          else
+            echo "✓ 找到 hsmd_ip.txt ($(wc -l < /Hotel/HSMDTV/ip/hsmd_ip.txt) 条记录)"
+          fi
+
+          # 检查是否有任何 _list.txt 文件
+          LIST_COUNT=$(ls -1 /Hotel/HSMDTV/*_list.txt 2>/dev/null | wc -l)
+          if [ "$LIST_COUNT" -eq 0 ]; then
+            echo "⚠️ 缺少: /Hotel/HSMDTV/ 下没有任何 *_list.txt 文件"
+            echo "请创建频道模板文件，如 湖北联通_list.txt"
+            MISSING=1
+          else
+            echo "✓ 找到 ${LIST_COUNT} 个频道列表文件:"
+            ls -1 /Hotel/HSMDTV/*_list.txt | sed 's/^/    /'
+          fi
+
+          echo "missing=${MISSING}" >> $GITHUB_OUTPUT
+
+      # ========== Step 7: 运行扫描脚本 ==========
+      - name: 运行 HSMDTV 扫描脚本
+        if: steps.check_files.outputs.missing == '0'
+        run: |
+          echo "=========================================="
+          echo "🚀 开始 HSMDTV 直播源扫描"
+          echo "  时间: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+          echo "  并发数: ${MAX_WORKERS}"
+          echo "  测速超时: ${HOST_SPEED_TEST_TIMEOUT}s"
+          echo "=========================================="
+          echo ""
+
+          # 设置日志级别
+          if [ "${{ github.event.inputs.debug_mode }}" == "true" ]; then
+            export LOG_LEVEL=DEBUG
+          else
+            export LOG_LEVEL=INFO
+          fi
+
+          python3 hsmdtv_scan.py
+
+          echo ""
+          echo "=========================================="
+          echo "📊 扫描完成"
+          echo "  时间: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+          echo "=========================================="
+
+      # ========== Step 8: 上传产物 ==========
+      - name: 上传输出文件
+        if: steps.check_files.outputs.missing == '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hsmdtv-output-${{ github.run_number }}
+          path: |
+            ${{ github.workspace }}/output/
+            ${{ github.workspace }}/hsmdtv_scan.log
+            ${{ github.workspace }}/scan_report.json
+          retention-days: 30
+
+      # ========== Step 9: 提交结果到仓库 ==========
+      - name: 提交结果到仓库
+        if: steps.check_files.outputs.missing == '0'
+        run: |
+          # 复制输出文件到仓库目录
+          cp ${{ github.workspace }}/output/hsmd.m3u8 ./hsmd.m3u8 2>/dev/null || true
+          cp ${{ github.workspace }}/output/hsmd.txt ./hsmd.txt 2>/dev/null || true
+          cp ${{ github.workspace }}/scan_report.json ./scan_report.json 2>/dev/null || true
+
+          # 复制按运营商分组的文件
+          cp ${{ github.workspace }}/output/hsmd_by_isp.m3u8 ./hsmd_by_isp.m3u8 2>/dev/null || true
+
+          # 复制扫描日志
+          cp ${{ github.workspace }}/hsmdtv_scan.log ./hsmdtv_scan.log 2>/dev/null || true
+
+          # 配置 git
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 检查是否有变化
+          if git diff --quiet hsmd.m3u8 hsmd.txt scan_report.json hsmdtv_scan.log hsmd_by_isp.m3u8 2>/dev/null; then
+            echo "📭 没有变化，跳过提交"
+          else
+            git add hsmd.m3u8 hsmd.txt scan_report.json hsmdtv_scan.log hsmd_by_isp.m3u8
+            git commit -m "🔄 自动更新直播源 $(date '+%Y-%m-%d %H:%M') [skip ci]"
+            git push
+            echo "✅ 已推送到仓库"
+          fi
+
+      # ========== Step 10: 打印摘要 ==========
+      - name: 运行摘要
+        if: always()
+        run: |
+          echo "## 📋 HSMDTV 扫描摘要" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 项目 | 值 |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| 运行时间 | $(date '+%Y-%m-%d %H:%M:%S CST') |" >> $GITHUB_STEP_SUMMARY
+          echo "| 触发方式 | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 并发线程 | ${MAX_WORKERS} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 测速超时 | ${HOST_SPEED_TEST_TIMEOUT}s |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # 如果有扫描报告，读取统计信息
+          if [ -f "${{ github.workspace }}/scan_report.json" ]; then
+            echo "### 📊 扫描统计" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            cat ${{ github.workspace }}/scan_report.json >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # 文件大小
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📁 输出文件" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "${{ github.workspace }}/output/hsmd.m3u8" ]; then
+            SIZE=$(du -h ${{ github.workspace }}/output/hsmd.m3u8 | cut -f1)
+            echo "- \`hsmd.m3u8\` (${SIZE})" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -f "${{ github.workspace }}/output/hsmd.txt" ]; then
+            SIZE=$(du -h ${{ github.workspace }}/output/hsmd.txt | cut -f1)
+            echo "- \`hsmd.txt\` (${SIZE})" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -f "${{ github.workspace }}/output/hsmd_by_isp.m3u8" ]; then
+            SIZE=$(du -h ${{ github.workspace }}/output/hsmd_by_isp.m3u8 | cut -f1)
+            echo "- \`hsmd_by_isp.m3u8\` (${SIZE})" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # ========== Step 11: 清理临时文件 ==========
+      - name: 清理
+        if: always()
+        run: |
+          rm -rf ${{ github.workspace }}/output
+          rm -f ${{ github.workspace }}/hsmdtv_scan.log
+          echo "✓ 清理完成"
