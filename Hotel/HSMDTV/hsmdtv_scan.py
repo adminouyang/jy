@@ -469,7 +469,7 @@ def generate_final_outputs(all_verified, channel_best):
         for cat, ch_names in categorized.items():
             if not ch_names:
                 continue
-            f.write(f"# ===== {cat} =====\n")
+            f.write(f"{cat},#genre#\n")
             for ch_name in ch_names:
                 if ch_name in channel_best:
                     link = channel_best[ch_name]
