@@ -1,84 +1,41 @@
 name: hsmdtv_scan
-
 on:
   schedule:
-    - cron: '0 22 * * *'   # 每天 UTC 22:00（北京时间次日 06:00）
+    - cron: '0 22 * * *'
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   update:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Hotel/HSMDTV
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Create logs directory
-        run: mkdir -p logs
-
-      - name: Show directory structure (debug)
-        run: |
-          echo "--- PWD ---"
-          pwd
-          echo "--- Hotel/HSMDTV tree ---"
-          ls -laR
-          echo "--- Check IP file ---"
-          test -f ip/hsmd_ip.txt && echo "OK: ip/hsmd_ip.txt exists" || echo "MISSING: ip/hsmd_ip.txt"
-          echo "--- Check list files ---"
-          ls -la *_list.txt 2>/dev/null || echo "MISSING: no *_list.txt found"
-
+      - run: pip install requests
+      - run: mkdir -p Hotel/HSMDTV/logs
       - name: Run IPTV update script
         env:
-          # 工作目录（脚本内所有相对路径基于此）
-          WORK_DIR: Hotel/HSMDTV
-          # 文件路径（相对于仓库根目录）
-          IP_LIST_FILE: Hotel/HSMDTV/ip/hsmd_ip.txt
-          IP_OUTPUT_DIR: Hotel/HSMDTV/ip
-          OUTPUT_M3U8: Hotel/HSMDTV/hsmd.m3u8
-          OUTPUT_TXT: Hotel/HSMDTV/hsmd.txt
-          LOG_FILE: Hotel/HSMDTV/logs/cron.log
-          # 外部资源
+          WORK_DIR: ${{ github.workspace }}/Hotel/HSMDTV
+          IP_LIST_FILE: ${{ github.workspace }}/Hotel/HSMDTV/ip/hsmd_ip.txt
+          IP_OUTPUT_DIR: ${{ github.workspace }}/Hotel/HSMDTV/ip
+          OUTPUT_M3U8: ${{ github.workspace }}/Hotel/HSMDTV/hsmd.m3u8
+          OUTPUT_TXT: ${{ github.workspace }}/Hotel/HSMDTV/hsmd.txt
+          LOG_FILE: ${{ github.workspace }}/Hotel/HSMDTV/logs/cron.log
           EPG_URL: ${{ secrets.EPG_URL || 'https://epg.112114.xyz/pp.xml' }}
-          LOGO_BASE_URL: ${{ secrets.LOGO_BASE_URL || 'https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/' }}
-          # 性能参数
-          MAX_WORKERS: '20'
-          HOST_SPEED_TEST_TIMEOUT: '15'
-          SPEED_TEST_BATCH_SIZE: '60'
-        run: python hsmdtv_scan.py
-
-      - name: Commit and push generated files
+          LOGO_BASE_URL: ${{ secrets.LOGO_BASE_URL || 'https://ghfast.top/...' }}
+        run: python Hotel/HSMDTV/hsmdtv_scan.py
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           BEIJING_TIME=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
-
-          # 添加所有生成的文件（用绝对路径）
-          git add Hotel/HSMDTV/hsmd.m3u8
-          git add Hotel/HSMDTV/hsmd.txt
-          git add Hotel/HSMDTV/hsmd_by_isp.m3u8
-          git add Hotel/HSMDTV/scan_report.json
-          git add Hotel/HSMDTV/logs/cron.log
-          git add Hotel/HSMDTV/ip/*.txt
-
-          # 只在有变化时才提交
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
+          git add Hotel/HSMDTV/hsmd.m3u8 Hotel/HSMDTV/hsmd.txt \
+              Hotel/HSMDTV/hsmd_by_isp.m3u8 Hotel/HSMDTV/scan_report.json \
+              Hotel/HSMDTV/logs/cron.log Hotel/HSMDTV/ip/*.txt
+          git diff --quiet && git diff --staged --quiet || {
             git commit -m "Auto-update hsmdtv [$BEIJING_TIME]"
-            git pull --rebase origin ${{ github.ref_name }}
+            git pull --rebase origin main
             git push
-          fi
+          }
