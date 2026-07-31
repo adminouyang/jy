@@ -372,6 +372,62 @@ def verify_all_channels_multi_isp(channel_lists, isp_speed_map):
     return all_verified, channel_best
 
 # ==================== 输出模块 ====================
+
+def _build_channel_lookup(all_verified):
+    """
+    将 all_verified 列表按频道名分组，保持首次出现顺序。
+    返回: OrderedDict {ch_name: [links...]}
+    """
+    ch_groups = OrderedDict()
+    for item in all_verified:
+        ch_groups.setdefault(item["name"], []).append(item)
+    return ch_groups
+
+
+def _categorize_channels(channel_names):
+    """
+    将所有频道名按 CHANNEL_CATEGORIES 的顺序归类。
+    返回: {分类名: [频道名,...], ...} 仅包含有频道的分类，
+          "其他频道" 放在最后。
+    每个分类内的频道顺序也遵循 CHANNEL_CATEGORIES 中的定义顺序。
+    """
+    # 建立 "频道名 -> 所属分类" 的映射（O(1) 查找）
+    name_to_cat = {}
+    for cat, chs in CHANNEL_CATEGORIES.items():
+        for ch in chs:
+            name_to_cat[ch] = cat
+
+    # 按 CHANNEL_CATEGORIES 中定义的顺序初始化分类
+    categorized = OrderedDict()
+    for cat in CHANNEL_CATEGORIES:
+        categorized[cat] = []
+
+    # 第一遍：按 channel_names 的首次出现顺序归位（保持 ISP 验证优先级）
+    seen = set()
+    for ch_name in channel_names:
+        cat = name_to_cat.get(ch_name, "其他频道")
+        categorized.setdefault(cat, [])
+        if ch_name not in seen:
+            categorized[cat].append(ch_name)
+            seen.add(ch_name)
+
+    # 第二遍：对每个分类内的频道，按 CHANNEL_CATEGORIES 中的定义顺序重排
+    # 这样 CCTV1 一定在 CCTV2 前面，不受验证顺序影响
+    cat_order = {}  # cat -> {ch_name: index}
+    for cat, chs in CHANNEL_CATEGORIES.items():
+        cat_order[cat] = {ch: i for i, ch in enumerate(chs)}
+
+    for cat, ch_names in categorized.items():
+        if cat in cat_order:
+            ch_names.sort(key=lambda c: cat_order[cat].get(c, 9999))
+        # "其他频道" 中的频道按字母排序
+        else:
+            ch_names.sort()
+
+    # 去掉空分类
+    return OrderedDict((k, v) for k, v in categorized.items() if v)
+
+
 def generate_final_outputs(all_verified, channel_best):
     """生成 m3u8 + txt + 按ISP分组m3u8 + JSON报告"""
     if not all_verified and not channel_best:
@@ -381,30 +437,38 @@ def generate_final_outputs(all_verified, channel_best):
     logger.info(f"\n{'='*60}")
     logger.info(f"📝 生成输出文件 (验证链接: {len(all_verified)}, 最佳频道: {len(channel_best)})")
 
-    # ---- 完整 m3u8 ----
+    # 按频道名分组的 OrderedDict（保持验证顺序）
+    ch_groups = _build_channel_lookup(all_verified)
+
+    # 按分类归位（保持 CHANNEL_CATEGORIES 中的顺序）
+    categorized = _categorize_channels(list(ch_groups.keys()))
+
+    # ---- 完整 m3u8（按分类分组输出）----
     with open(OUTPUT_M3U8, "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
         f.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n')
-        ch_groups = OrderedDict()
-        for item in all_verified:
-            ch_groups.setdefault(item["name"], []).append(item)
-        for ch_name, links in ch_groups.items():
-            cat = get_channel_category(ch_name)
-            logo = get_channel_logo(ch_name)
-            for link in links:
-                f.write(f'#EXTINF:-1 tvg-id="{ch_name}" tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{cat}",{ch_name}\n')
-                f.write(link["url"] + "\n")
+        for cat, ch_names in categorized.items():
+            if not ch_names:
+                continue
+            f.write(f"\n# ===== {cat} ({len(ch_names)} 个频道) =====\n")
+            for ch_name in ch_names:
+                logo = get_channel_logo(ch_name)
+                for link in ch_groups[ch_name]:
+                    f.write(f'#EXTINF:-1 tvg-id="{ch_name}" tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{cat}",{ch_name}\n')
+                    f.write(link["url"] + "\n")
     logger.info(f"  ✓ {OUTPUT_M3U8}")
 
-    # ---- 简洁 txt ----
+    # ---- 简洁 txt（按分类分组 + 分类标题行）----
     with open(OUTPUT_TXT, "w", encoding="utf-8") as f:
-        for cat in ["央视频道", "卫视频道", "其他频道"]:
-            for ch_name in CHANNEL_CATEGORIES.get(cat, []):
+        for cat, ch_names in categorized.items():
+            if not ch_names:
+                continue
+            f.write(f"# ===== {cat} =====\n")
+            for ch_name in ch_names:
                 if ch_name in channel_best:
-                    f.write(f"{ch_name},{channel_best[ch_name]['url']}\n")
-        for ch_name, link in channel_best.items():
-            if ch_name not in {c for chs in CHANNEL_CATEGORIES.values() for c in chs}:
-                f.write(f"{ch_name},{link['url']}\n")
+                    link = channel_best[ch_name]
+                    f.write(f"{ch_name},{link['url']}\n")
+            f.write("\n")  # 分类之间空行
     logger.info(f"  ✓ {OUTPUT_TXT}")
 
     # ---- 按ISP分组 m3u8 ----
@@ -417,34 +481,47 @@ def generate_final_outputs(all_verified, channel_best):
             isp_groups.setdefault(item.get("isp", "未知"), []).append(item)
         for isp, links in sorted(isp_groups.items()):
             f.write(f"\n# ===== {isp} ({len(links)} 条) =====\n")
-            ch_groups2 = OrderedDict()
+            # ISP 分组内部也按分类排序
+            isp_ch_groups = OrderedDict()
             for item in links:
-                ch_groups2.setdefault(item["name"], []).append(item)
-            for ch_name, ch_links in ch_groups2.items():
-                cat = get_channel_category(ch_name)
-                logo = get_channel_logo(ch_name)
-                for link in ch_links:
-                    f.write(f'#EXTINF:-1 tvg-id="{ch_name}" tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{cat}",{ch_name}\n')
-                    f.write(link["url"] + "\n")
+                isp_ch_groups.setdefault(item["name"], []).append(item)
+            isp_categorized = _categorize_channels(list(isp_ch_groups.keys()))
+            for cat, ch_names in isp_categorized.items():
+                if not ch_names:
+                    continue
+                f.write(f"# --- {cat} ---\n")
+                for ch_name in ch_names:
+                    logo = get_channel_logo(ch_name)
+                    for link in isp_ch_groups[ch_name]:
+                        f.write(f'#EXTINF:-1 tvg-id="{ch_name}" tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{cat}",{ch_name}\n')
+                        f.write(link["url"] + "\n")
     logger.info(f"  ✓ {isp_m3u8}")
 
-    # ---- JSON 报告 ----
+    # ---- JSON 报告（按分类分组）----
     report = {
         "scan_time": time.strftime("%Y-%m-%d %H:%M:%S"),
         "total_verified_links": len(all_verified),
         "total_unique_channels": len(channel_best),
+        "channels_by_category": {},   # 新增：按分类展示
         "channels_by_isp": {},
         "best_channels": {},
     }
+    # 按分类
+    for cat, ch_names in categorized.items():
+        if ch_names:
+            report["channels_by_category"][cat] = ch_names
+    # 按ISP
     for item in all_verified:
         isp = item.get("isp", "未知")
         report["channels_by_isp"].setdefault(isp, set()).add(item["name"])
     for isp, s in report["channels_by_isp"].items():
         report["channels_by_isp"][isp] = sorted(list(s))
+    # 最佳链接
     for ch, link in channel_best.items():
         report["best_channels"][ch] = {
             "url": link["url"], "ip": link["ip"],
             "port": link["port"], "isp": link["isp"],
+            "category": get_channel_category(ch),
             "speed_MB_s": round(link["speed"], 2),
         }
     report_file = os.path.join(WORK_DIR, "scan_report.json")
@@ -457,8 +534,12 @@ def generate_final_outputs(all_verified, channel_best):
     logger.info("📊 汇总报告")
     logger.info(f"  验证通过链接: {report['total_verified_links']}")
     logger.info(f"  唯一频道数:   {report['total_unique_channels']}")
+    logger.info(f"\n  按运营商:")
     for isp, chs in report["channels_by_isp"].items():
         logger.info(f"    [{isp}] {len(chs)} 个频道")
+    logger.info(f"\n  按分类:")
+    for cat, chs in report.get("channels_by_category", {}).items():
+        logger.info(f"    [{cat}] {len(chs)} 个频道")
     logger.info("="*60)
     return True
 
