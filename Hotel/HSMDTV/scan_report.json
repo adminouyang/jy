@@ -1,7 +1,7 @@
 {
-  "scan_time": "2026-08-01 22:46:49",
-  "total_verified_links": 110,
-  "total_unique_channels": 56,
+  "scan_time": "2026-08-02 22:48:43",
+  "total_verified_links": 120,
+  "total_unique_channels": 55,
   "channels_by_category": {
     "央视频道": [
       "CCTV1",
@@ -20,6 +20,7 @@
       "CCTV13",
       "CCTV14",
       "CCTV15",
+      "CCTV16",
       "兵器科技",
       "风云足球",
       "第一剧场",
@@ -34,7 +35,6 @@
       "深圳卫视",
       "北京卫视",
       "广东卫视",
-      "广西卫视",
       "东南卫视",
       "河南卫视",
       "湖北卫视",
@@ -42,24 +42,23 @@
       "四川卫视",
       "重庆卫视",
       "贵州卫视",
-      "云南卫视",
       "天津卫视",
       "安徽卫视",
       "山东卫视",
       "辽宁卫视",
-      "黑龙江卫视",
-      "三沙卫视"
+      "黑龙江卫视"
     ],
     "电影频道": [
       "CHC影迷电影",
       "CHC动作电影",
-      "江苏影视"
+      "BesTV电影",
+      "峨眉电影",
+      "华数电影"
     ],
-    "江苏频道": [
-      "江苏城市",
-      "江苏综艺",
-      "江苏体育休闲",
-      "南京科教"
+    "四川频道": [
+      "四川乡村",
+      "四川文化旅游",
+      "四川宣传片"
     ],
     "湖北频道": [
       "湖北经视"
@@ -68,16 +67,17 @@
       "福建综合"
     ],
     "少儿频道": [
+      "金鹰卡通",
       "动漫秀场"
     ],
     "其他频道": [
-      "金鹰纪实",
       "劲爆体育",
       "游戏风云"
     ]
   },
   "channels_by_isp": {
-    "江苏电信": [
+    "四川电信": [
+      "BesTV电影",
       "CCTV1",
       "CCTV10",
       "CCTV11",
@@ -85,35 +85,37 @@
       "CCTV13",
       "CCTV14",
       "CCTV15",
+      "CCTV16",
       "CCTV2",
       "CCTV3",
       "CCTV4",
       "CCTV5",
+      "CCTV5+",
       "CCTV6",
       "CCTV7",
       "CCTV8",
       "CCTV9",
-      "三沙卫视",
-      "云南卫视",
-      "南京科教",
-      "天津卫视",
+      "东南卫视",
+      "东方卫视",
+      "北京卫视",
+      "华数电影",
+      "四川乡村",
+      "四川卫视",
+      "四川宣传片",
+      "四川文化旅游",
       "安徽卫视",
-      "山东卫视",
+      "峨眉电影",
       "广东卫视",
-      "广西卫视",
-      "江苏体育休闲",
       "江苏卫视",
-      "江苏城市",
-      "江苏影视",
-      "江苏综艺",
+      "江西卫视",
       "河南卫视",
       "浙江卫视",
       "深圳卫视",
+      "湖北卫视",
       "湖南卫视",
       "贵州卫视",
       "重庆卫视",
-      "金鹰纪实",
-      "黑龙江卫视"
+      "金鹰卡通"
     ],
     "湖北联通": [
       "CCTV1",
@@ -191,29 +193,13 @@
     ]
   },
   "best_channels": {
-    "CCTV8": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/8/live.m3u8",
+    "CCTV5": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/5/live.m3u8",
       "ip": "113.57.140.161",
       "port": 10081,
       "isp": "湖北联通",
       "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV1": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/1/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "江苏体育休闲": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/21/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "江苏频道",
-      "speed_MB_s": 0.69
+      "speed_MB_s": 1.59
     },
     "CCTV3": {
       "url": "http://113.57.140.161:10081/newlive/live/hls/3/live.m3u8",
@@ -221,23 +207,15 @@
       "port": 10081,
       "isp": "湖北联通",
       "category": "央视频道",
-      "speed_MB_s": 2.68
+      "speed_MB_s": 1.59
     },
-    "江苏卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/18/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV13": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/11/live.m3u8",
+    "CCTV14": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8",
       "ip": "113.57.140.161",
       "port": 10081,
       "isp": "湖北联通",
       "category": "央视频道",
-      "speed_MB_s": 2.68
+      "speed_MB_s": 1.59
     },
     "CCTV2": {
       "url": "http://113.57.140.161:10081/newlive/live/hls/2/live.m3u8",
@@ -245,23 +223,7 @@
       "port": 10081,
       "isp": "湖北联通",
       "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV5": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/5/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "江苏城市": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/19/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "江苏频道",
-      "speed_MB_s": 0.69
+      "speed_MB_s": 1.59
     },
     "CCTV4": {
       "url": "http://113.57.140.161:10081/newlive/live/hls/4/live.m3u8",
@@ -269,63 +231,7 @@
       "port": 10081,
       "isp": "湖北联通",
       "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV6": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/6/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV12": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/10/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV14": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV15": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/15/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "央视频道",
-      "speed_MB_s": 0.69
-    },
-    "CCTV7": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/7/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "CCTV11": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/34/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "江苏影视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/22/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "电影频道",
-      "speed_MB_s": 0.69
+      "speed_MB_s": 1.59
     },
     "CCTV9": {
       "url": "http://113.57.140.161:10081/newlive/live/hls/9/live.m3u8",
@@ -333,295 +239,15 @@
       "port": 10081,
       "isp": "湖北联通",
       "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "江苏综艺": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/20/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "江苏频道",
-      "speed_MB_s": 0.69
+      "speed_MB_s": 1.59
     },
     "CCTV10": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/10/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "央视频道",
-      "speed_MB_s": 0.69
-    },
-    "重庆卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/23/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "天津卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/24/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "浙江卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/17/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "云南卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/33/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "贵州卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/35/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "三沙卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/38/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "深圳卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/32/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "湖南卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/19/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "广西卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/25/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "山东卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/34/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "南京科教": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/43/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "江苏频道",
-      "speed_MB_s": 0.69
-    },
-    "广东卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/16/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "黑龙江卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/31/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "金鹰纪实": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/39/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "其他频道",
-      "speed_MB_s": 0.69
-    },
-    "安徽卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/36/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "河南卫视": {
-      "url": "http://221.226.51.220:50081/newlive/live/hls/37/live.m3u8",
-      "ip": "221.226.51.220",
-      "port": 50081,
-      "isp": "江苏电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.69
-    },
-    "CCTV5+": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/14/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "湖北卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/15/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "兵器科技": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "风云足球": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/21/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "北京卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/22/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "劲爆体育": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "其他频道",
-      "speed_MB_s": 2.68
-    },
-    "动漫秀场": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/27/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "少儿频道",
-      "speed_MB_s": 2.68
-    },
-    "世界地理": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/29/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "游戏风云": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "其他频道",
-      "speed_MB_s": 2.68
-    },
-    "CHC影迷电影": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/28/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "电影频道",
-      "speed_MB_s": 2.68
-    },
-    "湖北经视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "湖北频道",
-      "speed_MB_s": 2.68
-    },
-    "第一剧场": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/37/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "央视频道",
-      "speed_MB_s": 2.68
-    },
-    "东方卫视": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/31/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "CHC动作电影": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/32/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "电影频道",
-      "speed_MB_s": 2.68
-    },
-    "重温经典": {
-      "url": "http://113.57.140.161:10081/newlive/live/hls/36/live.m3u8",
-      "ip": "113.57.140.161",
-      "port": 10081,
-      "isp": "湖北联通",
-      "category": "卫视频道",
-      "speed_MB_s": 2.68
-    },
-    "福建综合": {
-      "url": "http://120.40.39.246:352/newlive/live/hls/18/live.m3u8",
+      "url": "http://120.40.39.246:352/newlive/live/hls/11/live.m3u8",
       "ip": "120.40.39.246",
       "port": 352,
       "isp": "福建电信",
-      "category": "福建频道",
-      "speed_MB_s": 0.42
-    },
-    "东南卫视": {
-      "url": "http://120.40.39.246:352/newlive/live/hls/19/live.m3u8",
-      "ip": "120.40.39.246",
-      "port": 352,
-      "isp": "福建电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.42
-    },
-    "江西卫视": {
-      "url": "http://120.40.39.246:352/newlive/live/hls/34/live.m3u8",
-      "ip": "120.40.39.246",
-      "port": 352,
-      "isp": "福建电信",
-      "category": "卫视频道",
-      "speed_MB_s": 0.42
+      "category": "央视频道",
+      "speed_MB_s": 0.26
     },
     "四川卫视": {
       "url": "http://120.40.39.246:352/newlive/live/hls/33/live.m3u8",
@@ -629,7 +255,359 @@
       "port": 352,
       "isp": "福建电信",
       "category": "卫视频道",
-      "speed_MB_s": 0.42
+      "speed_MB_s": 0.26
+    },
+    "江苏卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/18/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV5+": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/14/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV8": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/8/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV1": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/1/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV13": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/11/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV6": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/6/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV16": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/17/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "央视频道",
+      "speed_MB_s": 0.19
+    },
+    "CCTV12": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/10/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV15": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/16/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "央视频道",
+      "speed_MB_s": 0.26
+    },
+    "CCTV7": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/7/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "CCTV11": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/34/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "湖南卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/19/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "浙江卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/17/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "东方卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/31/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "北京卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/22/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "江西卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/34/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "东南卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/19/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "重庆卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/23/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "贵州卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/30/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "湖北卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/15/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "安徽卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/31/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "河南卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/38/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "广东卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/16/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "峨眉电影": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/32/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "电影频道",
+      "speed_MB_s": 0.19
+    },
+    "深圳卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/28/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "四川文化旅游": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/35/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "四川频道",
+      "speed_MB_s": 0.19
+    },
+    "华数电影": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/38/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "电影频道",
+      "speed_MB_s": 0.19
+    },
+    "四川乡村": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/36/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "四川频道",
+      "speed_MB_s": 0.19
+    },
+    "BesTV电影": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "电影频道",
+      "speed_MB_s": 0.19
+    },
+    "金鹰卡通": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/40/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "少儿频道",
+      "speed_MB_s": 0.19
+    },
+    "四川宣传片": {
+      "url": "http://118.122.144.115:8888/newlive/live/hls/41/live.m3u8",
+      "ip": "118.122.144.115",
+      "port": 8888,
+      "isp": "四川电信",
+      "category": "四川频道",
+      "speed_MB_s": 0.19
+    },
+    "兵器科技": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "湖北经视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "湖北频道",
+      "speed_MB_s": 1.59
+    },
+    "天津卫视": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/24/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "CHC动作电影": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/32/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "电影频道",
+      "speed_MB_s": 1.59
+    },
+    "劲爆体育": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "其他频道",
+      "speed_MB_s": 1.59
+    },
+    "世界地理": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/29/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "游戏风云": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "其他频道",
+      "speed_MB_s": 1.59
+    },
+    "风云足球": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/21/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "动漫秀场": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/27/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "少儿频道",
+      "speed_MB_s": 1.59
+    },
+    "CHC影迷电影": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/28/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "电影频道",
+      "speed_MB_s": 1.59
+    },
+    "重温经典": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/36/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "卫视频道",
+      "speed_MB_s": 1.59
+    },
+    "第一剧场": {
+      "url": "http://113.57.140.161:10081/newlive/live/hls/37/live.m3u8",
+      "ip": "113.57.140.161",
+      "port": 10081,
+      "isp": "湖北联通",
+      "category": "央视频道",
+      "speed_MB_s": 1.59
+    },
+    "福建综合": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/18/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "福建频道",
+      "speed_MB_s": 0.26
     },
     "辽宁卫视": {
       "url": "http://120.40.39.246:352/newlive/live/hls/35/live.m3u8",
@@ -637,7 +615,23 @@
       "port": 352,
       "isp": "福建电信",
       "category": "卫视频道",
-      "speed_MB_s": 0.42
+      "speed_MB_s": 0.26
+    },
+    "山东卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/26/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
+    },
+    "黑龙江卫视": {
+      "url": "http://120.40.39.246:352/newlive/live/hls/29/live.m3u8",
+      "ip": "120.40.39.246",
+      "port": 352,
+      "isp": "福建电信",
+      "category": "卫视频道",
+      "speed_MB_s": 0.26
     }
   }
 }
