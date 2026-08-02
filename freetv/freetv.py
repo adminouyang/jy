@@ -646,7 +646,8 @@ async def main_async():
         "https://sub.ottiptv.cc/yylunbo.m3u",
         #"https://raw.githubusercontent.com/haonanren118/IPTV/refs/heads/master/iptv_sources.m3u8",
         "https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/ipv4.txt",
-        "https://raw.githubusercontent.com/wgq11/iptv/refs/heads/main/result.txt"
+        "https://raw.githubusercontent.com/wgq11/iptv/refs/heads/main/result.txt",
+        "https://raw.githubusercontent.com/lbxxxtw2/iptv/refs/heads/master/output/tv.txt",
         # "https://freetv.fun/test_channels_original_new.txt"
         # 可以继续添加更多源URL
     ]
