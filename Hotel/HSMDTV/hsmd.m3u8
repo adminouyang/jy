@@ -15,8 +15,6 @@ http://120.40.39.246:352/newlive/live/hls/1/live.m3u8
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://ghfast.top/...cctv2.png" group-title="央视频道",CCTV2
 http://118.122.144.115:8888/newlive/live/hls/2/live.m3u8
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://ghfast.top/...cctv2.png" group-title="央视频道",CCTV2
-http://118.122.144.84:8888/newlive/live/hls/2/live.m3u8
-#EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://ghfast.top/...cctv2.png" group-title="央视频道",CCTV2
 http://221.226.51.220:50081/newlive/live/hls/2/live.m3u8
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://ghfast.top/...cctv2.png" group-title="央视频道",CCTV2
 http://113.57.140.161:10081/newlive/live/hls/2/live.m3u8
@@ -26,8 +24,6 @@ http://60.13.52.236:65500/newlive/live/hls/2/live.m3u8
 http://120.40.39.246:352/newlive/live/hls/2/live.m3u8
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://ghfast.top/...cctv3.png" group-title="央视频道",CCTV3
 http://118.122.144.115:8888/newlive/live/hls/3/live.m3u8
-#EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://ghfast.top/...cctv3.png" group-title="央视频道",CCTV3
-http://118.122.144.84:8888/newlive/live/hls/3/live.m3u8
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://ghfast.top/...cctv3.png" group-title="央视频道",CCTV3
 http://221.226.51.220:50081/newlive/live/hls/3/live.m3u8
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://ghfast.top/...cctv3.png" group-title="央视频道",CCTV3
@@ -81,8 +77,6 @@ http://120.40.39.246:352/newlive/live/hls/8/live.m3u8
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://ghfast.top/...cctv8.png" group-title="央视频道",CCTV8
 http://118.122.144.115:8888/newlive/live/hls/8/live.m3u8
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://ghfast.top/...cctv8.png" group-title="央视频道",CCTV8
-http://118.122.144.84:8888/newlive/live/hls/8/live.m3u8
-#EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://ghfast.top/...cctv8.png" group-title="央视频道",CCTV8
 http://221.226.51.220:50081/newlive/live/hls/8/live.m3u8
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://ghfast.top/...cctv8.png" group-title="央视频道",CCTV8
 http://113.57.140.161:10081/newlive/live/hls/8/live.m3u8
@@ -101,8 +95,6 @@ http://120.40.39.246:352/newlive/live/hls/10/live.m3u8
 #EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="https://ghfast.top/...cctv10.png" group-title="央视频道",CCTV10
 http://118.122.144.115:8888/newlive/live/hls/10/live.m3u8
 #EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="https://ghfast.top/...cctv10.png" group-title="央视频道",CCTV10
-http://118.122.144.84:8888/newlive/live/hls/10/live.m3u8
-#EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="https://ghfast.top/...cctv10.png" group-title="央视频道",CCTV10
 http://221.226.51.220:50081/newlive/live/hls/10/live.m3u8
 #EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="https://ghfast.top/...cctv10.png" group-title="央视频道",CCTV10
 http://60.13.52.236:65500/newlive/live/hls/10/live.m3u8
@@ -120,8 +112,6 @@ http://60.13.52.236:65500/newlive/live/hls/11/live.m3u8
 http://120.40.39.246:352/newlive/live/hls/12/live.m3u8
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://ghfast.top/...cctv12.png" group-title="央视频道",CCTV12
 http://118.122.144.115:8888/newlive/live/hls/12/live.m3u8
-#EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://ghfast.top/...cctv12.png" group-title="央视频道",CCTV12
-http://118.122.144.84:8888/newlive/live/hls/12/live.m3u8
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://ghfast.top/...cctv12.png" group-title="央视频道",CCTV12
 http://221.226.51.220:50081/newlive/live/hls/12/live.m3u8
 #EXTINF:-1 tvg-id="CCTV12" tvg-name="CCTV12" tvg-logo="https://ghfast.top/...cctv12.png" group-title="央视频道",CCTV12
@@ -147,9 +137,9 @@ http://118.122.144.115:8888/newlive/live/hls/14/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://221.226.51.220:50081/newlive/live/hls/14/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
-http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8
-#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
+#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
+http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://60.13.52.236:65500/newlive/live/hls/14/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
@@ -164,8 +154,6 @@ http://60.13.52.236:65500/newlive/live/hls/15/live.m3u8
 http://120.40.39.246:352/newlive/live/hls/16/live.m3u8
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://ghfast.top/...cctv16.png" group-title="央视频道",CCTV16
 http://118.122.144.115:8888/newlive/live/hls/17/live.m3u8
-#EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://ghfast.top/...cctv16.png" group-title="央视频道",CCTV16
-http://118.122.144.84:8888/newlive/live/hls/17/live.m3u8
 #EXTINF:-1 tvg-id="兵器科技" tvg-name="兵器科技" tvg-logo="https://ghfast.top/...兵器科技.png" group-title="央视频道",兵器科技
 http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8
 #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://ghfast.top/...风云足球.png" group-title="央视频道",风云足球
@@ -389,9 +377,9 @@ http://221.226.51.220:50081/newlive/live/hls/43/live.m3u8
 #EXTINF:-1 tvg-id="四川乡村" tvg-name="四川乡村" tvg-logo="https://ghfast.top/...四川乡村.png" group-title="四川频道",四川乡村
 http://118.122.144.115:8888/newlive/live/hls/36/live.m3u8
 #EXTINF:-1 tvg-id="四川文化旅游" tvg-name="四川文化旅游" tvg-logo="https://ghfast.top/...四川文化旅游.png" group-title="四川频道",四川文化旅游
-http://118.122.144.115:8888/newlive/live/hls/34/live.m3u8
-#EXTINF:-1 tvg-id="四川文化旅游" tvg-name="四川文化旅游" tvg-logo="https://ghfast.top/...四川文化旅游.png" group-title="四川频道",四川文化旅游
 http://118.122.144.115:8888/newlive/live/hls/35/live.m3u8
+#EXTINF:-1 tvg-id="四川文化旅游" tvg-name="四川文化旅游" tvg-logo="https://ghfast.top/...四川文化旅游.png" group-title="四川频道",四川文化旅游
+http://118.122.144.115:8888/newlive/live/hls/34/live.m3u8
 #EXTINF:-1 tvg-id="四川宣传片" tvg-name="四川宣传片" tvg-logo="https://ghfast.top/...四川宣传片.png" group-title="四川频道",四川宣传片
 http://118.122.144.115:8888/newlive/live/hls/41/live.m3u8
 
@@ -412,15 +400,15 @@ http://113.57.140.161:10081/newlive/live/hls/27/live.m3u8
 # ===== 其他频道 (7 个频道) =====
 #EXTINF:-1 tvg-id="金鹰纪实" tvg-name="金鹰纪实" tvg-logo="https://ghfast.top/...金鹰纪实.png" group-title="其他频道",金鹰纪实
 http://221.226.51.220:50081/newlive/live/hls/39/live.m3u8
-#EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://ghfast.top/...游戏风云.png" group-title="其他频道",游戏风云
-http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
 #EXTINF:-1 tvg-id="劲爆体育" tvg-name="劲爆体育" tvg-logo="https://ghfast.top/...劲爆体育.png" group-title="其他频道",劲爆体育
 http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
-#EXTINF:-1 tvg-id="华数爱电影" tvg-name="华数爱电影" tvg-logo="https://ghfast.top/...华数爱电影.png" group-title="其他频道",华数爱电影
-http://60.13.52.236:65500/newlive/live/hls/6/live.m3u8
+#EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://ghfast.top/...游戏风云.png" group-title="其他频道",游戏风云
+http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
 #EXTINF:-1 tvg-id="IPTV3综艺" tvg-name="IPTV3综艺" tvg-logo="https://ghfast.top/...IPTV3综艺.png" group-title="其他频道",IPTV3综艺
 http://60.13.52.236:65500/newlive/live/hls/3/live.m3u8
-#EXTINF:-1 tvg-id="华数爱大剧" tvg-name="华数爱大剧" tvg-logo="https://ghfast.top/...华数爱大剧.png" group-title="其他频道",华数爱大剧
-http://60.13.52.236:65500/newlive/live/hls/8/live.m3u8
 #EXTINF:-1 tvg-id="IPTV5体育" tvg-name="IPTV5体育" tvg-logo="https://ghfast.top/...IPTV5体育.png" group-title="其他频道",IPTV5体育
 http://60.13.52.236:65500/newlive/live/hls/5/live.m3u8
+#EXTINF:-1 tvg-id="华数爱电影" tvg-name="华数爱电影" tvg-logo="https://ghfast.top/...华数爱电影.png" group-title="其他频道",华数爱电影
+http://60.13.52.236:65500/newlive/live/hls/6/live.m3u8
+#EXTINF:-1 tvg-id="华数爱大剧" tvg-name="华数爱大剧" tvg-logo="https://ghfast.top/...华数爱大剧.png" group-title="其他频道",华数爱大剧
+http://60.13.52.236:65500/newlive/live/hls/8/live.m3u8
