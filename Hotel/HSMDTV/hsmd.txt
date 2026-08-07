@@ -16,13 +16,8 @@ CCTV13,http://120.40.39.246:352/newlive/live/hls/14/live.m3u8
 CCTV14,http://120.40.39.246:352/newlive/live/hls/15/live.m3u8
 CCTV15,http://120.40.39.246:352/newlive/live/hls/16/live.m3u8
 CCTV16,http://118.122.144.115:8888/newlive/live/hls/17/live.m3u8
-兵器科技,http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8
-风云足球,http://113.57.140.161:10081/newlive/live/hls/21/live.m3u8
-第一剧场,http://113.57.140.161:10081/newlive/live/hls/37/live.m3u8
-世界地理,http://113.57.140.161:10081/newlive/live/hls/29/live.m3u8
 
 卫视频道,#genre#
-重温经典,http://113.57.140.161:10081/newlive/live/hls/36/live.m3u8
 湖南卫视,http://120.40.39.246:352/newlive/live/hls/21/live.m3u8
 浙江卫视,http://120.40.39.246:352/newlive/live/hls/23/live.m3u8
 江苏卫视,http://120.40.39.246:352/newlive/live/hls/22/live.m3u8
@@ -47,8 +42,6 @@ CCTV16,http://118.122.144.115:8888/newlive/live/hls/17/live.m3u8
 三沙卫视,http://221.226.51.220:50081/newlive/live/hls/38/live.m3u8
 
 电影频道,#genre#
-CHC影迷电影,http://113.57.140.161:10081/newlive/live/hls/28/live.m3u8
-CHC动作电影,http://113.57.140.161:10081/newlive/live/hls/32/live.m3u8
 BesTV电影,http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8
 江苏影视,http://221.226.51.220:50081/newlive/live/hls/22/live.m3u8
 峨眉电影,http://118.122.144.115:8888/newlive/live/hls/32/live.m3u8
@@ -62,21 +55,15 @@ BesTV电影,http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8
 
 四川频道,#genre#
 四川乡村,http://118.122.144.115:8888/newlive/live/hls/36/live.m3u8
-四川文化旅游,http://118.122.144.115:8888/newlive/live/hls/35/live.m3u8
+四川文化旅游,http://118.122.144.115:8888/newlive/live/hls/34/live.m3u8
 四川宣传片,http://118.122.144.115:8888/newlive/live/hls/41/live.m3u8
-
-湖北频道,#genre#
-湖北经视,http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8
 
 福建频道,#genre#
 福建综合,http://120.40.39.246:352/newlive/live/hls/18/live.m3u8
 
 少儿频道,#genre#
 金鹰卡通,http://118.122.144.115:8888/newlive/live/hls/40/live.m3u8
-动漫秀场,http://113.57.140.161:10081/newlive/live/hls/27/live.m3u8
 
 其他频道,#genre#
 金鹰纪实,http://221.226.51.220:50081/newlive/live/hls/39/live.m3u8
-游戏风云,http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
-劲爆体育,http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
 
