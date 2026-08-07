@@ -28,7 +28,7 @@ OUTPUT_TXT = os.environ.get("OUTPUT_TXT", os.path.join(SCRIPT_DIR, "output.txt")
 
 # 远程源配置
 API_URL = "https://iptvs.pes.im"
-TOP_N = 10
+TOP_N = 5
 MAX_WORKERS = 20
 HOST_SPEED_TEST_TIMEOUT = 15
 SPEED_TEST_BATCH_SIZE = 60
