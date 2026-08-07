@@ -1,21 +1,21 @@
 📡央视频道 #genre#
-CCTV1,cctv-1,cctv-1hd,cctv1,cctv1 8m1080,cctv1综合,CCTV-1
-CCTV2,cctv2,cctv2 8m1080,cctv2财经,cctv2 高清,CCTV-2
-CCTV3,cctv-3,cctv-3hd,cctv3,cctv3综艺,cctv3-综艺,cctv3 高清,CCTV-3
-CCTV4,cctv-4,cctv4,cctv-4 中文国际,cctv-4hd,cctv-4中文国际,cctv4中文国际,cctv4 高清,CCTV-4
-CCTV5,cctv-5,cctv-5hd,cctv5,cctv5体育,CCTV-5
-CCTV5+,cctv-5 plus体育赛事,cctv5 plus,cctv5 plus 8m1080,cctv5 plus体育赛事,cctv-5 plus,CCTV-5+
-CCTV6,cctv-6,cctv-6hd,cctv6,cctv6电影
-CCTV7,cctv-7,cctv-7hd,cctv7,CCTV-7
-CCTV8,cctv-8,cctv-8hd,cctv8,cctv-8电视剧,CCTV-8
-CCTV9,cctv-9,cctv-9hd,cctv9,cctv9纪录,cctv-9纪录,CCTV-9
-CCTV10,cctv-10,cctv-10hd,cctv-10科教,cctv10,cctv10科教,CCTV-10
-CCTV11,cctv-11,cctv-11hd,cctv-11戏曲,cctv11,cctv11戏曲,CCTV-11
-CCTV12,cctv-12,cctv-12hd,cctv12,cctv-12社会与法,CCTV-12
-CCTV13,cctv-13,cctv-13hd,cctv-13新闻,cctv13,cctv13新闻,CCTV-13
-CCTV14,cctv-14,cctv-14hd,cctv-14少儿,cctv14,cctv14hd,cctv14少儿,CCTV-14
-CCTV15,cctv-15,cctv-15hd,cctv-15音乐,cctv15,cctv15音乐,CCTV-15
-CCTV16,cctv-16,cctv-16hd,cctv16,CCTV-16
+CCTV1,cctv-1,cctv-1hd,cctv1,cctv1 8m1080,cctv1综合,CCTV-1,CCTV-1 综合,CCTV1港澳版
+CCTV2,cctv2,cctv2 8m1080,cctv2财经,cctv2 高清,CCTV-2,CCTV-2 财经
+CCTV3,cctv-3,cctv-3hd,cctv3,cctv3综艺,cctv3-综艺,cctv3 高清,CCTV-3,CCTV-3 综艺
+CCTV4,cctv-4,cctv4,cctv-4 中文国际,cctv-4hd,cctv-4中文国际,cctv4中文国际,cctv4 高清,CCTV-4,CCTV-4 中文国际
+CCTV5,cctv-5,cctv-5hd,cctv5,cctv5体育,CCTV-5,CCTV-5 体育
+CCTV5+,cctv-5 plus体育赛事,cctv5 plus,cctv5 plus 8m1080,cctv5 plus体育赛事,cctv-5 plus,CCTV-5+,CCTV-5+ 体育赛事
+CCTV6,cctv-6,cctv-6hd,cctv6,cctv6电影,CCTV-6 电影
+CCTV7,cctv-7,cctv-7hd,cctv7,CCTV-7,CCTV-7 国防军事
+CCTV8,cctv-8,cctv-8hd,cctv8,cctv-8电视剧,CCTV-8,CCTV-8 电视剧
+CCTV9,cctv-9,cctv-9hd,cctv9,cctv9纪录,cctv-9纪录,CCTV-9,CCTV-9 纪录
+CCTV10,cctv-10,cctv-10hd,cctv-10科教,cctv10,cctv10科教,CCTV-10,CCTV-10 科教
+CCTV11,cctv-11,cctv-11hd,cctv-11戏曲,cctv11,cctv11戏曲,CCTV-11,CCTV-11 戏曲
+CCTV12,cctv-12,cctv-12hd,cctv12,cctv-12社会与法,CCTV-12,CCTV-12 社会与法
+CCTV13,cctv-13,cctv-13hd,cctv-13新闻,cctv13,cctv13新闻,CCTV-13,CCTV-13 新闻
+CCTV14,cctv-14,cctv-14hd,cctv-14少儿,cctv14,cctv14hd,cctv14少儿,CCTV-14,CCTV-14 少儿
+CCTV15,cctv-15,cctv-15hd,cctv-15音乐,cctv15,cctv15音乐,CCTV-15,CCTV-15 音乐
+CCTV16,cctv-16,cctv-16hd,cctv16,CCTV-16,CCTV-16 奥林匹克
 CCTV17,cctv-17,cctv-17hd,cctv17,CCTV-17
 第一剧场,cctv-第一剧场,cctv第一剧场,cctv第一剧场
 风云足球,cctv-风云足球,cctv风云足球,cctv-风云足球
@@ -172,18 +172,18 @@ sctv-4高清,sctv-4高清
 广东影视,广东影视,广东影视高清
 广东科教,广东科教
 广东公共,广东公共,广东公共高清
-广东珠江,广东珠江,广东珠江高清,广东珠江
+广东珠江,广东珠江高清
 广东少儿,广东少儿,广东少儿高清
 广东新闻,广东新闻,广东新闻高清
-广东体育,广东体育,广东体育高清
+广东体育,广东体育高清
 广东民生,广东民生
 广东经济科教,广东经济科教
 广东综艺,广东综艺,广东综艺-4k2
 广州影视,广州影视,广州影视
-广州新闻,广州新闻,广州新闻
+广州新闻,广州新闻,
 广州法治,广州法治,广州法治
 广州竞赛,广州竞赛,广州竞赛
-广州综合,广州综合,广州综合
+广州综合,广州综合
 广州南国都市,广州南国都市
 岭南戏曲,岭南戏曲
 汕尾新闻综合,汕尾新闻综合
@@ -623,21 +623,47 @@ sctv-4高清,sctv-4高清
 足球,足球
 
 📡港澳台 #genre#
-amc电影,amc电影
+凤凰中文,凤凰中文
+凤凰卫视,凤凰卫视
+凤凰资讯,凤凰资讯
+凤凰香港,
+凤凰电影,
+香港c+,香港c+
+香港有线新闻,
+RTHK 33,
+RTHK 34,
+RTHK31,RTHK 31,
+RTHK32,RTHK 32,
+RTHK33,RTHK 33,
+RTHK34,RTHK 34,
+ViuTV,Viu 頻道
+Viu6,VIUTVSIX,ViuTVsix
+澳門Macau,
+澳门综艺,
+澳门莲花,
+澳视澳门,
+澳视卫星,
+澳门体育,
+天映频道,天映新加坡,,天映频道(新加坡)
+天映经典,
+爱奇艺,
+amc电影台,amc电影
 CN卡通,cn卡通
+千禧经典台,
 tvbs歡樂,tvbs歡樂
 緯來電影,緯來電影
 緯來體育,緯來體育
 緯來日本,緯來日本
-影迷數位電影,影迷數位電影
+影迷数位电影台,影迷數位電影
 華視,華視
 華視新聞,華視新聞
 公視戲劇,公視戲劇
-采昌影劇,采昌影劇
+采昌影剧台,采昌影劇
 三立新聞,三立新聞,三立新闻
 三立台灣,三立台灣,三立台灣台
 三立都會,三立都會
 新闻,新闻
+八度空间,
 人间衛視,人间衛視
 生命電視台,生命電視台,生命电视台
 台視,台視
@@ -674,7 +700,7 @@ tvbs歡樂,tvbs歡樂
 民視台灣,民視台灣
 民視第一,民視第一
 民视 新闻,民视 新闻
-民视影剧,民视影剧
+民视影剧,民视影剧台
 民视新闻,民视新闻
 民视新闻 hd,民视新闻 hd
 民视新闻台,民视新闻台
@@ -682,14 +708,16 @@ tvbs歡樂,tvbs歡樂
 民视第一,民视第一
 民视旅游,民视旅游
 民视综艺,民视综艺
+靖天映画,靖天映画
+靖天电影台,
 靖天育樂,靖天育樂
 靖天資訊,靖天資訊
 靖天綜合,靖天綜合
 靖天日本,靖天日本
 靖天國際,靖天國際
-靖天戲劇,靖天戲劇
+靖天戏剧台,靖天戲劇
 靖天卡通,靖天卡通
-靖洋戲劇,靖洋戲劇
+靖洋戏剧台,靖洋戲劇
 龍華電影,龍華電影
 龍華戲劇,龍華戲劇
 亞洲旅遊,亞洲旅遊
@@ -705,8 +733,10 @@ tvbs歡樂,tvbs歡樂
 华语电视,华语电视
 华语电视3,华语电视3
 华语电视3台,华语电视3台
-经典电影,经典电影
+经典电影台,经典电影
 amc电影,amc电影
+CMusic,
+精选动漫台,
 elta生活英语,elta生活英语
 tvbs欢乐,tvbs欢乐
 華視,華視
@@ -742,16 +772,28 @@ tvbs欢乐,tvbs欢乐
 东森新闻,东森新闻
 东森超视,东森超视
 亚洲新闻,亚洲新闻
-亚洲旅游,亚洲旅游
+亚洲旅游,亚洲旅游,
 动物星球,动物星球
 华视新闻,华视新闻
 历史频道,历史频道
 纬来体育,纬来体育,緯來體育
+纬来电影台,
+纬来戏剧台,
+纬来体育台,
+东森电影,
+东森戏剧,
+东森洋片,
 经典电影,经典电影
 镜新闻,镜新闻
+龙祥时代,
+龙华电影,
+龙华经典,龍華經典台,
+龙华偶像,
 龙华日韩,龙华日韩
 龙华戏剧,龙华戏剧,
-龍華經典台,
+龙华洋片,
+龙华卡通,
+金光布袋戏,
 面包台,
 j2,j2
 nowsports,nowsports
@@ -762,15 +804,8 @@ tvbs亚洲台,tvbs亚洲台
 tvbs亞洲,tvbs亞洲
 tvbs新聞,tvbs新聞
 tvbs新闻,tvbs新闻
-凤凰中文,凤凰中文
-凤凰卫视,凤凰卫视
-凤凰资讯,凤凰资讯
-凤凰电影,
-RTHK 31,
-RTHK 32,
-RTHK 33,
-RTHK 34,
-TVB J1,
+
+TVBJ1,TVB J1,
 TVB1,
 国际,国际
 无线财经,无线财经
@@ -779,29 +814,27 @@ TVB1,
 环球电视,环球电视
 电影01,电影01
 第一卫视,第一卫视
-翡翠台,翡翠,tvb 翡翠
-翡翠台4K,
-华丽翡翠台,
-黃金華劇台,
-娛樂新聞台,
+翡翠台,翡翠,tvb 翡翠,翡翠台(字幕),翡翠台(WebVTT字幕),翡翠台(多音轨字幕)
+翡翠台4K,翡翠台4K(字幕),翡翠台4K(多音轨字幕)
+华丽翡翠台,华丽翡翠台(硬字幕),华丽翡翠台(新加坡),华丽翡翠台(多音轨字幕)
+TVBDRAMA,翡翠剧集台
+Astro AOD,Astro AOD(多音轨字幕)
+Astro欢喜台,
+黃金華劇台,黄金华剧台(WebVTT字幕),
+娛樂新聞台,TVB娱乐新闻台,
 tvbs新闻,tvbs新闻
-TVB Plus,
-HOY 76,
-HOY 77,
-HOY 78,
+TVB Plus,TVB Plus(字幕),TVB Plus(WebVTT字幕),TVB PLUS(多音轨字幕)
+HOY 76,,HOY国际财经台
+HOY 77,HOY TV
+HOY 78,HOY资讯台
+HOY剧集台,
 NOW新闻台,
 Now财经台,
 ROCK Action,
-TVB星河,tvb星河,星河台
-亚洲武侠电视台,
-ViuTV,Viu 頻道
-Viu6,VIUTVSIX
-澳門Macau,
-澳门综艺,
-澳门莲花,
-澳视澳门,
-澳视卫星,
-明珠台,明珠
+TVB星河,tvb星河,星河台,TVB星河(多音轨字幕)
+亚洲武侠电视台,TVB亚洲武侠,亚洲武侠
+
+明珠台,明珠,明珠台(字幕),明珠台(WebVTT字幕),明珠台(多音轨字幕)
 无线新闻台,
 有线新,有线新
 有线新闻,有线新闻
@@ -811,8 +844,10 @@ Viu6,VIUTVSIX
 林正英,林正英
 美亚电影,美亚电影
 耀才财经,耀才财经
-香港c+,香港c+
-香港有线新闻,香港有线新闻
+
+CH5,
+CH8,
+CHU,
 DAZN1,dazn sport 1
 DAZN2,dazn sport 2
 nba tv,nba tv
