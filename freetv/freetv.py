@@ -648,6 +648,7 @@ async def main_async():
         "https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/ipv4.txt",
         "https://raw.githubusercontent.com/wgq11/iptv/refs/heads/main/result.txt",
         "https://raw.githubusercontent.com/lbxxxtw2/iptv/refs/heads/master/output/tv.txt",
+        "https://raw.githubusercontent.com/qingtian6325-lang/IPTV/refs/heads/main/mytv.m3u",
         # "https://freetv.fun/test_channels_original_new.txt"
         # 可以继续添加更多源URL
     ]
