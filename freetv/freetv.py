@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.0
-功能：异步并发测速、黑名单手动管理、不在模板中的频道归入“其它频道”
+IPTV频道源测速工具 v3.1
+功能：
+- 异步并发测速
+- 黑名单手动管理（只读取，不自动写入）
+- 支持 HLS/m3u8 分片测速（解决 m3u8 链接测速数据不足问题）
+- 不在模板中的频道自动归入“其它频道”
+- 打印频道名、链接、速度、响应时间
+- 只输出速度 ≥ 阈值（600 KB/s）的源
 """
 
 import asyncio
@@ -12,7 +18,7 @@ import statistics
 import os
 import re
 import time
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 from datetime import datetime, timedelta, timezone
 
 # ====================== 全局配置 ======================
@@ -56,7 +62,6 @@ class Blacklist:
     def contains(self, url):
         try:
             domain = urlparse(url).netloc
-            # 去除端口号
             if ':' in domain:
                 domain = domain.split(':')[0]
             return domain in self.domains
@@ -107,7 +112,6 @@ class ChannelTemplate:
             self.categories.append(other_cat)
             self.category_channels[other_cat] = []
         else:
-            # 移到末尾
             self.categories.remove(other_cat)
             self.categories.append(other_cat)
 
@@ -115,16 +119,13 @@ class ChannelTemplate:
         return True
 
     def add_to_other(self, name):
-        """将未知频道名加入‘其它频道’分类"""
         other_cat = '其它频道'
         if other_cat not in self.categories:
             self.categories.append(other_cat)
             self.category_channels[other_cat] = []
-        # 将名称本身作为主频道
         self.main_channels[name] = other_cat
         if name not in self.category_channels[other_cat]:
             self.category_channels[other_cat].append(name)
-        # 同时加入别名映射（自身映射到自身）
         if name not in self.channel_map:
             self.channel_map[name] = name
 
@@ -241,6 +242,51 @@ class AsyncSpeedTester:
     async def __aexit__(self, *args):
         await self.session.close()
 
+    async def _measure_stream(self, stream_response, url_label, channel_name):
+        """通用测速函数：对已打开的响应流进行速度测量"""
+        downloaded = 0
+        steady_downloaded = 0
+        steady_start = None
+        chunk_speeds = []
+        chunk_start = time.time()
+        test_start = time.time()
+
+        async for chunk in stream_response.content.iter_chunked(32768):
+            now = time.time()
+            chunk_len = len(chunk)
+            if chunk_len == 0:
+                break
+            elapsed = now - chunk_start
+            if elapsed > 0.001:
+                chunk_speeds.append(chunk_len / elapsed / 1024)
+            chunk_start = now
+
+            downloaded += chunk_len
+            if downloaded > STEADY_BYTES:
+                if steady_start is None:
+                    steady_start = now
+                steady_downloaded += chunk_len
+
+            if downloaded >= DEEP_TEST_SIZE:
+                break
+            if (now - test_start) >= MIN_TEST_TIME and downloaded >= 131072:
+                break
+
+        total_time = time.time() - test_start
+        if total_time <= 0 or downloaded < 16384:  # 提高最小数据量要求，避免极小分片
+            return 0.0, downloaded
+
+        overall_speed = downloaded / total_time / 1024
+        steady_speed = 0
+        if steady_downloaded > 0 and steady_start:
+            steady_elapsed = time.time() - steady_start
+            if steady_elapsed > 0:
+                steady_speed = steady_downloaded / steady_elapsed / 1024
+        median_speed = statistics.median(chunk_speeds) if len(chunk_speeds) >= 3 else overall_speed
+
+        final_speed = 0.5 * steady_speed + 0.3 * overall_speed + 0.2 * median_speed
+        return final_speed, downloaded
+
     async def test_one(self, url, channel_name):
         """测试单个源，返回速度KB/s，失败返回0"""
         # 检查黑名单
@@ -258,66 +304,88 @@ class AsyncSpeedTester:
                         print(f"❌ {channel_name:<25} | {url[:55]:<55} | 超时 (TTFB={ttfb*1000:.0f}ms)")
                         return 0.0
 
-                    downloaded = 0
-                    steady_downloaded = 0
-                    steady_start = None
-                    chunk_speeds = []
-                    chunk_start = time.time()
+                    # 判断是否为 HLS 播放列表
+                    content_type = resp.headers.get('Content-Type', '')
+                    body_preview = await resp.content.read(2048)  # 读取前2KB判断
+                    resp.content.unread_data(body_preview)       # 放回去供后续读取
 
-                    async for chunk in resp.content.iter_chunked(32768):
-                        now = time.time()
-                        chunk_len = len(chunk)
-                        if chunk_len == 0:
-                            break
-                        elapsed = now - chunk_start
-                        if elapsed > 0.001:
-                            chunk_speeds.append(chunk_len / elapsed / 1024)
-                        chunk_start = now
+                    is_hls = (url.lower().endswith('.m3u8') or
+                              'vnd.apple.mpegurl' in content_type or
+                              'application/x-mpegURL' in content_type or
+                              body_preview.lstrip()[:20].lower().find(b'#extm3u') != -1)
 
-                        downloaded += chunk_len
-                        if downloaded > STEADY_BYTES:
-                            if steady_start is None:
-                                steady_start = now
-                            steady_downloaded += chunk_len
+                    if is_hls:
+                        # 解析播放列表，获取第一个 ts 分片
+                        playlist_text = body_preview.decode('utf-8', errors='ignore')
+                        # 继续读取剩余部分（如果有）
+                        remaining = await resp.content.read()
+                        full_playlist = playlist_text + remaining.decode('utf-8', errors='ignore')
 
-                        if downloaded >= DEEP_TEST_SIZE:
-                            break
-                        if (now - start) >= MIN_TEST_TIME and downloaded >= 131072:
-                            break
+                        seg_urls = []
+                        for line in full_playlist.splitlines():
+                            line = line.strip()
+                            if line and not line.startswith('#'):
+                                seg_url = urljoin(url, line)
+                                seg_urls.append(seg_url)
+                                if len(seg_urls) >= 3:
+                                    break
 
-                    total_time = time.time() - start
-                    if total_time <= 0 or downloaded < 8192:
-                        print(f"❌ {channel_name:<25} | {url[:55]:<55} | 数据不足 ({downloaded}B)")
-                        return 0.0
+                        if not seg_urls:
+                            print(f"❌ {channel_name:<25} | {url[:55]:<55} | m3u8无有效分片")
+                            return 0.0
 
-                    # 三种速度计算
-                    overall_speed = downloaded / total_time / 1024
-                    steady_speed = 0
-                    if steady_downloaded > 0 and steady_start:
-                        steady_elapsed = time.time() - steady_start
-                        if steady_elapsed > 0:
-                            steady_speed = steady_downloaded / steady_elapsed / 1024
-                    median_speed = statistics.median(chunk_speeds) if len(chunk_speeds) >= 3 else overall_speed
+                        # 依次尝试分片，直到成功测速
+                        final_speed = 0.0
+                        for seg_url in seg_urls:
+                            try:
+                                async with self.session.get(seg_url, timeout=CHECK_TIMEOUT) as seg_resp:
+                                    speed, downloaded = await self._measure_stream(seg_resp, seg_url, channel_name)
+                                    if speed > 0:
+                                        final_speed = speed
+                                        break
+                                    else:
+                                        print(f"⚠️  {channel_name:<25} | {seg_url[:50]:<50} | 分片数据不足 ({downloaded}B)")
+                            except Exception as e:
+                                print(f"⚠️  {channel_name:<25} | {seg_url[:50]:<50} | 分片请求失败: {str(e)[:30]}")
+                                continue
 
-                    final_speed = (0.5 * steady_speed +
-                                   0.3 * overall_speed +
-                                   0.2 * median_speed)
+                        if final_speed <= 0:
+                            print(f"❌ {channel_name:<25} | {url[:55]:<55} | 所有分片测速失败")
+                            return 0.0
 
-                    # 更新统计
-                    self.stats['total'] += 1
-                    if final_speed >= SPEED_THRESHOLD:
-                        self.stats['passed'] += 1
+                        # 更新统计
+                        self.stats['total'] += 1
+                        if final_speed >= SPEED_THRESHOLD:
+                            self.stats['passed'] += 1
+                        else:
+                            self.stats['failed'] += 1
+                        self.stats['speeds'].append(final_speed)
+                        self.stats['max'] = max(self.stats['max'], final_speed)
+                        self.stats['min'] = min(self.stats['min'], final_speed)
+
+                        status = '✅' if final_speed >= SPEED_THRESHOLD else '❌'
+                        print(f"{status} {channel_name:<25} | {url[:55]:<55} | 速度: {final_speed:>7.1f} KB/s | 响应: {ttfb*1000:>5.0f} ms")
+                        return final_speed
+
                     else:
-                        self.stats['failed'] += 1
-                    self.stats['speeds'].append(final_speed)
-                    self.stats['max'] = max(self.stats['max'], final_speed)
-                    self.stats['min'] = min(self.stats['min'], final_speed)
+                        # 非 HLS 直链，直接测速
+                        speed, downloaded = await self._measure_stream(resp, url, channel_name)
+                        if speed <= 0:
+                            print(f"❌ {channel_name:<25} | {url[:55]:<55} | 数据不足 ({downloaded}B)")
+                            return 0.0
 
-                    # 打印详细信息
-                    status = '✅' if final_speed >= SPEED_THRESHOLD else '❌'
-                    print(f"{status} {channel_name:<25} | {url[:55]:<55} | 速度: {final_speed:>7.1f} KB/s | 响应: {ttfb*1000:>5.0f} ms")
+                        self.stats['total'] += 1
+                        if speed >= SPEED_THRESHOLD:
+                            self.stats['passed'] += 1
+                        else:
+                            self.stats['failed'] += 1
+                        self.stats['speeds'].append(speed)
+                        self.stats['max'] = max(self.stats['max'], speed)
+                        self.stats['min'] = min(self.stats['min'], speed)
 
-                    return final_speed
+                        status = '✅' if speed >= SPEED_THRESHOLD else '❌'
+                        print(f"{status} {channel_name:<25} | {url[:55]:<55} | 速度: {speed:>7.1f} KB/s | 响应: {ttfb*1000:>5.0f} ms")
+                        return speed
 
             except asyncio.TimeoutError:
                 print(f"❌ {channel_name:<25} | {url[:55]:<55} | 超时")
@@ -336,7 +404,7 @@ class AsyncSpeedTester:
         tested = 0
 
         print(f"\n开始并发测速，最大并发 {MAX_CONCURRENT}，共 {total_sources} 个源")
-        print("=" * 130)
+        print("=" * 140)
 
         for cat in template.categories:
             for main in template.category_channels.get(cat, []):
@@ -354,7 +422,7 @@ class AsyncSpeedTester:
                 tested += len(urls)
                 passed_now = sum(1 for sp in speeds if sp >= SPEED_THRESHOLD)
                 print(f"  {main:<20} 通过 {passed_now}/{len(urls)}  进度 {tested}/{total_sources}")
-                print("-" * 130)
+                print("-" * 140)
 
         return results, self.stats
 
@@ -403,9 +471,9 @@ def save_output(all_channels, template, output_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
-    print("=" * 65)
-    print("IPTV频道源测速工具 v3.0 (异步并发+黑名单+其它频道)")
-    print("=" * 65)
+    print("=" * 75)
+    print("IPTV频道源测速工具 v3.1 (支持 HLS/m3u8 分片测速)")
+    print("=" * 75)
 
     # 1. 加载黑名单
     blacklist = Blacklist('freetv/blacklist.txt')
@@ -451,7 +519,7 @@ async def main():
         results, stats = await tester.batch_test(std_list, template)
 
     # 7. 输出结果
-    print("\n" + "=" * 65)
+    print("\n" + "=" * 75)
     print("测速完成！")
     print(f"  总测试源数: {stats['total']}")
     print(f"  通过(≥{SPEED_THRESHOLD}KB/s): {stats['passed']}")
