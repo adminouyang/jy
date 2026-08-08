@@ -485,7 +485,13 @@ async def main():
 
     # 3. 获取频道列表
     source_urls = [
-        'https://iptv-org.github.io/iptv/index.m3u',
+        #'https://iptv-org.github.io/iptv/index.m3u',
+        "https://sub.ottiptv.cc/yylunbo.m3u",
+        #"https://raw.githubusercontent.com/haonanren118/IPTV/refs/heads/master/iptv_sources.m3u8",
+        "https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/ipv4.txt",
+        "https://raw.githubusercontent.com/wgq11/iptv/refs/heads/main/result.txt",
+        "https://raw.githubusercontent.com/lbxxxtw2/iptv/refs/heads/master/output/tv.txt",
+        "https://raw.githubusercontent.com/qingtian6325-lang/IPTV/refs/heads/main/mytv.m3u",
     ]
     print("\n从网络源获取频道列表...")
     all_raw = await fetch_channels_from_urls(source_urls)
