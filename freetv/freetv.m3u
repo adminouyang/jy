@@ -1,11 +1,9 @@
 #EXTM3U x-tvg-url="https://gh-proxy.com/https://raw.githubusercontent.com/adminouyang/231006/refs/heads/main/py/TV/EPG/epg.xml"
-#EXTINF:-1 tvg-name="汕头经济" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/汕头经济.png" group-title="广东", 汕头经济
-http://129.211.14.102:25000/gdst.php?id=st2&token=www.9kds.com
-#EXTINF:-1 tvg-name="汕头综合" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/汕头综合.png" group-title="广东", 汕头综合
-http://129.211.14.102:25000/gdst.php?id=st1&token=www.9kds.com
 #EXTINF:-1 tvg-name="林正英" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/林正英.png" group-title="港澳台", 林正英
 http://epg.112114.xyz/douyu/218859
-#EXTINF:-1 tvg-name="TVB Plus" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/TVB Plus.png" group-title="港澳台", TVB Plus
-https://vdm6-hw.nbgdsygs.com/live/h6-2.flv
-#EXTINF:-1 tvg-name="无线新闻台" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/无线新闻台.png" group-title="港澳台", 无线新闻台
-http://15611-huge.cdn-o2.me/live/4b1cb29e33/9ea2b8c5e827/500949.ts
+#EXTINF:-1 tvg-name="欧美大片3" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/欧美大片3.png" group-title="其它", 欧美大片3
+http://epg.112114.xyz/douyu/9249162
+#EXTINF:-1 tvg-name="贝爷影厅" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/贝爷影厅.png" group-title="其它", 贝爷影厅
+http://epg.112114.xyz/douyu/252802
+#EXTINF:-1 tvg-name="刘德华-电影" tvg-logo="https://codeberg.org/ou-yang/TV/raw/branch/main/LOGO/刘德华-电影.png" group-title="其它", 刘德华-电影
+http://epg.112114.xyz/douyu/2516864
