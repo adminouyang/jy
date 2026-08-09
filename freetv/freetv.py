@@ -21,10 +21,10 @@ from datetime import datetime, timedelta, timezone
 # ====================== 全局配置 ======================
 SPEED_THRESHOLD = 600          # KB/s
 CHECK_TIMEOUT = 5              # 秒
-MAX_CONCURRENT = 30            # 最大并发数
+MAX_CONCURRENT = 50            # 最大并发数
 DEEP_TEST_SIZE = 786432        # 字节 (~768KB)
 STEADY_BYTES = 262144          # 排除前256KB爆发期
-MIN_TEST_TIME = 1.5            # 秒
+MIN_TEST_TIME = 2.5            # 秒
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -314,7 +314,7 @@ class AsyncSpeedTester:
                 async with self.session.get(url, timeout=CHECK_TIMEOUT) as resp:
                     ttfb = time.time() - start
                     if ttfb > 2.5:
-                        print(f"❌ {channel_name:<10}|{url[:85]:<90}|超时(TTFB={ttfb*1000:.0f}ms)")
+                        print(f"❌ {channel_name:<10}|{url[:85]:<85}|超时(TTFB={ttfb*1000:.0f}ms)")
                         return 0.0
 
                     # 判断是否为 HLS 播放列表
@@ -344,7 +344,7 @@ class AsyncSpeedTester:
                                     break
 
                         if not seg_urls:
-                            print(f"❌ {channel_name:<10}|{url[:85]:<90}| m3u8无有效分片")
+                            print(f"❌ {channel_name:<10}|{url[:85]:<85}| m3u8无有效分片")
                             return 0.0
 
                         final_speed = 0.0
@@ -356,13 +356,13 @@ class AsyncSpeedTester:
                                         final_speed = speed
                                         break
                                     else:
-                                        print(f"⚠️  {channel_name:<10}|{seg_url[:85]:<90}|分片数据不足 ({downloaded}B)")
+                                        print(f"⚠️  {channel_name:<10}|{seg_url[:85]:<85}|分片数据不足 ({downloaded}B)")
                             except Exception as e:
-                                print(f"⚠️  {channel_name:<10}|{seg_url[:85]:<90}|分片请求失败: {str(e)[:30]}")
+                                print(f"⚠️  {channel_name:<10}|{seg_url[:85]:<85}|分片请求失败: {str(e)[:30]}")
                                 continue
 
                         if final_speed <= 0:
-                            print(f"❌ {channel_name:<10}|{url[:85]:<90}| 所有分片测速失败")
+                            print(f"❌ {channel_name:<10}|{url[:85]:<85}| 所有分片测速失败")
                             return 0.0
 
                         self.stats['total'] += 1
@@ -375,14 +375,14 @@ class AsyncSpeedTester:
                         self.stats['min'] = min(self.stats['min'], final_speed)
 
                         status = '✅' if final_speed >= SPEED_THRESHOLD else '❌'
-                        print(f"{status} {channel_name:<10}|{url[:85]:<90}|速度:{final_speed:>7.1f} KB/s|响应: {ttfb*1000:>5.0f} ms")
+                        print(f"{status} {channel_name:<10}|{url[:85]:<85}|速度:{final_speed:>7.1f} KB/s|响应: {ttfb*1000:>5.0f} ms")
                         return final_speed
 
                     else:
                         # 非HLS直链
                         speed, downloaded = await self._measure_stream(resp, url, channel_name)
                         if speed <= 0:
-                            print(f"❌ {channel_name:<10}|{url[:85]:<90}| 数据不足 ({downloaded}B)")
+                            print(f"❌ {channel_name:<10}|{url[:85]:<85}| 数据不足 ({downloaded}B)")
                             return 0.0
 
                         self.stats['total'] += 1
@@ -395,14 +395,14 @@ class AsyncSpeedTester:
                         self.stats['min'] = min(self.stats['min'], speed)
 
                         status = '✅' if speed >= SPEED_THRESHOLD else '❌'
-                        print(f"{status}{channel_name:<10}|{url[:85]:<90}|速度:{speed:>7.1f} KB/s|响应:{ttfb*1000:>5.0f} ms")
+                        print(f"{status}{channel_name:<10}|{url[:85]:<85}|速度:{speed:>7.1f} KB/s|响应:{ttfb*1000:>5.0f} ms")
                         return speed
 
             except asyncio.TimeoutError:
-                print(f"❌ {channel_name:<10}|{url[:85]:<90}| 超时")
+                print(f"❌ {channel_name:<10}|{url[:85]:<85}| 超时")
                 return 0.0
             except Exception as e:
-                print(f"❌ {channel_name:<10}|{url[:85]:<90}| 异常: {str(e)[:30]}")
+                print(f"❌ {channel_name:<10}|{url[:85]:<85}| 异常: {str(e)[:30]}")
                 return 0.0
 
     async def batch_test(self, channel_list, template):
@@ -492,7 +492,7 @@ async def main():
         return
 
     source_urls = [
-        "https://iptv-org.github.io/iptv/index.m3u",
+        #"https://iptv-org.github.io/iptv/index.m3u",
         "https://sub.ottiptv.cc/yylunbo.m3u",
         #"https://raw.githubusercontent.com/haonanren118/IPTV/refs/heads/master/iptv_sources.m3u8",
         "https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/ipv4.txt",
