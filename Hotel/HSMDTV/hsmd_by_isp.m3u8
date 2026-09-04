@@ -1,14 +1,14 @@
 #EXTM3U
 #EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"
 
-# ===== 四川电信 (46 条) =====
+# ===== 四川电信 (43 条) =====
 # --- 央视频道 ---
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://ghfast.top/...cctv1.png" group-title="央视频道",CCTV1
 http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8
+#EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://ghfast.top/...cctv1.png" group-title="央视频道",CCTV1
+http://118.122.144.84:8888/newlive/live/hls/1/live.m3u8
 #EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://ghfast.top/...cctv2.png" group-title="央视频道",CCTV2
 http://118.122.144.115:8888/newlive/live/hls/2/live.m3u8
-#EXTINF:-1 tvg-id="CCTV2" tvg-name="CCTV2" tvg-logo="https://ghfast.top/...cctv2.png" group-title="央视频道",CCTV2
-http://118.122.144.84:8888/newlive/live/hls/2/live.m3u8
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV3" tvg-logo="https://ghfast.top/...cctv3.png" group-title="央视频道",CCTV3
 http://118.122.144.115:8888/newlive/live/hls/3/live.m3u8
 #EXTINF:-1 tvg-id="CCTV4" tvg-name="CCTV4" tvg-logo="https://ghfast.top/...cctv4.png" group-title="央视频道",CCTV4
@@ -19,16 +19,14 @@ http://118.122.144.115:8888/newlive/live/hls/5/live.m3u8
 http://118.122.144.84:8888/newlive/live/hls/5/live.m3u8
 #EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV5+" tvg-logo="https://ghfast.top/...cctv5plus.png" group-title="央视频道",CCTV5+
 http://118.122.144.115:8888/newlive/live/hls/16/live.m3u8
-#EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV5+" tvg-logo="https://ghfast.top/...cctv5plus.png" group-title="央视频道",CCTV5+
-http://118.122.144.84:8888/newlive/live/hls/16/live.m3u8
 #EXTINF:-1 tvg-id="CCTV6" tvg-name="CCTV6" tvg-logo="https://ghfast.top/...cctv6.png" group-title="央视频道",CCTV6
 http://118.122.144.115:8888/newlive/live/hls/6/live.m3u8
 #EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://ghfast.top/...cctv7.png" group-title="央视频道",CCTV7
 http://118.122.144.115:8888/newlive/live/hls/7/live.m3u8
+#EXTINF:-1 tvg-id="CCTV7" tvg-name="CCTV7" tvg-logo="https://ghfast.top/...cctv7.png" group-title="央视频道",CCTV7
+http://118.122.144.84:8888/newlive/live/hls/7/live.m3u8
 #EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://ghfast.top/...cctv8.png" group-title="央视频道",CCTV8
 http://118.122.144.115:8888/newlive/live/hls/8/live.m3u8
-#EXTINF:-1 tvg-id="CCTV8" tvg-name="CCTV8" tvg-logo="https://ghfast.top/...cctv8.png" group-title="央视频道",CCTV8
-http://118.122.144.84:8888/newlive/live/hls/8/live.m3u8
 #EXTINF:-1 tvg-id="CCTV9" tvg-name="CCTV9" tvg-logo="https://ghfast.top/...cctv9.png" group-title="央视频道",CCTV9
 http://118.122.144.115:8888/newlive/live/hls/9/live.m3u8
 #EXTINF:-1 tvg-id="CCTV10" tvg-name="CCTV10" tvg-logo="https://ghfast.top/...cctv10.png" group-title="央视频道",CCTV10
@@ -41,8 +39,6 @@ http://118.122.144.115:8888/newlive/live/hls/12/live.m3u8
 http://118.122.144.115:8888/newlive/live/hls/13/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://118.122.144.115:8888/newlive/live/hls/14/live.m3u8
-#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
-http://118.122.144.84:8888/newlive/live/hls/14/live.m3u8
 #EXTINF:-1 tvg-id="CCTV15" tvg-name="CCTV15" tvg-logo="https://ghfast.top/...cctv15.png" group-title="央视频道",CCTV15
 http://118.122.144.115:8888/newlive/live/hls/15/live.m3u8
 #EXTINF:-1 tvg-id="CCTV16" tvg-name="CCTV16" tvg-logo="https://ghfast.top/...cctv16.png" group-title="央视频道",CCTV16
@@ -50,8 +46,6 @@ http://118.122.144.115:8888/newlive/live/hls/17/live.m3u8
 # --- 卫视频道 ---
 #EXTINF:-1 tvg-id="湖南卫视" tvg-name="湖南卫视" tvg-logo="https://ghfast.top/...hunan.png" group-title="卫视频道",湖南卫视
 http://118.122.144.115:8888/newlive/live/hls/19/live.m3u8
-#EXTINF:-1 tvg-id="湖南卫视" tvg-name="湖南卫视" tvg-logo="https://ghfast.top/...hunan.png" group-title="卫视频道",湖南卫视
-http://118.122.144.84:8888/newlive/live/hls/19/live.m3u8
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://ghfast.top/...zhejiang.png" group-title="卫视频道",浙江卫视
 http://118.122.144.115:8888/newlive/live/hls/21/live.m3u8
 #EXTINF:-1 tvg-id="江苏卫视" tvg-name="江苏卫视" tvg-logo="https://ghfast.top/...jiangsu.png" group-title="卫视频道",江苏卫视
@@ -210,9 +204,9 @@ http://113.57.140.161:10081/newlive/live/hls/10/live.m3u8
 #EXTINF:-1 tvg-id="CCTV13" tvg-name="CCTV13" tvg-logo="https://ghfast.top/...cctv13.png" group-title="央视频道",CCTV13
 http://113.57.140.161:10081/newlive/live/hls/11/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
-http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
-#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8
+#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
+http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
 #EXTINF:-1 tvg-id="兵器科技" tvg-name="兵器科技" tvg-logo="https://ghfast.top/...兵器科技.png" group-title="央视频道",兵器科技
 http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8
 #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://ghfast.top/...风云足球.png" group-title="央视频道",风云足球
@@ -256,10 +250,10 @@ http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8
 #EXTINF:-1 tvg-id="动漫秀场" tvg-name="动漫秀场" tvg-logo="https://ghfast.top/...动漫秀场.png" group-title="少儿频道",动漫秀场
 http://113.57.140.161:10081/newlive/live/hls/27/live.m3u8
 # --- 其他频道 ---
-#EXTINF:-1 tvg-id="劲爆体育" tvg-name="劲爆体育" tvg-logo="https://ghfast.top/...劲爆体育.png" group-title="其他频道",劲爆体育
-http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
 #EXTINF:-1 tvg-id="游戏风云" tvg-name="游戏风云" tvg-logo="https://ghfast.top/...游戏风云.png" group-title="其他频道",游戏风云
 http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
+#EXTINF:-1 tvg-id="劲爆体育" tvg-name="劲爆体育" tvg-logo="https://ghfast.top/...劲爆体育.png" group-title="其他频道",劲爆体育
+http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
 
 # ===== 福建电信 (37 条) =====
 # --- 央视频道 ---
