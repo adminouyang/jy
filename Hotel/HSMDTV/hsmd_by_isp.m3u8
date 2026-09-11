@@ -1,7 +1,7 @@
 #EXTM3U
 #EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"
 
-# ===== 四川电信 (77 条) =====
+# ===== 四川电信 (79 条) =====
 # --- 央视频道 ---
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://ghfast.top/...cctv1.png" group-title="央视频道",CCTV1
 http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8
@@ -86,16 +86,18 @@ http://118.122.144.115:8888/newlive/live/hls/20/live.m3u8
 http://118.122.144.84:8888/newlive/live/hls/20/live.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
 http://118.122.144.115:8888/newlive/live/hls/22/live.m3u8
-#EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
-http://118.122.144.84:8888/newlive/live/hls/22/live.m3u8
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://ghfast.top/...shenzhen.png" group-title="卫视频道",深圳卫视
 http://118.122.144.115:8888/newlive/live/hls/33/live.m3u8
+#EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://ghfast.top/...shenzhen.png" group-title="卫视频道",深圳卫视
+http://118.122.144.84:8888/newlive/live/hls/33/live.m3u8
 #EXTINF:-1 tvg-id="北京卫视" tvg-name="北京卫视" tvg-logo="https://ghfast.top/...beijing.png" group-title="卫视频道",北京卫视
 http://118.122.144.115:8888/newlive/live/hls/23/live.m3u8
 #EXTINF:-1 tvg-id="北京卫视" tvg-name="北京卫视" tvg-logo="https://ghfast.top/...beijing.png" group-title="卫视频道",北京卫视
 http://118.122.144.84:8888/newlive/live/hls/23/live.m3u8
 #EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://ghfast.top/...guangdong.png" group-title="卫视频道",广东卫视
 http://118.122.144.115:8888/newlive/live/hls/31/live.m3u8
+#EXTINF:-1 tvg-id="广东卫视" tvg-name="广东卫视" tvg-logo="https://ghfast.top/...guangdong.png" group-title="卫视频道",广东卫视
+http://118.122.144.84:8888/newlive/live/hls/31/live.m3u8
 #EXTINF:-1 tvg-id="东南卫视" tvg-name="东南卫视" tvg-logo="https://ghfast.top/...东南卫视.png" group-title="卫视频道",东南卫视
 http://118.122.144.115:8888/newlive/live/hls/25/live.m3u8
 #EXTINF:-1 tvg-id="东南卫视" tvg-name="东南卫视" tvg-logo="https://ghfast.top/...东南卫视.png" group-title="卫视频道",东南卫视
@@ -135,6 +137,8 @@ http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8
 http://118.122.144.84:8888/newlive/live/hls/39/live.m3u8
 #EXTINF:-1 tvg-id="峨眉电影" tvg-name="峨眉电影" tvg-logo="https://ghfast.top/...峨眉电影.png" group-title="电影频道",峨眉电影
 http://118.122.144.115:8888/newlive/live/hls/32/live.m3u8
+#EXTINF:-1 tvg-id="峨眉电影" tvg-name="峨眉电影" tvg-logo="https://ghfast.top/...峨眉电影.png" group-title="电影频道",峨眉电影
+http://118.122.144.84:8888/newlive/live/hls/32/live.m3u8
 #EXTINF:-1 tvg-id="华数电影" tvg-name="华数电影" tvg-logo="https://ghfast.top/...华数电影.png" group-title="电影频道",华数电影
 http://118.122.144.115:8888/newlive/live/hls/38/live.m3u8
 #EXTINF:-1 tvg-id="华数电影" tvg-name="华数电影" tvg-logo="https://ghfast.top/...华数电影.png" group-title="电影频道",华数电影
