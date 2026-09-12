@@ -147,9 +147,9 @@ http://118.122.144.84:8888/newlive/live/hls/14/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://221.226.51.220:50081/newlive/live/hls/14/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
-http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
-#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8
+#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
+http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://120.40.39.246:352/newlive/live/hls/15/live.m3u8
 #EXTINF:-1 tvg-id="CCTV15" tvg-name="CCTV15" tvg-logo="https://ghfast.top/...cctv15.png" group-title="央视频道",CCTV15
@@ -210,6 +210,8 @@ http://113.57.140.161:10081/newlive/live/hls/18/live.m3u8
 http://120.40.39.246:352/newlive/live/hls/22/live.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
 http://118.122.144.115:8888/newlive/live/hls/22/live.m3u8
+#EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
+http://118.122.144.84:8888/newlive/live/hls/22/live.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
 http://113.57.140.161:10081/newlive/live/hls/31/live.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视

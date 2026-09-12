@@ -1,7 +1,7 @@
 #EXTM3U
 #EXTM3U x-tvg-url="https://epg.112114.xyz/pp.xml"
 
-# ===== 四川电信 (79 条) =====
+# ===== 四川电信 (80 条) =====
 # --- 央视频道 ---
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" tvg-logo="https://ghfast.top/...cctv1.png" group-title="央视频道",CCTV1
 http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8
@@ -86,6 +86,8 @@ http://118.122.144.115:8888/newlive/live/hls/20/live.m3u8
 http://118.122.144.84:8888/newlive/live/hls/20/live.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
 http://118.122.144.115:8888/newlive/live/hls/22/live.m3u8
+#EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://ghfast.top/...dongfang.png" group-title="卫视频道",东方卫视
+http://118.122.144.84:8888/newlive/live/hls/22/live.m3u8
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://ghfast.top/...shenzhen.png" group-title="卫视频道",深圳卫视
 http://118.122.144.115:8888/newlive/live/hls/33/live.m3u8
 #EXTINF:-1 tvg-id="深圳卫视" tvg-name="深圳卫视" tvg-logo="https://ghfast.top/...shenzhen.png" group-title="卫视频道",深圳卫视
@@ -276,9 +278,9 @@ http://113.57.140.161:10081/newlive/live/hls/10/live.m3u8
 #EXTINF:-1 tvg-id="CCTV13" tvg-name="CCTV13" tvg-logo="https://ghfast.top/...cctv13.png" group-title="央视频道",CCTV13
 http://113.57.140.161:10081/newlive/live/hls/11/live.m3u8
 #EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
-http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
-#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
 http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8
+#EXTINF:-1 tvg-id="CCTV14" tvg-name="CCTV14" tvg-logo="https://ghfast.top/...cctv14.png" group-title="央视频道",CCTV14
+http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
 #EXTINF:-1 tvg-id="兵器科技" tvg-name="兵器科技" tvg-logo="https://ghfast.top/...兵器科技.png" group-title="央视频道",兵器科技
 http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8
 #EXTINF:-1 tvg-id="风云足球" tvg-name="风云足球" tvg-logo="https://ghfast.top/...风云足球.png" group-title="央视频道",风云足球
