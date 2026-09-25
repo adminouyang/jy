@@ -666,3 +666,6 @@ async def main():
         print(f"  {cat}: {len(avail)}/{len(mains)} 频道, {src_cnt} 源")
 
     print("\n完成！")
+
+if __name__ == '__main__':
+    asyncio.run(main())
