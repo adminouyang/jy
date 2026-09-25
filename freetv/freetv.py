@@ -577,6 +577,9 @@ def save_output(all_channels, template, output_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
+    # 必须放在所有使用这些全局变量之前
+    global SPEED_THRESHOLD, CHECK_TIMEOUT, MAX_CONCURRENT
+
     parser = argparse.ArgumentParser(description='IPTV频道源测速工具')
     parser.add_argument('--threshold', type=int, default=SPEED_THRESHOLD)
     parser.add_argument('--timeout', type=int, default=CHECK_TIMEOUT)
@@ -588,7 +591,6 @@ async def main():
                         help='源URL文件，每行一个；留空使用内置列表')
     args = parser.parse_args()
 
-    global SPEED_THRESHOLD, CHECK_TIMEOUT, MAX_CONCURRENT
     SPEED_THRESHOLD = args.threshold
     CHECK_TIMEOUT = args.timeout
     MAX_CONCURRENT = args.concurrency
@@ -664,7 +666,3 @@ async def main():
         print(f"  {cat}: {len(avail)}/{len(mains)} 频道, {src_cnt} 源")
 
     print("\n完成！")
-
-
-if __name__ == '__main__':
-    asyncio.run(main())
