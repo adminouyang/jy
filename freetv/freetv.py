@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.5
-核心改动：多方法综合测试
-- HLS：分片测试 → 播放列表下载测试 → 首个分片强制测试
-- 直链：Range下载 → 无Range下载 → HEAD请求测试
-- 只要有一种方法成功即判定可用
+IPTV频道源测速工具 v3.5 修正完整版
+- 多方法综合测试：HLS分片→播放列表下载→直链Range→无Range→HEAD
+- 任一方法成功即保留该源（速度按实际测得值）
+- 低速源也会进入输出文件
+- 修复函数名/变量名笔误
 """
 
 import asyncio
@@ -21,7 +21,7 @@ from urllib.parse import urlparse, urljoin, urldefrag
 from datetime import datetime, timedelta, timezone
 
 # ====================== 全局配置 ======================
-SPEED_THRESHOLD = 600          # KB/s
+SPEED_THRESHOLD = 600          # KB/s（仅用于统计显示，不再用于过滤输出）
 CHECK_TIMEOUT = 5              # 秒
 MAX_CONCURRENT = 50            # 最大并发数
 DEEP_TEST_SIZE = 786432        # 字节 (~768KB)
@@ -92,6 +92,7 @@ def try_extract_stream_url(body, content_type=''):
                     v = data.get(k)
                     if v:
                         candidates.append(str(v))
+
                 def walk(o):
                     if isinstance(o, dict):
                         for v in o.values():
@@ -254,7 +255,7 @@ def parse_m3u(text):
         if line.startswith('#EXTINF'):
             parts = line.split(',')
             if len(parts) >= 2:
-                name = clean_mma_name(parts[-1].strip())
+                name = clean_m3u_name(parts[-1].strip())
                 j = i + 1
                 while j < len(lines) and (not lines[j].strip() or lines[j].startswith('#')):
                     j += 1
@@ -334,11 +335,10 @@ class AsyncSpeedTester:
 
     # ---------- 通用下载测速 ----------
     async def _download_speed(self, url, max_bytes=RANGE_PROBE_BYTES, min_time=MIN_TEST_TIME,
-                              use_range=True, referer=None):
-        """返回 (speed, downloaded, reason)"""
+                              use_range=True):
         headers = HEADERS.copy()
-        if referer:
-            headers['Referer'] = referer
+        parsed = urlparse(url)
+        headers['Referer'] = f"{parsed.scheme}://{parsed.netloc}"
         if use_range:
             headers['Range'] = f'bytes=0-{max_bytes - 1}'
 
@@ -346,9 +346,7 @@ class AsyncSpeedTester:
         try:
             async with self.session.get(url, timeout=CHECK_TIMEOUT, headers=headers) as resp:
                 if resp.status in (403, 416) and use_range:
-                    return await self._download_speed(
-                        url, max_bytes, min_time, use_range=False, headers=headers
-                    )
+                    return await self._download_speed(url, max_bytes, min_time, use_range=False)
                 if resp.status not in (200, 206):
                     return 0, 0, f'HTTP {resp.status}'
 
@@ -377,7 +375,7 @@ class AsyncSpeedTester:
                             steady += l
                         el = now - chunk_start
                         if el > 0.001:
-                            chunk_spe.append(l / el / 1024)
+                            chunk_speeds.append(l / el / 1024)
                         chunk_start = now
                         if downloaded >= max_bytes:
                             break
@@ -386,7 +384,7 @@ class AsyncSpeedTester:
                 except (aiohttp.ServerDisconnectedError,
                         aiohttp.ClientConnectionError,
                         asyncio.TimeoutError):
-                    pass  # 中断但保留数据
+                    pass
 
                 total = time.time() - start
                 if total <= 0 or downloaded < 1:
@@ -398,7 +396,7 @@ class AsyncSpeedTester:
                     se = time.time() - steady_t0
                     if se > 0:
                         steady_speed = steady / se / 1024
-                median_s = statistics.median(chunk_spe) if len(chunk_spe) >= 3 else overall
+                median_s = statistics.median(chunk_speeds) if len(chunk_speeds) >= 3 else overall
                 final = 0.5 * steady_speed + 0.3 * overall + 0.2 * median_s
                 return final, downloaded, 'ok'
 
@@ -436,7 +434,7 @@ class AsyncSpeedTester:
             return result
         return [(url, text)]
 
-    # ---------- 测试方法1：HLS分片测试 ----------
+    # ---------- 测试方法1：HLS 分片 ----------
     async def _test_hls_segments(self, url, channel_name):
         medias = await self.resolve_media_playlist(url)
         if not medias:
@@ -472,7 +470,7 @@ class AsyncSpeedTester:
                 return avg, f'segs={valid}/{len(recent)}'
         return 0, 'all_segments_failed'
 
-    # ---------- 测试方法2：HLS播放列表下载测试 ----------
+    # ---------- 测试方法2：HLS 播放列表下载 ----------
     async def _test_hls_playlist(self, url, channel_name):
         speed, downloaded, reason = await self._download_speed(
             url, max_bytes=65536, min_time=1.0, use_range=False
@@ -481,25 +479,21 @@ class AsyncSpeedTester:
             return speed, f'playlist_dl_{downloaded}B'
         return 0, reason
 
-    # ---------- 测试方法3：直链 Range 下载 ----------
+    # ---------- 测试方法3：直链 Range ----------
     async def _test_direct_range(self, url, channel_name):
-        speed, downloaded, reason = await self._download_speed(
-            url, use_range=True
-        )
+        speed, downloaded, reason = await self._download_speed(url, use_range=True)
         if speed > 0 and downloaded > 0:
             return speed, reason
         return 0, reason
 
-    # ---------- 测试方法4：直链无 Range 下载 ----------
+    # ---------- 测试方法4：直链无 Range ----------
     async def _test_direct_no_range(self, url, channel_name):
-        speed, downloaded, reason = await self._download_speed(
-            url, use_range=False
-        )
+        speed, downloaded, reason = await self._download_speed(url, use_range=False)
         if speed > 0 and downloaded > 0:
             return speed, reason
         return 0, reason
 
-    # ---------- 测试方法5：HTTP HEAD 测试 ----------
+    # ---------- 测试方法5：HTTP HEAD ----------
     async def _test_http_head(self, url, channel_name):
         try:
             parsed = urlparse(url)
@@ -509,7 +503,6 @@ class AsyncSpeedTester:
                 if resp.status == 200:
                     cl = resp.headers.get('Content-Length')
                     if cl and int(cl) > 0:
-                        # 返回一个极低速度，表示可连接
                         return 0.1, f'head_ok_len={cl}'
                     return 0.1, 'head_ok'
                 return 0, f'HTTP {resp.status}'
@@ -561,7 +554,9 @@ class AsyncSpeedTester:
                             if b'#EXTM3U' in snippet:
                                 is_hls = True
                             else:
-                                extracted = try_extract_stream_url(snippet.decode('utf-8', 'ignore'), ct)
+                                extracted = try_extract_stream_url(
+                                    snippet.decode('utf-8', 'ignore'), ct
+                                )
                                 if extracted:
                                     is_hls = True
                                     url = extracted[0]
@@ -570,13 +565,11 @@ class AsyncSpeedTester:
 
             # 按类型选择测试顺序
             if is_hls:
-                # HLS 测试顺序：分片 → 播放列表 → 首个分片强制
                 methods = [
                     ('hls_segments', self._test_hls_segments),
                     ('hls_playlist', self._test_hls_playlist),
                 ]
             else:
-                # 直链测试顺序：Range → 无Range → HEAD
                 methods = [
                     ('direct_range', self._test_direct_range),
                     ('direct_no_range', self._test_direct_no_range),
@@ -589,7 +582,6 @@ class AsyncSpeedTester:
                     ttfb = time.time() - start
                     self._record(url, channel_name, speed, ttfb, method_name)
                     return speed
-                # 失败继续尝试下一个方法
 
             # 所有方法失败
             self.stats['fail'] += 1
@@ -617,14 +609,15 @@ class AsyncSpeedTester:
                 tasks = [self.test_one(url, main) for url in urls]
                 speeds = await asyncio.gather(*tasks)
 
-                passed = [(url, sp) for url, sp in zip(urls, speeds) if sp >= SPEED_THRESHOLD]
-                passed.sort(key=lambda x: x[1], reverse=True)
-                if passed:
-                    results[main] = passed
+                # 只要有速度就保留（含低速源），不再强制 SPEED_THRESHOLD
+                kept = [(url, sp) for url, sp in zip(urls, speeds) if sp > 0]
+                kept.sort(key=lambda x: x[1], reverse=True)
+                if kept:
+                    results[main] = kept
 
                 tested += len(urls)
-                passed_now = sum(1 for sp in speeds if sp >= SPEED_THRESHOLD)
-                print(f"  {main:<20} 通过 {passed_now}/{len(urls)}  进度 {tested}/{total_sources}")
+                kept_now = sum(1 for sp in speeds if sp > 0)
+                print(f"  {main:<20} 保留 {kept_now}/{len(urls)}  进度 {tested}/{total_sources}")
                 print("-" * 145)
 
         return results, self.stats
@@ -691,7 +684,7 @@ async def main():
     MAX_CONCURRENT = args.concurrency
 
     print("=" * 85)
-    print("IPTV频道源测速工具 v3.5 (多方法综合测试)")
+    print("IPTV频道源测速工具 v3.5 (多方法综合测试，可用即保留)")
     print(f"阈值:{SPEED_THRESHOLD}KB/s 超时:{CHECK_TIMEOUT}s 并发:{MAX_CONCURRENT}")
     print("=" * 85)
 
@@ -741,7 +734,7 @@ async def main():
     print("\n" + "=" * 60)
     print("测速完成！")
     print(f"  总测试源数: {stats['total']}")
-    print(f"  通过(≥{SPEED_THRESHOLD}KB/s): {stats['passed']}")
+    print(f"  达阈值(≥{SPEED_THRESHOLD}KB/s): {stats['passed']}")
     print(f"  低速(连通但未达标): {stats['low']}")
     print(f"  失败(所有方法均失败): {stats['fail']}")
     print(f"  跳过(黑名单): {stats['skip']}")
@@ -749,7 +742,7 @@ async def main():
         print(f"  平均速度: {statistics.mean(stats['speeds']):.1f} KB/s")
         print(f"  最高速度: {stats['max']:.1f} KB/s")
         print(f"  最低速度: {stats['min']:.1f} KB/s")
-    print(f"  通过频道数: {len(results)}")
+    print(f"  保留频道数: {len(results)}")
 
     save_output(results, template, args.output)
 
