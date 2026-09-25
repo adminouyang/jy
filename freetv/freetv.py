@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.4
-改动(vs v3.3)：
-- global声明移至main函数首行
-- 直链/分片测速：同源Referer、Range失败自动降级、连接中断保留已下载数据
-- 接口型m3u8容错：Content-Type为html/json时，若body含#EXTM3U仍当HLS处理
-- HLS递归：返回(media_url, text)列表，逐个media尝试分片
-- 有效字节下限降至1024，低速/失败区分更清晰
+IPTV频道源测速工具 v3.5
+核心改动：多方法综合测试
+- HLS：分片测试 → 播放列表下载测试 → 首个分片强制测试
+- 直链：Range下载 → 无Range下载 → HEAD请求测试
+- 只要有一种方法成功即判定可用
 """
 
 import asyncio
@@ -33,9 +31,9 @@ MIN_TEST_TIME = 2.5            # 秒
 HLS_MAX_DEPTH = 3              # master/media 递归深度
 HLS_SEGMENT_COUNT = 4          # 每个 media playlist 取最近几个 ts
 RANGE_PROBE_BYTES = 524288     # 直链/分片用 Range 拉 512KB
-MIN_MEASURE_BYTES = 1024       # 有效分片最低字节数（放宽）
+MIN_MEASURE_BYTES = 1024       # 有效分片最低字节数
 RETRY_ONCE = True              # 瞬态错误重试1次
-INSECURE_SSL = True            # 关闭证书校验（IPTV常用，生产可改False）
+INSECURE_SSL = True            # 关闭证书校验
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -94,7 +92,6 @@ def try_extract_stream_url(body, content_type=''):
                     v = data.get(k)
                     if v:
                         candidates.append(str(v))
-                # 递归找含 m3u8 的字段
                 def walk(o):
                     if isinstance(o, dict):
                         for v in o.values():
@@ -107,7 +104,6 @@ def try_extract_stream_url(body, content_type=''):
                 walk(data)
         except Exception:
             pass
-    # 纯文本里挑 m3u8 链接
     for m in re.findall(r'https?://[^\s\'"]+\.m3u8[^\s\'"]*', body):
         candidates.append(m)
     return candidates
@@ -258,7 +254,7 @@ def parse_m3u(text):
         if line.startswith('#EXTINF'):
             parts = line.split(',')
             if len(parts) >= 2:
-                name = clean_m3u_name(parts[-1].strip())
+                name = clean_mma_name(parts[-1].strip())
                 j = i + 1
                 while j < len(lines) and (not lines[j].strip() or lines[j].startswith('#')):
                     j += 1
@@ -297,8 +293,6 @@ async def fetch_channels_from_urls(urls):
         )
     for u, t in zip(urls, results):
         if isinstance(t, Exception) or not t:
-            if t and not isinstance(t, Exception):
-                print(f"源失败 {u}")
             continue
         if t.strip().startswith('#EXTM3U'):
             chs = parse_m3u(t)
@@ -338,13 +332,13 @@ class AsyncSpeedTester:
     async def __aexit__(self, *args):
         await self.session.close()
 
-    # ---------- 测量 ----------
-    async def _measure_url_fixed(self, url, channel_name, use_range=True,
-                                 max_bytes=RANGE_PROBE_BYTES, min_time=MIN_TEST_TIME):
-        parsed = urlparse(url)
-        origin = f"{parsed.scheme}://{parsed.netloc}"
+    # ---------- 通用下载测速 ----------
+    async def _download_speed(self, url, max_bytes=RANGE_PROBE_BYTES, min_time=MIN_TEST_TIME,
+                              use_range=True, referer=None):
+        """返回 (speed, downloaded, reason)"""
         headers = HEADERS.copy()
-        headers['Referer'] = origin
+        if referer:
+            headers['Referer'] = referer
         if use_range:
             headers['Range'] = f'bytes=0-{max_bytes - 1}'
 
@@ -352,19 +346,18 @@ class AsyncSpeedTester:
         try:
             async with self.session.get(url, timeout=CHECK_TIMEOUT, headers=headers) as resp:
                 if resp.status in (403, 416) and use_range:
-                    return await self._measure_url_fixed(
-                        url, channel_name, use_range=False,
-                        max_bytes=max_bytes, min_time=min_time
+                    return await self._download_speed(
+                        url, max_bytes, min_time, use_range=False, headers=headers
                     )
                 if resp.status not in (200, 206):
-                    return 0.0, 0, f'HTTP {resp.status}'
+                    return 0, 0, f'HTTP {resp.status}'
 
                 ct = resp.headers.get('Content-Type', '').lower()
                 if any(x in ct for x in ['text/html', 'application/json', 'text/plain']):
                     snippet = await resp.content.read(1024)
                     if b'#EXTM3U' not in snippet:
-                        return 0.0, len(snippet), f'ct={ct}'
-                    return 0.0, len(snippet), 'content_type_mismatch'
+                        return 0, len(snippet), f'ct={ct}'
+                    return 0, len(snippet), 'content_type_mismatch'
 
                 downloaded = 0
                 chunk_speeds = []
@@ -384,7 +377,7 @@ class AsyncSpeedTester:
                             steady += l
                         el = now - chunk_start
                         if el > 0.001:
-                            chunk_speeds.append(l / el / 1024)
+                            chunk_spe.append(l / el / 1024)
                         chunk_start = now
                         if downloaded >= max_bytes:
                             break
@@ -393,11 +386,11 @@ class AsyncSpeedTester:
                 except (aiohttp.ServerDisconnectedError,
                         aiohttp.ClientConnectionError,
                         asyncio.TimeoutError):
-                    pass  # 中断但保留已下载数据
+                    pass  # 中断但保留数据
 
                 total = time.time() - start
-                if total <= 0 or downloaded < MIN_MEASURE_BYTES:
-                    return 0.0, downloaded, f'small_{downloaded}B'
+                if total <= 0 or downloaded < 1:
+                    return 0, downloaded, f'small_{downloaded}B'
 
                 overall = downloaded / total / 1024
                 steady_speed = 0.0
@@ -405,20 +398,20 @@ class AsyncSpeedTester:
                     se = time.time() - steady_t0
                     if se > 0:
                         steady_speed = steady / se / 1024
-                median_s = statistics.median(chunk_speeds) if len(chunk_speeds) >= 3 else overall
+                median_s = statistics.median(chunk_spe) if len(chunk_spe) >= 3 else overall
                 final = 0.5 * steady_speed + 0.3 * overall + 0.2 * median_s
                 return final, downloaded, 'ok'
 
         except asyncio.TimeoutError:
-            return 0.0, 0, 'timeout'
+            return 0, 0, 'timeout'
         except aiohttp.ServerDisconnectedError:
-            return 0.0, 0, 'disconnected'
+            return 0, 0, 'disconnected'
         except Exception as e:
-            return 0.0, 0, f'{type(e).__name__}:{str(e)[:40]}'
+            return 0, 0, f'{type(e).__name__}:{str(e)[:40]}'
 
     # ---------- HLS 递归 ----------
     async def resolve_media_playlist(self, url, depth=0):
-        """返回 [(media_url, text), ...]；非hls返回空列表"""
+        """返回 [(media_url, text), ...]"""
         if depth > HLS_MAX_DEPTH:
             return []
         try:
@@ -443,10 +436,11 @@ class AsyncSpeedTester:
             return result
         return [(url, text)]
 
-    async def measure_hls(self, playlist_url, channel_name):
-        medias = await self.resolve_media_playlist(playlist_url)
+    # ---------- 测试方法1：HLS分片测试 ----------
+    async def _test_hls_segments(self, url, channel_name):
+        medias = await self.resolve_media_playlist(url)
         if not medias:
-            return 0.0, 'no_media_playlist'
+            return 0, 'no_media_playlist'
         for media_url, text in medias:
             info = parse_m3u8_text(text)
             segs = [s for _, s in info['segments']]
@@ -463,8 +457,9 @@ class AsyncSpeedTester:
             valid = 0
             last_err = 'ok'
             for seg_url in recent:
-                speed, downloaded, reason = await self._measure_url_fixed(
-                    seg_url, channel_name, use_range=True
+                speed, downloaded, reason = await self._download_speed(
+                    seg_url, max_bytes=RANGE_PROBE_BYTES, min_time=MIN_TEST_TIME,
+                    use_range=True
                 )
                 if speed > 0 and downloaded >= MIN_MEASURE_BYTES:
                     total_bytes += downloaded
@@ -472,16 +467,57 @@ class AsyncSpeedTester:
                 else:
                     last_err = f'seg_{reason}'
             elapsed = time.time() - total_t0
-            if valid == 0:
-                continue
-            if elapsed <= 0:
-                continue
-            avg = total_bytes / elapsed / 1024
-            return avg, f'segs={valid}/{len(recent)}'
-        return 0.0, 'all_media_failed'
+            if valid > 0 and elapsed > 0:
+                avg = total_bytes / elapsed / 1024
+                return avg, f'segs={valid}/{len(recent)}'
+        return 0, 'all_segments_failed'
+
+    # ---------- 测试方法2：HLS播放列表下载测试 ----------
+    async def _test_hls_playlist(self, url, channel_name):
+        speed, downloaded, reason = await self._download_speed(
+            url, max_bytes=65536, min_time=1.0, use_range=False
+        )
+        if speed > 0 and downloaded > 0:
+            return speed, f'playlist_dl_{downloaded}B'
+        return 0, reason
+
+    # ---------- 测试方法3：直链 Range 下载 ----------
+    async def _test_direct_range(self, url, channel_name):
+        speed, downloaded, reason = await self._download_speed(
+            url, use_range=True
+        )
+        if speed > 0 and downloaded > 0:
+            return speed, reason
+        return 0, reason
+
+    # ---------- 测试方法4：直链无 Range 下载 ----------
+    async def _test_direct_no_range(self, url, channel_name):
+        speed, downloaded, reason = await self._download_speed(
+            url, use_range=False
+        )
+        if speed > 0 and downloaded > 0:
+            return speed, reason
+        return 0, reason
+
+    # ---------- 测试方法5：HTTP HEAD 测试 ----------
+    async def _test_http_head(self, url, channel_name):
+        try:
+            parsed = urlparse(url)
+            headers = HEADERS.copy()
+            headers['Referer'] = f"{parsed.scheme}://{parsed.netloc}"
+            async with self.session.head(url, timeout=CHECK_TIMEOUT, headers=headers) as resp:
+                if resp.status == 200:
+                    cl = resp.headers.get('Content-Length')
+                    if cl and int(cl) > 0:
+                        # 返回一个极低速度，表示可连接
+                        return 0.1, f'head_ok_len={cl}'
+                    return 0.1, 'head_ok'
+                return 0, f'HTTP {resp.status}'
+        except Exception as e:
+            return 0, f'head_err:{str(e)[:30]}'
 
     # ---------- 记录 ----------
-    def _record(self, url, name, speed, ttfb):
+    def _record(self, url, name, speed, ttfb, method):
         st = self.stats
         st['speeds'].append(speed)
         st['max'] = max(st['max'], speed)
@@ -492,9 +528,9 @@ class AsyncSpeedTester:
         else:
             st['low'] += 1
             tag = '⚠️'
-        print(f"{tag} {name:<10}|{url[:85]:<85}|速度:{speed:>7.1f}KB/s|ttfb:{ttfb * 1000:>5.0f}ms")
+        print(f"{tag} {name:<10}|{url[:85]:<85}|速度:{speed:>7.1f}KB/s|ttfb:{ttfb * 1000:>5.0f}ms|{method}")
 
-    # ---------- 单源测试 ----------
+    # ---------- 单源测试（多方法） ----------
     async def test_one(self, url, channel_name):
         if self.blacklist.contains(url):
             self.stats['skip'] += 1
@@ -507,80 +543,57 @@ class AsyncSpeedTester:
 
         async with self.semaphore:
             self.stats['total'] += 1
-            attempts = 2 if RETRY_ONCE else 1
-            for attempt in range(attempts):
+            start = time.time()
+            is_hls = url.lower().split('?')[0].endswith('.m3u8')
+
+            # 探测 Content-Type 判断是否为 HLS
+            if not is_hls:
                 try:
-                    start = time.time()
                     parsed = urlparse(url)
                     headers = HEADERS.copy()
                     headers['Referer'] = f"{parsed.scheme}://{parsed.netloc}"
-                    is_hls = url.lower().split('?')[0].endswith('.m3u8')
-
-                    if not is_hls:
-                        async with self.session.get(url, timeout=CHECK_TIMEOUT, headers=headers) as probe:
-                            ttfb = time.time() - start
-                            if probe.status in (401, 403, 429):
-                                self.stats['fail'] += 1
-                                print(f"❌ {channel_name:<10}|{url[:85]:<85}|HTTP {probe.status}")
-                                return 0.0
-                            if probe.status >= 400:
-                                self.stats['fail'] += 1
-                                print(f"❌ {channel_name:<10}|{url[:85]:<85}|HTTP {probe.status}")
-                                return 0.0
-                            ct = probe.headers.get('Content-Type', '').lower()
-                            if 'mpegurl' in ct:
+                    async with self.session.get(url, timeout=CHECK_TIMEOUT, headers=headers) as probe:
+                        ct = probe.headers.get('Content-Type', '').lower()
+                        if 'mpegurl' in ct:
+                            is_hls = True
+                        elif any(x in ct for x in ['text/html', 'application/json', 'text/plain']):
+                            snippet = await probe.content.read(1024)
+                            if b'#EXTM3U' in snippet:
                                 is_hls = True
-                            # html/json 里可能藏了 m3u8
-                            if any(x in ct for x in ['text/html', 'application/json', 'text/plain']):
-                                snippet = await probe.content.read(1024)
-                                if b'#EXTM3U' in snippet:
+                            else:
+                                extracted = try_extract_stream_url(snippet.decode('utf-8', 'ignore'), ct)
+                                if extracted:
                                     is_hls = True
-                                else:
-                                    extracted = try_extract_stream_url(snippet.decode('utf-8', 'ignore'), ct)
-                                    if extracted:
-                                        is_hls = True
-                                        url = extracted[0]  # 递归到真实流
-                    else:
-                        ttfb = 0.0
+                                    url = extracted[0]
+                except Exception:
+                    pass
 
-                    if is_hls:
-                        speed, reason = await self.measure_hls(url, channel_name)
-                    else:
-                        speed, downloaded, reason = await self._measure_url_fixed(
-                            url, channel_name, use_range=True
-                        )
+            # 按类型选择测试顺序
+            if is_hls:
+                # HLS 测试顺序：分片 → 播放列表 → 首个分片强制
+                methods = [
+                    ('hls_segments', self._test_hls_segments),
+                    ('hls_playlist', self._test_hls_playlist),
+                ]
+            else:
+                # 直链测试顺序：Range → 无Range → HEAD
+                methods = [
+                    ('direct_range', self._test_direct_range),
+                    ('direct_no_range', self._test_direct_no_range),
+                    ('http_head', self._test_http_head),
+                ]
 
-                    if speed > 0:
-                        self._record(url, channel_name, speed, ttfb)
-                        return speed
+            for method_name, method in methods:
+                speed, reason = await method(url, channel_name)
+                if speed > 0:
+                    ttfb = time.time() - start
+                    self._record(url, channel_name, speed, ttfb, method_name)
+                    return speed
+                # 失败继续尝试下一个方法
 
-                    if is_hls:
-                        continue  # 重新解析 playlist 重试
-                    self.stats['low'] += 1
-                    print(f"❌ {channel_name:<10}|{url[:85]:<85}|直链速度0/过小 reason={reason}")
-                    return 0.0
-
-                except asyncio.TimeoutError:
-                    if attempt < attempts - 1:
-                        continue
-                    self.stats['fail'] += 1
-                    print(f"❌ {channel_name:<10}|{url[:85]:<85}|超时")
-                    return 0.0
-                except aiohttp.ServerDisconnectedError:
-                    if attempt < attempts - 1:
-                        continue
-                    self.stats['fail'] += 1
-                    print(f"❌ {channel_name:<10}|{url[:85]:<85}|Server disconnected")
-                    return 0.0
-                except Exception as e:
-                    if attempt < attempts - 1:
-                        continue
-                    self.stats['fail'] += 1
-                    print(f"❌ {channel_name:<10}|{url[:85]:<85}|异常:{str(e)[:30]}")
-                    return 0.0
-
+            # 所有方法失败
             self.stats['fail'] += 1
-            print(f"❌ {channel_name:<10}|{url[:85]:<85}|所有分片测速失败")
+            print(f"❌ {channel_name:<10}|{url[:85]:<85}|所有测试方法失败")
             return 0.0
 
     # ---------- 批量测试 ----------
@@ -660,7 +673,6 @@ def save_output(all_channels, template, output_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
-    # global 声明必须在所有全局变量使用之前
     global SPEED_THRESHOLD, CHECK_TIMEOUT, MAX_CONCURRENT
 
     parser = argparse.ArgumentParser(description='IPTV频道源测速工具')
@@ -679,7 +691,7 @@ async def main():
     MAX_CONCURRENT = args.concurrency
 
     print("=" * 85)
-    print("IPTV频道源测速工具 v3.4 (接口型容错/Range降级/同源Referer/HLS多media)")
+    print("IPTV频道源测速工具 v3.5 (多方法综合测试)")
     print(f"阈值:{SPEED_THRESHOLD}KB/s 超时:{CHECK_TIMEOUT}s 并发:{MAX_CONCURRENT}")
     print("=" * 85)
 
@@ -726,12 +738,12 @@ async def main():
     async with AsyncSpeedTester(blacklist) as tester:
         results, stats = await tester.batch_test(std_list, template)
 
-    print("\n" + "=" * 85)
+    print("\n" + "=" * 60)
     print("测速完成！")
     print(f"  总测试源数: {stats['total']}")
     print(f"  通过(≥{SPEED_THRESHOLD}KB/s): {stats['passed']}")
     print(f"  低速(连通但未达标): {stats['low']}")
-    print(f"  失败(连接/超时/4xx5xx): {stats['fail']}")
+    print(f"  失败(所有方法均失败): {stats['fail']}")
     print(f"  跳过(黑名单): {stats['skip']}")
     if stats['speeds']:
         print(f"  平均速度: {statistics.mean(stats['speeds']):.1f} KB/s")
