@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.5 修正完整版
-- 多方法综合测试：HLS分片→播放列表下载→直链Range→无Range→HEAD
+IPTV频道源测速工具 v3.6
+- 多方法综合测试：HLS分片→播放列表→HTTPS兜底 / 直链Range→无Range→HEAD→HTTPS兜底 / RTMP用ffmpeg
 - 任一方法成功即保留该源（速度按实际测得值）
 - 低速源也会进入输出文件
 - 修复函数名/变量名笔误
@@ -17,6 +17,8 @@ import re
 import json
 import time
 import argparse
+import subprocess
+import shutil
 from urllib.parse import urlparse, urljoin, urldefrag
 from datetime import datetime, timedelta, timezone
 
@@ -241,7 +243,7 @@ def clean_m3u_name(raw):
 def sanitize_url(raw_url):
     url = raw_url.strip()
     url, _ = urldefrag(url)
-    if not url or not url.startswith(('http://', 'https://')):
+    if not url or not url.startswith(('http://', 'https://', 'rtmp://', 'rtmps://')):
         return None
     return url
 
@@ -509,6 +511,58 @@ class AsyncSpeedTester:
         except Exception as e:
             return 0, f'head_err:{str(e)[:30]}'
 
+    # ---------- 测试方法6：RTMP/RTMPS（ffmpeg 兜底）----------
+    async def _test_rtmp(self, url, channel_name):
+        def _run():
+            try:
+                result = subprocess.run(
+                    ['ffmpeg', '-i', url, '-t', '1', '-v', 'error', '-f', 'null', '-'],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    return 100.0, 'ffmpeg_ok'
+                err = result.stderr.decode('utf-8', 'ignore')[:100]
+                return 0.0, f'ffmpeg_rc={result.returncode}:{err}'
+            except subprocess.TimeoutExpired:
+                return 0.0, 'ffmpeg_timeout'
+            except FileNotFoundError:
+                return 0.0, 'ffmpeg_not_found'
+            except Exception as e:
+                return 0.0, f'ffmpeg_exc:{str(e)[:40]}'
+        try:
+            speed, reason = await asyncio.to_thread(_run)
+            return speed, reason
+        except Exception as e:
+            return 0.0, f'thread_exc:{str(e)[:30]}'
+
+    # ---------- 测试方法7：HTTPS 证书 + 连通性 ----------
+    async def _test_https_specific(self, url, channel_name):
+        parsed = urlparse(url)
+        domain = parsed.hostname or ''
+        headers = HEADERS.copy()
+        headers['Referer'] = f"https://{domain}/"
+
+        try:
+            async with self.session.get(
+                url, timeout=CHECK_TIMEOUT, headers=headers
+            ) as resp:
+                ct = resp.headers.get('Content-Type', '').lower()
+                if 'mpegurl' in ct or url.lower().split('?')[0].endswith('.m3u8'):
+                    return 0.0, 'is_hls_defer'
+                async for chunk in resp.content.iter_chunked(65536):
+                    if chunk:
+                        return 100.0, 'https_data_ok'
+                    break
+                return 0.0, 'https_empty_body'
+        except ssl.SSLCertVerificationError as e:
+            return 0.0, f'ssl_verify:{str(e)[:50]}'
+        except aiohttp.ClientConnectorCertificateError as e:
+            return 0.0, f'cert_error:{str(e)[:50]}'
+        except Exception as e:
+            return 0.0, f'https_exc:{str(e)[:40]}'
+
     # ---------- 记录 ----------
     def _record(self, url, name, speed, ttfb, method):
         st = self.stats
@@ -537,10 +591,11 @@ class AsyncSpeedTester:
         async with self.semaphore:
             self.stats['total'] += 1
             start = time.time()
+            scheme = urlparse(url).scheme.lower()
             is_hls = url.lower().split('?')[0].endswith('.m3u8')
 
-            # 探测 Content-Type 判断是否为 HLS
-            if not is_hls:
+            # 探测 Content-Type 判断是否为 HLS（仅 http/https）
+            if scheme in ('http', 'https') and not is_hls:
                 try:
                     parsed = urlparse(url)
                     headers = HEADERS.copy()
@@ -560,21 +615,30 @@ class AsyncSpeedTester:
                                 if extracted:
                                     is_hls = True
                                     url = extracted[0]
+                                    scheme = urlparse(url).scheme.lower()
                 except Exception:
                     pass
 
-            # 按类型选择测试顺序
-            if is_hls:
+            # 按协议类型选择测试方法链
+            if scheme in ('rtmp', 'rtmps'):
+                methods = [
+                    ('rtmp_ffmpeg', self._test_rtmp),
+                ]
+            elif is_hls:
                 methods = [
                     ('hls_segments', self._test_hls_segments),
                     ('hls_playlist', self._test_hls_playlist),
                 ]
+                if scheme == 'https':
+                    methods.append(('https_specific', self._test_https_specific))
             else:
                 methods = [
                     ('direct_range', self._test_direct_range),
                     ('direct_no_range', self._test_direct_no_range),
                     ('http_head', self._test_http_head),
                 ]
+                if scheme == 'https':
+                    methods.append(('https_specific', self._test_https_specific))
 
             for method_name, method in methods:
                 speed, reason = await method(url, channel_name)
@@ -609,7 +673,7 @@ class AsyncSpeedTester:
                 tasks = [self.test_one(url, main) for url in urls]
                 speeds = await asyncio.gather(*tasks)
 
-                # 只要有速度就保留（含低速源），不再强制 SPEED_THRESHOLD
+                # 只要有速度就保留（含低速源）
                 kept = [(url, sp) for url, sp in zip(urls, speeds) if sp > 0]
                 kept.sort(key=lambda x: x[1], reverse=True)
                 if kept:
@@ -684,9 +748,12 @@ async def main():
     MAX_CONCURRENT = args.concurrency
 
     print("=" * 85)
-    print("IPTV频道源测速工具 v3.5 (多方法综合测试，可用即保留)")
+    print("IPTV频道源测速工具 v3.6 (多方法综合测试 + RTMP/HTTPS兜底)")
     print(f"阈值:{SPEED_THRESHOLD}KB/s 超时:{CHECK_TIMEOUT}s 并发:{MAX_CONCURRENT}")
     print("=" * 85)
+
+    if not shutil.which('ffmpeg'):
+        print("警告：未检测到 ffmpeg，RTMP/RTMPS 源将无法检测")
 
     blacklist = Blacklist(args.blacklist)
     template = ChannelTemplate(args.template)
