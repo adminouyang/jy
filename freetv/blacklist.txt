@@ -78,3 +78,5 @@ stream.thmz.com
 jwcdnqx.hebyun.com.cn
 d1sq2slp9afh7o.cloudfront.net
 104.152.209.49
+58.219.124.241
+125.93.74.27
