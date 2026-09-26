@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.6
-使用 curl_cffi 模拟浏览器指纹，解决大量源测速失败问题
+IPTV频道源测速工具 v3.7 (aiohttp 稳定版)
+核心策略：魔数检测 + m3u8分片测速 + 双阈值 + 自动黑名单
 """
 
 import asyncio
-import curl_cffi.requests as curl_requests
-from curl_cffi.requests import AsyncSession
+import aiohttp
 import ssl
 import statistics
 import os
@@ -17,29 +16,28 @@ from urllib.parse import urlparse, urljoin, urldefrag, urlunparse
 from datetime import datetime, timedelta, timezone
 
 # ====================== 全局配置 ======================
-SPEED_THRESHOLD = 600          # KB/s
-CHECK_TIMEOUT = 5              # 秒
-FALLBACK_TIMEOUT = 8           # 秒
-MAX_CONCURRENT = 30            # 降低并发避免触发限流
-DEEP_TEST_SIZE = 786432        # 字节 (~768KB)
-STEADY_BYTES = 262144          # 排除前256KB爆发期
-MIN_TEST_TIME = 2.5            # 秒
+AVAILABLE_THRESHOLD = 150     # KB/s，可用线（低于此视为不可用）
+FAST_THRESHOLD = 600          # KB/s，优质线
+CHECK_TIMEOUT = 5             # 秒（首次测速）
+FALLBACK_TIMEOUT = 8          # 秒（备用测速）
+MAX_CONCURRENT = 15           # 最大并发数（降低防限流）
+DEEP_TEST_SIZE = 524288       # 字节 (~512KB)
+STEADY_BYTES = 196608         # 排除前192KB爆发期
+MIN_TEST_TIME = 2.5           # 秒
 
-# 多种浏览器指纹
-BROWSER_FINGERPRINTS = [
-    {"impersonate": "chrome110", "headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}},
-    {"impersonate": "safari15_5", "headers": {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15"}},
-    {"impersonate": "ios15_5", "headers": {"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Mobile/15E148 Safari/604.1"}},
-    {"impersonate": "android", "headers": {"User-Agent": "Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"}},
-    {"impersonate": "edge99", "headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"}},
+USER_AGENTS = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'VLC/3.0.18 LibVLC/3.0.18',
+    'PotPlayer/210603 (Windows NT 10.0; Win64; x64)',
+    'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
 ]
 
-# 公共请求头
-COMMON_HEADERS = {
+BASE_HEADERS = {
     'Accept': '*/*',
     'Accept-Language': 'zh-CN,zh;q=0.9',
-    'Referer': 'https://www.google.com/',
     'Connection': 'keep-alive',
+    'Referer': 'https://www.google.com/',
 }
 
 # ====================== 黑名单管理 ======================
@@ -71,6 +69,19 @@ class Blacklist:
             return domain in self.domains
         except:
             return False
+
+    def add(self, url):
+        try:
+            domain = urlparse(url).netloc
+            if ':' in domain:
+                domain = domain.split(':')[0]
+            if domain not in self.domains:
+                self.domains.add(domain)
+                with open(self.path, 'a', encoding='utf-8') as f:
+                    f.write(f"{domain}\n")
+                print(f"🚫 已将 {domain} 加入黑名单")
+        except:
+            pass
 
 # ====================== 频道模板处理 ======================
 class ChannelTemplate:
@@ -150,8 +161,8 @@ class ChannelTemplate:
 # ====================== 频道列表获取 ======================
 async def fetch_text(session, url):
     try:
-        resp = await session.get(url, timeout=10)
-        return resp.text
+        async with session.get(url, timeout=10) as resp:
+            return await resp.text()
     except Exception as e:
         print(f"获取失败 {url}: {e}")
         return ''
@@ -213,7 +224,7 @@ def parse_txt(text):
 
 async def fetch_channels_from_urls(urls):
     all_channels = []
-    async with AsyncSession(headers=COMMON_HEADERS, impersonate="chrome110") as session:
+    async with aiohttp.ClientSession(headers=BASE_HEADERS) as session:
         for url in urls:
             text = await fetch_text(session, url)
             if not text:
@@ -227,57 +238,81 @@ async def fetch_channels_from_urls(urls):
             all_channels.extend(chs)
     return all_channels
 
+# ====================== 视频魔数检测 ======================
+def detect_video_magic(data: bytes):
+    """检查数据前几个字节是否为已知视频格式的魔数，返回格式名称或None"""
+    if len(data) < 4:
+        return None
+    if data.startswith(b'#EXTM3U'):
+        return 'M3U8'
+    if data[0] == 0x47:
+        return 'TS'
+    if data[:3] == b'FLV':
+        return 'FLV'
+    if data[4:8] == b'ftyp' or data[:4] == b'\x00\x00\x00\x1c':
+        return 'MP4'
+    # 检查是否为HTML或Gitea登录页
+    head = data[:1024].decode('utf-8', errors='ignore').lower()
+    if any(x in head for x in ['<!doctype html', '<html', 'gitea', '登录', 'webautn']):
+        return 'HTML'
+    # 其他二进制数据（可能为裸H264等）
+    if len(data) >= 64:
+        return 'BINARY'
+    return None
+
 # ====================== 异步测速引擎 ======================
 class AsyncSpeedTester:
     def __init__(self, blacklist):
         self.blacklist = blacklist
-        self.stats = {'total': 0, 'passed': 0, 'failed': 0,
-                      'speeds': [], 'max': 0, 'min': float('inf')}
+        self.stats = {'total': 0, 'available': 0, 'fast': 0,
+                      'failed': 0, 'speeds': [], 'max': 0, 'min': float('inf')}
         self.session = None
         self.semaphore = asyncio.Semaphore(MAX_CONCURRENT)
 
     async def __aenter__(self):
-        # 使用默认指纹创建session，后续可按需更换
-        self.session = AsyncSession(headers=COMMON_HEADERS, impersonate="chrome110")
+        ssl_ctx = ssl.create_default_context()
+        ssl_ctx.check_hostname = False
+        ssl_ctx.verify_mode = ssl.CERT_NONE
+        conn = aiohttp.TCPConnector(
+            limit=MAX_CONCURRENT * 2,
+            ttl_dns_cache=600,
+            ssl=ssl_ctx,
+            force_close=False
+        )
+        self.session = aiohttp.ClientSession(
+            connector=conn,
+            timeout=aiohttp.ClientTimeout(total=CHECK_TIMEOUT + 2)
+        )
         return self
 
     async def __aexit__(self, *args):
         await self.session.close()
 
-    async def _quick_check(self, url, fingerprint_index=0):
-        """快速检查URL是否返回视频流，返回 (is_valid, data, format)"""
-        fp = BROWSER_FINGERPRINTS[fingerprint_index % len(BROWSER_FINGERPRINTS)]
-        try:
-            resp = await self.session.get(
-                url,
-                impersonate=fp["impersonate"],
-                headers=fp["headers"],
-                timeout=3
-            )
-            data = await resp.acontent_read(4096)  # 读取前4096字节
-            if len(data) < 32:
-                return False, data, 'too_short'
-            # 魔数检测
-            if data.startswith(b'#EXTM3U'):
-                return True, data, 'M3U8'
-            if data[0] == 0x47:
-                return True, data, 'TS'
-            if data[:3] == b'FLV':
-                return True, data, 'FLV'
-            if data[4:8] == b'ftyp':
-                return True, data, 'MP4'
-            head = data[:512].decode('utf-8', errors='ignore').lower()
-            if '<!doctype' in head or '<html' in head:
-                return False, data, 'html'
-            # 其他二进制数据，认为可能是视频
-            return True, data, 'unknown'
-        except Exception as e:
-            return False, b'', str(e)[:40]
+    def _build_headers(self, ua_index=0):
+        h = BASE_HEADERS.copy()
+        h['User-Agent'] = USER_AGENTS[ua_index % len(USER_AGENTS)]
+        return h
 
-    async def _measure_stream(self, response, url_label, channel_name,
-                               deep_size=DEEP_TEST_SIZE, steady_bytes=STEADY_BYTES,
-                               min_time=MIN_TEST_TIME):
-        """从curl_cffi的Response对象读取流式数据测速"""
+    async def _quick_check(self, url, ua_index=0, timeout=4):
+        """快速检查URL是否返回视频流，返回 (format, data)"""
+        headers = self._build_headers(ua_index)
+        try:
+            async with self.session.get(url, headers=headers, timeout=timeout) as resp:
+                data = await resp.content.read(8192)  # 只读前8KB
+                if len(data) < 32:
+                    return 'TOO_SHORT', data
+                fmt = detect_video_magic(data)
+                if fmt:
+                    return fmt, data
+                return 'UNKNOWN', data
+        except asyncio.TimeoutError:
+            return 'TIMEOUT', b''
+        except Exception as e:
+            return f'ERR:{str(e)[:30]}', b''
+
+    async def _measure_stream(self, stream_response, deep_size=DEEP_TEST_SIZE,
+                              steady_bytes=STEADY_BYTES, min_time=MIN_TEST_TIME):
+        """通用测速函数，返回速度KB/s和下载字节数"""
         downloaded = 0
         steady_downloaded = 0
         steady_start = None
@@ -285,7 +320,7 @@ class AsyncSpeedTester:
         chunk_start = time.time()
         test_start = time.time()
 
-        async for chunk in response.aiter_content(chunk_size=32768):
+        async for chunk in stream_response.content.iter_chunked(32768):
             now = time.time()
             chunk_len = len(chunk)
             if chunk_len == 0:
@@ -321,72 +356,75 @@ class AsyncSpeedTester:
         final_speed = 0.5 * steady_speed + 0.3 * overall_speed + 0.2 * median_speed
         return final_speed, downloaded
 
-    async def _try_speed_test(self, url, channel_name, fingerprint_index=0, timeout=CHECK_TIMEOUT,
-                               deep_size=DEEP_TEST_SIZE):
-        """使用指定指纹进行一次完整测速"""
-        fp = BROWSER_FINGERPRINTS[fingerprint_index % len(BROWSER_FINGERPRINTS)]
+    async def _try_speed_test(self, url, ua_index=0, timeout=CHECK_TIMEOUT,
+                              deep_size=DEEP_TEST_SIZE):
+        """执行一次完整测速，返回速度KB/s"""
+        headers = self._build_headers(ua_index)
         try:
             start = time.time()
-            resp = await self.session.get(
-                url,
-                impersonate=fp["impersonate"],
-                headers=fp["headers"],
-                timeout=timeout
-            )
-            ttfb = time.time() - start
-            if ttfb > 2.5:
-                return 0.0
-
-            # 读取前2048字节判断是否为M3U8
-            body_preview = await resp.acontent_read(2048)
-            # 注意：curl_cffi的response不支持unread，所以我们重新发起请求获取完整流
-            # 更好的做法：先读取头部，如果是m3u8则解析，否则直接测速
-            if body_preview.startswith(b'#EXTM3U'):
-                # 需要完整playlist，重新请求
-                resp_full = await self.session.get(url, impersonate=fp["impersonate"], headers=fp["headers"], timeout=timeout)
-                playlist_text = await resp_full.text()
-                # 解析分片
-                base_url = url
-                seg_urls = []
-                has_extinf = False
-                for line in playlist_text.splitlines():
-                    line = line.strip()
-                    if line.startswith('#EXTINF'):
-                        has_extinf = True
-                    elif line and not line.startswith('#') and has_extinf:
-                        seg_url = urljoin(base_url, line)
-                        parsed_base = urlparse(base_url)
-                        parsed_seg = urlparse(seg_url)
-                        if not parsed_seg.query and parsed_base.query:
-                            seg_url = urlunparse(parsed_seg._replace(query=parsed_base.query))
-                        seg_url, _ = urldefrag(seg_url)
-                        seg_urls.append(seg_url)
-                        if len(seg_urls) >= 3:
-                            break
-                if not has_extinf or not seg_urls:
+            async with self.session.get(url, headers=headers, timeout=timeout) as resp:
+                ttfb = time.time() - start
+                if ttfb > 2.5:
                     return 0.0
 
-                final_speed = 0.0
-                for seg_url in seg_urls:
-                    try:
-                        seg_resp = await self.session.get(seg_url, impersonate=fp["impersonate"], headers=fp["headers"], timeout=timeout)
-                        speed, downloaded = await self._measure_stream(seg_resp, seg_url, channel_name, deep_size=deep_size)
-                        if speed > 0:
-                            final_speed = speed
-                            break
-                    except:
-                        continue
-                return final_speed
-            else:
-                # 直连流：使用已有的response继续读取
-                speed, downloaded = await self._measure_stream(resp, url, channel_name, deep_size=deep_size)
-                return speed
+                # 读取前2048字节判断是否为M3U8
+                body_preview = await resp.content.read(2048)
+                resp.content.unread_data(body_preview)
 
-        except Exception as e:
+                is_m3u8 = body_preview.startswith(b'#EXTM3U')
+
+                if is_m3u8:
+                    # 解析播放列表
+                    playlist_text = body_preview.decode('utf-8', errors='ignore')
+                    remaining = await resp.content.read()
+                    full_playlist = playlist_text + remaining.decode('utf-8', errors='ignore')
+
+                    # 提取分片URL（保留原始query参数）
+                    base_url = url
+                    seg_urls = []
+                    has_extinf = False
+                    for line in full_playlist.splitlines():
+                        line = line.strip()
+                        if line.startswith('#EXTINF'):
+                            has_extinf = True
+                        elif line and not line.startswith('#') and has_extinf:
+                            seg_url = urljoin(base_url, line)
+                            parsed_base = urlparse(base_url)
+                            parsed_seg = urlparse(seg_url)
+                            if not parsed_seg.query and parsed_base.query:
+                                seg_url = urlunparse(parsed_seg._replace(query=parsed_base.query))
+                            seg_url, _ = urldefrag(seg_url)
+                            seg_urls.append(seg_url)
+                            if len(seg_urls) >= 3:
+                                break
+
+                    if not has_extinf or not seg_urls:
+                        return 0.0
+
+                    # 测速前2个分片
+                    final_speed = 0.0
+                    for seg_url in seg_urls[:2]:
+                        try:
+                            async with self.session.get(seg_url, headers=headers, timeout=timeout) as seg_resp:
+                                speed, downloaded = await self._measure_stream(seg_resp)
+                                if speed > final_speed:
+                                    final_speed = speed
+                        except:
+                            continue
+                    return final_speed
+                else:
+                    # 直连流
+                    speed, downloaded = await self._measure_stream(resp)
+                    return speed
+
+        except asyncio.TimeoutError:
+            return 0.0
+        except Exception:
             return 0.0
 
     async def test_one(self, url, channel_name):
         """测试单个源，返回速度KB/s，失败返回0"""
+        # 检查黑名单
         if self.blacklist.contains(url):
             domain = urlparse(url).netloc
             print(f"⏭️  黑名单跳过: {channel_name:<10}| {domain}")
@@ -400,56 +438,55 @@ class AsyncSpeedTester:
             print(f"🔧 自动清理URL: {channel_name:<10}| {url[:55]} → {clean_url[:55]}")
             url = clean_url
 
-        # 快速检查：尝试最多3种指纹
-        valid = False
-        check_data = None
-        for idx in range(3):
-            is_valid, data, fmt = await self._quick_check(url, idx)
-            if is_valid:
-                valid = True
-                check_data = data
-                print(f"🌐 指纹{idx}检查有效({fmt}): {channel_name:<10}| {url[:85]}")
-                break
+        # 第一步：快速检查是否返回视频流（使用第一个UA）
+        fmt, data = await self._quick_check(url, ua_index=0, timeout=3)
+        if fmt in ('HTML', 'TOO_SHORT', 'UNKNOWN', 'TIMEOUT'):
+            # 尝试第二个UA再检查一次
+            fmt2, data2 = await self._quick_check(url, ua_index=1, timeout=3)
+            if fmt2 in ('HTML', 'TOO_SHORT', 'UNKNOWN', 'TIMEOUT'):
+                print(f"🌐 快速检查无效({fmt2}): {channel_name:<10}| {url[:85]}")
+                # 如果是HTML页面，自动加入黑名单
+                if fmt2 == 'HTML':
+                    self.blacklist.add(url)
+                return 0.0
             else:
-                print(f"🌐 指纹{idx}检查无效({fmt}): {channel_name:<10}| {url[:85]}")
-        if not valid:
-            return 0.0
+                print(f"🌐 二次检查有效({fmt2}): {channel_name:<10}| {url[:85]}")
+        else:
+            print(f"🌐 快速检查有效({fmt}): {channel_name:<10}| {url[:85]}")
 
-        # 正式测速：使用第一个有效的指纹索引
-        first_idx = next(i for i in range(3) if await self._quick_check(url, i) is not None)  # 简化处理，实际用上面循环记录的idx
-        # 这里为了简洁，直接用idx=0开始，如果失败再用备用指纹
-        speed_first = await self._try_speed_test(url, channel_name, fingerprint_index=0, timeout=CHECK_TIMEOUT)
-        if speed_first >= SPEED_THRESHOLD:
+        # 第二步：正式测速（使用第一个UA）
+        speed_first = await self._try_speed_test(url, ua_index=0, timeout=CHECK_TIMEOUT)
+        if speed_first >= FAST_THRESHOLD:
             self.stats['total'] += 1
-            self.stats['passed'] += 1
+            self.stats['available'] += 1
+            self.stats['fast'] += 1
             self.stats['speeds'].append(speed_first)
             self.stats['max'] = max(self.stats['max'], speed_first)
             self.stats['min'] = min(self.stats['min'], speed_first)
-            print(f"✅ {channel_name:<10}|{url[:85]:<85}|速度:{speed_first:>7.1f} KB/s|首次")
+            print(f"✅ {channel_name:<10}|{url[:85]:<85}|速度:{speed_first:>7.1f} KB/s|优质")
             return speed_first
 
-        # 备用：尝试其他指纹
-        print(f"🔄 {channel_name:<10}|{url[:85]:<85}|首次测速不佳({speed_first:.1f}KB/s)，启用备用指纹...")
-        best_speed = speed_first
-        for idx in range(1, len(BROWSER_FINGERPRINTS)):
-            speed = await self._try_speed_test(url, channel_name, fingerprint_index=idx, timeout=FALLBACK_TIMEOUT, deep_size=524288)
-            if speed > best_speed:
-                best_speed = speed
-            if best_speed >= SPEED_THRESHOLD:
-                break
+        # 首次测速不佳，启用备用（更换UA、增加超时）
+        print(f"🔄 {channel_name:<10}|{url[:85]:<85}|首次测速不佳({speed_first:.1f}KB/s)，启用备用测速...")
+        speed_fallback = await self._try_speed_test(url, ua_index=2, timeout=FALLBACK_TIMEOUT,
+                                                     deep_size=393216)  # 384KB
+        final_speed = max(speed_first, speed_fallback)
 
-        final_speed = best_speed
+        # 更新统计
         self.stats['total'] += 1
-        if final_speed >= SPEED_THRESHOLD:
-            self.stats['passed'] += 1
+        if final_speed >= AVAILABLE_THRESHOLD:
+            self.stats['available'] += 1
+            if final_speed >= FAST_THRESHOLD:
+                self.stats['fast'] += 1
         else:
             self.stats['failed'] += 1
         self.stats['speeds'].append(final_speed)
         self.stats['max'] = max(self.stats['max'], final_speed)
         self.stats['min'] = min(self.stats['min'], final_speed)
 
-        status = '✅' if final_speed >= SPEED_THRESHOLD else '❌'
-        print(f"{status} {channel_name:<10}|{url[:85]:<85}|速度:{final_speed:>7.1f} KB/s|备用")
+        status = '✅' if final_speed >= FAST_THRESHOLD else ('⚠️' if final_speed >= AVAILABLE_THRESHOLD else '❌')
+        note = f"备用({speed_fallback:.1f})" if speed_fallback > 0 else "备用失败"
+        print(f"{status} {channel_name:<10}|{url[:85]:<85}|速度:{final_speed:>7.1f} KB/s|{note}")
         return final_speed
 
     async def batch_test(self, channel_list, template):
@@ -457,12 +494,12 @@ class AsyncSpeedTester:
         for main, url in channel_list:
             groups.setdefault(main, []).append(url)
 
-        results = {}
+        results = {}  # {main: [(url, speed), ...]}
         total_sources = len(channel_list)
         tested = 0
 
         print(f"\n开始并发测速，最大并发 {MAX_CONCURRENT}，共 {total_sources} 个源")
-        print("=" * 165)
+        print("=" * 180)
 
         for cat in template.categories:
             for main in template.category_channels.get(cat, []):
@@ -472,15 +509,17 @@ class AsyncSpeedTester:
                 tasks = [self.test_one(url, main) for url in urls]
                 speeds = await asyncio.gather(*tasks)
 
-                passed = [(url, sp) for url, sp in zip(urls, speeds) if sp >= SPEED_THRESHOLD]
-                passed.sort(key=lambda x: x[1], reverse=True)
+                # 筛选可用源（>= AVAILABLE_THRESHOLD）
+                passed = [(url, sp) for url, sp in zip(urls, speeds) if sp >= AVAILABLE_THRESHOLD]
+                passed.sort(key=lambda x: x[1], reverse=True)  # 按速度降序
                 if passed:
                     results[main] = passed
 
                 tested += len(urls)
-                passed_now = sum(1 for sp in speeds if sp >= SPEED_THRESHOLD)
-                print(f"  {main:<20} 通过 {passed_now}/{len(urls)}  进度 {tested}/{total_sources}")
-                print("-" * 165)
+                passed_now = sum(1 for sp in speeds if sp >= AVAILABLE_THRESHOLD)
+                fast_now = sum(1 for sp in speeds if sp >= FAST_THRESHOLD)
+                print(f"  {main:<20} 可用 {passed_now}/{len(urls)}  优质 {fast_now}/{len(urls)}  进度 {tested}/{total_sources}")
+                print("-" * 180)
 
         return results, self.stats
 
@@ -507,7 +546,7 @@ def save_output(all_channels, template, output_dir='freetv'):
 
         txt_lines.append(f'{cat},#genre#')
         for main in avail:
-            sources = all_channels[main]
+            sources = all_channels[main]  # 已按速度降序
             for url, speed in sources:
                 txt_lines.append(f'{main},{url}')
             logo = template.get_logo_url(main)
@@ -529,9 +568,9 @@ def save_output(all_channels, template, output_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
-    print("=" * 110)
-    print("IPTV频道源测速工具 v3.6 (curl_cffi 模拟浏览器指纹)")
-    print("=" * 110)
+    print("=" * 116)
+    print("IPTV频道源测速工具 v3.7 (aiohttp 稳定版 · 双阈值 · 自动黑名单)")
+    print("=" * 116)
 
     blacklist = Blacklist('freetv/blacklist.txt')
     template = ChannelTemplate('freetv/dome.txt')
@@ -572,10 +611,11 @@ async def main():
     async with AsyncSpeedTester(blacklist) as tester:
         results, stats = await tester.batch_test(std_list, template)
 
-    print("\n" + "=" * 80)
+    print("\n" + "=" * 88)
     print("测速完成！")
     print(f"  总测试源数: {stats['total']}")
-    print(f"  通过(≥{SPEED_THRESHOLD}KB/s): {stats['passed']}")
+    print(f"  可用(≥{AVAILABLE_THRESHOLD}KB/s): {stats['available']}")
+    print(f"  优质(≥{FAST_THRESHOLD}KB/s): {stats['fast']}")
     print(f"  失败: {stats['failed']}")
     if stats['speeds']:
         print(f"  平均速度: {statistics.mean(stats['speeds']):.1f} KB/s")
