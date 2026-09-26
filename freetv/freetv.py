@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.9 (aiohttp 稳定版)
+IPTV频道源测速工具 v3.10 (aiohttp 增强版)
 改进：
   1. 分片测速重试 + 扩展候选分片（最多5个）
   2. 针对特定域名动态添加 Referer 和 Origin
   3. ffprobe 兜底（可选，需安装 FFmpeg）
   4. 速度上限截断（MAX_REASONABLE_SPEED=50000 KB/s）
   5. 最小有效字节/时间保护（避免空响应导致的虚假高速）
-  6. 保留 v3.7/v3.8 所有优点：魔数检测、双阈值、自动黑名单
+  6. 自动黑名单：连续失败的源域名自动加入黑名单
+  7. 软黑名单：本次测速为0但快速检查有效的源，记录到 soft_blacklist.txt，下次跳过
+  8. 对特定域名（如 php.jdshipin.com）尝试 POST 请求作为备用
+  9. 输出失效域名报告
 """
 
 import asyncio
@@ -19,8 +22,10 @@ import os
 import re
 import time
 import subprocess
+import json
 from urllib.parse import urlparse, urljoin, urldefrag, urlunparse
 from datetime import datetime, timedelta, timezone
+from collections import defaultdict
 
 # ====================== 全局配置 ======================
 AVAILABLE_THRESHOLD = 150     # KB/s，可用线
@@ -36,6 +41,13 @@ MIN_TEST_TIME = 2.5           # 秒
 MAX_REASONABLE_SPEED = 50000   # KB/s，超过此值视为异常，重置为0
 MIN_DOWNLOAD_BYTES = 1024      # 分片最少有效字节数
 MIN_ELAPSED_SECONDS = 0.05     # 最小有效耗时（秒）
+
+# ---- v3.10 新增配置 ----
+SOFT_BLACKLIST_FILE = 'freetv/soft_blacklist.json'  # 软黑名单文件（JSON格式，记录URL->次数）
+MAX_SOFT_FAIL_COUNT = 2        # 软黑名单容忍次数，超过则跳过
+AUTO_HARD_BLACKLIST = True     # 自动将连续失败的域名加入硬黑名单
+HARD_BLACKLIST_THRESHOLD = 3   # 同一域名在不同频道上失败多少次后加入硬黑名单
+POST_RETRY_DOMAINS = ['jdshipin.com']  # 对这些域名尝试POST请求作为备用
 
 # ffprobe 兜底开关（设为 False 可关闭，无需安装 FFmpeg）
 ENABLE_FFPROBE_FALLBACK = True
@@ -65,54 +77,89 @@ SPECIAL_REFERER = {
     'chinacert.cftest5.cn': 'https://live.chinacert.cftest5.cn/',
 }
 
-# 需要额外添加 Origin 头的域名列表
 ORIGIN_HEADERS = {
     'jdshipin.com': 'https://www.jdshipin.com',
     'tvbus.cc': 'http://tvbus.cc',
 }
 
-# ====================== 黑名单管理（同 v3.7） ======================
+# ====================== 黑名单管理（增强版） ======================
 class Blacklist:
-    def __init__(self, path='freetv/blacklist.txt'):
-        self.path = path
-        self.domains = set()
-        self.load()
+    def __init__(self, hard_path='freetv/blacklist.txt', soft_path=SOFT_BLACKLIST_FILE):
+        self.hard_path = hard_path
+        self.soft_path = soft_path
+        self.hard_domains = set()
+        self.soft_dict = {}  # url -> fail_count
+        self.domain_fail_count = defaultdict(int)  # 域名 -> 失败次数（用于自动加硬黑名单）
+        self.load_hard()
+        self.load_soft()
 
-    def load(self):
-        if not os.path.exists(self.path):
-            os.makedirs(os.path.dirname(self.path), exist_ok=True)
-            with open(self.path, 'w', encoding='utf-8') as f:
+    def load_hard(self):
+        if not os.path.exists(self.hard_path):
+            os.makedirs(os.path.dirname(self.hard_path), exist_ok=True)
+            with open(self.hard_path, 'w', encoding='utf-8') as f:
                 f.write("# IPTV黑名单域名列表\n# 每行一个域名，以#开头的行视为注释\n")
-            print(f"已创建黑名单文件: {self.path}")
+            print(f"已创建黑名单文件: {self.hard_path}")
             return
-        with open(self.path, 'r', encoding='utf-8') as f:
+        with open(self.hard_path, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith('#'):
-                    self.domains.add(line)
-        print(f"黑名单加载完毕: {len(self.domains)} 个域名")
+                    self.hard_domains.add(line)
+        print(f"硬黑名单加载完毕: {len(self.hard_domains)} 个域名")
 
-    def contains(self, url):
+    def load_soft(self):
+        if os.path.exists(self.soft_path):
+            try:
+                with open(self.soft_path, 'r', encoding='utf-8') as f:
+                    self.soft_dict = json.load(f)
+                print(f"软黑名单加载完毕: {len(self.soft_dict)} 个URL")
+            except:
+                self.soft_dict = {}
+        else:
+            self.soft_dict = {}
+
+    def save_soft(self):
+        os.makedirs(os.path.dirname(self.soft_path), exist_ok=True)
+        with open(self.soft_path, 'w', encoding='utf-8') as f:
+            json.dump(self.soft_dict, f, ensure_ascii=False, indent=2)
+
+    def is_hard_blocked(self, url):
         try:
             domain = urlparse(url).netloc
             if ':' in domain:
                 domain = domain.split(':')[0]
-            return domain in self.domains
+            return domain in self.hard_domains
         except:
             return False
 
-    def add(self, url):
+    def is_soft_blocked(self, url):
+        cnt = self.soft_dict.get(url, 0)
+        return cnt >= MAX_SOFT_FAIL_COUNT
+
+    def record_failure(self, url, channel_name=None):
+        """记录一次失败，更新软黑名单和域名失败计数"""
+        # 软黑名单
+        self.soft_dict[url] = self.soft_dict.get(url, 0) + 1
+        # 域名失败计数
         try:
             domain = urlparse(url).netloc
             if ':' in domain:
                 domain = domain.split(':')[0]
-            if domain not in self.domains:
-                self.domains.add(domain)
-                with open(self.path, 'a', encoding='utf-8') as f:
-                    f.write(f"{domain}\n")
-                print(f"🚫 已将 {domain} 加入黑名单")
+            self.domain_fail_count[domain] += 1
+            # 自动加硬黑名单
+            if AUTO_HARD_BLACKLIST and self.domain_fail_count[domain] >= HARD_BLACKLIST_THRESHOLD:
+                if domain not in self.hard_domains:
+                    self.hard_domains.add(domain)
+                    with open(self.hard_path, 'a', encoding='utf-8') as f:
+                        f.write(f"{domain}\n")
+                    print(f"🚫 自动将 {domain} 加入硬黑名单（累计失败 {self.domain_fail_count[domain]} 次）")
         except:
             pass
+
+    def record_success(self, url):
+        """测速成功时清除软黑名单记录"""
+        if url in self.soft_dict:
+            del self.soft_dict[url]
 
 # ====================== 频道模板处理（同 v3.7） ======================
 class ChannelTemplate:
@@ -290,7 +337,6 @@ def detect_video_magic(data: bytes):
 
 # ====================== ffprobe 兜底函数 ======================
 async def ffprobe_check(url):
-    """调用 ffprobe 检查 URL 是否包含视频流，返回 True/False"""
     cmd = [
         'ffprobe', '-v', 'error',
         '-select_streams', 'v:0',
@@ -309,12 +355,13 @@ async def ffprobe_check(url):
     except (asyncio.TimeoutError, FileNotFoundError, subprocess.SubprocessError):
         return False
 
-# ====================== 异步测速引擎（增强版 v3.9） ======================
+# ====================== 异步测速引擎（增强版 v3.10） ======================
 class AsyncSpeedTester:
     def __init__(self, blacklist):
         self.blacklist = blacklist
         self.stats = {'total': 0, 'available': 0, 'fast': 0,
                       'failed': 0, 'speeds': [], 'max': 0, 'min': float('inf')}
+        self.failed_domains = defaultdict(list)  # domain -> list of (url, channel_name)
         self.session = None
         self.semaphore = asyncio.Semaphore(MAX_CONCURRENT)
 
@@ -337,26 +384,23 @@ class AsyncSpeedTester:
     async def __aexit__(self, *args):
         await self.session.close()
 
-    def _build_headers(self, url, ua_index=0):
-        """构建请求头，根据域名动态添加 Referer 和 Origin"""
+    def _build_headers(self, url, ua_index=0, method='GET'):
         headers = BASE_HEADERS.copy()
         headers['User-Agent'] = USER_AGENTS[ua_index % len(USER_AGENTS)]
-
         domain = urlparse(url).hostname or ''
-        # 添加 Referer
         for key, ref in SPECIAL_REFERER.items():
             if key in domain:
                 headers['Referer'] = ref
                 break
-        # 添加 Origin
         for key, origin in ORIGIN_HEADERS.items():
             if key in domain:
                 headers['Origin'] = origin
                 break
+        if method == 'POST':
+            headers['Content-Type'] = 'application/x-www-form-urlencoded'
         return headers
 
     async def _quick_check(self, url, ua_index=0, timeout=3):
-        """快速检查URL是否返回视频流，返回 (format, data)"""
         headers = self._build_headers(url, ua_index)
         try:
             async with self.session.get(url, headers=headers, timeout=timeout) as resp:
@@ -374,7 +418,6 @@ class AsyncSpeedTester:
 
     async def _measure_stream(self, stream_response, deep_size=DEEP_TEST_SIZE,
                               steady_bytes=STEADY_BYTES, min_time=MIN_TEST_TIME):
-        """通用测速函数（v3.9 增加速度上限截断和最小有效保护）"""
         downloaded = 0
         steady_downloaded = 0
         steady_start = None
@@ -404,7 +447,6 @@ class AsyncSpeedTester:
                 break
 
         total_time = time.time() - test_start
-        # 最小有效保护：耗时太短或数据太少 -> 无效
         if total_time <= MIN_ELAPSED_SECONDS or downloaded < MIN_DOWNLOAD_BYTES:
             return 0.0, downloaded
 
@@ -418,17 +460,14 @@ class AsyncSpeedTester:
 
         final_speed = 0.5 * steady_speed + 0.3 * overall_speed + 0.2 * median_speed
 
-        # 速度上限截断
         if final_speed > MAX_REASONABLE_SPEED:
             final_speed = 0.0
         return final_speed, downloaded
 
     async def _download_m3u8_segment(self, seg_url, ua_index, timeout=CHECK_TIMEOUT):
-        """下载单个 m3u8 分片并测速，返回速度 KB/s"""
         headers = self._build_headers(seg_url, ua_index)
         try:
             async with self.session.get(seg_url, headers=headers, timeout=timeout) as resp:
-                # 检查 Content-Length
                 content_length = resp.headers.get('Content-Length')
                 if content_length and int(content_length) < MIN_DOWNLOAD_BYTES:
                     return 0.0
@@ -437,9 +476,26 @@ class AsyncSpeedTester:
         except:
             return 0.0
 
+    async def _try_post_request(self, url, ua_index=0, timeout=CHECK_TIMEOUT):
+        """对特定域名尝试POST请求（模拟表单提交）"""
+        headers = self._build_headers(url, ua_index, method='POST')
+        # 构造简单的POST数据（模仿常见IPTV接口）
+        post_data = {'action': 'play', 'type': 'm3u8'}
+        try:
+            async with self.session.post(url, headers=headers, data=post_data, timeout=timeout) as resp:
+                if resp.status == 200:
+                    body_preview = await resp.content.read(2048)
+                    resp.content.unread_data(body_preview)
+                    is_m3u8 = body_preview.startswith(b'#EXTM3U')
+                    if is_m3u8:
+                        speed, _ = await self._measure_stream(resp)
+                        return speed
+                return 0.0
+        except:
+            return 0.0
+
     async def _try_speed_test(self, url, ua_index=0, timeout=CHECK_TIMEOUT,
                               deep_size=DEEP_TEST_SIZE):
-        """增强版测速：m3u8 分片重试 + 扩展候选 + 速度截断"""
         headers = self._build_headers(url, ua_index)
         try:
             start = time.time()
@@ -454,7 +510,6 @@ class AsyncSpeedTester:
                 is_m3u8 = body_preview.startswith(b'#EXTM3U')
 
                 if is_m3u8:
-                    # 解析完整播放列表
                     playlist_text = body_preview.decode('utf-8', errors='ignore')
                     remaining = await resp.content.read()
                     full_playlist = playlist_text + remaining.decode('utf-8', errors='ignore')
@@ -474,13 +529,12 @@ class AsyncSpeedTester:
                                 seg_url = urlunparse(parsed_seg._replace(query=parsed_base.query))
                             seg_url, _ = urldefrag(seg_url)
                             seg_urls.append(seg_url)
-                            if len(seg_urls) >= 5:   # 扩展到最多5个候选
+                            if len(seg_urls) >= 5:
                                 break
 
                     if not has_extinf or not seg_urls:
                         return 0.0
 
-                    # 依次测试分片
                     best_speed = 0.0
                     for idx, seg_url in enumerate(seg_urls):
                         for ua_offset in range(2):
@@ -503,7 +557,6 @@ class AsyncSpeedTester:
                             break
                     return best_speed
                 else:
-                    # 直连流
                     speed, downloaded = await self._measure_stream(resp)
                     if speed > MAX_REASONABLE_SPEED:
                         speed = 0.0
@@ -516,9 +569,15 @@ class AsyncSpeedTester:
 
     async def test_one(self, url, channel_name):
         """测试单个源，返回速度KB/s，失败返回0"""
-        if self.blacklist.contains(url):
+        # 检查硬黑名单
+        if self.blacklist.is_hard_blocked(url):
             domain = urlparse(url).netloc
-            print(f"⏭️  黑名单跳过: {channel_name:<10}| {domain}")
+            print(f"⏭️  硬黑名单跳过: {channel_name:<10}| {domain}")
+            return 0.0
+
+        # 检查软黑名单
+        if self.blacklist.is_soft_blocked(url):
+            print(f"⏭️  软黑名单跳过: {channel_name:<10}| {url[:85]}")
             return 0.0
 
         # 清理URL
@@ -536,7 +595,7 @@ class AsyncSpeedTester:
             if fmt2 in ('HTML', 'TOO_SHORT', 'UNKNOWN', 'TIMEOUT'):
                 print(f"🌐 快速检查无效({fmt2}): {channel_name:<10}| {url[:85]}")
                 if fmt2 == 'HTML':
-                    self.blacklist.add(url)
+                    self.blacklist.record_failure(url, channel_name)
                 return 0.0
             else:
                 print(f"🌐 二次检查有效({fmt2}): {channel_name:<10}| {url[:85]}")
@@ -547,6 +606,7 @@ class AsyncSpeedTester:
         speed_first = await self._try_speed_test(url, ua_index=0, timeout=CHECK_TIMEOUT)
         if speed_first >= FAST_THRESHOLD:
             self._update_stats(speed_first, True)
+            self.blacklist.record_success(url)
             print(f"✅ {channel_name:<10}|{url[:85]:<85}|速度:{speed_first:>7.1f} KB/s|优质")
             return speed_first
 
@@ -556,7 +616,16 @@ class AsyncSpeedTester:
                                                      deep_size=393216)
         final_speed = max(speed_first, speed_fallback)
 
-        # 如果最终速度为0且快速检查为M3U8，尝试ffprobe兜底
+        # 如果还是0，尝试POST请求（仅对指定域名）
+        if final_speed == 0.0:
+            domain = urlparse(url).hostname or ''
+            if any(d in domain for d in POST_RETRY_DOMAINS):
+                print(f"📮 尝试POST请求: {channel_name:<10}| {url[:85]}")
+                post_speed = await self._try_post_request(url, ua_index=0, timeout=FALLBACK_TIMEOUT)
+                if post_speed > final_speed:
+                    final_speed = post_speed
+
+        # 如果最终速度为0，尝试ffprobe兜底
         if final_speed == 0.0 and ENABLE_FFPROBE_FALLBACK:
             print(f"🔍 尝试 ffprobe 兜底: {channel_name:<10}| {url[:85]}")
             if await ffprobe_check(url):
@@ -565,7 +634,16 @@ class AsyncSpeedTester:
             else:
                 print(f"  ❌ ffprobe 也无法播放")
 
-        self._update_stats(final_speed, final_speed >= AVAILABLE_THRESHOLD)
+        # 更新统计和黑名单
+        if final_speed >= AVAILABLE_THRESHOLD:
+            self._update_stats(final_speed, True)
+            self.blacklist.record_success(url)
+        else:
+            self._update_stats(final_speed, False)
+            self.blacklist.record_failure(url, channel_name)
+            # 记录失败域名
+            domain = urlparse(url).hostname or ''
+            self.failed_domains[domain].append((url, channel_name))
 
         status = '✅' if final_speed >= FAST_THRESHOLD else ('⚠️' if final_speed >= AVAILABLE_THRESHOLD else '❌')
         note = f"备用({speed_fallback:.1f})" if speed_fallback > 0 else "备用失败"
@@ -596,7 +674,7 @@ class AsyncSpeedTester:
         tested = 0
 
         print(f"\n开始并发测速，最大并发 {MAX_CONCURRENT}，共 {total_sources} 个源")
-        print("=" * 200)
+        print("=" * 220)
 
         for cat in template.categories:
             for main in template.category_channels.get(cat, []):
@@ -615,7 +693,7 @@ class AsyncSpeedTester:
                 passed_now = sum(1 for sp in speeds if sp >= AVAILABLE_THRESHOLD)
                 fast_now = sum(1 for sp in speeds if sp >= FAST_THRESHOLD)
                 print(f"  {main:<20} 可用 {passed_now}/{len(urls)}  优质 {fast_now}/{len(urls)}  进度 {tested}/{total_sources}")
-                print("-" * 200)
+                print("-" * 220)
 
         return results, self.stats
 
@@ -664,11 +742,11 @@ def save_output(all_channels, template, output_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
-    print("=" * 180)
-    print("IPTV频道源测速工具 v3.9 (aiohttp 增强版 · 分片重试 · 动态Referer/Origin · ffprobe兜底 · 速度截断)")
-    print("=" * 180)
+    print("=" * 190)
+    print("IPTV频道源测速工具 v3.10 (aiohttp 增强版 · 自动黑名单 · POST备用 · 软黑名单)")
+    print("=" * 190)
 
-    blacklist = Blacklist('freetv/blacklist.txt')
+    blacklist = Blacklist('freetv/blacklist.txt', SOFT_BLACKLIST_FILE)
     template = ChannelTemplate('freetv/dome.txt')
     if not template.load():
         return
@@ -707,20 +785,31 @@ async def main():
     async with AsyncSpeedTester(blacklist) as tester:
         results, stats = await tester.batch_test(std_list, template)
 
-    print("\n" + "=" * 168)
+    # 保存软黑名单
+    blacklist.save_soft()
+
+    print("\n" + "=" * 188)
     print("测速完成！")
     print(f"  总测试源数: {stats['total']}")
     print(f"  可用(≥{AVAILABLE_THRESHOLD}KB/s): {stats['available']}")
     print(f"  优质(≥{FAST_THRESHOLD}KB/s): {stats['fast']}")
     print(f"  失败: {stats['failed']}")
     if stats['speeds']:
-        # 过滤掉0值再算均值
-        valid_speeds = [s for s in stats['speeds'] if s > 0 and s <= MAX_REASONABLE_SPEED]
+        valid_speeds = [s for s in stats['speeds'] if 0 < s <= MAX_REASONABLE_SPEED]
         if valid_speeds:
             print(f"  平均速度: {statistics.mean(valid_speeds):.1f} KB/s")
         print(f"  最高速度: {stats['max']:.1f} KB/s")
         print(f"  最低速度: {stats['min']:.1f} KB/s")
     print(f"  通过频道数: {len(results)}")
+
+    # 输出失效域名报告
+    if tester.failed_domains:
+        print("\n📋 失效域名报告（累计失败次数较多的域名）：")
+        sorted_domains = sorted(tester.failed_domains.items(), key=lambda x: len(x[1]), reverse=True)
+        for domain, fails in sorted_domains[:20]:
+            print(f"  {domain}: {len(fails)} 次失败")
+            for url, ch in fails[:3]:
+                print(f"    - {ch}: {url[:80]}")
 
     save_output(results, template)
 
