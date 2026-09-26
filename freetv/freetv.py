@@ -44,6 +44,35 @@ class SpeedTestConfig:
         'Connection': 'close',  # 使用短连接避免连接保持的开销
         'Cache-Control': 'no-cache',
     }
+# ====================== 黑名单管理 ======================
+class Blacklist:
+    def __init__(self, path='freetv/blacklist.txt'):
+        self.path = path
+        self.domains = set()
+        self.load()
+
+    def load(self):
+        if not os.path.exists(self.path):
+            os.makedirs(os.path.dirname(self.path), exist_ok=True)
+            with open(self.path, 'w', encoding='utf-8') as f:
+                f.write("# IPTV黑名单域名列表\n# 每行一个域名，以#开头的行视为注释\n")
+            print(f"已创建黑名单文件: {self.path}")
+            return
+        with open(self.path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#'):
+                    self.domains.add(line)
+        print(f"黑名单加载完毕: {len(self.domains)} 个域名")
+
+    def contains(self, url):
+        try:
+            domain = urlparse(url).netloc
+            if ':' in domain:
+                domain = domain.split(':')[0]
+            return domain in self.domains
+        except:
+            return False
 
 
 # ====================== 测速引擎 ======================
