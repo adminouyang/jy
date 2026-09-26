@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV频道源测速工具 v3.4
-修复：
-- 连通性检查改为普通GET，读取前1KB即断，避免Range不支持
-- 增加内容类型验证，过滤HTML等非视频内容
-- 清理URL中的$后缀
-- HLS解析加强，无效播放列表直接跳过
-- 备用测速更换UA、增加超时
+IPTV频道源测速工具 v3.5
+彻底重构测速逻辑：
+- 不依赖HTTP状态码，直接读取数据
+- 使用视频魔数（TS/FLV/MP4/M3U8）判断有效性
+- m3u8分片URL保留原始参数
+- 多User-Agent轮换
+- 输出按速度降序排列
 """
 
 import asyncio
@@ -17,7 +17,7 @@ import statistics
 import os
 import re
 import time
-from urllib.parse import urlparse, urljoin, urldefrag
+from urllib.parse import urlparse, urljoin, urldefrag, urlencode, parse_qs, urlunparse
 from datetime import datetime, timedelta, timezone
 
 # ====================== 全局配置 ======================
@@ -29,12 +29,31 @@ DEEP_TEST_SIZE = 786432        # 字节 (~768KB)
 STEADY_BYTES = 262144          # 排除前256KB爆发期
 MIN_TEST_TIME = 2.5            # 秒
 
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+# 多个User-Agent轮换，模拟不同播放器
+USER_AGENTS = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'VLC/3.0.18 LibVLC/3.0.18',
+    'PotPlayer/210603 (Windows NT 10.0; Win64; x64)',
+    'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1'
+]
+
+BASE_HEADERS = {
     'Accept': '*/*',
     'Accept-Language': 'zh-CN,zh;q=0.9',
     'Connection': 'keep-alive',
     'Referer': 'https://www.google.com/',
+}
+
+# 视频魔数（前几个字节）
+VIDEO_MAGIC = {
+    b'\x47': 'TS',          # MPEG-TS
+    b'FLV': 'FLV',
+    b'\x00\x00\x00\x1c': 'MP4',  # ftyp box
+    b'#EXTM3U': 'M3U8',
+    b'\xff\xfb': 'MP3',
+    b'\xff\xf3': 'MP3',
+    b'RIFF': 'AVI',
 }
 
 # ====================== 黑名单管理 ======================
@@ -161,9 +180,7 @@ def clean_m3u_name(raw):
 def sanitize_url(raw_url):
     """清理URL：移除#片段、$后缀，去除首尾空格"""
     url = raw_url.strip()
-    # 移除#片段
     url, _ = urldefrag(url)
-    # 移除 $ 及其后的无关字符（如 $免费分享）
     if '$' in url:
         url = url.split('$')[0]
     if not url or not url.startswith(('http://', 'https://')):
@@ -211,7 +228,7 @@ def parse_txt(text):
 
 async def fetch_channels_from_urls(urls):
     all_channels = []
-    async with aiohttp.ClientSession(headers=HEADERS) as session:
+    async with aiohttp.ClientSession(headers=BASE_HEADERS) as session:
         for url in urls:
             text = await fetch_text(session, url)
             if not text:
@@ -224,6 +241,35 @@ async def fetch_channels_from_urls(urls):
                 print(f"  TXT源 {url}: {len(chs)} 个频道")
             all_channels.extend(chs)
     return all_channels
+
+# ====================== 视频魔数检测 ======================
+def detect_video_magic(data: bytes):
+    """检查数据前几个字节是否为已知视频格式的魔数，返回格式名称或None"""
+    if len(data) < 4:
+        return None
+    # 检查M3U8（文本格式）
+    if data.startswith(b'#EXTM3U'):
+        return 'M3U8'
+    # 检查TS
+    if data[0] == 0x47:
+        return 'TS'
+    # 检查FLV
+    if data[:3] == b'FLV':
+        return 'FLV'
+    # 检查MP4 (ftyp)
+    if data[:4] == b'\x00\x00\x00\x1c' or data[4:8] == b'ftyp':
+        return 'MP4'
+    # 检查MP3
+    if data[:2] in (b'\xff\xfb', b'\xff\xf3'):
+        return 'MP3'
+    # 检查AVI
+    if data[:4] == b'RIFF':
+        return 'AVI'
+    # 检查是否为HTML（排除）
+    head = data[:512].decode('utf-8', errors='ignore').lower()
+    if '<!doctype' in head or '<html' in head:
+        return 'HTML'
+    return None
 
 # ====================== 异步测速引擎 ======================
 class AsyncSpeedTester:
@@ -246,7 +292,6 @@ class AsyncSpeedTester:
         )
         self.session = aiohttp.ClientSession(
             connector=conn,
-            headers=HEADERS,
             timeout=aiohttp.ClientTimeout(total=CHECK_TIMEOUT + 2)
         )
         return self
@@ -254,36 +299,41 @@ class AsyncSpeedTester:
     async def __aexit__(self, *args):
         await self.session.close()
 
-    async def _connectivity_check(self, url, channel_name):
+    def _build_headers(self, ua_index=0):
+        h = BASE_HEADERS.copy()
+        h['User-Agent'] = USER_AGENTS[ua_index % len(USER_AGENTS)]
+        return h
+
+    async def _fetch_and_check(self, url, channel_name, ua_index=0, timeout=3):
         """
-        连通性检查：发送完整GET请求，只读取前1024字节即关闭。
-        检查响应状态码和内容类型，若为HTML则视为无效。
-        返回 (是否可达, 是否疑似视频内容)
+        快速检查URL是否返回视频流。
+        返回 (is_valid: bool, data: bytes, format: str)
         """
+        headers = self._build_headers(ua_index)
         try:
-            async with self.session.get(url, timeout=3) as resp:
-                if resp.status not in (200, 206):
-                    print(f"🌐 连通性检查失败({resp.status}): {channel_name:<10}| {url[:85]}")
-                    return False, False
-                # 读取前1024字节判断内容类型
-                chunk = await resp.content.read(1024)
-                # 检查是否为HTML
-                head_lower = chunk[:512].decode('utf-8', errors='ignore').lower()
-                if '<!doctype' in head_lower or '<html' in head_lower:
-                    print(f"🌐 内容为HTML，视为无效: {channel_name:<10}| {url[:85]}")
-                    return True, False  # 可达但不是视频
-                return True, True
+            async with self.session.get(url, headers=headers, timeout=timeout) as resp:
+                # 读取前4096字节用于判断
+                data = await resp.content.read(4096)
+                if len(data) < 32:
+                    return False, data, 'too_short'
+                fmt = detect_video_magic(data)
+                if fmt == 'HTML':
+                    return False, data, 'html'
+                if fmt is not None:
+                    return True, data, fmt
+                # 未知格式，但数据量足够，可能也是视频（如裸H264）
+                if len(data) >= 128:
+                    return True, data, 'unknown_binary'
+                return False, data, 'no_magic'
         except asyncio.TimeoutError:
-            print(f"🌐 连通性检查超时: {channel_name:<10}| {url[:85]}")
-            return False, False
+            return False, b'', 'timeout'
         except Exception as e:
-            print(f"🌐 连通性检查异常: {channel_name:<10}| {url[:85]} | {str(e)[:30]}")
-            return False, False
+            return False, b'', f'exception:{str(e)[:30]}'
 
     async def _measure_stream(self, stream_response, url_label, channel_name,
                                deep_size=DEEP_TEST_SIZE, steady_bytes=STEADY_BYTES,
                                min_time=MIN_TEST_TIME):
-        """通用测速函数，可自定义下载参数"""
+        """通用测速函数"""
         downloaded = 0
         steady_downloaded = 0
         steady_start = None
@@ -327,65 +377,61 @@ class AsyncSpeedTester:
         final_speed = 0.5 * steady_speed + 0.3 * overall_speed + 0.2 * median_speed
         return final_speed, downloaded
 
-    async def _try_speed_test(self, url, channel_name, timeout=CHECK_TIMEOUT,
-                               deep_size=DEEP_TEST_SIZE, fallback_ua=None):
+    async def _try_speed_test(self, url, channel_name, ua_index=0, timeout=CHECK_TIMEOUT,
+                               deep_size=DEEP_TEST_SIZE):
         """
-        执行一次测速尝试，返回 (speed, is_hls_flag, is_html)
-        speed=0表示失败
+        执行一次完整测速，返回速度KB/s
         """
-        headers = HEADERS.copy()
-        if fallback_ua:
-            headers['User-Agent'] = fallback_ua
-
+        headers = self._build_headers(ua_index)
         try:
             start = time.time()
             async with self.session.get(url, headers=headers, timeout=timeout) as resp:
                 ttfb = time.time() - start
                 if ttfb > 2.5:
-                    return 0.0, False, False
+                    return 0.0
 
-                # 读取前2048字节判断是否为HTML
+                # 读取前2048字节判断是否为M3U8
                 body_preview = await resp.content.read(2048)
                 resp.content.unread_data(body_preview)
-                head_lower = body_preview[:1024].decode('utf-8', errors='ignore').lower()
-                is_html = '<!doctype' in head_lower or '<html' in head_lower
-                if is_html:
-                    return 0.0, False, True
 
-                # 判断是否为 HLS
-                content_type = resp.headers.get('Content-Type', '')
-                is_hls = (url.lower().endswith('.m3u8') or
-                          'vnd.apple.mpegurl' in content_type or
-                          'application/x-mpegURL' in content_type or
-                          body_preview.lstrip()[:20].lower().find(b'#extm3u') != -1)
+                is_m3u8 = body_preview.startswith(b'#EXTM3U')
 
-                if is_hls:
+                if is_m3u8:
                     # 解析播放列表
                     playlist_text = body_preview.decode('utf-8', errors='ignore')
                     remaining = await resp.content.read()
                     full_playlist = playlist_text + remaining.decode('utf-8', errors='ignore')
 
-                    # 检查是否有至少一个 #EXTINF 和分片URL
-                    has_extinf = False
+                    # 提取分片URL（保留原始query参数）
+                    base_url = url
                     seg_urls = []
+                    has_extinf = False
                     for line in full_playlist.splitlines():
                         line = line.strip()
                         if line.startswith('#EXTINF'):
                             has_extinf = True
                         elif line and not line.startswith('#') and has_extinf:
-                            seg_url = urljoin(url, line)
+                            # 手动拼接URL，保留base的query参数
+                            seg_url = urljoin(base_url, line)
+                            # 注意：urljoin会丢弃base的query，我们需要保留
+                            # 如果line是相对路径，则拼接后可能丢失参数，需要手动添加
+                            parsed_base = urlparse(base_url)
+                            parsed_seg = urlparse(seg_url)
+                            if not parsed_seg.query and parsed_base.query:
+                                # 保留base的query参数
+                                seg_url = urlunparse(parsed_seg._replace(query=parsed_base.query))
                             seg_url, _ = urldefrag(seg_url)
                             seg_urls.append(seg_url)
                             if len(seg_urls) >= 3:
                                 break
 
                     if not has_extinf or not seg_urls:
-                        return 0.0, True, False  # HLS但内容无效
+                        return 0.0
 
                     final_speed = 0.0
                     for seg_url in seg_urls:
                         try:
-                            async with self.session.get(seg_url, timeout=timeout) as seg_resp:
+                            async with self.session.get(seg_url, headers=headers, timeout=timeout) as seg_resp:
                                 speed, downloaded = await self._measure_stream(
                                     seg_resp, seg_url, channel_name,
                                     deep_size=deep_size)
@@ -394,20 +440,18 @@ class AsyncSpeedTester:
                                     break
                         except:
                             continue
-
-                    return final_speed, True, False
-
+                    return final_speed
                 else:
-                    # 直连测速
+                    # 直连流
                     speed, downloaded = await self._measure_stream(
                         resp, url, channel_name,
                         deep_size=deep_size)
-                    return speed, False, False
+                    return speed
 
         except asyncio.TimeoutError:
-            return 0.0, False, False
+            return 0.0
         except Exception:
-            return 0.0, False, False
+            return 0.0
 
     async def test_one(self, url, channel_name):
         """测试单个源，返回速度KB/s，失败返回0"""
@@ -417,7 +461,7 @@ class AsyncSpeedTester:
             print(f"⏭️  黑名单跳过: {channel_name:<10}| {domain}")
             return 0.0
 
-        # 预处理URL：移除#片段和$后缀
+        # 预处理URL
         clean_url, _ = urldefrag(url)
         if '$' in clean_url:
             clean_url = clean_url.split('$')[0]
@@ -425,19 +469,22 @@ class AsyncSpeedTester:
             print(f"🔧 自动清理URL: {channel_name:<10}| {url[:55]} → {clean_url[:55]}")
             url = clean_url
 
-        # 连通性预检（同时判断是否为视频内容）
-        reachable, is_video = await self._connectivity_check(url, channel_name)
-        if not reachable:
-            return 0.0  # 不可达，不计入统计
-        if not is_video:
-            # 可达但内容是HTML，视为无效
-            return 0.0
+        # 第一步：快速检查是否返回视频流（使用第一个UA）
+        is_valid, data, fmt = await self._fetch_and_check(url, channel_name, ua_index=0, timeout=3)
+        if not is_valid:
+            print(f"🌐 快速检查无效({fmt}): {channel_name:<10}| {url[:85]}")
+            # 尝试第二个UA再检查一次
+            is_valid2, data2, fmt2 = await self._fetch_and_check(url, channel_name, ua_index=1, timeout=3)
+            if not is_valid2:
+                print(f"🌐 二次检查仍无效({fmt2}): {channel_name:<10}| {url[:85]}")
+                return 0.0
+            else:
+                print(f"🌐 二次检查有效({fmt2}): {channel_name:<10}| {url[:85]}")
+                is_valid = True
+                data = data2
 
-        # 首次测速
-        speed_first, is_hls, is_html = await self._try_speed_test(url, channel_name,
-                                                                   timeout=CHECK_TIMEOUT,
-                                                                   deep_size=DEEP_TEST_SIZE)
-        # 如果首次测速通过阈值，直接记录并返回
+        # 第二步：正式测速（使用第一个UA）
+        speed_first = await self._try_speed_test(url, channel_name, ua_index=0, timeout=CHECK_TIMEOUT)
         if speed_first >= SPEED_THRESHOLD:
             self.stats['total'] += 1
             self.stats['passed'] += 1
@@ -447,25 +494,13 @@ class AsyncSpeedTester:
             print(f"✅ {channel_name:<10}|{url[:85]:<85}|速度:{speed_first:>7.1f} KB/s|首次")
             return speed_first
 
-        # 如果首次发现是HTML（理论上不会发生，因为连通性检查已过滤），则直接返回
-        if is_html:
-            print(f"❌ {channel_name:<10}|{url[:85]:<85}| 内容为HTML，跳过")
-            return 0.0
-
-        # 首次测速失败（速度不足或异常），启动备用测速
+        # 首次测速不佳，启用备用（更换UA、增加超时）
         print(f"🔄 {channel_name:<10}|{url[:85]:<85}|首次测速不佳({speed_first:.1f}KB/s)，启用备用测速...")
-
-        # 备用测速参数：更长时间、更小数据量、更换UA
-        fallback_ua = 'Mozilla/5.0 (Linux; Android 13; SM-S908B) AppleWebKit/537.36'
-        speed_fallback, _, _ = await self._try_speed_test(url, channel_name,
-                                                           timeout=FALLBACK_TIMEOUT,
-                                                           deep_size=524288,      # 512KB
-                                                           fallback_ua=fallback_ua)
-
-        # 取两者中较高的值作为最终速度
+        speed_fallback = await self._try_speed_test(url, channel_name, ua_index=2, timeout=FALLBACK_TIMEOUT,
+                                                     deep_size=524288)  # 512KB
         final_speed = max(speed_first, speed_fallback)
 
-        # 更新统计（每个源只记一次）
+        # 更新统计
         self.stats['total'] += 1
         if final_speed >= SPEED_THRESHOLD:
             self.stats['passed'] += 1
@@ -490,7 +525,7 @@ class AsyncSpeedTester:
         tested = 0
 
         print(f"\n开始并发测速，最大并发 {MAX_CONCURRENT}，共 {total_sources} 个源")
-        print("=" * 155)
+        print("=" * 160)
 
         for cat in template.categories:
             for main in template.category_channels.get(cat, []):
@@ -501,14 +536,14 @@ class AsyncSpeedTester:
                 speeds = await asyncio.gather(*tasks)
 
                 passed = [(url, sp) for url, sp in zip(urls, speeds) if sp >= SPEED_THRESHOLD]
-                passed.sort(key=lambda x: x[1], reverse=True)  # 按速度降序排列
+                passed.sort(key=lambda x: x[1], reverse=True)  # 按速度降序
                 if passed:
                     results[main] = passed
 
                 tested += len(urls)
                 passed_now = sum(1 for sp in speeds if sp >= SPEED_THRESHOLD)
                 print(f"  {main:<20} 通过 {passed_now}/{len(urls)}  进度 {tested}/{total_sources}")
-                print("-" * 155)
+                print("-" * 160)
 
         return results, self.stats
 
@@ -535,7 +570,7 @@ def save_output(all_channels, template, output_dir='freetv'):
 
         txt_lines.append(f'{cat},#genre#')
         for main in avail:
-            sources = all_channels[main]  # 已经是按速度降序排列的列表
+            sources = all_channels[main]  # 已按速度降序
             for url, speed in sources:
                 txt_lines.append(f'{main},{url}')
             logo = template.get_logo_url(main)
@@ -557,9 +592,9 @@ def save_output(all_channels, template, output_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
-    print("=" * 95)
-    print("IPTV频道源测速工具 v3.4 (内容过滤+URL清理+备用测速增强)")
-    print("=" * 95)
+    print("=" * 105)
+    print("IPTV频道源测速工具 v3.5 (魔数检测+多UA+参数保留)")
+    print("=" * 105)
 
     blacklist = Blacklist('freetv/blacklist.txt')
     template = ChannelTemplate('freetv/dome.txt')
