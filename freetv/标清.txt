@@ -1,1 +1,17 @@
 #EXTM3U
+#EXTINF:-1 tvg-name="0" tvg-logo="" group-title="SD",0
+https://live.ottiptv.cc/yy/1382851580
+#EXTINF:-1 tvg-name="ViuTVsix" tvg-logo="" group-title="SD",ViuTVsix
+https://cdn.qd.je/163189/viu6
+#EXTINF:-1 tvg-name="周星星系列" tvg-logo="" group-title="SD",周星星系列
+https://live.ottiptv.cc/yy/1354888671
+#EXTINF:-1 tvg-name="天映经典" tvg-logo="" group-title="SD",天映经典
+https://cdn.qd.je/163189/ccm2
+#EXTINF:-1 tvg-name="天映经典" tvg-logo="" group-title="SD",天映经典
+https://cdn.qd.je/163189/ccm
+#EXTINF:-1 tvg-name="天映经典B" tvg-logo="" group-title="SD",天映经典B
+https://cdn.qd.je/163189.php?id=ccm
+#EXTINF:-1 tvg-name="新主播" tvg-logo="" group-title="SD",新主播
+https://live.ottiptv.cc/yy/1355179797
+#EXTINF:-1 tvg-name="郝蕾演绎-情满四合院" tvg-logo="" group-title="SD",郝蕾演绎-情满四合院
+https://live.ottiptv.cc/yy/1382745089
