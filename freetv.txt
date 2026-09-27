@@ -1,0 +1,303 @@
+#EXTM3U
+#EXTINF:-1 tvg-name="AEC" tvg-logo="" group-title="HD",AEC
+https://cdn.qd.je/163189/aec
+#EXTINF:-1 tvg-name="AOD" tvg-logo="" group-title="HD",AOD
+https://cdn.qd.je/163189/aod
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="" group-title="HD",CCTV1
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv1
+#EXTINF:-1 tvg-name="CCTV1" tvg-logo="" group-title="HD",CCTV1
+http://104.152.209.49:8181/720p/cctv1.m3u8
+#EXTINF:-1 tvg-name="CCTV10" tvg-logo="" group-title="HD",CCTV10
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv10
+#EXTINF:-1 tvg-name="CCTV10" tvg-logo="" group-title="HD",CCTV10
+http://104.152.209.49:8181/720p/cctv10.m3u8
+#EXTINF:-1 tvg-name="CCTV11" tvg-logo="" group-title="HD",CCTV11
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv11
+#EXTINF:-1 tvg-name="CCTV11" tvg-logo="" group-title="HD",CCTV11
+http://104.152.209.49:8181/720p/cctv11.m3u8
+#EXTINF:-1 tvg-name="CCTV12" tvg-logo="" group-title="HD",CCTV12
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv12
+#EXTINF:-1 tvg-name="CCTV12" tvg-logo="" group-title="HD",CCTV12
+http://104.152.209.49:8181/720p/cctv12.m3u8
+#EXTINF:-1 tvg-name="CCTV13" tvg-logo="" group-title="HD",CCTV13
+https://cdn.qd.je/163189/cctv13-2
+#EXTINF:-1 tvg-name="CCTV13" tvg-logo="" group-title="HD",CCTV13
+https://cdn.qd.je/163189.php?id=cctv13
+#EXTINF:-1 tvg-name="CCTV13" tvg-logo="" group-title="HD",CCTV13
+http://104.152.209.49:8181/720p/cctv13.m3u8
+#EXTINF:-1 tvg-name="CCTV14" tvg-logo="" group-title="HD",CCTV14
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv14
+#EXTINF:-1 tvg-name="CCTV15" tvg-logo="" group-title="HD",CCTV15
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv15
+#EXTINF:-1 tvg-name="CCTV15" tvg-logo="" group-title="HD",CCTV15
+http://104.152.209.49:8181/720p/cctv15.m3u8
+#EXTINF:-1 tvg-name="CCTV16" tvg-logo="" group-title="HD",CCTV16
+https://cdn.qd.je/163189/cctv16-2
+#EXTINF:-1 tvg-name="CCTV16" tvg-logo="" group-title="HD",CCTV16
+https://cdn.qd.je/163189.php?id=cctv16
+#EXTINF:-1 tvg-name="CCTV16" tvg-logo="" group-title="HD",CCTV16
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv16
+#EXTINF:-1 tvg-name="CCTV16" tvg-logo="" group-title="HD",CCTV16
+http://104.152.209.49:8181/720p/cctv16.m3u8
+#EXTINF:-1 tvg-name="CCTV17" tvg-logo="" group-title="HD",CCTV17
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv17
+#EXTINF:-1 tvg-name="CCTV17" tvg-logo="" group-title="HD",CCTV17
+http://104.152.209.49:8181/720p/cctv17.m3u8
+#EXTINF:-1 tvg-name="CCTV2" tvg-logo="" group-title="HD",CCTV2
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv2
+#EXTINF:-1 tvg-name="CCTV2" tvg-logo="" group-title="HD",CCTV2
+http://104.152.209.49:8181/720p/cctv2.m3u8
+#EXTINF:-1 tvg-name="CCTV3" tvg-logo="" group-title="HD",CCTV3
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv3
+#EXTINF:-1 tvg-name="CCTV4" tvg-logo="" group-title="HD",CCTV4
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv4
+#EXTINF:-1 tvg-name="CCTV4" tvg-logo="" group-title="HD",CCTV4
+http://104.152.209.49:8181/720p/cctv4.m3u8
+#EXTINF:-1 tvg-name="CCTV4" tvg-logo="" group-title="HD",CCTV4
+http://104.152.209.49:8181/720p/cctv4k.m3u8
+#EXTINF:-1 tvg-name="CCTV5" tvg-logo="" group-title="HD",CCTV5
+http://104.152.209.49:8181/720p/cctv5.m3u8
+#EXTINF:-1 tvg-name="CCTV5" tvg-logo="" group-title="HD",CCTV5
+http://104.152.209.49:8181/720p/cctv5p.m3u8
+#EXTINF:-1 tvg-name="CCTV6" tvg-logo="" group-title="HD",CCTV6
+http://104.152.209.49:8181/720p/cctv6.m3u8
+#EXTINF:-1 tvg-name="CCTV6" tvg-logo="" group-title="HD",CCTV6
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv6
+#EXTINF:-1 tvg-name="CCTV7" tvg-logo="" group-title="HD",CCTV7
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv7
+#EXTINF:-1 tvg-name="CCTV7" tvg-logo="" group-title="HD",CCTV7
+http://104.152.209.49:8181/720p/cctv7.m3u8
+#EXTINF:-1 tvg-name="CCTV8" tvg-logo="" group-title="HD",CCTV8
+http://104.152.209.49:8181/720p/cctv8k.m3u8
+#EXTINF:-1 tvg-name="CCTV8" tvg-logo="" group-title="HD",CCTV8
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv8
+#EXTINF:-1 tvg-name="CCTV8" tvg-logo="" group-title="HD",CCTV8
+http://104.152.209.49:8181/720p/cctv8.m3u8
+#EXTINF:-1 tvg-name="CCTV9" tvg-logo="" group-title="HD",CCTV9
+https://php.jdshipin.com/TVOD/iptv.php?id=cctv9
+#EXTINF:-1 tvg-name="CCTV9" tvg-logo="" group-title="HD",CCTV9
+http://104.152.209.49:8181/720p/cctv9.m3u8
+#EXTINF:-1 tvg-name="CH5B" tvg-logo="" group-title="HD",CH5B
+https://cdn.qd.je/163189.php?id=ch5
+#EXTINF:-1 tvg-name="CH8B" tvg-logo="" group-title="HD",CH8B
+https://cdn.qd.je/163189.php?id=ch8
+#EXTINF:-1 tvg-name="CHUB" tvg-logo="" group-title="HD",CHUB
+https://cdn.qd.je/163189.php?id=chu
+#EXTINF:-1 tvg-name="Channel 5" tvg-logo="" group-title="HD",Channel 5
+https://cdn.qd.je/163189/ch5
+#EXTINF:-1 tvg-name="Channel 8" tvg-logo="" group-title="HD",Channel 8
+https://cdn.qd.je/163189/ch8
+#EXTINF:-1 tvg-name="Channel U" tvg-logo="" group-title="HD",Channel U
+https://cdn.qd.je/163189/chu
+#EXTINF:-1 tvg-name="HOY TVB" tvg-logo="" group-title="HD",HOY TVB
+https://cdn.qd.je/163189.php?id=hoy2
+#EXTINF:-1 tvg-name="HOY TVB" tvg-logo="" group-title="HD",HOY TVB
+https://cdn.qd.je/163189.php?id=hoy
+#EXTINF:-1 tvg-name="HOY77" tvg-logo="" group-title="HD",HOY77
+https://cdn.qd.je/163189/hoy2
+#EXTINF:-1 tvg-name="HOY77" tvg-logo="" group-title="HD",HOY77
+https://cdn.qd.je/163189/hoy
+#EXTINF:-1 tvg-name="HOY78" tvg-logo="" group-title="HD",HOY78
+https://cdn.qd.je/163189/hoy78
+#EXTINF:-1 tvg-name="HOY国际财经台B" tvg-logo="" group-title="HD",HOY国际财经台B
+https://cdn.qd.je/163189.php?id=hoy76
+#EXTINF:-1 tvg-name="HOY资讯台B" tvg-logo="" group-title="HD",HOY资讯台B
+https://cdn.qd.je/163189.php?id=hoy78
+#EXTINF:-1 tvg-name="HUA HEE DAI" tvg-logo="" group-title="HD",HUA HEE DAI
+https://cdn.qd.je/163189/hxt
+#EXTINF:-1 tvg-name="NOW新闻台B" tvg-logo="" group-title="HD",NOW新闻台B
+https://cdn.qd.je/163189.php?id=now
+#EXTINF:-1 tvg-name="Now新聞台" tvg-logo="" group-title="HD",Now新聞台
+https://cdn.qd.je/163189/now
+#EXTINF:-1 tvg-name="RTHK31" tvg-logo="" group-title="HD",RTHK31
+https://cdn.qd.je/163189/rthk31
+#EXTINF:-1 tvg-name="RTHK31B" tvg-logo="" group-title="HD",RTHK31B
+https://cdn.qd.je/163189.php?id=rthk31
+#EXTINF:-1 tvg-name="RTHK32" tvg-logo="" group-title="HD",RTHK32
+https://cdn.qd.je/163189/rthk32
+#EXTINF:-1 tvg-name="RTHK32B" tvg-logo="" group-title="HD",RTHK32B
+https://cdn.qd.je/163189.php?id=rthk32
+#EXTINF:-1 tvg-name="RTHK33" tvg-logo="" group-title="HD",RTHK33
+https://cdn.qd.je/163189/rthk33
+#EXTINF:-1 tvg-name="RTM Apetito" tvg-logo="" group-title="HD",RTM Apetito
+https://d1sq2slp9afh7o.cloudfront.net/smil:apetito/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="RTM Aura" tvg-logo="" group-title="HD",RTM Aura
+https://d1sq2slp9afh7o.cloudfront.net/smil:aura/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="RTM Fitrah" tvg-logo="" group-title="HD",RTM Fitrah
+https://d1sq2slp9afh7o.cloudfront.net/smil:fitrah/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="RTM Junior" tvg-logo="" group-title="HD",RTM Junior
+https://d1sq2slp9afh7o.cloudfront.net/smil:jr/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="RTM Lead" tvg-logo="" group-title="HD",RTM Lead
+https://d1sq2slp9afh7o.cloudfront.net/smil:lead/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="RTM Roll" tvg-logo="" group-title="HD",RTM Roll
+https://d1sq2slp9afh7o.cloudfront.net/smil:roll/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="RTM Snap" tvg-logo="" group-title="HD",RTM Snap
+https://d1sq2slp9afh7o.cloudfront.net/smil:snap/chunklist_b2596000_slENG.m3u8
+#EXTINF:-1 tvg-name="TVB Jade HD" tvg-logo="" group-title="HD",TVB Jade HD
+https://cdn.qd.je/163189/jade2
+#EXTINF:-1 tvg-name="TVB Jade HD" tvg-logo="" group-title="HD",TVB Jade HD
+https://cdn.qd.je/163189/jade
+#EXTINF:-1 tvg-name="TVB Jade HD" tvg-logo="" group-title="HD",TVB Jade HD
+https://cdn.qd.je/163189/hlt
+#EXTINF:-1 tvg-name="TVB Jade HD" tvg-logo="" group-title="HD",TVB Jade HD
+https://cdn.qd.je/163189/hlfct
+#EXTINF:-1 tvg-name="TVB Plus" tvg-logo="" group-title="HD",TVB Plus
+https://cdn.qd.je/163189/tvbp
+#EXTINF:-1 tvg-name="TVB Plus" tvg-logo="" group-title="HD",TVB Plus
+https://cdn.qd.je/163189/tvbpvtt
+#EXTINF:-1 tvg-name="TVB1" tvg-logo="" group-title="HD",TVB1
+https://cdn.qd.je/163189/tvb1
+#EXTINF:-1 tvg-name="TVB1B" tvg-logo="" group-title="HD",TVB1B
+https://cdn.qd.je/163189.php?id=tvb1
+#EXTINF:-1 tvg-name="TVBJ1" tvg-logo="" group-title="HD",TVBJ1
+https://cdn.qd.je/163189/j1
+#EXTINF:-1 tvg-name="TVBj1B" tvg-logo="" group-title="HD",TVBj1B
+https://cdn.qd.je/163189.php?id=j1
+#EXTINF:-1 tvg-name="TVB亚洲武侠" tvg-logo="" group-title="HD",TVB亚洲武侠
+https://cdn.qd.je/163189/yzwx
+#EXTINF:-1 tvg-name="TVB星河" tvg-logo="" group-title="HD",TVB星河
+https://cdn.qd.je/163189/tvbxh2
+#EXTINF:-1 tvg-name="TVB星河" tvg-logo="" group-title="HD",TVB星河
+https://cdn.qd.je/163189/tvbxh
+#EXTINF:-1 tvg-name="TVB星河" tvg-logo="" group-title="HD",TVB星河
+https://cdn.qd.je/163189/xinghe
+#EXTINF:-1 tvg-name="TVB星河B" tvg-logo="" group-title="HD",TVB星河B
+https://cdn.qd.je/163189.php?id=xinghe
+#EXTINF:-1 tvg-name="ViuTVsixB" tvg-logo="" group-title="HD",ViuTVsixB
+https://cdn.qd.je/163189.php?id=viu6
+#EXTINF:-1 tvg-name="YY用户" tvg-logo="" group-title="HD",YY用户
+https://live.ottiptv.cc/yy/1382851591
+#EXTINF:-1 tvg-name="iQIYI" tvg-logo="" group-title="HD",iQIYI
+https://cdn.qd.je/163189/iqiyi
+#EXTINF:-1 tvg-name="亚洲武侠B" tvg-logo="" group-title="HD",亚洲武侠B
+https://cdn.qd.je/163189.php?id=yzwx
+#EXTINF:-1 tvg-name="你是我的荣耀" tvg-logo="" group-title="HD",你是我的荣耀
+https://live.ottiptv.cc/yy/1354931488
+#EXTINF:-1 tvg-name="八度空间" tvg-logo="" group-title="HD",八度空间
+https://cdn.qd.je/163189/8tv
+#EXTINF:-1 tvg-name="八度空间B" tvg-logo="" group-title="HD",八度空间B
+https://cdn.qd.je/163189.php?id=8tv
+#EXTINF:-1 tvg-name="凤凰中文" tvg-logo="" group-title="HD",凤凰中文
+https://cdn.qd.je/163189/fhzw
+#EXTINF:-1 tvg-name="凤凰中文B" tvg-logo="" group-title="HD",凤凰中文B
+https://cdn.qd.je/163189.php?id=fhzw
+#EXTINF:-1 tvg-name="凤凰资讯" tvg-logo="" group-title="HD",凤凰资讯
+https://cdn.qd.je/163189/fhzx
+#EXTINF:-1 tvg-name="凤凰资讯B" tvg-logo="" group-title="HD",凤凰资讯B
+https://cdn.qd.je/163189.php?id=fhzx
+#EXTINF:-1 tvg-name="凤凰香港" tvg-logo="" group-title="HD",凤凰香港
+https://cdn.qd.je/163189/fhhk
+#EXTINF:-1 tvg-name="凤凰香港B" tvg-logo="" group-title="HD",凤凰香港B
+https://cdn.qd.je/163189.php?id=fhhk
+#EXTINF:-1 tvg-name="千禧經典台" tvg-logo="" group-title="HD",千禧經典台
+https://cdn.qd.je/163189/tvbc
+#EXTINF:-1 tvg-name="华丽翡翠台(新加坡)" tvg-logo="" group-title="HD",华丽翡翠台(新加坡)
+http://cdn3.123.rr.kg/stream/live/jade/
+#EXTINF:-1 tvg-name="华丽翡翠台(硬字幕)B" tvg-logo="" group-title="HD",华丽翡翠台(硬字幕)B
+https://cdn.qd.je/163189.php?id=jade
+#EXTINF:-1 tvg-name="单挑荒野第一季" tvg-logo="" group-title="HD",单挑荒野第一季
+https://live.ottiptv.cc/yy/1354933535
+#EXTINF:-1 tvg-name="南国都市4K" tvg-logo="" group-title="HD",南国都市4K
+https://cdn.qd.je/163189/ngds
+#EXTINF:-1 tvg-name="大湾区卫视" tvg-logo="" group-title="HD",大湾区卫视
+http://107.150.60.122/live/nfws.m3u8
+#EXTINF:-1 tvg-name="大湾区卫视(外)" tvg-logo="" group-title="HD",大湾区卫视(外)
+http://38.75.136.137:98/gslb/dsdqpub/gdgj.m3u8?auth=testpub
+#EXTINF:-1 tvg-name="天映新加坡" tvg-logo="" group-title="HD",天映新加坡
+https://cdn.qd.je/163189/typd
+#EXTINF:-1 tvg-name="天映频道(新加坡)B" tvg-logo="" group-title="HD",天映频道(新加坡)B
+https://cdn.qd.je/163189.php?id=typd
+#EXTINF:-1 tvg-name="天映马来西亚" tvg-logo="" group-title="HD",天映马来西亚
+https://cdn.qd.je/163189/typd2
+#EXTINF:-1 tvg-name="天道-9.2高分好剧" tvg-logo="" group-title="HD",天道-9.2高分好剧
+https://live.ottiptv.cc/yy/1382735574
+#EXTINF:-1 tvg-name="娛樂新聞台" tvg-logo="" group-title="HD",娛樂新聞台
+https://cdn.qd.je/163189/ylxw
+#EXTINF:-1 tvg-name="广东体育B" tvg-logo="" group-title="HD",广东体育B
+https://cdn.qd.je/163189.php?id=gdty
+#EXTINF:-1 tvg-name="广东珠江B" tvg-logo="" group-title="HD",广东珠江B
+https://cdn.qd.je/163189.php?id=gdzj
+#EXTINF:-1 tvg-name="广州新闻" tvg-logo="" group-title="HD",广州新闻
+https://cdn.qd.je/163189/gzxw
+#EXTINF:-1 tvg-name="无线新闻" tvg-logo="" group-title="HD",无线新闻
+https://cdn.qd.je/163189/wxxw
+#EXTINF:-1 tvg-name="无线新闻" tvg-logo="" group-title="HD",无线新闻
+https://cdn.qd.je/163189/wxxwt
+#EXTINF:-1 tvg-name="无线新闻台B" tvg-logo="" group-title="HD",无线新闻台B
+https://cdn.qd.je/163189.php?id=wxxw
+#EXTINF:-1 tvg-name="明珠台" tvg-logo="" group-title="HD",明珠台
+https://cdn.qd.je/163189/mzt
+#EXTINF:-1 tvg-name="海峡卫视" tvg-logo="" group-title="HD",海峡卫视
+https://cdn.qd.je/163189/hxws2
+#EXTINF:-1 tvg-name="海峡卫视2B" tvg-logo="" group-title="HD",海峡卫视2B
+https://cdn.qd.je/163189.php?id=hxws2
+#EXTINF:-1 tvg-name="湖南卫视D" tvg-logo="" group-title="HD",湖南卫视D
+http://104.152.209.49:8181/720p/hnws.m3u8
+#EXTINF:-1 tvg-name="澳视体育" tvg-logo="" group-title="HD",澳视体育
+https://cdn.qd.je/163189/amty
+#EXTINF:-1 tvg-name="澳视卫星" tvg-logo="" group-title="HD",澳视卫星
+https://cdn.qd.je/163189/as
+#EXTINF:-1 tvg-name="澳视卫星B" tvg-logo="" group-title="HD",澳视卫星B
+https://cdn.qd.je/163189.php?id=as
+#EXTINF:-1 tvg-name="澳视澳门" tvg-logo="" group-title="HD",澳视澳门
+https://cdn.qd.je/163189/asam
+#EXTINF:-1 tvg-name="澳视澳门B" tvg-logo="" group-title="HD",澳视澳门B
+https://cdn.qd.je/163189.php?id=asam
+#EXTINF:-1 tvg-name="澳视综艺" tvg-logo="" group-title="HD",澳视综艺
+https://cdn.qd.je/163189/amzy
+#EXTINF:-1 tvg-name="澳门体育B" tvg-logo="" group-title="HD",澳门体育B
+https://cdn.qd.je/163189.php?id=amty
+#EXTINF:-1 tvg-name="澳门综艺B" tvg-logo="" group-title="HD",澳门综艺B
+https://cdn.qd.je/163189.php?id=amzy
+#EXTINF:-1 tvg-name="澳门莲花" tvg-logo="" group-title="HD",澳门莲花
+https://cdn.qd.je/163189/amlh
+#EXTINF:-1 tvg-name="澳门莲花B" tvg-logo="" group-title="HD",澳门莲花B
+https://cdn.qd.je/163189.php?id=amlh
+#EXTINF:-1 tvg-name="神医喜来乐" tvg-logo="" group-title="HD",神医喜来乐
+https://live.ottiptv.cc/yy/1382714119
+#EXTINF:-1 tvg-name="翡翠剧集台" tvg-logo="" group-title="HD",翡翠剧集台
+https://cdn.qd.je/163189/tvbd
+#EXTINF:-1 tvg-name="翡翠剧集台B" tvg-logo="" group-title="HD",翡翠剧集台B
+https://cdn.qd.je/163189.php?id=tvbd
+#EXTINF:-1 tvg-name="翡翠台" tvg-logo="" group-title="HD",翡翠台
+https://cdn.qd.je/163189/fct4k
+#EXTINF:-1 tvg-name="翡翠台" tvg-logo="" group-title="HD",翡翠台
+https://cdn.qd.je/163189/fct
+#EXTINF:-1 tvg-name="翡翠台" tvg-logo="" group-title="HD",翡翠台
+https://cdn.qd.je/163189/fct2
+#EXTINF:-1 tvg-name="翡翠台" tvg-logo="" group-title="HD",翡翠台
+https://cdn.qd.je/163189/fctvtt
+#EXTINF:-1 tvg-name="翡翠台B" tvg-logo="" group-title="HD",翡翠台B
+https://cdn.qd.je/163189.php?id=fct
+#EXTINF:-1 tvg-name="重温经典" tvg-logo="" group-title="HD",重温经典
+https://cdn.qd.je/163189/cwjd2
+#EXTINF:-1 tvg-name="重温经典" tvg-logo="" group-title="HD",重温经典
+https://cdn.qd.je/163189/cwjd
+#EXTINF:-1 tvg-name="重温经典B" tvg-logo="" group-title="HD",重温经典B
+https://cdn.qd.je/163189.php?id=cwjd
+#EXTINF:-1 tvg-name="龍華卡通" tvg-logo="" group-title="HD",龍華卡通
+https://cdn.qd.je/163189/lhkt
+#EXTINF:-1 tvg-name="龍華戲劇" tvg-logo="" group-title="HD",龍華戲劇
+https://cdn.qd.je/163189/lhxj
+#EXTINF:-1 tvg-name="龍華日韓" tvg-logo="" group-title="HD",龍華日韓
+https://cdn.qd.je/163189/lhrh
+#EXTINF:-1 tvg-name="龍華洋片" tvg-logo="" group-title="HD",龍華洋片
+https://cdn.qd.je/163189/lhyp
+#EXTINF:-1 tvg-name="龍華經典" tvg-logo="" group-title="HD",龍華經典
+https://cdn.qd.je/163189/lhjd
+#EXTINF:-1 tvg-name="龍華電影" tvg-logo="" group-title="HD",龍華電影
+https://cdn.qd.je/163189/lhdy
+#EXTINF:-1 tvg-name="龙华偶像B" tvg-logo="" group-title="HD",龙华偶像B
+https://cdn.qd.je/163189.php?id=lhox
+#EXTINF:-1 tvg-name="龙华卡通B" tvg-logo="" group-title="HD",龙华卡通B
+https://cdn.qd.je/163189.php?id=lhkt
+#EXTINF:-1 tvg-name="龙华戏剧B" tvg-logo="" group-title="HD",龙华戏剧B
+https://cdn.qd.je/163189.php?id=lhxj
+#EXTINF:-1 tvg-name="龙华日韩B" tvg-logo="" group-title="HD",龙华日韩B
+https://cdn.qd.je/163189.php?id=lhrh
+#EXTINF:-1 tvg-name="龙华洋片B" tvg-logo="" group-title="HD",龙华洋片B
+https://cdn.qd.je/163189.php?id=lhyp
+#EXTINF:-1 tvg-name="龙华电影B" tvg-logo="" group-title="HD",龙华电影B
+https://cdn.qd.je/163189.php?id=lhdy
+#EXTINF:-1 tvg-name="龙华经典B" tvg-logo="" group-title="HD",龙华经典B
+https://cdn.qd.je/163189.php?id=lhjd
