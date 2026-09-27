@@ -34,8 +34,11 @@ EPG_URL = 'https://epg.pw/api/epg.xml'                     # 固定 EPG 地址�
 
 # 网络源列表（已启用）
 NETWORK_SOURCES = [
-    'https://sub.ottiptv.cc/get.php?username=xxx&password=xxx&type=m3u_plus',
-    # 请替换为真实有效的订阅地址
+        "https://sub.ottiptv.cc/yylunbo.m3u",
+        "https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/ipv4.txt",
+        "https://raw.githubusercontent.com/wgq11/iptv/refs/heads/main/result.txt",
+        "https://raw.githubusercontent.com/lbxxxtw2/iptv/refs/heads/master/output/tv.txt",
+        "https://raw.githubusercontent.com/qingtian6325-lang/IPTV/refs/heads/main/mytv.m3u",
 ]
 
 # 超时设置（秒）
