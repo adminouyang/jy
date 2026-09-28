@@ -10,7 +10,7 @@ IPTV 连通性+分辨率+测速筛选工具 v3.0
 - 输出：高清(≥720p)→freetv.txt/freetv.m3u；标清(<720p)→freetv/标清.txt
 """
 
-import from asyncio import as_completed
+from asyncio import as_completed
 import aiohttp
 import ssl
 import os
