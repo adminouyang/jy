@@ -24,7 +24,7 @@ from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 
 # ====================== 配置 ======================
-CHECK_TIMEOUT = 5          # 连通性超时（秒）
+CHECK_TIMEOUT = 3          # 连通性超时（秒）
 RESOLUTION_TIMEOUT = 8     # 分辨率解析超时（秒）
 SPEED_TIMEOUT = 8          # 测速超时（秒）
 MAX_CONCURRENT = 30        # 连通性并发数
@@ -53,14 +53,14 @@ RESOLUTION_PRIORITY = {
 
 # 各分辨率速度阈值（KB/s），可根据实际调整
 SPEED_THRESHOLD_KBPS = {
-    '8K': 51200,      # 50 MB/s
-    '4K': 25600,      # 25 MB/s
-    '1080p': 10240,   # 10 MB/s
-    '1080i': 8192,    # 8 MB/s
-    '720p': 5120,     # 5 MB/s
-    '576p': 3072,     # 3 MB/s
-    '480p': 2048,     # 2 MB/s
-    '360p': 1024,     # 1 MB/s
+    '8K': 4096,      # 50 MB/s
+    '4K': 2048,      # 25 MB/s
+    '1080p': 650,   # 10 MB/s
+    '1080i': 400,    # 8 MB/s
+    '720p': 300,     # 5 MB/s
+    '576p': 180,     # 3 MB/s
+    '480p': 150,     # 2 MB/s
+    '360p': 100,     # 1 MB/s
     'unknown': 1024,  # 保守值
 }
 
