@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV 连通性检测工具 v2.0
-- 模板解析：支持任意 emoji/符号前缀的分类行（如 📺央视频道,#genre#）
-- 检测方法：HEAD 优先，失败降级 GET；仅判断最终状态码是否为 200
-- 超时 / 非200 / 连接异常 -> 提取域名写入 freetv/blacklist.txt 并去重
-- 输出：通过验证的频道列表（TXT + M3U）
-- 打印格式：频道名 | URL(截80) | 耗时ms | 状态
+IPTV 连通性+分辨率+测速筛选工具 v3.0
+- 模板解析：支持任意emoji/符号前缀的分类行
+- 连通性测试：HEAD优先，失败降级GET，仅接受200
+- 分辨率解析：ffprobe获取宽高，映射到8K/4K/1080p/720p/576p/480p/360p/unknown
+- 测速：ffmpeg下载小片段，计算速度(KB/s)
+- 阈值筛选：按分辨率设定速度下限，每个分类+域名取前2个测速样本，均达标则保留该组全部URL
+- 输出：高清(≥720p)→freetv.txt/freetv.m3u；标清(<720p)→freetv/标清.txt
 """
 
 import asyncio
@@ -15,13 +16,19 @@ import ssl
 import os
 import re
 import time
+import subprocess
+import tempfile
+import json
 from urllib.parse import urlparse, urldefrag
 from datetime import datetime, timedelta, timezone
+from collections import defaultdict
 
 # ====================== 配置 ======================
-CHECK_TIMEOUT = 5          # 单次请求总超时（秒）
-CONNECT_TIMEOUT = 5        # TCP/SSL 连接超时
-MAX_CONCURRENT = 50        # 并发数
+CHECK_TIMEOUT = 5          # 连通性超时（秒）
+RESOLUTION_TIMEOUT = 8     # 分辨率解析超时（秒）
+SPEED_TIMEOUT = 8          # 测速超时（秒）
+MAX_CONCURRENT = 30        # 连通性并发数
+SPEED_CONCURRENT = 5       # 测速并发数（子进程较慢）
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
     'Accept': '*/*',
@@ -30,27 +37,51 @@ HEADERS = {
     'Referer': 'https://www.google.com/',
 }
 
-# emoji/符号清洗：覆盖常用 emoji 平面、杂项符号、变体选择符、零宽连接符
+# 分辨率优先级（用于排序，越高越清晰）
+RESOLUTION_PRIORITY = {
+    '8K': 100,
+    '4K': 95,
+    '2160p': 90,
+    '1080p': 82,
+    '1080i': 78,
+    '720p': 72,
+    '576p': 62,
+    '480p': 52,
+    '360p': 42,
+    'unknown': 15,
+}
+
+# 各分辨率速度阈值（KB/s），可根据实际调整
+SPEED_THRESHOLD_KBPS = {
+    '8K': 51200,      # 50 MB/s
+    '4K': 25600,      # 25 MB/s
+    '1080p': 10240,   # 10 MB/s
+    '1080i': 8192,    # 8 MB/s
+    '720p': 5120,     # 5 MB/s
+    '576p': 3072,     # 3 MB/s
+    '480p': 2048,     # 2 MB/s
+    '360p': 1024,     # 1 MB/s
+    'unknown': 1024,  # 保守值
+}
+
+# emoji清洗
 EMOJI_RE = re.compile(
     "[" 
-    "\U0001F000-\U0001FAFF"   # 象形/表情/交通/旗/补充
-    "\U00002600-\U000027BF"   # 杂项符号+丁巴特
-    "\U0001F1E0-\U0001F1FF"   # 国旗
-    "\U0000FE00-\U0000FE0F"   # 变体选择符
-    "\U0000200D"              # 零宽连接符
-    "\U00002190-\U000021FF"   # 箭头
-    "\U00002B00-\U00002BFF"   # 符号
+    "\U0001F000-\U0001FAFF"
+    "\U00002600-\U000027BF"
+    "\U0001F1E0-\U0001F1FF"
+    "\U0000FE00-\U0000FE0F"
+    "\U0000200D"
+    "\U00002190-\U000021FF"
+    "\U00002B00-\U00002BFF"
     "]+", flags=re.UNICODE
 )
-WS_RE = re.compile(r'[\u3000\s]+')  # 全角/半角空白
-
+WS_RE = re.compile(r'[\u3000\s]+')
 
 def clean_cat_name(raw: str) -> str:
     s = EMOJI_RE.sub('', raw)
     s = WS_RE.sub('', s)
-    # 再去掉可能残留的普通符号前缀，如“4K”保留，“·”保留；“,”已在外部切掉
     return s.strip(' ,，、-')
-
 
 # ====================== 黑名单 ======================
 class Blacklist:
@@ -78,7 +109,6 @@ class Blacklist:
     def host_of(url: str) -> str:
         try:
             netloc = urlparse(url).netloc
-            # 去用户信息、去端口
             if '@' in netloc:
                 netloc = netloc.split('@', 1)[1]
             if ':' in netloc:
@@ -121,7 +151,6 @@ class Blacklist:
     def contains(self, url: str) -> bool:
         return self.host_of(url) in self.domains
 
-
 # ====================== 模板 ======================
 class ChannelTemplate:
     def __init__(self, path):
@@ -142,7 +171,6 @@ class ChannelTemplate:
                 line = line.strip()
                 if not line:
                     continue
-                # 分类行：含 #genre#，取第一个逗号前，清 emoji
                 if '#genre#' in line:
                     head = line.split('#genre#', 1)[0]
                     if ',' in head:
@@ -153,7 +181,6 @@ class ChannelTemplate:
                         self.category_channels[cat] = []
                     current_cat = cat
                     continue
-                # 频道行：至少含一个逗号，且当前有分类
                 if current_cat and ',' in line:
                     items = [x.strip() for x in line.split(',') if x.strip()]
                     if not items:
@@ -165,7 +192,6 @@ class ChannelTemplate:
                     for alias in items:
                         self.channel_map.setdefault(alias, main)
 
-        # 其它兜底
         other = '其它频道'
         self.categories = [c for c in self.categories if c != other]
         if other not in self.categories:
@@ -193,8 +219,91 @@ class ChannelTemplate:
     def template_names(self):
         return set(self.channel_map.keys())
 
+# ====================== 分辨率与测速工具 ======================
+def parse_resolution(width, height):
+    """根据宽高解析分辨率等级"""
+    if not width or not height or width == 0 or height == 0:
+        return 'unknown'
+    if width >= 7680 or height >= 4320:
+        return '8K'
+    if width >= 3840 or height >= 2160:
+        return '4K'
+    if width >= 1920 or height >= 1080:
+        return '1080p'
+    if width >= 1440 or height >= 900:   # 常见宽屏
+        return '720p'
+    if width >= 960 or height >= 540:    # 近似
+        return '576p'
+    if width >= 854 or height >= 480:    # FWVGA
+        return '480p'
+    return '360p'
 
-# ====================== 抓取源 ======================
+def get_resolution_info(url, timeout=RESOLUTION_TIMEOUT):
+    """使用ffprobe获取视频分辨率"""
+    try:
+        cmd = [
+            'ffprobe', '-v', 'quiet',
+            '-print_format', 'json',
+            '-show_streams',
+            '-timeout', str(int(timeout * 1e6)),
+            url
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout + 5)
+        if result.returncode != 0:
+            return 'unknown', 0, 0
+        data = json.loads(result.stdout)
+        video_streams = [s for s in data.get('streams', []) if s.get('codec_type') == 'video']
+        if not video_streams:
+            return 'unknown', 0, 0
+        stream = video_streams[0]
+        width = stream.get('width', 0)
+        height = stream.get('height', 0)
+        resolution = parse_resolution(width, height)
+        return resolution, width, height
+    except Exception:
+        return 'unknown', 0, 0
+
+def test_speed(url, timeout=SPEED_TIMEOUT):
+    """使用ffmpeg测试流媒体速度，返回速度KB/s"""
+    try:
+        with tempfile.NamedTemporaryFile(delete=True, suffix='.ts') as temp_file:
+            cmd = [
+                'ffmpeg', '-y',
+                '-timeout', str(int(timeout * 1e6)),
+                '-user_agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                '-i', url,
+                '-t', str(timeout),
+                '-c', 'copy',
+                '-f', 'mpegts',
+                temp_file.name
+            ]
+            start_time = time.time()
+            process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                process.communicate(timeout=timeout + 2)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+            end_time = time.time()
+            duration = end_time - start_time
+            try:
+                file_size = os.path.getsize(temp_file.name)
+                if file_size > 10240 and duration > 0.1:
+                    speed_kbps = (file_size / duration) / 1024   # KB/s
+                    return round(speed_kbps, 2)
+            except:
+                pass
+    except:
+        pass
+    return 0.0
+
+def clean_url(url):
+    """去除URL中$及其后内容"""
+    if '$' in url:
+        url = url.split('$')[0]
+    return url
+
+# ====================== 源获取 ======================
 async def fetch_text(session, url):
     try:
         async with session.get(url, timeout=10) as resp:
@@ -203,13 +312,11 @@ async def fetch_text(session, url):
         print(f"获取失败 {url}: {e}")
         return ''
 
-
 def clean_m3u_name(raw):
     name = re.sub(r'\([^)]*\)', '', raw)
     name = re.sub(r'\[[^\]]*\]', '', name)
     name = re.sub(r'\s+', ' ', name).strip()
     return name
-
 
 def sanitize_url(raw):
     u = raw.strip()
@@ -217,7 +324,6 @@ def sanitize_url(raw):
     if u.startswith(('http://', 'https://')):
         return u
     return None
-
 
 def parse_m3u(text):
     out = []
@@ -240,7 +346,6 @@ def parse_m3u(text):
         i += 1
     return out
 
-
 def parse_txt(text):
     out = []
     for line in text.splitlines():
@@ -259,7 +364,6 @@ def parse_txt(text):
             pass
     return out
 
-
 async def fetch_all(urls):
     res = []
     async with aiohttp.ClientSession(headers=HEADERS) as s:
@@ -275,7 +379,6 @@ async def fetch_all(urls):
                 print(f"  TXT源 {u}: {len(chs)} 个频道")
             res.extend(chs)
     return res
-
 
 # ====================== 连通性测试 ======================
 class ConnectivityTester:
@@ -300,8 +403,8 @@ class ConnectivityTester:
             headers=HEADERS,
             timeout=aiohttp.ClientTimeout(
                 total=CHECK_TIMEOUT,
-                connect=CONNECT_TIMEOUT,
-                sock_connect=CONNECT_TIMEOUT,
+                connect=CHECK_TIMEOUT,
+                sock_connect=CHECK_TIMEOUT,
                 sock_read=CHECK_TIMEOUT,
             ),
         )
@@ -321,15 +424,12 @@ class ConnectivityTester:
 
         async with self.sem:
             start = time.time()
-            status = None
             try:
-                # 1) HEAD
                 try:
                     async with self.session.head(url, allow_redirects=True) as r:
                         status = r.status
                         ms = (time.time() - start) * 1000
                 except (aiohttp.ClientResponseError, aiohttp.ClientError):
-                    # 2) 降级 GET，只读一点
                     async with self.session.get(url, allow_redirects=True) as r:
                         status = r.status
                         await r.content.read(4096)
@@ -341,13 +441,13 @@ class ConnectivityTester:
                     self.stats['total'] += 1
                     self.stats['passed'] += 1
                     print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|200")
-                    return True, ms
+                    return True, url
                 else:
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
                     print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} -> 写黑名单")
                     await self.bl.add(url)
-                    return False, ms
+                    return False, url
 
             except asyncio.TimeoutError:
                 ms = (time.time() - start) * 1000
@@ -355,85 +455,164 @@ class ConnectivityTester:
                 self.stats['failed'] += 1
                 print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时 -> 写黑名单")
                 await self.bl.add(url)
-                return False, ms
+                return False, url
             except Exception as e:
                 ms = (time.time() - start) * 1000
                 self.stats['total'] += 1
                 self.stats['failed'] += 1
                 print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{str(e)[:25]} -> 写黑名单")
                 await self.bl.add(url)
-                return False, ms
+                return False, url
 
-    async def batch(self, channel_list, tpl: ChannelTemplate):
-        groups = {}
+    async def batch(self, channel_list):
+        tasks = []
         for main, url in channel_list:
-            groups.setdefault(main, []).append(url)
+            tasks.append(self.test_one(url, main))
+        results = await asyncio.gather(*tasks)
+        passed = []
+        for (main, url), (ok, _) in zip(channel_list, results):
+            if ok:
+                passed.append((main, url))
+        return passed, self.stats
 
-        results = {}
-        total = len(channel_list)
-        done = 0
-        print(f"\n开始连通性测试，并发 {MAX_CONCURRENT}，共 {total} 个源")
-        print("=" * 140)
+# ====================== 测速筛选 ======================
+class SpeedFilter:
+    def __init__(self, tpl: ChannelTemplate):
+        self.tpl = tpl
+        self.results = {}  # (category, domain) -> list of (main, url, resolution, speed_kbps)
+        self.passed_groups = set()  # (category, domain) that passed threshold
 
-        for cat in tpl.categories:
-            for main in tpl.category_channels.get(cat, []):
-                urls = groups.get(main)
-                if not urls:
-                    continue
-                outs = await asyncio.gather(*[self.test_one(u, main) for u in urls])
-                passed = [(u, ms) for u, (ok, ms) in zip(urls, outs) if ok]
-                passed.sort(key=lambda x: x[1])
-                if passed:
-                    results[main] = passed
-                done += len(urls)
-                ok_n = sum(1 for ok, _ in outs if ok)
-                print(f"  {main:<20} 通过 {ok_n}/{len(urls)}  进度 {done}/{total}")
-                print("-" * 120)
+    def add_url(self, main, url):
+        """添加一个通过连通性的URL，进行分辨率解析和测速"""
+        url = clean_url(url)
+        domain = Blacklist.host_of(url)
+        cat = self.tpl.main_channels.get(main, '其它频道')
+        key = (cat, domain)
 
-        return results, self.stats
+        # 分辨率解析
+        resolution, w, h = get_resolution_info(url)
+        # 测速
+        speed = test_speed(url)
 
+        self.results.setdefault(key, []).append({
+            'main': main,
+            'url': url,
+            'resolution': resolution,
+            'speed': speed,
+            'domain': domain,
+            'cat': cat
+        })
+
+    def apply_threshold(self):
+        """应用阈值筛选，决定哪些组保留"""
+        for key, entries in self.results.items():
+            cat, domain = key
+            # 找出测速成功的条目（speed > 0）
+            speed_entries = [e for e in entries if e['speed'] > 0]
+            if not speed_entries:
+                # 没有测速成功的，无条件保留（可能是IPv6等）
+                self.passed_groups.add(key)
+                continue
+
+            # 取前2个测速成功的
+            samples = speed_entries[:2]
+            all_pass = True
+            for sample in samples:
+                res = sample['resolution']
+                thr = SPEED_THRESHOLD_KBPS.get(res, 1024)
+                if sample['speed'] < thr:
+                    all_pass = False
+                    break
+            if all_pass:
+                self.passed_groups.add(key)
+
+    def get_filtered_urls(self):
+        """返回通过筛选的URL列表，以及按分辨率分类的列表"""
+        hd_urls = []   # 高清 (>=720p)
+        sd_urls = []   # 标清 (<720p)
+        for key, entries in self.results.items():
+            if key not in self.passed_groups:
+                continue
+            for e in entries:
+                res = e['resolution']
+                priority = RESOLUTION_PRIORITY.get(res, 0)
+                if priority >= RESOLUTION_PRIORITY['720p']:  # 720p及以上
+                    hd_urls.append((e['main'], e['url']))
+                else:
+                    sd_urls.append((e['main'], e['url']))
+        return hd_urls, sd_urls
 
 # ====================== 输出 ======================
-def save_output(all_ch, tpl, out_dir='freetv'):
+def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
     os.makedirs(out_dir, exist_ok=True)
     bj = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime('%Y%m%d %H:%M:%S')
-
-    txt_path = os.path.join(out_dir, 'freetv.txt')
-    m3u_path = os.path.join(out_dir, 'freetv.m3u')
     epg = 'https://gh-proxy.com/https://raw.githubusercontent.com/adminouyang/231006/refs/heads/main/py/TV/EPG/epg.xml'
 
+    # 高清输出
+    txt_path = os.path.join(out_dir, 'freetv.txt')
+    m3u_path = os.path.join(out_dir, 'freetv.m3u')
     txt_lines = ['#genre#', f'更新时间,{bj}', '']
     m3u_lines = [f'#EXTM3U x-tvg-url="{epg}"']
 
+    # 按分类组织高清
+    hd_by_cat = defaultdict(list)
+    for main, url in hd_urls:
+        cat = tpl.main_channels.get(main, '其它频道')
+        hd_by_cat[cat].append((main, url))
+
     for cat in tpl.categories:
-        mains = [m for m in tpl.category_channels.get(cat, []) if all_ch.get(m)]
-        if not mains:
+        items = hd_by_cat.get(cat, [])
+        if not items:
             continue
         txt_lines.append(f'{cat},#genre#')
-        for m in mains:
-            for url, ms in all_ch[m]:
-                txt_lines.append(f'{m},{url}')
-            logo = tpl.get_logo_url(m)
-            for url, ms in all_ch[m]:
+        seen_main = set()
+        for main, url in items:
+            if main not in seen_main:
+                seen_main.add(main)
+                txt_lines.append(f'{main},{url}')
+                logo = tpl.get_logo_url(main)
                 m3u_lines.append(
-                    f'#EXTINF:-1 tvg-name="{m}" tvg-logo="{logo}" group-title="{cat}", {m}'
+                    f'#EXTINF:-1 tvg-name="{main}" tvg-logo="{logo}" group-title="{cat}", {main}'
                 )
                 m3u_lines.append(url)
+            else:
+                # 同一个主名可能有多个URL，只保留第一个（按需可改为全部）
+                pass
 
     with open(txt_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(txt_lines))
     with open(m3u_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(m3u_lines))
+    print(f"\n高清输出：{txt_path} ({len(set(m for m,u in hd_urls))} 频道)")
 
-    n = sum(len(v) for v in all_ch.values())
-    print(f"\n输出文件：\n  {txt_path} ({n} 源)\n  {m3u_path} ({n} 源)")
+    # 标清输出
+    sd_path = os.path.join(out_dir, '标清.txt')
+    sd_lines = ['#genre#', f'更新时间,{bj}', '']
+    sd_by_cat = defaultdict(list)
+    for main, url in sd_urls:
+        cat = tpl.main_channels.get(main, '其它频道')
+        sd_by_cat[cat].append((main, url))
 
+    for cat in tpl.categories:
+        items = sd_by_cat.get(cat, [])
+        if not items:
+            continue
+        sd_lines.append(f'{cat},#genre#')
+        seen_main = set()
+        for main, url in items:
+            if main not in seen_main:
+                seen_main.add(main)
+                sd_lines.append(f'{main},{url}')
+
+    with open(sd_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(sd_lines))
+    print(f"标清输出：{sd_path} ({len(set(m for m,u in sd_urls))} 频道)")
 
 # ====================== 主流程 ======================
 async def main():
-    print("=" * 92)
-    print("IPTV 连通性检测（仅状态码200，自动拉黑无效域名）")
-    print("=" * 92)
+    print("=" * 94)
+    print("IPTV 连通性 + 分辨率 + 测速筛选（阈值自适应）")
+    print("=" * 94)
 
     bl = Blacklist('freetv/blacklist.txt')
     tpl = ChannelTemplate('freetv/dome.txt')
@@ -455,6 +634,7 @@ async def main():
         print("未获取到任何源")
         return
 
+    # 映射到模板主名
     known, unknown = [], []
     names = tpl.template_names()
     for nm, u in raw:
@@ -462,7 +642,6 @@ async def main():
             known.append((nm, u))
         else:
             unknown.append((nm, u))
-
     for nm, u in unknown:
         tpl.add_to_other(nm)
     print(f"已知频道源 {len(known)}，未知归入其它 {len(unknown)}")
@@ -470,23 +649,67 @@ async def main():
     std = [(tpl.get_main(nm), u) for nm, u in known + unknown]
     print(f"待测源总数: {len(std)}")
 
+    # 连通性测试
     async with ConnectivityTester(bl) as tester:
-        results, stats = await tester.batch(std, tpl)
+        passed_list, stats = await tester.batch(std)
 
-    print("\n" + "=" * 60)
-    print("完成统计：")
-    print(f"  总检测: {stats['total']}  通过200: {stats['passed']}  失败: {stats['failed']}")
-    print(f"  可用频道数: {len(results)}")
+    print(f"\n连通性通过：{len(passed_list)} 个源")
+    if not passed_list:
+        print("没有可用的源，退出")
+        return
 
-    save_output(results, tpl)
+    # 分辨率解析 + 测速 + 阈值筛选
+    print("\n开始分辨率解析与测速（并发数{}）...".format(SPEED_CONCURRENT))
+    filter_obj = SpeedFilter(tpl)
 
-    print("\n分类统计：")
+    # 使用线程池并行执行阻塞的ffprobe/ffmpeg
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    loop = asyncio.get_event_loop()
+    executor = ThreadPoolExecutor(max_workers=SPEED_CONCURRENT)
+    futures = []
+    for main, url in passed_list:
+        future = loop.run_in_executor(executor, lambda m=main, u=url: filter_obj.add_url(m, u))
+        futures.append(future)
+
+    # 显示进度
+    total = len(futures)
+    done = 0
+    for fut in as_completed(futures):
+        done += 1
+        if done % 10 == 0 or done == total:
+            print(f"  进度: {done}/{total}")
+    print("分辨率与测速完成")
+
+    # 应用阈值
+    filter_obj.apply_threshold()
+    hd_urls, sd_urls = filter_obj.get_filtered_urls()
+    print(f"筛选后高清源: {len(hd_urls)}, 标清源: {len(sd_urls)}")
+
+    # 输出
+    save_output(hd_urls, sd_urls, tpl)
+
+    # 分类统计
+    print("\n分类统计（高清）：")
+    hd_by_cat = defaultdict(set)
+    for main, url in hd_urls:
+        cat = tpl.main_channels.get(main, '其它频道')
+        hd_by_cat[cat].add(main)
     for cat in tpl.categories:
-        mains = tpl.category_channels.get(cat, [])
-        avail = [m for m in mains if results.get(m)]
-        src = sum(len(results[m]) for m in avail)
-        print(f"  {cat}: 可用 {len(avail)}/{len(mains)} 频道, {src} 源")
+        cnt = len(hd_by_cat.get(cat, []))
+        if cnt:
+            print(f"  {cat}: {cnt} 频道")
 
+    print("\n标清分类统计：")
+    sd_by_cat = defaultdict(set)
+    for main, url in sd_urls:
+        cat = tpl.main_channels.get(main, '其它频道')
+        sd_by_cat[cat].add(main)
+    for cat in tpl.categories:
+        cnt = len(sd_by_cat.get(cat, []))
+        if cnt:
+            print(f"  {cat}: {cnt} 频道")
+
+    executor.shutdown()
 
 if __name__ == '__main__':
     asyncio.run(main())
