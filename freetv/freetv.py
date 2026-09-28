@@ -658,12 +658,11 @@ async def main():
         print("没有可用的源，退出")
         return
 
-    # 分辨率解析 + 测速 + 阈值筛选
+# 分辨率解析 + 测速 + 阈值筛选
     print("\n开始分辨率解析与测速（并发数{}）...".format(SPEED_CONCURRENT))
     filter_obj = SpeedFilter(tpl)
 
-    # 使用线程池并行执行阻塞的ffprobe/ffmpeg
-    from concurrent.futures import ThreadPoolExecutor, as_completed
+    from concurrent.futures import ThreadPoolExecutor
     loop = asyncio.get_event_loop()
     executor = ThreadPoolExecutor(max_workers=SPEED_CONCURRENT)
     futures = []
@@ -671,10 +670,11 @@ async def main():
         future = loop.run_in_executor(executor, lambda m=main, u=url: filter_obj.add_url(m, u))
         futures.append(future)
 
-    # 显示进度
+    # 使用 asyncio.as_completed 等待并显示进度
     total = len(futures)
     done = 0
-    for fut in as_completed(futures):
+    for coro in asyncio.as_completed(futures):
+        await coro
         done += 1
         if done % 10 == 0 or done == total:
             print(f"  进度: {done}/{total}")
