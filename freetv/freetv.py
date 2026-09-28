@@ -10,7 +10,7 @@ IPTV 连通性+分辨率+测速筛选工具 v3.0
 - 输出：高清(≥720p)→freetv.txt/freetv.m3u；标清(<720p)→freetv/标清.txt
 """
 
-from asyncio import as_completed
+import asyncio
 import aiohttp
 import ssl
 import os
@@ -22,6 +22,7 @@ import json
 from urllib.parse import urlparse, urldefrag
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 
 # ====================== 配置 ======================
 CHECK_TIMEOUT = 3          # 连通性超时（秒）
@@ -662,7 +663,6 @@ async def main():
     print("\n开始分辨率解析与测速（并发数{}）...".format(SPEED_CONCURRENT))
     filter_obj = SpeedFilter(tpl)
 
-    from concurrent.futures import ThreadPoolExecutor
     loop = asyncio.get_event_loop()
     executor = ThreadPoolExecutor(max_workers=SPEED_CONCURRENT)
     futures = []
@@ -673,7 +673,7 @@ async def main():
     # 使用 asyncio.as_completed 等待并显示进度
     total = len(futures)
     done = 0
-    for coro in asyncio.as_completed(futures):
+    for coro in asyncio.as_completed(futures):   # 注意这里用的是 asyncio.as_completed
         await coro
         done += 1
         if done % 10 == 0 or done == total:
