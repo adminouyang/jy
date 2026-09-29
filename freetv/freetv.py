@@ -527,17 +527,27 @@ class SpeedFilter:
         self.results = {}  # (category, domain) -> list of dict
         self.passed_groups = set()  # (category, domain) that passed threshold
 
-    def add_url(self, main, url):
-        """添加一个通过连通性的URL，进行分辨率解析和测速，并打印详细信息"""
+def add_url(self, main, url):
+    """添加一个通过连通性的URL，进行分辨率解析和测速，并打印详细信息"""
+    try:
         url = clean_url(url)
         domain = Blacklist.host_of(url)
         cat = self.tpl.main_channels.get(main, '其它频道')
         key = (cat, domain)
 
-        # 分辨率解析
-        resolution, w, h = get_resolution_info(url)
-        # 测速
-        speed = test_speed(url)
+        # 分辨率解析（捕获所有异常）
+        try:
+            resolution, w, h = get_resolution_info(url)
+        except Exception as e:
+            resolution = 'unknown'
+            print(f"⚠️ 分辨率解析失败 {main}: {e}")
+
+        # 测速（捕获所有异常）
+        try:
+            speed = test_speed(url)
+        except Exception as e:
+            speed = 0.0
+            print(f"⚠️ 测速失败 {main}: {e}")
 
         # 打印详细信息
         speed_str = f"{speed:.2f} KB/s" if speed > 0 else "N/A"
@@ -551,6 +561,9 @@ class SpeedFilter:
             'domain': domain,
             'cat': cat
         })
+    except Exception as e:
+        # 兜底异常处理，防止任何意外导致整个线程崩溃
+        print(f"❌ 严重错误处理 {main}: {e}")
 
     def apply_threshold(self):
         """应用阈值筛选，决定哪些组保留"""
@@ -727,8 +740,12 @@ async def main():
 
     total = len(futures)
     done = 0
-    for coro in asyncio.as_completed(futures):
+for coro in asyncio.as_completed(futures):
+    try:
         await coro
+    except Exception as e:
+        print(f"⚠️ 测速任务异常: {e}")
+    finally:
         done += 1
         if done % 20 == 0 or done == total:
             print(f"  进度: {done}/{total}")
