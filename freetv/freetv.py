@@ -740,7 +740,7 @@ async def main():
 
     total = len(futures)
     done = 0
-for coro in asyncio.as_completed(futures):
+    for coro in asyncio.as_completed(futures):
     try:
         await coro
     except Exception as e:
