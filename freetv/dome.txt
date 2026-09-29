@@ -24,8 +24,8 @@ CCTV17,cctv-17,cctv-17hd,cctv17,CCTV-17,CCTV17@
 CCTV4欧洲,CCTV-4 Europe
 CCTV4美洲,CCTV-4 America (1080p)
 CCTVNews,cctvnews,cctv-news
-CCTV4K,cctv-4k,cctv-4k高清,cctv4k,cctv-4k超高清,CCTV-4K (1080p)
-CCTV8K,cctv-8k超高清,CCTV-8K (1080p)
+CCTV4K,cctv-4k,cctv-4k高清,cctv4k,cctv-4k超高清,CCTV-4K (1080p),CCTV-4K超高清D
+CCTV8K,cctv-8k超高清,CCTV-8K (1080p),CCTV-8K超高清D
 CETV-1,cetv-1,cetv1,CETV1 (576p)
 CETV2,CETV2 (576p)
 CETV-4,cetv-4
@@ -539,7 +539,8 @@ sctv-4高清,sctv-4高清
 揭阳公共,揭阳公共
 揭阳综合,揭阳综合
 绵阳科技,绵阳科技
-广安新闻综合频道,广安新闻综合频道
+广安新闻综合频道,广安新闻综合频道,
+广安公共
 叙州新闻综合,叙州新闻综合
 大竹新闻综合,大竹新闻综合
 南充科教,南充科教
@@ -814,7 +815,7 @@ TVB1,
 第一卫视,第一卫视
 翡翠台,翡翠,tvb 翡翠,翡翠台(字幕),翡翠台(WebVTT字幕),翡翠台(多音轨字幕)
 翡翠台4K,翡翠台4K(字幕),翡翠台4K(多音轨字幕)
-华丽翡翠台,华丽翡翠台(硬字幕),华丽翡翠台(新加坡),华丽翡翠台(多音轨字幕)
+华丽翡翠台,华丽翡翠台(硬字幕),华丽翡翠台(新加坡),华丽翡翠台(多音轨字幕),华丽翡翠台2
 TVBDRAMA,翡翠剧集台
 Astro AOD,Astro AOD(多音轨字幕)
 Astro欢喜台,
@@ -829,7 +830,7 @@ HOY剧集台,
 NOW新闻台,
 Now财经台,
 ROCK Action,
-TVB星河,tvb星河,星河台,TVB星河(多音轨字幕)
+TVB星河,tvb星河,星河台,TVB星河(多音轨字幕),TVB星河1,
 亚洲武侠电视台,TVB亚洲武侠,亚洲武侠
 
 明珠台,明珠,明珠台(字幕),明珠台(WebVTT字幕),明珠台(多音轨字幕)
@@ -933,7 +934,7 @@ NEWSMAX2,newsmax 2,newsmaxtv
 倚天屠龙记-电视剧,倚天屠龙记
 天龙八部-电视剧,金庸武侠 天龙八部,天龙八部
 济公
-新白娘子传奇-电视剧,新白娘子传奇-女神赵雅芝
+新白娘子传奇-电视剧,新白娘子传奇-女神赵雅芝,新百娘子传奇D
 狂飙
  刑事侦缉档案I-电视剧,刑事侦缉档案I
 
