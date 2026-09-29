@@ -416,9 +416,13 @@ class ConnectivityTester:
         await self.session.close()
 
     async def test_one(self, url: str, name: str):
+        """
+        测试单个URL，返回 (是否通过, URL)。
+        注意：此方法不再直接写入黑名单。
+        """
         if self.bl.contains(url):
             print(f"⏭️  黑名单跳过: {name:<12}| {self.bl.host_of(url)}")
-            return False, 0
+            return False, url
 
         clean, _ = urldefrag(url)
         if clean != url:
@@ -437,18 +441,16 @@ class ConnectivityTester:
                             self.stats['passed'] += 1
                             print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|200 (HEAD)")
                             return True, url
-                        head_status = status
                 except (aiohttp.ClientResponseError, aiohttp.ClientError):
-                    head_status = None
-                    ms = (time.time() - start) * 1000
+                    pass  # HEAD 异常，降级到 GET
                 except Exception as e:
                     ms = (time.time() - start) * 1000
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|HEAD异常:{str(e)[:25]} -> 写黑名单")
-                    await self.bl.add(url)
+                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|HEAD异常:{str(e)[:25]}")
+                    self.stats['total'] += 1
+                    self.stats['failed'] += 1
                     return False, url
 
                 # 第二轮：GET 请求（带 Range 头）
-                start_get = time.time()
                 try:
                     headers = self.session.headers.copy()
                     headers['Range'] = 'bytes=0-4096'
@@ -465,41 +467,58 @@ class ConnectivityTester:
                             ms = (time.time() - start) * 1000
                             self.stats['total'] += 1
                             self.stats['failed'] += 1
-                            print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET) -> 写黑名单")
-                            await self.bl.add(url)
+                            print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET)")
                             return False, url
                 except asyncio.TimeoutError:
                     ms = (time.time() - start) * 1000
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时(GET) -> 写黑名单")
-                    await self.bl.add(url)
+                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时(GET)")
                     return False, url
                 except Exception as e:
                     ms = (time.time() - start) * 1000
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|GET异常:{str(e)[:25]} -> 写黑名单")
-                    await self.bl.add(url)
+                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|GET异常:{str(e)[:25]}")
                     return False, url
 
             except Exception as e:
                 ms = (time.time() - start) * 1000
                 self.stats['total'] += 1
                 self.stats['failed'] += 1
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|异常:{str(e)[:25]} -> 写黑名单")
-                await self.bl.add(url)
+                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|异常:{str(e)[:25]}")
                 return False, url
 
     async def batch(self, channel_list):
+        """
+        批量测试所有URL，然后统一处理黑名单：
+        只有当一个域名下所有URL都失败时，才将该域名加入黑名单。
+        """
         tasks = []
         for main, url in channel_list:
             tasks.append(self.test_one(url, main))
         results = await asyncio.gather(*tasks)
+
         passed = []
+        failed_domains = set()
+        passed_domains = set()
+
         for (main, url), (ok, _) in zip(channel_list, results):
+            domain = Blacklist.host_of(url)
             if ok:
                 passed.append((main, url))
+                passed_domains.add(domain)
+            else:
+                failed_domains.add(domain)
+
+        # 只拉黑那些完全没有通过的域名
+        domains_to_blacklist = failed_domains - passed_domains
+        for domain in domains_to_blacklist:
+            # 构造一个该域名的URL用于写入黑名单
+            dummy_url = f"http://{domain}/"
+            await self.bl.add(dummy_url)
+            print(f"🖤 域名 {domain} 所有URL均失败，已加入黑名单")
+
         return passed, self.stats
 # ====================== 测速筛选 ======================
 class SpeedFilter:
