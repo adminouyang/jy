@@ -483,8 +483,8 @@ class SpeedFilter:
         self.results = {}  # (category, domain) -> list of (main, url, resolution, speed_kbps)
         self.passed_groups = set()  # (category, domain) that passed threshold
 
-    def add_url(self, main, url):
-        """添加一个通过连通性的URL，进行分辨率解析和测速"""
+def add_url(self, main, url):
+        """添加一个通过连通性的URL，进行分辨率解析和测速，并打印详细信息"""
         url = clean_url(url)
         domain = Blacklist.host_of(url)
         cat = self.tpl.main_channels.get(main, '其它频道')
@@ -494,6 +494,10 @@ class SpeedFilter:
         resolution, w, h = get_resolution_info(url)
         # 测速
         speed = test_speed(url)
+
+        # 打印详细信息
+        speed_str = f"{speed:.2f} KB/s" if speed > 0 else "N/A"
+        print(f"📊 {main:<16} | {url[:60]:<60} | {resolution:<8} | {speed_str:<12}")
 
         self.results.setdefault(key, []).append({
             'main': main,
@@ -670,13 +674,12 @@ async def main():
         future = loop.run_in_executor(executor, lambda m=main, u=url: filter_obj.add_url(m, u))
         futures.append(future)
 
-    # 使用 asyncio.as_completed 等待并显示进度
     total = len(futures)
     done = 0
-    for coro in asyncio.as_completed(futures):   # 注意这里用的是 asyncio.as_completed
+    for coro in asyncio.as_completed(futures):
         await coro
         done += 1
-        if done % 10 == 0 or done == total:
+        if done % 20 == 0 or done == total:   # 每20个或结束时打印一次进度
             print(f"  进度: {done}/{total}")
     print("分辨率与测速完成")
 
