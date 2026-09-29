@@ -575,21 +575,21 @@ class SpeedFilter:
             if all_pass:
                 self.passed_groups.add(key)
 
-    def get_filtered_urls(self):
-        """返回通过筛选的URL列表，以及按分辨率分类的列表"""
-        hd_urls = []   # 高清 (>=720p)
-        sd_urls = []   # 标清 (<720p)
-        for key, entries in self.results.items():
-            if key not in self.passed_groups:
-                continue
-            for e in entries:
-                res = e['resolution']
-                priority = RESOLUTION_PRIORITY.get(res, 0)
-                if priority >= RESOLUTION_PRIORITY['720p']:  # 720p及以上
-                    hd_urls.append((e['main'], e['url']))
-                else:
-                    sd_urls.append((e['main'], e['url']))
-        return hd_urls, sd_urls
+def get_filtered_urls(self):
+    """返回通过筛选的URL列表，以及按分辨率分类的列表，包含速度信息"""
+    hd_urls = []   # 高清 (>=720p)
+    sd_urls = []   # 标清 (<720p)
+    for key, entries in self.results.items():
+        if key not in self.passed_groups:
+            continue
+        for e in entries:
+            res = e['resolution']
+            priority = RESOLUTION_PRIORITY.get(res, 0)
+            if priority >= RESOLUTION_PRIORITY['720p']:
+                hd_urls.append((e['main'], e['url'], e['speed']))
+            else:
+                sd_urls.append((e['main'], e['url'], e['speed']))
+    return hd_urls, sd_urls
 
 # ====================== 输出 ======================
 def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
@@ -603,59 +603,66 @@ def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
     txt_lines = ['#genre#', f'更新时间,{bj}', '']
     m3u_lines = [f'#EXTM3U x-tvg-url="{epg}"']
 
-    # 按分类组织高清
-    hd_by_cat = defaultdict(list)
-    for main, url in hd_urls:
+    # 按分类组织高清，每个分类内按频道名分组，频道内按速度降序
+    hd_by_cat = defaultdict(lambda: defaultdict(list))
+    for main, url, speed in hd_urls:
         cat = tpl.main_channels.get(main, '其它频道')
-        hd_by_cat[cat].append((main, url))
+        hd_by_cat[cat][main].append((url, speed))
 
     for cat in tpl.categories:
-        items = hd_by_cat.get(cat, [])
-        if not items:
+        channels = hd_by_cat.get(cat, {})
+        if not channels:
             continue
         txt_lines.append(f'{cat},#genre#')
-        seen_main = set()
-        for main, url in items:
-            if main not in seen_main:
-                seen_main.add(main)
+        # 按频道名排序（保持一致性）
+        for main in sorted(channels.keys()):
+            items = channels[main]
+            # 按速度降序排列
+            items.sort(key=lambda x: x[1], reverse=True)
+            seen_urls = set()
+            for url, speed in items:
+                if url in seen_urls:
+                    continue
+                seen_urls.add(url)
                 txt_lines.append(f'{main},{url}')
                 logo = tpl.get_logo_url(main)
                 m3u_lines.append(
                     f'#EXTINF:-1 tvg-name="{main}" tvg-logo="{logo}" group-title="{cat}", {main}'
                 )
                 m3u_lines.append(url)
-            else:
-                # 同一个主名可能有多个URL，只保留第一个
-                pass
 
     with open(txt_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(txt_lines))
     with open(m3u_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(m3u_lines))
-    print(f"\n高清输出：{txt_path} ({len(set(m for m,u in hd_urls))} 频道)")
+    print(f"\n高清输出：{txt_path} ({sum(len(v) for v in hd_by_cat.values())} 条URL)")
 
     # 标清输出
     sd_path = os.path.join(out_dir, '标清.txt')
     sd_lines = ['#genre#', f'更新时间,{bj}', '']
-    sd_by_cat = defaultdict(list)
-    for main, url in sd_urls:
+    sd_by_cat = defaultdict(lambda: defaultdict(list))
+    for main, url, speed in sd_urls:
         cat = tpl.main_channels.get(main, '其它频道')
-        sd_by_cat[cat].append((main, url))
+        sd_by_cat[cat][main].append((url, speed))
 
     for cat in tpl.categories:
-        items = sd_by_cat.get(cat, [])
-        if not items:
+        channels = sd_by_cat.get(cat, {})
+        if not channels:
             continue
         sd_lines.append(f'{cat},#genre#')
-        seen_main = set()
-        for main, url in items:
-            if main not in seen_main:
-                seen_main.add(main)
+        for main in sorted(channels.keys()):
+            items = channels[main]
+            items.sort(key=lambda x: x[1], reverse=True)
+            seen_urls = set()
+            for url, speed in items:
+                if url in seen_urls:
+                    continue
+                seen_urls.add(url)
                 sd_lines.append(f'{main},{url}')
 
     with open(sd_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sd_lines))
-    print(f"标清输出：{sd_path} ({len(set(m for m,u in sd_urls))} 频道)")
+    print(f"标清输出：{sd_path} ({sum(len(v) for v in sd_by_cat.values())} 条URL)")
 
 # ====================== 主流程 ======================
 async def main():
