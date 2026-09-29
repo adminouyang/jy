@@ -442,12 +442,12 @@ class ConnectivityTester:
                 if status == 200:
                     self.stats['total'] += 1
                     self.stats['passed'] += 1
-                    print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|200")
+                    print(f"✅ {name:<10}|{url[:100]:<100}|{ms:>7.0f} ms|200")
                     return True, url
                 else:
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} -> 写黑名单")
+                    print(f"❌ {name:<10}|{url[:100]:<100}|{ms:>7.0f} ms|{status} -> 写黑名单")
                     await self.bl.add(url)
                     return False, url
 
@@ -455,14 +455,14 @@ class ConnectivityTester:
                 ms = (time.time() - start) * 1000
                 self.stats['total'] += 1
                 self.stats['failed'] += 1
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时 -> 写黑名单")
+                print(f"❌ {name:<10}|{url[:100]:<100}|{ms:>7.0f} ms|超时 -> 写黑名单")
                 await self.bl.add(url)
                 return False, url
             except Exception as e:
                 ms = (time.time() - start) * 1000
                 self.stats['total'] += 1
                 self.stats['failed'] += 1
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{str(e)[:25]} -> 写黑名单")
+                print(f"❌ {name:<10}|{url[:100]:<100}|{ms:>7.0f} ms|{str(e)[:25]} -> 写黑名单")
                 await self.bl.add(url)
                 return False, url
 
