@@ -55,13 +55,12 @@ RESOLUTION_PRIORITY = {
 
 # 各分辨率速度阈值（KB/s）
 SPEED_THRESHOLD_KBPS = {
-    '8K': 1024,
-    '4K': 760,
-    '1080p': 560,
-    '1080i': 400,
-    '720p': 320,
-    '576p': 160,
-    '480p': 120,
+    '8K': 2048,
+    '4K': 1900,
+    '1080p': 465,
+    '720p': 282,
+    '576p': 144,
+    '480p': 125,
     '360p': 60,
     'unknown': 1024,
 }
@@ -228,16 +227,20 @@ def parse_resolution(width, height):
         return 'unknown'
     if width >= 7680 or height >= 4320:
         return '8K'
-    if width >= 3840 or height >= 2100:
+    if width >= 3840 or height >= 2160:
         return '4K'
-    if width >= 1900 or height >= 1060:
+    if width >= 1920 or height >= 1080:
         return '1080p'
-    if width >= 1400 or height >= 880:
+    if width >= 1280 or height >= 720:
         return '720p'
-    if width >= 950 or height >= 530:
+    if width >= 720 or height >= 576:
         return '576p'
-    if width >= 850 or height >= 470:
+    if width >= 1024 or height >= 576:
+        return '576p'
+    if width >= 854 or height >= 480:
         return '480p'
+    if width >= 640 or height >= 480:
+        return '480p'  
     return '360p'
 
 def get_resolution_info(url, timeout=RESOLUTION_TIMEOUT):
