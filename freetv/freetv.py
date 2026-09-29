@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV 连通性 + 分辨率 + 测速筛选工具 v3.1
+IPTV 连通性 + 分辨率 + 测速筛选工具 v3.2
 - 模板解析：支持任意emoji/符号前缀的分类行
-- 连通性测试：HEAD优先，失败降级GET，仅接受200
+- 连通性测试：HEAD优先，非200降级GET（带Range），仅接受200/206
+- 域名延迟拉黑：仅当域名下所有URL均失败时才拉黑
 - 分辨率解析：ffprobe获取宽高，映射到8K/4K/1080p/720p/576p/480p/360p/unknown
 - 测速：ffmpeg下载小片段，计算速度(KB/s)
 - 阈值筛选：按分辨率设定速度下限，每个分类+域名取前2个测速样本，均达标则保留该组全部URL
-- 输出：高清(≥720p)→freetv.txt/freetv.m3u；标清(<720p)→freetv/标清.txt
-- 打印每个频道的名称、URL、分辨率、速度(KB/s)
+- 输出：按dome.txt分类顺序，同频道名按速度降序排列，高清(≥720p)→freetv.txt/freetv.m3u；标清(<720p)→freetv/标清.txt
 """
 
 import asyncio
@@ -44,26 +44,26 @@ RESOLUTION_PRIORITY = {
     '8K': 100,
     '4K': 95,
     '2160p': 90,
-    '1080p': 82,
-    '1080i': 78,
-    '720p': 72,
-    '576p': 62,
-    '480p': 52,
-    '360p': 42,
-    'unknown': 15,
+    '1080p': 85,
+    '1080i': 80,
+    '720p': 70,
+    '576p': 55,
+    '480p': 35,
+    '360p': 18,
+    'unknown': 5,
 }
 
-# 各分辨率速度阈值（KB/s），可根据实际调整
+# 各分辨率速度阈值（KB/s）
 SPEED_THRESHOLD_KBPS = {
-    '8K': 2048,      # 50 MB/s
-    '4K': 1024,      # 25 MB/s
-    '1080p': 600,   # 10 MB/s
-    '1080i': 450,    # 8 MB/s
-    '720p': 380,     # 5 MB/s
-    '576p': 160,     # 3 MB/s
-    '480p': 120,     # 2 MB/s
-    '360p': 60,     # 1 MB/s
-    'unknown': 1024,  # 保守值
+    '8K': 51200,
+    '4K': 25600,
+    '1080p': 12288,
+    '1080i': 9216,
+    '720p': 6144,
+    '576p': 3584,
+    '480p': 2304,
+    '360p': 1152,
+    'unknown': 1536,
 }
 
 # emoji清洗
@@ -228,15 +228,15 @@ def parse_resolution(width, height):
         return 'unknown'
     if width >= 7680 or height >= 4320:
         return '8K'
-    if width >= 3840 or height >= 2160:
+    if width >= 3840 or height >= 2100:
         return '4K'
-    if width >= 1920 or height >= 1080:
+    if width >= 1900 or height >= 1060:
         return '1080p'
-    if width >= 1440 or height >= 900:
+    if width >= 1400 or height >= 880:
         return '720p'
-    if width >= 960 or height >= 540:
+    if width >= 950 or height >= 530:
         return '576p'
-    if width >= 854 or height >= 480:
+    if width >= 850 or height >= 470:
         return '480p'
     return '360p'
 
@@ -416,10 +416,7 @@ class ConnectivityTester:
         await self.session.close()
 
     async def test_one(self, url: str, name: str):
-        """
-        测试单个URL，返回 (是否通过, URL)。
-        注意：此方法不再直接写入黑名单。
-        """
+        """测试单个URL，返回 (是否通过, URL)。不直接写入黑名单。"""
         if self.bl.contains(url):
             print(f"⏭️  黑名单跳过: {name:<12}| {self.bl.host_of(url)}")
             return False, url
@@ -490,10 +487,7 @@ class ConnectivityTester:
                 return False, url
 
     async def batch(self, channel_list):
-        """
-        批量测试所有URL，然后统一处理黑名单：
-        只有当一个域名下所有URL都失败时，才将该域名加入黑名单。
-        """
+        """批量测试所有URL，然后统一处理黑名单：只有当一个域名下所有URL都失败时才拉黑。"""
         tasks = []
         for main, url in channel_list:
             tasks.append(self.test_one(url, main))
@@ -514,12 +508,12 @@ class ConnectivityTester:
         # 只拉黑那些完全没有通过的域名
         domains_to_blacklist = failed_domains - passed_domains
         for domain in domains_to_blacklist:
-            # 构造一个该域名的URL用于写入黑名单
             dummy_url = f"http://{domain}/"
             await self.bl.add(dummy_url)
             print(f"🖤 域名 {domain} 所有URL均失败，已加入黑名单")
 
         return passed, self.stats
+
 # ====================== 测速筛选 ======================
 class SpeedFilter:
     def __init__(self, tpl: ChannelTemplate):
@@ -527,27 +521,17 @@ class SpeedFilter:
         self.results = {}  # (category, domain) -> list of dict
         self.passed_groups = set()  # (category, domain) that passed threshold
 
-def add_url(self, main, url):
-    """添加一个通过连通性的URL，进行分辨率解析和测速，并打印详细信息"""
-    try:
+    def add_url(self, main, url):
+        """添加一个通过连通性的URL，进行分辨率解析和测速，并打印详细信息"""
         url = clean_url(url)
         domain = Blacklist.host_of(url)
         cat = self.tpl.main_channels.get(main, '其它频道')
         key = (cat, domain)
 
-        # 分辨率解析（捕获所有异常）
-        try:
-            resolution, w, h = get_resolution_info(url)
-        except Exception as e:
-            resolution = 'unknown'
-            print(f"⚠️ 分辨率解析失败 {main}: {e}")
-
-        # 测速（捕获所有异常）
-        try:
-            speed = test_speed(url)
-        except Exception as e:
-            speed = 0.0
-            print(f"⚠️ 测速失败 {main}: {e}")
+        # 分辨率解析
+        resolution, w, h = get_resolution_info(url)
+        # 测速
+        speed = test_speed(url)
 
         # 打印详细信息
         speed_str = f"{speed:.2f} KB/s" if speed > 0 else "N/A"
@@ -561,48 +545,43 @@ def add_url(self, main, url):
             'domain': domain,
             'cat': cat
         })
-    except Exception as e:
-        # 兜底异常处理，防止任何意外导致整个线程崩溃
-        print(f"❌ 严重错误处理 {main}: {e}")
 
     def apply_threshold(self):
         """应用阈值筛选，决定哪些组保留"""
         for key, entries in self.results.items():
             cat, domain = key
-            # 找出测速成功的条目（speed > 0）
             speed_entries = [e for e in entries if e['speed'] > 0]
             if not speed_entries:
                 # 没有测速成功的，无条件保留（可能是IPv6等）
                 self.passed_groups.add(key)
                 continue
 
-            # 取前2个测速成功的
             samples = speed_entries[:2]
             all_pass = True
             for sample in samples:
                 res = sample['resolution']
-                thr = SPEED_THRESHOLD_KBPS.get(res, 1024)
+                thr = SPEED_THRESHOLD_KBPS.get(res, 1500)
                 if sample['speed'] < thr:
                     all_pass = False
                     break
             if all_pass:
                 self.passed_groups.add(key)
 
-def get_filtered_urls(self):
-    """返回通过筛选的URL列表，以及按分辨率分类的列表，包含速度信息"""
-    hd_urls = []   # 高清 (>=720p)
-    sd_urls = []   # 标清 (<720p)
-    for key, entries in self.results.items():
-        if key not in self.passed_groups:
-            continue
-        for e in entries:
-            res = e['resolution']
-            priority = RESOLUTION_PRIORITY.get(res, 0)
-            if priority >= RESOLUTION_PRIORITY['720p']:
-                hd_urls.append((e['main'], e['url'], e['speed']))
-            else:
-                sd_urls.append((e['main'], e['url'], e['speed']))
-    return hd_urls, sd_urls
+    def get_filtered_urls(self):
+        """返回通过筛选的URL列表，以及按分辨率分类的列表，包含速度信息"""
+        hd_urls = []   # 高清 (>=720p)
+        sd_urls = []   # 标清 (<720p)
+        for key, entries in self.results.items():
+            if key not in self.passed_groups:
+                continue
+            for e in entries:
+                res = e['resolution']
+                priority = RESOLUTION_PRIORITY.get(res, 0)
+                if priority >= RESOLUTION_PRIORITY['720p']:
+                    hd_urls.append((e['main'], e['url'], e['speed']))
+                else:
+                    sd_urls.append((e['main'], e['url'], e['speed']))
+        return hd_urls, sd_urls
 
 # ====================== 输出 ======================
 def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
@@ -741,14 +720,10 @@ async def main():
     total = len(futures)
     done = 0
     for coro in asyncio.as_completed(futures):
-        try:
-            await coro
-        except Exception as e:
-            print(f"⚠️ 测速任务异常: {e}")
-        finally:
-            done += 1
-            if done % 20 == 0 or done == total:
-                print(f"  进度: {done}/{total}")
+        await coro
+        done += 1
+        if done % 20 == 0 or done == total:
+            print(f"  进度: {done}/{total}")
     print("分辨率与测速完成")
 
     # 应用阈值
@@ -762,7 +737,7 @@ async def main():
     # 分类统计
     print("\n分类统计（高清）：")
     hd_by_cat = defaultdict(set)
-    for main, url in hd_urls:
+    for main, url, speed in hd_urls:
         cat = tpl.main_channels.get(main, '其它频道')
         hd_by_cat[cat].add(main)
     for cat in tpl.categories:
@@ -772,7 +747,7 @@ async def main():
 
     print("\n标清分类统计：")
     sd_by_cat = defaultdict(set)
-    for main, url in sd_urls:
+    for main, url, speed in sd_urls:
         cat = tpl.main_channels.get(main, '其它频道')
         sd_by_cat[cat].add(main)
     for cat in tpl.categories:
