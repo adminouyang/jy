@@ -49,3 +49,4 @@ jellyfin.cyruslee.top
 epg.pw
 cdn9.163189.xyz
 live.chinacert.cftest5.cn
+222.214.208.34
