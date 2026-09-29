@@ -44,3 +44,7 @@ live2.hnntv.cn
 101.35.240.114
 m3u8.channel.wsrtv.com.cn
 chen.ccwu.cc
+jellyfin.cyruslee.top
+59.35.185.47
+epg.pw
+cdn9.163189.xyz
