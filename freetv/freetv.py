@@ -415,86 +415,81 @@ class ConnectivityTester:
     async def __aexit__(self, *a):
         await self.session.close()
 
-async def test_one(self, url: str, name: str):
-    if self.bl.contains(url):
-        print(f"⏭️  黑名单跳过: {name:<12}| {self.bl.host_of(url)}")
-        return False, 0
+    async def test_one(self, url: str, name: str):
+        if self.bl.contains(url):
+            print(f"⏭️  黑名单跳过: {name:<12}| {self.bl.host_of(url)}")
+            return False, 0
 
-    clean, _ = urldefrag(url)
-    if clean != url:
-        url = clean
+        clean, _ = urldefrag(url)
+        if clean != url:
+            url = clean
 
-    async with self.sem:
-        start = time.time()
-        try:
-            # 第一轮：HEAD 请求
+        async with self.sem:
+            start = time.time()
             try:
-                async with self.session.head(url, allow_redirects=True) as r:
-                    status = r.status
+                # 第一轮：HEAD 请求
+                try:
+                    async with self.session.head(url, allow_redirects=True) as r:
+                        status = r.status
+                        ms = (time.time() - start) * 1000
+                        if status == 200:
+                            self.stats['total'] += 1
+                            self.stats['passed'] += 1
+                            print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|200 (HEAD)")
+                            return True, url
+                        head_status = status
+                except (aiohttp.ClientResponseError, aiohttp.ClientError):
+                    head_status = None
                     ms = (time.time() - start) * 1000
-                    # 如果 HEAD 返回 200，直接通过
-                    if status == 200:
-                        self.stats['total'] += 1
-                        self.stats['passed'] += 1
-                        print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|200 (HEAD)")
-                        return True, url
-                    # 如果 HEAD 返回非 200，记录状态码，准备降级为 GET
-                    head_status = status
-            except (aiohttp.ClientResponseError, aiohttp.ClientError) as e:
-                # HEAD 请求异常（如连接错误、超时），也降级
-                head_status = None
-                ms = (time.time() - start) * 1000
-            except Exception as e:
-                # 其他异常直接失败
-                ms = (time.time() - start) * 1000
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|HEAD异常:{str(e)[:25]} -> 写黑名单")
-                await self.bl.add(url)
-                return False, url
+                except Exception as e:
+                    ms = (time.time() - start) * 1000
+                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|HEAD异常:{str(e)[:25]} -> 写黑名单")
+                    await self.bl.add(url)
+                    return False, url
 
-            # 第二轮：GET 请求（带上 Range 头）
-            start_get = time.time()
-            try:
-                headers = self.session.headers.copy()
-                headers['Range'] = 'bytes=0-4096'  # 请求前4KB，模拟播放器行为
-                async with self.session.get(url, allow_redirects=True, headers=headers) as r:
-                    status = r.status
-                    # 即使返回 206 Partial Content 也算成功（常见于带 Range 的响应）
-                    if status in (200, 206):
-                        await r.content.read(4096)  # 读取少量数据确认可连接
-                        ms = (time.time() - start) * 1000
-                        self.stats['total'] += 1
-                        self.stats['passed'] += 1
-                        print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET降级)")
-                        return True, url
-                    else:
-                        ms = (time.time() - start) * 1000
-                        self.stats['total'] += 1
-                        self.stats['failed'] += 1
-                        print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET) -> 写黑名单")
-                        await self.bl.add(url)
-                        return False, url
-            except asyncio.TimeoutError:
-                ms = (time.time() - start) * 1000
-                self.stats['total'] += 1
-                self.stats['failed'] += 1
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时(GET) -> 写黑名单")
-                await self.bl.add(url)
-                return False, url
+                # 第二轮：GET 请求（带 Range 头）
+                start_get = time.time()
+                try:
+                    headers = self.session.headers.copy()
+                    headers['Range'] = 'bytes=0-4096'
+                    async with self.session.get(url, allow_redirects=True, headers=headers) as r:
+                        status = r.status
+                        if status in (200, 206):
+                            await r.content.read(4096)
+                            ms = (time.time() - start) * 1000
+                            self.stats['total'] += 1
+                            self.stats['passed'] += 1
+                            print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET降级)")
+                            return True, url
+                        else:
+                            ms = (time.time() - start) * 1000
+                            self.stats['total'] += 1
+                            self.stats['failed'] += 1
+                            print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET) -> 写黑名单")
+                            await self.bl.add(url)
+                            return False, url
+                except asyncio.TimeoutError:
+                    ms = (time.time() - start) * 1000
+                    self.stats['total'] += 1
+                    self.stats['failed'] += 1
+                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时(GET) -> 写黑名单")
+                    await self.bl.add(url)
+                    return False, url
+                except Exception as e:
+                    ms = (time.time() - start) * 1000
+                    self.stats['total'] += 1
+                    self.stats['failed'] += 1
+                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|GET异常:{str(e)[:25]} -> 写黑名单")
+                    await self.bl.add(url)
+                    return False, url
+
             except Exception as e:
                 ms = (time.time() - start) * 1000
                 self.stats['total'] += 1
                 self.stats['failed'] += 1
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|GET异常:{str(e)[:25]} -> 写黑名单")
+                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|异常:{str(e)[:25]} -> 写黑名单")
                 await self.bl.add(url)
                 return False, url
-
-        except Exception as e:
-            ms = (time.time() - start) * 1000
-            self.stats['total'] += 1
-            self.stats['failed'] += 1
-            print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|异常:{str(e)[:25]} -> 写黑名单")
-            await self.bl.add(url)
-            return False, url
 
     async def batch(self, channel_list):
         tasks = []
@@ -506,7 +501,6 @@ async def test_one(self, url: str, name: str):
             if ok:
                 passed.append((main, url))
         return passed, self.stats
-
 # ====================== 测速筛选 ======================
 class SpeedFilter:
     def __init__(self, tpl: ChannelTemplate):
