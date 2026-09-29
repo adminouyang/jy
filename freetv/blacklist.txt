@@ -48,3 +48,4 @@ jellyfin.cyruslee.top
 59.35.185.47
 epg.pw
 cdn9.163189.xyz
+live.chinacert.cftest5.cn
