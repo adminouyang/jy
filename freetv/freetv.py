@@ -741,14 +741,14 @@ async def main():
     total = len(futures)
     done = 0
     for coro in asyncio.as_completed(futures):
-    try:
-        await coro
-    except Exception as e:
-        print(f"⚠️ 测速任务异常: {e}")
-    finally:
-        done += 1
-        if done % 20 == 0 or done == total:
-            print(f"  进度: {done}/{total}")
+        try:
+            await coro
+        except Exception as e:
+            print(f"⚠️ 测速任务异常: {e}")
+        finally:
+            done += 1
+            if done % 20 == 0 or done == total:
+                print(f"  进度: {done}/{total}")
     print("分辨率与测速完成")
 
     # 应用阈值
