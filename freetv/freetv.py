@@ -591,27 +591,50 @@ def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
     bj = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime('%Y%m%d %H:%M:%S')
     epg = 'https://gh-proxy.com/https://raw.githubusercontent.com/adminouyang/231006/refs/heads/main/py/TV/EPG/epg.xml'
 
-    # 高清输出
+    # ========== 高清输出 ==========
     txt_path = os.path.join(out_dir, 'freetv.txt')
     m3u_path = os.path.join(out_dir, 'freetv.m3u')
     txt_lines = ['#genre#', f'更新时间,{bj}', '']
     m3u_lines = [f'#EXTM3U x-tvg-url="{epg}"']
 
-    # 按分类组织高清，每个分类内按频道名分组，频道内按速度降序
+    # 按分类组织高清
     hd_by_cat = defaultdict(lambda: defaultdict(list))
     for main, url, speed in hd_urls:
         cat = tpl.main_channels.get(main, '其它频道')
         hd_by_cat[cat][main].append((url, speed))
 
     for cat in tpl.categories:
-        channels = hd_by_cat.get(cat, {})
-        if not channels:
+        channels_dict = hd_by_cat.get(cat, {})
+        if not channels_dict:
             continue
         txt_lines.append(f'{cat},#genre#')
-        # 按频道名排序（保持一致性）
-        for main in sorted(channels.keys()):
-            items = channels[main]
-            # 按速度降序排列
+
+        # 获取该分类在模板中的频道顺序
+        ordered_mains = tpl.category_channels.get(cat, [])
+        # 剩余频道（不在模板中的）
+        remaining_mains = set(channels_dict.keys()) - set(ordered_mains)
+
+        # 按模板顺序输出
+        for main in ordered_mains:
+            if main not in channels_dict:
+                continue
+            items = channels_dict[main]
+            items.sort(key=lambda x: x[1], reverse=True)  # 按速度降序
+            seen_urls = set()
+            for url, speed in items:
+                if url in seen_urls:
+                    continue
+                seen_urls.add(url)
+                txt_lines.append(f'{main},{url}')
+                logo = tpl.get_logo_url(main)
+                m3u_lines.append(
+                    f'#EXTINF:-1 tvg-name="{main}" tvg-logo="{logo}" group-title="{cat}", {main}'
+                )
+                m3u_lines.append(url)
+
+        # 输出剩余频道（按字母排序）
+        for main in sorted(remaining_mains):
+            items = channels_dict[main]
             items.sort(key=lambda x: x[1], reverse=True)
             seen_urls = set()
             for url, speed in items:
@@ -631,7 +654,7 @@ def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
         f.write('\n'.join(m3u_lines))
     print(f"\n高清输出：{txt_path} ({sum(len(v) for v in hd_by_cat.values())} 条URL)")
 
-    # 标清输出
+    # ========== 标清输出 ==========
     sd_path = os.path.join(out_dir, '标清.txt')
     sd_lines = ['#genre#', f'更新时间,{bj}', '']
     sd_by_cat = defaultdict(lambda: defaultdict(list))
@@ -640,12 +663,28 @@ def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
         sd_by_cat[cat][main].append((url, speed))
 
     for cat in tpl.categories:
-        channels = sd_by_cat.get(cat, {})
-        if not channels:
+        channels_dict = sd_by_cat.get(cat, {})
+        if not channels_dict:
             continue
         sd_lines.append(f'{cat},#genre#')
-        for main in sorted(channels.keys()):
-            items = channels[main]
+
+        ordered_mains = tpl.category_channels.get(cat, [])
+        remaining_mains = set(channels_dict.keys()) - set(ordered_mains)
+
+        for main in ordered_mains:
+            if main not in channels_dict:
+                continue
+            items = channels_dict[main]
+            items.sort(key=lambda x: x[1], reverse=True)
+            seen_urls = set()
+            for url, speed in items:
+                if url in seen_urls:
+                    continue
+                seen_urls.add(url)
+                sd_lines.append(f'{main},{url}')
+
+        for main in sorted(remaining_mains):
+            items = channels_dict[main]
             items.sort(key=lambda x: x[1], reverse=True)
             seen_urls = set()
             for url, speed in items:
