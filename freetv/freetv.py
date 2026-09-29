@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-IPTV 连通性+分辨率+测速筛选工具 v3.0
+IPTV 连通性 + 分辨率 + 测速筛选工具 v3.1
 - 模板解析：支持任意emoji/符号前缀的分类行
 - 连通性测试：HEAD优先，失败降级GET，仅接受200
 - 分辨率解析：ffprobe获取宽高，映射到8K/4K/1080p/720p/576p/480p/360p/unknown
 - 测速：ffmpeg下载小片段，计算速度(KB/s)
 - 阈值筛选：按分辨率设定速度下限，每个分类+域名取前2个测速样本，均达标则保留该组全部URL
 - 输出：高清(≥720p)→freetv.txt/freetv.m3u；标清(<720p)→freetv/标清.txt
+- 打印每个频道的名称、URL、分辨率、速度(KB/s)
 """
 
 import asyncio
@@ -25,11 +26,11 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 
 # ====================== 配置 ======================
-CHECK_TIMEOUT = 3          # 连通性超时（秒）
+CHECK_TIMEOUT = 5          # 连通性超时（秒）
 RESOLUTION_TIMEOUT = 8     # 分辨率解析超时（秒）
 SPEED_TIMEOUT = 8          # 测速超时（秒）
 MAX_CONCURRENT = 30        # 连通性并发数
-SPEED_CONCURRENT = 15       # 测速并发数（子进程较慢）
+SPEED_CONCURRENT = 5       # 测速并发数（子进程较慢）
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
     'Accept': '*/*',
@@ -54,12 +55,12 @@ RESOLUTION_PRIORITY = {
 
 # 各分辨率速度阈值（KB/s），可根据实际调整
 SPEED_THRESHOLD_KBPS = {
-    '8K': 4096,      # 50 MB/s
-    '4K': 2048,      # 25 MB/s
-    '1080p': 650,   # 10 MB/s
-    '1080i': 400,    # 8 MB/s
-    '720p': 300,     # 5 MB/s
-    '576p': 180,     # 3 MB/s
+    '8K': 2048,      # 50 MB/s
+    '4K': 1024,      # 25 MB/s
+    '1080p': 700,   # 10 MB/s
+    '1080i': 650,    # 8 MB/s
+    '720p': 600,     # 5 MB/s
+    '576p': 170,     # 3 MB/s
     '480p': 150,     # 2 MB/s
     '360p': 100,     # 1 MB/s
     'unknown': 1024,  # 保守值
@@ -231,11 +232,11 @@ def parse_resolution(width, height):
         return '4K'
     if width >= 1920 or height >= 1080:
         return '1080p'
-    if width >= 1440 or height >= 900:   # 常见宽屏
+    if width >= 1440 or height >= 900:
         return '720p'
-    if width >= 960 or height >= 540:    # 近似
+    if width >= 960 or height >= 540:
         return '576p'
-    if width >= 854 or height >= 480:    # FWVGA
+    if width >= 854 or height >= 480:
         return '480p'
     return '360p'
 
@@ -290,7 +291,7 @@ def test_speed(url, timeout=SPEED_TIMEOUT):
             try:
                 file_size = os.path.getsize(temp_file.name)
                 if file_size > 10240 and duration > 0.1:
-                    speed_kbps = (file_size / duration) / 1024   # KB/s
+                    speed_kbps = (file_size / duration) / 1024
                     return round(speed_kbps, 2)
             except:
                 pass
@@ -480,10 +481,10 @@ class ConnectivityTester:
 class SpeedFilter:
     def __init__(self, tpl: ChannelTemplate):
         self.tpl = tpl
-        self.results = {}  # (category, domain) -> list of (main, url, resolution, speed_kbps)
+        self.results = {}  # (category, domain) -> list of dict
         self.passed_groups = set()  # (category, domain) that passed threshold
 
-def add_url(self, main, url):
+    def add_url(self, main, url):
         """添加一个通过连通性的URL，进行分辨率解析和测速，并打印详细信息"""
         url = clean_url(url)
         domain = Blacklist.host_of(url)
@@ -581,7 +582,7 @@ def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
                 )
                 m3u_lines.append(url)
             else:
-                # 同一个主名可能有多个URL，只保留第一个（按需可改为全部）
+                # 同一个主名可能有多个URL，只保留第一个
                 pass
 
     with open(txt_path, 'w', encoding='utf-8') as f:
@@ -615,9 +616,9 @@ def save_output(hd_urls, sd_urls, tpl, out_dir='freetv'):
 
 # ====================== 主流程 ======================
 async def main():
-    print("=" * 94)
+    print("=" * 96)
     print("IPTV 连通性 + 分辨率 + 测速筛选（阈值自适应）")
-    print("=" * 94)
+    print("=" * 96)
 
     bl = Blacklist('freetv/blacklist.txt')
     tpl = ChannelTemplate('freetv/dome.txt')
@@ -663,7 +664,7 @@ async def main():
         print("没有可用的源，退出")
         return
 
-# 分辨率解析 + 测速 + 阈值筛选
+    # 分辨率解析 + 测速 + 阈值筛选
     print("\n开始分辨率解析与测速（并发数{}）...".format(SPEED_CONCURRENT))
     filter_obj = SpeedFilter(tpl)
 
@@ -679,7 +680,7 @@ async def main():
     for coro in asyncio.as_completed(futures):
         await coro
         done += 1
-        if done % 20 == 0 or done == total:   # 每20个或结束时打印一次进度
+        if done % 20 == 0 or done == total:
             print(f"  进度: {done}/{total}")
     print("分辨率与测速完成")
 
