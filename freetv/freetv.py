@@ -29,7 +29,7 @@ CHECK_TIMEOUT = 3          # 连通性超时（秒）
 RESOLUTION_TIMEOUT = 8     # 分辨率解析超时（秒）
 SPEED_TIMEOUT = 8          # 测速超时（秒）
 MAX_CONCURRENT = 30        # 连通性并发数
-SPEED_CONCURRENT = 5       # 测速并发数（子进程较慢）
+SPEED_CONCURRENT = 15       # 测速并发数（子进程较慢）
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
     'Accept': '*/*',
