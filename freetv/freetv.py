@@ -438,13 +438,13 @@ class ConnectivityTester:
                         if status == 200:
                             self.stats['total'] += 1
                             self.stats['passed'] += 1
-                            print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|200 (HEAD)")
+                            print(f"✅ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|200 (HEAD)")
                             return True, url
                 except (aiohttp.ClientResponseError, aiohttp.ClientError):
                     pass  # HEAD 异常，降级到 GET
                 except Exception as e:
                     ms = (time.time() - start) * 1000
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|HEAD异常:{str(e)[:25]}")
+                    print(f"❌ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|HEAD异常:{str(e)[:25]}")
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
                     return False, url
@@ -460,32 +460,32 @@ class ConnectivityTester:
                             ms = (time.time() - start) * 1000
                             self.stats['total'] += 1
                             self.stats['passed'] += 1
-                            print(f"✅ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET降级)")
+                            print(f"✅ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|{status} (GET降级)")
                             return True, url
                         else:
                             ms = (time.time() - start) * 1000
                             self.stats['total'] += 1
                             self.stats['failed'] += 1
-                            print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|{status} (GET)")
+                            print(f"❌ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|{status} (GET)")
                             return False, url
                 except asyncio.TimeoutError:
                     ms = (time.time() - start) * 1000
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|超时(GET)")
+                    print(f"❌ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|超时(GET)")
                     return False, url
                 except Exception as e:
                     ms = (time.time() - start) * 1000
                     self.stats['total'] += 1
                     self.stats['failed'] += 1
-                    print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|GET异常:{str(e)[:25]}")
+                    print(f"❌ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|GET异常:{str(e)[:25]}")
                     return False, url
 
             except Exception as e:
                 ms = (time.time() - start) * 1000
                 self.stats['total'] += 1
                 self.stats['failed'] += 1
-                print(f"❌ {name:<12}|{url[:80]:<80}|{ms:>7.0f} ms|异常:{str(e)[:25]}")
+                print(f"❌ {name:<12}|{ {url[:100]:<100}|{ms:>7.0f} ms|异常:{str(e)[:25]}")
                 return False, url
 
     async def batch(self, channel_list):
@@ -537,7 +537,7 @@ class SpeedFilter:
 
         # 打印详细信息
         speed_str = f"{speed:.2f} KB/s" if speed > 0 else "N/A"
-        print(f"📊 {main:<16} | {url[:60]:<60} | {resolution:<8} | {speed_str:<12}")
+        print(f"📊 {main:<10} |{url[:100]:<100}|{resolution:<8} | {speed_str:<12}")
 
         self.results.setdefault(key, []).append({
             'main': main,
