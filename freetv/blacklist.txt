@@ -9,7 +9,6 @@ cdn10.123.rr.kg
 cdn6.cc.cd
 cdn11.163189.xyz
 c.123.rr.kg
-cdn.qd.je
 ottrrs.hl.chinamobile.com
 bobohome.ignorelist.com
 cdn12.178.indevs.in
@@ -59,3 +58,13 @@ epg.pw
 cdn9.163189.xyz
 live.chinacert.cftest5.cn
 222.214.208.34
+net.manyee.net
+119.125.134.188
+59.32.97.146
+www.3344.uk
+219.140.6.150
+113.64.94.159
+footyun.top
+iptv.852851.xyz
+119.125.129.49
+119.125.134.215
