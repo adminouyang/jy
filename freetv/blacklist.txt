@@ -68,3 +68,6 @@ footyun.top
 iptv.852851.xyz
 119.125.129.49
 119.125.134.215
+112.109.218.254
+m3u8.channel.dzsm.com
+video.bread-tv.com
