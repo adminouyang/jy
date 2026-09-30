@@ -135,19 +135,18 @@ jobs:
                         }
                     else:
                         # 数据量不足，视为无效
-                return {
+                        return {
                             'ip_port': ip_info['ip_port'],
                             'data_length': data_length,
                             'status': 'insufficient_data',
-                        }
-                else:
-                    return {'ip_port': ip_info['ip_port'], 'status': 'http_error', 'status_code': response.status_code}
+                               }
+                        else:
+                            return {'ip_port': ip_info['ip_port'], 'status': 'http_error', 'status_code': response.status_code}
             
-            except requests.exceptions.Timeout:
-                return {'ip_port': ip_info['ip_port'], 'status': 'timeout'}
-            except Exception as e:
-                return {'ip_port': ip_info['ip_port'], 'status': 'error', 'error': str(e)}
-
+                    except requests.exceptions.Timeout:
+                        return {'ip_port': ip_info['ip_port'], 'status': 'timeout'}
+                    except Exception as e:
+                        return {'ip_port': ip_info['ip_port'], 'status': 'error', 'error': str(e)}
 
         def save_valid_ips(valid_ips, output_dir):
             """保存有效的IP到对应地区的文件"""
