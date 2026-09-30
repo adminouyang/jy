@@ -101,33 +101,52 @@ jobs:
             return results
 
 
-        def test_ip_speed(ip_info, test_path="/608807420", timeout=3):
-            """测试IP速度"""
+        def test_ip_speed(ip_info, test_path="/608807420", timeout=3, min_bytes=1024):
+            """
+            测试IP速度，并验证是否返回足够的数据量
+            :param ip_info: IP信息字典，需包含 'ip_port'
+            :param test_path: 测试路径
+            :param timeout: 超时时间（秒）
+            :param min_bytes: 最小有效数据字节数，默认1024（1KB）
+            """
             url = f"http://{ip_info['ip_port']}{test_path}"
-
+    
             try:
                 start_time = time.time()
                 response = requests.get(url, timeout=timeout, headers={
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
                 })
                 end_time = time.time()
-
-                if response.status_code == 200 and len(response.content) > 0:
-                    speed = round((end_time - start_time) * 1000, 2)  # 转换为毫秒
-                    return {
-                        'ip': ip_info['ip'],
-                        'port': ip_info['port'],
-                        'ip_port': ip_info['ip_port'],
-                        'region': ip_info['region'],
-                        'speed': speed,
-                        'status': 'success'
-                    }
+        
+                # 检查HTTP状态码
+                if response.status_code == 200:
+                    # 检查实际数据长度是否达到阈值
+                    data_length = len(response.content)
+                    if data_length >= min_bytes:
+                        speed = round((end_time - start_time) * 1000, 2)  # 延迟(ms)
+                        return {
+                            'ip': ip_info['ip'],
+                            'port': ip_info['port'],
+                            'ip_port': ip_info['ip_port'],
+                            'region': ip_info['region'],
+                            'speed': speed,
+                            'data_length': data_length,
+                            'status': 'success'
+                        }
+                    else:
+                        # 数据量不足，视为无效
+                return {
+                            'ip_port': ip_info['ip_port'],
+                            'data_length': data_length,
+                            'status': 'insufficient_data',
+                        }
+                else:
+                    return {'ip_port': ip_info['ip_port'], 'status': 'http_error', 'status_code': response.status_code}
+            
             except requests.exceptions.Timeout:
                 return {'ip_port': ip_info['ip_port'], 'status': 'timeout'}
             except Exception as e:
                 return {'ip_port': ip_info['ip_port'], 'status': 'error', 'error': str(e)}
-
-            return {'ip_port': ip_info['ip_port'], 'status': 'failed'}
 
 
         def save_valid_ips(valid_ips, output_dir):
