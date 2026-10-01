@@ -47,6 +47,7 @@ RESOLUTION_PRIORITY = {
     '1080p': 85,
     '720p': 80,
     '576p': 60,
+    '540p': 50,
     '480p': 40,
     '360p': 20,
     'unknown': 10,
@@ -59,6 +60,7 @@ SPEED_THRESHOLD_KBPS = {
     '1080p': 465,
     '720p': 282,
     '576p': 144,
+    '540p': 130,
     '480p': 125,
     '360p': 60,
     'unknown': 1024,
@@ -234,12 +236,16 @@ def parse_resolution(width, height):
         return '720p'
     if width >= 720 or height >= 576:
         return '576p'
+    if width >= 960 or height >= 540:
+        return '540p'
     if width >= 1024 or height >= 576:
         return '576p'
     if width >= 854 or height >= 480:
         return '480p'
     if width >= 640 or height >= 480:
-        return '480p'  
+        return '480p'
+    if width >= 640 or height >= 360:
+        return '360p'
     return '360p'
 
 def get_resolution_info(url, timeout=RESOLUTION_TIMEOUT):
