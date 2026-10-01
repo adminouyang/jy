@@ -73,3 +73,9 @@ m3u8.channel.dzsm.com
 video.bread-tv.com
 119.125.134.221
 183.10.180.238
+live-hls-aje-ak.getaj.net
+plex.cyruslee.top
+cdn2.163189.xyz
+119.125.134.229
+123.163.21.136
+1.24.221.16
