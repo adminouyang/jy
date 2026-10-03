@@ -198,7 +198,7 @@ def handle_migu_main_request(cont_id):
         "Host": "play.miguvideo.com",
         "appId": "miguvideo",
         "terminalId": "android",
-        "User-Agent": "URLMozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.95 Safari/537.36",
+        "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; oneplus-13 Build/TP1A.220624.014)",
         "MG-BH": "true",
         "appVersionName": "6.3.35",
         "appVersion": "2600033500",
