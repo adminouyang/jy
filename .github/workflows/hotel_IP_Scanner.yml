@@ -40,10 +40,10 @@ jobs:
         import asyncio
         import aiohttp
         import argparse
-        from typing import List, Tuple, Set, Dict, AsyncGenerator, Optional
+        from typing import List, Set, Dict, AsyncGenerator, Optional, Tuple
         import re
         import sys
-        from dataclasses import dataclass, field
+        from dataclasses import dataclass
         import signal
         
         # 优化配置
@@ -320,19 +320,53 @@ jobs:
                 print(f"读取配置文件错误: {e}")
             return configs
         
-        def apply_modifications(config_file: str, 
-                                 comment_lines: Set[int], 
-                                 delete_lines: Set[int]):
+        def build_new_line(config: IPConfig, new_option: int) -> str:
+            """根据原配置和新option生成新的配置行字符串"""
+            # 提取原行中的地区和配置部分
+            if '$' in config.original_line:
+                config_part, region = config.original_line.rsplit('$', 1)
+            else:
+                config_part = config.original_line
+                region = ""
+            config_part = config_part.strip()
+            # 去掉旧的option部分（如果有逗号）
+            if ',' in config_part:
+                ip_part, _ = config_part.split(',', 1)
+            else:
+                ip_part = config_part
+            ip_part = ip_part.strip()
+            # 构建新行
+            if new_option == 0:
+                new_config = ip_part
+            else:
+                new_config = f"{ip_part},{new_option}"
+            if region:
+                return f"{new_config}${region}"
+            else:
+                return new_config
+        
+        def apply_modifications(config_file: str, invalid_file: str,
+                                 comment_lines: Set[int],
+                                 delete_lines: Set[int],
+                                 update_lines: Dict[int, str]):
             """
-            统一应用修改：先标记（加注释），后删除。
-            comment_lines: 需要加注释的行号集合（1-based）
-            delete_lines: 需要删除的行号集合（1-based）
+            统一应用修改：
+            - update_lines: 需要替换的行号->新行内容
+            - comment_lines: 需要标记的行号
+            - delete_lines: 需要删除的行号（同时追加到invalid_file）
             """
             try:
                 with open(config_file, 'r', encoding='utf-8') as f:
                     lines = f.readlines()
                 
-                # 先处理标记（加注释）
+                # 1. 更新option
+                for lineno in sorted(update_lines.keys(), reverse=False):
+                    idx = lineno - 1
+                    if 0 <= idx < len(lines):
+                        lines[idx] = update_lines[lineno] + '\n'
+                        print(f"更新第{lineno}行: {lines[idx].strip()}")
+                
+                # 2. 标记（加注释）
                 for lineno in sorted(comment_lines, reverse=False):
                     idx = lineno - 1
                     if 0 <= idx < len(lines):
@@ -340,16 +374,27 @@ jobs:
                             lines[idx] = '# ' + lines[idx].lstrip()
                             print(f"标记第{lineno}行为注释: {lines[idx].strip()}")
                 
-                # 再处理删除（从大到小删除以避免索引变动）
+                # 3. 删除并记录到无效文件
+                deleted_contents = []
                 for lineno in sorted(delete_lines, reverse=True):
                     idx = lineno - 1
                     if 0 <= idx < len(lines):
                         removed = lines.pop(idx).rstrip('\n')
+                        deleted_contents.append(removed)
                         print(f"删除第{lineno}行: {removed}")
                 
+                # 写入更新后的配置文件
                 with open(config_file, 'w', encoding='utf-8') as f:
                     f.writelines(lines)
                 print(f"配置文件已更新")
+                
+                # 追加无效记录
+                if deleted_contents:
+                    with open(invalid_file, 'a', encoding='utf-8') as f:
+                        for content in deleted_contents:
+                            f.write(content + '\n')
+                    print(f"已将 {len(deleted_contents)} 条无效配置追加到 {invalid_file}")
+                    
             except Exception as e:
                 print(f"修改配置文件出错: {e}")
         
@@ -390,9 +435,11 @@ jobs:
             region_results = {}
             all_start_time = time.time()
             
-            # 记录需要标记（加注释）和删除的行号
-            comment_lines = set()
-            delete_lines = set()
+            # 记录修改操作
+            comment_lines = set()       # 需要标记（加注释）的行号
+            delete_lines = set()        # 需要删除的行号
+            update_lines = {}           # 需要更新option的行号 -> 新行内容
+            invalid_records = []        # 需要记录到无效文件的原始行内容（与delete_lines对应）
             
             async with FastScanner(max_workers=args.workers) as scanner:
                 scanner.start_time = all_start_time
@@ -401,7 +448,7 @@ jobs:
                     print(f"\n[配置 {i}/{len(configs)}]")
                     
                     if config.option == 3:
-                        # option==3: stop_on_first=True，未找到则删除该行
+                        # option==3: 直接扫描，stop_on_first=True，未找到则删除
                         found_ips = await scanner.scan_config(config, stop_on_first=True)
                         if found_ips:
                             if config.region not in region_results:
@@ -410,47 +457,81 @@ jobs:
                         else:
                             print(f"option=3未找到IP，准备删除第{config.line_number}行")
                             delete_lines.add(config.line_number)
-                    else:
-                        # option==0 或 option==1: 先按原始option扫描
+                            invalid_records.append(config.original_line)
+                    elif config.option == 1:
+                        # option==1: 扫描，未找到则标记
                         found_ips = await scanner.scan_config(config, stop_on_first=True)
                         if found_ips:
                             if config.region not in region_results:
                                 region_results[config.region] = set()
                             region_results[config.region].update(found_ips)
                         else:
-                            if config.option == 0:
-                                # 自动升级到option==1再试一次
-                                print(f"option=0未找到IP，自动升级为option=1重试...")
-                                upgraded_config = IPConfig(
+                            print(f"option=1未找到IP，准备标记第{config.line_number}行")
+                            comment_lines.add(config.line_number)
+                    else:  # option == 0
+                        # 第一步：尝试option=0（D段）
+                        found_ips = await scanner.scan_config(config, stop_on_first=True)
+                        if found_ips:
+                            if config.region not in region_results:
+                                region_results[config.region] = set()
+                            region_results[config.region].update(found_ips)
+                            # 找到IP，无需修改配置文件
+                        else:
+                            print(f"option=0未找到IP，升级为option=1...")
+                            # 第二步：尝试option=1（C+D段）
+                            upgraded_config_1 = IPConfig(
+                                base_ip=config.base_ip,
+                                port=config.port,
+                                option=1,
+                                region=config.region,
+                                original_line=config.original_line,
+                                line_number=config.line_number
+                            )
+                            found_ips = await scanner.scan_config(upgraded_config_1, stop_on_first=True)
+                            if found_ips:
+                                if config.region not in region_results:
+                                    region_results[config.region] = set()
+                                region_results[config.region].update(found_ips)
+                                # 找到IP，更新配置行为option=1
+                                new_line = build_new_line(config, 1)
+                                update_lines[config.line_number] = new_line
+                                print(f"在option=1找到IP，更新第{config.line_number}行为: {new_line}")
+                            else:
+                                print(f"option=1未找到IP，升级为option=3...")
+                                # 第三步：尝试option=3（B+C+D段）
+                                upgraded_config_3 = IPConfig(
                                     base_ip=config.base_ip,
                                     port=config.port,
-                                    option=1,
+                                    option=3,
                                     region=config.region,
                                     original_line=config.original_line,
                                     line_number=config.line_number
                                 )
-                                found_ips = await scanner.scan_config(upgraded_config, stop_on_first=True)
+                                found_ips = await scanner.scan_config(upgraded_config_3, stop_on_first=True)
                                 if found_ips:
                                     if config.region not in region_results:
                                         region_results[config.region] = set()
                                     region_results[config.region].update(found_ips)
+                                    # 找到IP，更新配置行为option=3
+                                    new_line = build_new_line(config, 3)
+                                    update_lines[config.line_number] = new_line
+                                    print(f"在option=3找到IP，更新第{config.line_number}行为: {new_line}")
                                 else:
-                                    print(f"升级后仍未找到IP，准备标记第{config.line_number}行")
-                                    comment_lines.add(config.line_number)
-                            else:
-                                # option==1 且未找到IP，标记
-                                print(f"option=1未找到IP，准备标记第{config.line_number}行")
-                                comment_lines.add(config.line_number)
+                                    # 全部未找到，删除并记录无效
+                                    print(f"option=3也未找到IP，准备删除第{config.line_number}行并记录无效")
+                                    delete_lines.add(config.line_number)
+                                    invalid_records.append(config.original_line)
                     
                     if i < len(configs):
                         print(f"等待2秒后继续扫描下一个配置...")
                         await asyncio.sleep(2)
             
             # 统一修改配置文件
-            if comment_lines or delete_lines:
+            if comment_lines or delete_lines or update_lines:
                 print(f"\n{'='*60}")
                 print("正在更新配置文件...")
-                apply_modifications(args.input, comment_lines, delete_lines)
+                invalid_file = os.path.join(args.output, 'Invalid_ip.txt')
+                apply_modifications(args.input, invalid_file, comment_lines, delete_lines, update_lines)
             else:
                 print("\n配置文件无需修改")
             
