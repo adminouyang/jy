@@ -924,76 +924,47 @@ jobs:
                return False
        
        
-       def parse_txt_format(txt_content, ip_port):
-           """解析TXT格式的频道数据，正确替换内网地址"""
+       def parse_txt_format(text, ip_port):
+           """解析TXT格式的频道列表，返回 [{name, url, category, logo, speed}]"""
            channels = []
-           lines = txt_content.strip().split('\n')
-       
-           # 提取IP和端口
-           try:
-               ip = ip_port.split(':')[0]
-               port = ip_port.split(':')[1]
-       
-               # 验证IP和端口格式
-               if not re.match(r'^\d+\.\d+\.\d+\.\d+$', ip):
-                   print(f"❌ 无效的IP格式: {ip}")
-                   return []
-               if not port.isdigit() or not (1 <= int(port) <= 65535):
-                   print(f"❌ 无效的端口: {port}")
-                   return []
-           except Exception as e:
-               print(f"❌ 解析IP端口失败: {ip_port}, 错误: {e}")
-               return []
-       
-           for line in lines:
+    
+           # 去除文本开头的 BOM 字符
+           text = text.lstrip('\ufeff')
+    
+           for line in text.splitlines():
                line = line.strip()
                if not line or ',' not in line:
                    continue
-       
-               try:
-                   # 修复编码问题
-                   original_line = line
-                   line = fix_encoding(line)
-       
-                   # 分割频道名称和URL
-                   parts = line.split(',', 1)
-                   if len(parts) == 2:
-                       name = parts[0].strip()
-                       original_url = parts[1].strip()
-                       
-                       # 处理#号分隔的多个URL
-                       urls = original_url.split('#')
-                       
-                       for url_part in urls:
-                           url_part = url_part.strip()
-                           if not url_part:
-                               continue
-                               
-                           # 跳过UDP/RTP链接
-                           if url_part.startswith('udp://') or url_part.startswith('rtp://'):
-                               print(f"⏭️ 跳过UDP/RTP链接: {name} -> {url_part}")
-                               continue
-                               
-                           # 处理URL路径
-                           if url_part:
-                               full_url = process_url(url_part, ip, port)
-       
-                               if full_url and validate_url_format(full_url, ip_port):
-                                   # 创建频道数据
-                                   channel_data = {
-                                       "name": name,
-                                       "url": full_url
-                                   }
-                                   channels.append(channel_data)
-                                   print(f"✅ 解析频道: {name} -> {full_url}")
-                                   break  # 找到一个有效链接就停止
-                               else:
-                                   print(f"⚠️ 跳过无效URL: {name} -> {url_part}")
-       
-               except Exception as e:
-                   print(f"❌ 解析TXT行失败: {original_line}, 错误: {e}")
+        
+               # 分割频道名和URL
+               name, url = line.split(',', 1)
+               name = name.strip().lstrip('\ufeff')
+               url = url.strip()
+        
+               if not name or not url:
                    continue
-       
+        
+               # 处理相对路径
+               if url.startswith('/'):
+                   url = f"http://{ip_port}{url}"
+               elif not url.startswith('http://') and not url.startswith('https://'):
+                   # 既不是绝对链接也不以斜杠开头，则视为相对路径拼接
+                   url = f"http://{ip_port}/{url}"
+        
+               # 宽松校验：只要是以 http:// 或 https:// 开头的合法链接即可
+               # 不再强制要求IP后面必须带端口
+               if re.match(r'^https?://[^\s/$.?#].[^\s]*$', url, re.I):
+                   channels.append({
+                       "name": name,
+                       "url": url,
+                       "category": "",
+                       "logo": "",
+                       "speed": 0
+                   })
+               else:
+                   print(f"⚠️ URL格式不正确: {url}")
+                   print(f"⚠️ 跳过无效URL: {name} -> {url}")
+    
            return channels
        
        
