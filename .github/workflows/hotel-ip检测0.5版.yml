@@ -897,27 +897,27 @@ jobs:
        
        
        def validate_url_format(url, ip_port):
-           """验证URL格式是否正确"""
+           """验证URL格式是否正确 - 放宽端口校验"""
            try:
                # 检查URL是否为空
                if not url:
                    return False
-       
-               # 检查URL格式: 必须包含正确的IP:端口格式
-               if not re.match(r'^http://\d+\.\d+\.\d+\.\d+:\d+/', url):
+
+               # 只检查是否以 http:// 或 https:// 开头，不再强制要求带端口
+               if not re.match(r'^https?://', url):
                    print(f"⚠️ URL格式不正确: {url}")
                    return False
-       
-               # 检查是否包含重复的协议或IP
-               if url.count("http://") > 1:
+
+               # 检查是否包含重复的协议
+               if url.count("http://") > 1 or url.count("https://") > 1:
                    print(f"⚠️ URL包含重复协议: {url}")
                    return False
-       
-               # 检查是否包含错误的IP端口格式
-               if "http://:" in url or "//:" in url:
+
+               # 检查是否包含空IP或空端口
+               if "http://:" in url or "https://:" in url or "//:" in url:
                    print(f"⚠️ URL包含空IP端口: {url}")
                    return False
-       
+
                return True
            except Exception as e:
                print(f"❌ 验证URL格式失败: {url}, 错误: {e}")
