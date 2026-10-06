@@ -951,9 +951,8 @@ jobs:
                    # 既不是绝对链接也不以斜杠开头，则视为相对路径拼接
                    url = f"http://{ip_port}/{url}"
         
-               # 宽松校验：只要是以 http:// 或 https:// 开头的合法链接即可
-               # 不再强制要求IP后面必须带端口
-               if re.match(r'^https?://[^\s/$.?#].[^\s]*$', url, re.I):
+               # 只检查是否以 http:// 或 https:// 开头，不做更严格的格式校验
+               if url.startswith('http://') or url.startswith('https://'):
                    channels.append({
                        "name": name,
                        "url": url,
