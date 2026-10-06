@@ -731,7 +731,16 @@ jobs:
        # ===============================
        # 工具函数
        # ===============================
-       
+       # 禁止关键词列表
+       FORBIDDEN_KEYWORDS = ["AHBKLIVE", "udp", "rtp", "rtsp", "udp://", "rtp://"]
+
+       def is_url_forbidden(url):
+           """检查URL是否包含禁止关键词，返回True表示应过滤"""
+           url_lower = url.lower()
+           for kw in FORBIDDEN_KEYWORDS:
+               if kw.lower() in url_lower:
+                   return True
+           return False
        
        def get_random_headers():
            """获取随机User-Agent的headers"""
@@ -941,32 +950,37 @@ jobs:
        def parse_txt_format(text, ip_port):
            """解析TXT格式的频道列表，返回 [{name, url, category, logo, speed}]"""
            channels = []
-    
+
            # 去除文本开头的 BOM 字符
            text = text.lstrip('\ufeff')
-    
+
            for line in text.splitlines():
                line = line.strip()
                if not line or ',' not in line:
                    continue
-        
+
                # 分割频道名和URL
                name, url = line.split(',', 1)
                name = name.strip().lstrip('\ufeff')
                url = url.strip()
-        
+
                if not name or not url:
                    continue
-        
+
                # 处理相对路径
                if url.startswith('/'):
                    url = f"http://{ip_port}{url}"
                elif not url.startswith('http://') and not url.startswith('https://'):
                    url = f"http://{ip_port}/{url}"
-        
-               # 关键：将URL中的主机替换为当前IP:端口
-               url = replace_host_with_ip_port(url, ip_port)
-        
+               else:
+                   # 绝对路径则替换主机为当前IP:端口
+                   url = replace_host_with_ip_port(url, ip_port)
+
+               # 关键：过滤包含禁止关键词的URL
+               if is_url_forbidden(url):
+                   print(f"⚠️ URL包含无效协议/内部标识，跳过: {name} -> {url}")
+                   continue
+
                # 只检查是否以 http:// 或 https:// 开头
                if url.startswith('http://') or url.startswith('https://'):
                    channels.append({
@@ -979,32 +993,37 @@ jobs:
                else:
                    print(f"⚠️ URL格式不正确: {url}")
                    print(f"⚠️ 跳过无效URL: {name} -> {url}")
-    
+
            return channels
 
        def parse_json_format(text, ip_port):
            """解析JSON格式的频道列表，返回 [{name, url, category, logo, speed}]"""
            channels = []
-    
+
            try:
                data = json.loads(text)
                if data.get("code") == 0 and "data" in data:
                    for item in data["data"]:
                        name = item.get("name", "").strip()
                        url = item.get("url", "").strip()
-                
+
                        if not name or not url:
                            continue
-                
+
                        # 处理相对路径
                        if url.startswith('/'):
                            url = f"http://{ip_port}{url}"
                        elif not url.startswith('http://') and not url.startswith('https://'):
                            url = f"http://{ip_port}/{url}"
-                
-                       # 关键：将URL中的主机替换为当前IP:端口
-                       url = replace_host_with_ip_port(url, ip_port)
-                
+                       else:
+                           # 绝对路径则替换主机为当前IP:端口
+                           url = replace_host_with_ip_port(url, ip_port)
+
+                       # 关键：过滤包含禁止关键词的URL
+                       if is_url_forbidden(url):
+                           print(f"⚠️ URL包含无效协议/内部标识，跳过: {name} -> {url}")
+                           continue
+
                        if url.startswith('http://') or url.startswith('https://'):
                            channels.append({
                                "name": name,
@@ -1018,7 +1037,7 @@ jobs:
                            print(f"⚠️ 跳过无效URL: {name} -> {url}")
            except Exception as e:
                print(f"❌ 解析JSON失败: {e}")
-    
+
            return channels
        
        def test_channel_url_availability(channel_url, timeout=2):
