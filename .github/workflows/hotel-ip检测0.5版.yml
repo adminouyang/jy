@@ -42,6 +42,7 @@ jobs:
        from queue import Queue
        import eventlet
        import sys
+       from urllib.parse import urlparse, urlunparse
        
        # 增加递归深度限制
        sys.setrecursionlimit(10000)
@@ -731,6 +732,7 @@ jobs:
        # 工具函数
        # ===============================
        
+       
        def get_random_headers():
            """获取随机User-Agent的headers"""
            return {
@@ -741,7 +743,19 @@ jobs:
                "Connection": "keep-alive",
                "Upgrade-Insecure-Requests": "1"
            }
-       
+
+       def replace_host_with_ip_port(url, ip_port):
+           """将URL中的主机和端口替换为指定的IP:端口"""
+           try:
+               parsed = urlparse(url)
+               if parsed.scheme in ('http', 'https') and parsed.netloc:
+                   # 替换 netloc 为 ip_port，保留原路径和参数
+                   new_url = urlunparse((parsed.scheme, ip_port, parsed.path, parsed.params, parsed.query, parsed.fragment))
+                   return new_url
+               return url
+           except Exception as e:
+               print(f"❌ 替换URL主机失败: {url}, 错误: {e}")
+               return url
        
        def get_isp(ip):
            """IP运营商判断"""
@@ -948,10 +962,12 @@ jobs:
                if url.startswith('/'):
                    url = f"http://{ip_port}{url}"
                elif not url.startswith('http://') and not url.startswith('https://'):
-                   # 既不是绝对链接也不以斜杠开头，则视为相对路径拼接
                    url = f"http://{ip_port}/{url}"
         
-               # 只检查是否以 http:// 或 https:// 开头，不做更严格的格式校验
+               # 关键：将URL中的主机替换为当前IP:端口
+               url = replace_host_with_ip_port(url, ip_port)
+        
+               # 只检查是否以 http:// 或 https:// 开头
                if url.startswith('http://') or url.startswith('https://'):
                    channels.append({
                        "name": name,
@@ -965,7 +981,45 @@ jobs:
                    print(f"⚠️ 跳过无效URL: {name} -> {url}")
     
            return channels
-       
+
+       def parse_json_format(text, ip_port):
+           """解析JSON格式的频道列表，返回 [{name, url, category, logo, speed}]"""
+           channels = []
+    
+           try:
+               data = json.loads(text)
+               if data.get("code") == 0 and "data" in data:
+                   for item in data["data"]:
+                       name = item.get("name", "").strip()
+                       url = item.get("url", "").strip()
+                
+                       if not name or not url:
+                           continue
+                
+                       # 处理相对路径
+                       if url.startswith('/'):
+                           url = f"http://{ip_port}{url}"
+                       elif not url.startswith('http://') and not url.startswith('https://'):
+                           url = f"http://{ip_port}/{url}"
+                
+                       # 关键：将URL中的主机替换为当前IP:端口
+                       url = replace_host_with_ip_port(url, ip_port)
+                
+                       if url.startswith('http://') or url.startswith('https://'):
+                           channels.append({
+                               "name": name,
+                               "url": url,
+                               "category": item.get("typename", ""),
+                               "logo": "",
+                               "speed": 0
+                           })
+                       else:
+                           print(f"⚠️ URL格式不正确: {url}")
+                           print(f"⚠️ 跳过无效URL: {name} -> {url}")
+           except Exception as e:
+               print(f"❌ 解析JSON失败: {e}")
+    
+           return channels
        
        def test_channel_url_availability(channel_url, timeout=2):
            """快速测试单个频道链接的可用性（不测速，只检查是否可连接）"""
