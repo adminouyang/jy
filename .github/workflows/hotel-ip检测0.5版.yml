@@ -741,6 +741,29 @@ jobs:
                if kw.lower() in url_lower:
                    return True
            return False
+
+       def get_response_text(response):
+           """从requests响应中正确解码文本，优先UTF-8"""
+           content = response.content
+           # 按常见编码依次尝试，避免乱码
+           for encoding in ('utf-8-sig', 'utf-8', 'gb18030', 'gbk', 'latin-1'):
+               try:
+                   text = content.decode(encoding)
+                   if '\ufffd' in text:
+                       continue
+                   return text
+               except UnicodeDecodeError:
+                   continue
+           return content.decode('utf-8', errors='replace')
+
+       def fix_mojibake(name):
+           """修复已经变成乱码的频道名"""
+           if 'æ' in name or 'å' in name or 'Ã' in name:
+               try:
+                   return name.encode('latin-1').decode('utf-8')
+               except (UnicodeEncodeError, UnicodeDecodeError):
+                   pass
+           return name
        
        def get_random_headers():
            """获取随机User-Agent的headers"""
@@ -758,13 +781,10 @@ jobs:
            try:
                parsed = urlparse(url)
                if parsed.scheme in ('http', 'https') and parsed.netloc:
-                   # 替换 netloc 为 ip_port，保留原路径和参数
-                   new_url = urlunparse((parsed.scheme, ip_port, parsed.path, parsed.params, parsed.query, parsed.fragment))
-                   return new_url
-               return url
+                   return urlunparse((parsed.scheme, ip_port, parsed.path, parsed.params, parsed.query, parsed.fragment))
            except Exception as e:
                print(f"❌ 替换URL主机失败: {url}, 错误: {e}")
-               return url
+           return url
        
        def get_isp(ip):
            """IP运营商判断"""
@@ -967,16 +987,19 @@ jobs:
                if not name or not url:
                    continue
 
+               # 修复可能的乱码频道名
+               name = fix_mojibake(name)
+
                # 处理相对路径
                if url.startswith('/'):
                    url = f"http://{ip_port}{url}"
                elif not url.startswith('http://') and not url.startswith('https://'):
                    url = f"http://{ip_port}/{url}"
                else:
-                   # 绝对路径则替换主机为当前IP:端口
+                   # 绝对地址也替换主机为当前IP:端口
                    url = replace_host_with_ip_port(url, ip_port)
 
-               # 关键：过滤包含禁止关键词的URL
+               # 过滤包含无效协议/内部标识的URL
                if is_url_forbidden(url):
                    print(f"⚠️ URL包含无效协议/内部标识，跳过: {name} -> {url}")
                    continue
@@ -1010,16 +1033,19 @@ jobs:
                        if not name or not url:
                            continue
 
+                       # 修复可能的乱码频道名
+                       name = fix_mojibake(name)
+
                        # 处理相对路径
                        if url.startswith('/'):
                            url = f"http://{ip_port}{url}"
                        elif not url.startswith('http://') and not url.startswith('https://'):
                            url = f"http://{ip_port}/{url}"
                        else:
-                           # 绝对路径则替换主机为当前IP:端口
+                           # 绝对地址也替换主机为当前IP:端口
                            url = replace_host_with_ip_port(url, ip_port)
 
-                       # 关键：过滤包含禁止关键词的URL
+                       # 过滤包含无效协议/内部标识的URL
                        if is_url_forbidden(url):
                            print(f"⚠️ URL包含无效协议/内部标识，跳过: {name} -> {url}")
                            continue
