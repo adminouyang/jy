@@ -748,6 +748,17 @@ jobs:
                if kw.lower() in url_lower:
                    return True
            return False
+       
+       def get_random_headers():
+           """获取随机User-Agent的headers"""
+           return {
+               "User-Agent": random.choice(USER_AGENTS),
+               "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+               "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+               "Accept-Encoding": "gzip, deflate, br",
+               "Connection": "keep-alive",
+               "Upgrade-Insecure-Requests": "1"
+           }
 
        def get_response_text(response):
            """从requests响应中正确解码文本，优先UTF-8"""
@@ -804,17 +815,6 @@ jobs:
                name = name[3:]
 
            return name
-       
-       def get_random_headers():
-           """获取随机User-Agent的headers"""
-           return {
-               "User-Agent": random.choice(USER_AGENTS),
-               "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-               "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-               "Accept-Encoding": "gzip, deflate, br",
-               "Connection": "keep-alive",
-               "Upgrade-Insecure-Requests": "1"
-           }
 
        def replace_host_with_ip_port(url, ip_port):
            """将URL中的主机和端口替换为指定的IP:端口"""
@@ -1029,7 +1029,7 @@ jobs:
 
                # 修复可能的乱码频道名
                name = fix_mojibake(name)
-
+               url = fix_mojibake(url)  # 有些URL也可能被错误解码
                # 处理相对路径
                if url.startswith('/'):
                    url = f"http://{ip_port}{url}"
@@ -1075,7 +1075,7 @@ jobs:
 
                        # 修复可能的乱码频道名
                        name = fix_mojibake(name)
-
+                       url = fix_mojibake(url)
                        # 处理相对路径
                        if url.startswith('/'):
                            url = f"http://{ip_port}{url}"
