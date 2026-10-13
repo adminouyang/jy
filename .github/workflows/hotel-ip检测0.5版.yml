@@ -764,12 +764,45 @@ jobs:
            return content.decode('utf-8', errors='replace')
 
        def fix_mojibake(name):
-           """修复已经变成乱码的频道名"""
-           if 'æ' in name or 'å' in name or 'Ã' in name:
+           """通用修复UTF-8被错误解码导致的乱码，兼容多次编码错误"""
+           if not name:
+               return name
+
+           # 清理真实 BOM
+           if name.startswith('\ufeff'):
+               name = name.lstrip('\ufeff')
+
+           # 清理被LATIN-1误解码的BOM (ï»¿ = UTF-8 BOM)
+           if name.startswith('ï»¿'):
+               name = name[3:]
+
+           # 递归修复：把当前字符串当作latin1编码的字节，用utf-8解码
+           for _ in range(5):
                try:
-                   return name.encode('latin-1').decode('utf-8')
-               except (UnicodeEncodeError, UnicodeDecodeError):
-                   pass
+                   raw = name.encode('latin-1')
+               except UnicodeEncodeError:
+                   # 当前字符串包含latin1无法表示的字符，说明已是正常文本
+                   break
+
+               try:
+                   decoded = raw.decode('utf-8')
+               except UnicodeDecodeError:
+                   # 不是UTF-8字节流，无法修复
+                   break
+
+               # 解码成功且产生了有意义的变化，则继续修复
+               if decoded != name and '\ufffd' not in decoded:
+                   name = decoded
+                   continue
+               else:
+                   break
+
+           # 再次清理可能残留的BOM
+           if name.startswith('\ufeff'):
+               name = name.lstrip('\ufeff')
+           if name.startswith('ï»¿'):
+               name = name[3:]
+
            return name
        
        def get_random_headers():
