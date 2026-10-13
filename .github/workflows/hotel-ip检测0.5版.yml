@@ -1198,28 +1198,27 @@ jobs:
                try:
                    response = requests.get(json_url, timeout=5)
                    if response.status_code == 200:
-                       data = response.json()
-                       if data.get("code") == 0 and "data" in data:
-                           # 处理JSON数据中的URL
-                           for channel in data.get("data", []):
-                               url = channel.get("url", "")
-                               if url and not url.startswith("http"):
-                                   if url.startswith("/"):
-                                       channel["url"] = f"http://{ip_port}{url}"
-                                   else:
-                                       channel["url"] = f"http://{ip_port}/{url}"
-                           print(f"✅ {ip_port} JSON接口可用，找到{len(data.get('data', []))}个频道")
+                       # 关键：使用get_response_text正确解码，避免乱码
+                       json_text = get_response_text(response)
+                       # 使用parse_json_format统一处理：修复乱码、替换内网IP、过滤无效链接
+                       json_channels = parse_json_format(json_text, ip_port)
+                       if json_channels:
+                           data = {"code": 0, "data": json_channels}
+                           print(f"✅ {ip_port} JSON接口可用，找到{len(json_channels)}个频道")
                            return True, data
+                       else:
+                           print(f"❌ {ip_port} JSON接口解析后无有效频道")
                except Exception as e:
                    print(f"❌ {ip_port} JSON接口失败: {e}")
-
                # 原有逻辑：如果JSON接口失败，尝试TXT格式接口 (格式3)
                txt_url = f"http://{ip_port}/ZHGXTV/Public/json/live_interface.txt"
                try:
                    response = requests.get(txt_url, timeout=5)
                    if response.status_code == 200:
-                       # 解析TXT格式数据
-                       txt_data = parse_txt_format(response.text, ip_port)
+                       # 关键：使用get_response_text正确解码，避免乱码
+                       txt_text = get_response_text(response)
+                       # 解析TXT格式数据，已内置乱码修复、IP替换、无效链接过滤
+                       txt_data = parse_txt_format(txt_text, ip_port)
                        if txt_data:
                            # 转换为与JSON相同的结构
                            data = {
