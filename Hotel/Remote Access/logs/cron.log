@@ -17499,3 +17499,131 @@ PermissionError: [Errno 13] Permission denied: '/Hotel'
 [2026-10-15 00:17:27] ✅ M3U8 已保存到 output.m3u8 (55200 字节)
 [2026-10-15 00:17:27] ✅ TXT 已保存到 output.txt (18024 字节)
 [2026-10-15 00:17:27] 🎉 更新完成!
+[2026-10-16 00:01:48] ==================================================
+[2026-10-16 00:01:48] IPTV 播放列表自动更新（远程源抓取 + 本地保存）
+[2026-10-16 00:01:48] ==================================================
+[2026-10-16 00:01:48] 抓取远程源 (第1次)...
+[2026-10-16 00:01:49] ✅ 远程源获取成功，共 288 个源
+[2026-10-16 00:01:49] 开始测速 288 个源...
+[2026-10-16 00:01:51] 测速进度: 10/288 (有效: 0)
+[2026-10-16 00:01:53] 测速进度: 20/288 (有效: 0)
+[2026-10-16 00:01:58] 测速进度: 30/288 (有效: 5)
+[2026-10-16 00:01:58] 测速进度: 40/288 (有效: 9)
+[2026-10-16 00:02:01] 测速进度: 50/288 (有效: 14)
+[2026-10-16 00:02:06] 测速进度: 70/288 (有效: 21)
+[2026-10-16 00:02:06] 测速进度: 80/288 (有效: 21)
+[2026-10-16 00:02:07] 测速进度: 90/288 (有效: 21)
+[2026-10-16 00:02:08] 测速进度: 100/288 (有效: 21)
+[2026-10-16 00:02:10] 测速进度: 110/288 (有效: 21)
+[2026-10-16 00:02:20] 测速进度: 130/288 (有效: 28)
+[2026-10-16 00:02:21] 测速进度: 140/288 (有效: 28)
+[2026-10-16 00:02:23] 测速进度: 150/288 (有效: 28)
+[2026-10-16 00:02:24] 测速进度: 160/288 (有效: 28)
+[2026-10-16 00:02:25] 测速进度: 170/288 (有效: 31)
+[2026-10-16 00:02:36] 测速进度: 190/288 (有效: 37)
+[2026-10-16 00:02:36] 测速进度: 200/288 (有效: 37)
+[2026-10-16 00:02:38] 测速进度: 210/288 (有效: 37)
+[2026-10-16 00:02:39] 测速进度: 220/288 (有效: 37)
+[2026-10-16 00:02:42] 测速进度: 230/288 (有效: 37)
+[2026-10-16 00:02:51] 测速进度: 250/288 (有效: 43)
+[2026-10-16 00:02:51] 测速进度: 260/288 (有效: 43)
+[2026-10-16 00:02:52] 测速进度: 270/288 (有效: 43)
+[2026-10-16 00:02:56] 测速进度: 280/288 (有效: 44)
+[2026-10-16 00:03:02] 测速进度: 288/288 (有效: 52)
+[2026-10-16 00:03:02] 测速完成: 52/288 个有效源
+[2026-10-16 00:03:02] 选中 Top 5 源:
+[2026-10-16 00:03:02]   源1: 27.223.110.214:8009 (hsmdtv) 2.43MB/s
+[2026-10-16 00:03:02]   源2: 113.57.140.161:10081 (hsmdtv) 1.71MB/s
+[2026-10-16 00:03:02]   源3: 218.13.139.26:9901 (txiptv) 1.64MB/s
+[2026-10-16 00:03:02]   源4: 111.59.139.85:11888 (txiptv) 1.36MB/s
+[2026-10-16 00:03:02]   源5: 111.59.139.82:11888 (txiptv) 1.35MB/s
+[2026-10-16 00:03:02] 抓取频道: 源1 27.223.110.214:8009 (hsmdtv)...
+[2026-10-16 00:03:02] 📂 找到 hsmd_address_list.txt: /home/runner/work/jy/jy/Hotel/Remote Access/hsmd_address_list.txt
+[2026-10-16 00:03:02]    共解析到 37 条频道记录
+[2026-10-16 00:03:02]    ✅ CCTV1: http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/1/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV2: http://118.122.144.115:8888/newlive/live/hls/2/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/2/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV3: http://118.122.144.115:8888/newlive/live/hls/3/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/3/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV4: http://118.122.144.115:8888/newlive/live/hls/4/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/4/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV5: http://118.122.144.115:8888/newlive/live/hls/5/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/5/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV5+: http://118.122.144.115:8888/newlive/live/hls/6/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/6/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV6: http://118.122.144.115:8888/newlive/live/hls/7/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/7/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV7: http://118.122.144.115:8888/newlive/live/hls/8/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/8/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV8: http://118.122.144.115:8888/newlive/live/hls/9/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/9/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV9: http://118.122.144.115:8888/newlive/live/hls/10/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/10/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV10: http://118.122.144.115:8888/newlive/live/hls/11/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/11/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV11: http://118.122.144.115:8888/newlive/live/hls/12/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/12/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV12: http://118.122.144.115:8888/newlive/live/hls/13/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/13/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV13: http://118.122.144.115:8888/newlive/live/hls/14/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/14/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV14: http://118.122.144.115:8888/newlive/live/hls/15/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/15/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV15: http://118.122.144.115:8888/newlive/live/hls/16/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/16/live.m3u8
+[2026-10-16 00:03:02]    ✅ 福建综合: http://118.122.144.115:8888/newlive/live/hls/18/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/18/live.m3u8
+[2026-10-16 00:03:02]    ✅ 东南卫视: http://118.122.144.115:8888/newlive/live/hls/19/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/19/live.m3u8
+[2026-10-16 00:03:02]    ✅ 东方卫视: http://118.122.144.115:8888/newlive/live/hls/20/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/20/live.m3u8
+[2026-10-16 00:03:02]    ✅ 湖南卫视: http://118.122.144.115:8888/newlive/live/hls/21/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/21/live.m3u8
+[2026-10-16 00:03:02]    ✅ 江苏卫视: http://118.122.144.115:8888/newlive/live/hls/22/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/22/live.m3u8
+[2026-10-16 00:03:02]    ✅ 浙江卫视: http://118.122.144.115:8888/newlive/live/hls/23/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/23/live.m3u8
+[2026-10-16 00:03:02]    ✅ 湖北卫视: http://118.122.144.115:8888/newlive/live/hls/24/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/24/live.m3u8
+[2026-10-16 00:03:02]    ✅ 广东卫视: http://118.122.144.115:8888/newlive/live/hls/25/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/25/live.m3u8
+[2026-10-16 00:03:02]    ✅ 山东卫视: http://118.122.144.115:8888/newlive/live/hls/26/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/26/live.m3u8
+[2026-10-16 00:03:02]    ✅ 湖北卫视: http://118.122.144.115:8888/newlive/live/hls/27/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/27/live.m3u8
+[2026-10-16 00:03:02]    ✅ 深圳卫视: http://118.122.144.115:8888/newlive/live/hls/28/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/28/live.m3u8
+[2026-10-16 00:03:02]    ✅ 黑龙江卫视: http://118.122.144.115:8888/newlive/live/hls/29/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/29/live.m3u8
+[2026-10-16 00:03:02]    ✅ 贵州卫视: http://118.122.144.115:8888/newlive/live/hls/30/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/30/live.m3u8
+[2026-10-16 00:03:02]    ✅ 安徽卫视: http://118.122.144.115:8888/newlive/live/hls/31/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/31/live.m3u8
+[2026-10-16 00:03:02]    ✅ 天津卫视: http://118.122.144.115:8888/newlive/live/hls/32/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/32/live.m3u8
+[2026-10-16 00:03:02]    ✅ 四川卫视: http://118.122.144.115:8888/newlive/live/hls/33/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/33/live.m3u8
+[2026-10-16 00:03:02]    ✅ 江西卫视: http://118.122.144.115:8888/newlive/live/hls/34/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/34/live.m3u8
+[2026-10-16 00:03:02]    ✅ 辽宁卫视: http://118.122.144.115:8888/newlive/live/hls/35/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/35/live.m3u8
+[2026-10-16 00:03:02]    ✅ 重庆卫视: http://118.122.144.115:8888/newlive/live/hls/36/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/36/live.m3u8
+[2026-10-16 00:03:02]    ✅ 北京卫视: http://118.122.144.115:8888/newlive/live/hls/37/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/37/live.m3u8
+[2026-10-16 00:03:02]    ✅ 河南卫视: http://118.122.144.115:8888/newlive/live/hls/38/live.m3u8 -> http://27.223.110.214:8009/newlive/live/hls/38/live.m3u8
+[2026-10-16 00:03:02] 抓取频道: 源2 113.57.140.161:10081 (hsmdtv)...
+[2026-10-16 00:03:02] 📂 找到 hsmd_address_list.txt: /home/runner/work/jy/jy/Hotel/Remote Access/hsmd_address_list.txt
+[2026-10-16 00:03:02]    共解析到 37 条频道记录
+[2026-10-16 00:03:02]    ✅ CCTV1: http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/1/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV2: http://118.122.144.115:8888/newlive/live/hls/2/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/2/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV3: http://118.122.144.115:8888/newlive/live/hls/3/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/3/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV4: http://118.122.144.115:8888/newlive/live/hls/4/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/4/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV5: http://118.122.144.115:8888/newlive/live/hls/5/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/5/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV5+: http://118.122.144.115:8888/newlive/live/hls/6/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/6/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV6: http://118.122.144.115:8888/newlive/live/hls/7/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/7/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV7: http://118.122.144.115:8888/newlive/live/hls/8/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/8/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV8: http://118.122.144.115:8888/newlive/live/hls/9/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/9/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV9: http://118.122.144.115:8888/newlive/live/hls/10/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/10/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV10: http://118.122.144.115:8888/newlive/live/hls/11/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/11/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV11: http://118.122.144.115:8888/newlive/live/hls/12/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/12/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV12: http://118.122.144.115:8888/newlive/live/hls/13/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/13/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV13: http://118.122.144.115:8888/newlive/live/hls/14/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/14/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV14: http://118.122.144.115:8888/newlive/live/hls/15/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/15/live.m3u8
+[2026-10-16 00:03:02]    ✅ CCTV15: http://118.122.144.115:8888/newlive/live/hls/16/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/16/live.m3u8
+[2026-10-16 00:03:02]    ✅ 福建综合: http://118.122.144.115:8888/newlive/live/hls/18/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/18/live.m3u8
+[2026-10-16 00:03:02]    ✅ 东南卫视: http://118.122.144.115:8888/newlive/live/hls/19/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/19/live.m3u8
+[2026-10-16 00:03:02]    ✅ 东方卫视: http://118.122.144.115:8888/newlive/live/hls/20/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/20/live.m3u8
+[2026-10-16 00:03:02]    ✅ 湖南卫视: http://118.122.144.115:8888/newlive/live/hls/21/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/21/live.m3u8
+[2026-10-16 00:03:02]    ✅ 江苏卫视: http://118.122.144.115:8888/newlive/live/hls/22/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/22/live.m3u8
+[2026-10-16 00:03:02]    ✅ 浙江卫视: http://118.122.144.115:8888/newlive/live/hls/23/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/23/live.m3u8
+[2026-10-16 00:03:02]    ✅ 湖北卫视: http://118.122.144.115:8888/newlive/live/hls/24/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/24/live.m3u8
+[2026-10-16 00:03:02]    ✅ 广东卫视: http://118.122.144.115:8888/newlive/live/hls/25/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/25/live.m3u8
+[2026-10-16 00:03:02]    ✅ 山东卫视: http://118.122.144.115:8888/newlive/live/hls/26/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/26/live.m3u8
+[2026-10-16 00:03:02]    ✅ 湖北卫视: http://118.122.144.115:8888/newlive/live/hls/27/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/27/live.m3u8
+[2026-10-16 00:03:02]    ✅ 深圳卫视: http://118.122.144.115:8888/newlive/live/hls/28/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/28/live.m3u8
+[2026-10-16 00:03:02]    ✅ 黑龙江卫视: http://118.122.144.115:8888/newlive/live/hls/29/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/29/live.m3u8
+[2026-10-16 00:03:02]    ✅ 贵州卫视: http://118.122.144.115:8888/newlive/live/hls/30/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
+[2026-10-16 00:03:02]    ✅ 安徽卫视: http://118.122.144.115:8888/newlive/live/hls/31/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/31/live.m3u8
+[2026-10-16 00:03:02]    ✅ 天津卫视: http://118.122.144.115:8888/newlive/live/hls/32/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/32/live.m3u8
+[2026-10-16 00:03:02]    ✅ 四川卫视: http://118.122.144.115:8888/newlive/live/hls/33/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/33/live.m3u8
+[2026-10-16 00:03:02]    ✅ 江西卫视: http://118.122.144.115:8888/newlive/live/hls/34/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/34/live.m3u8
+[2026-10-16 00:03:02]    ✅ 辽宁卫视: http://118.122.144.115:8888/newlive/live/hls/35/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
+[2026-10-16 00:03:02]    ✅ 重庆卫视: http://118.122.144.115:8888/newlive/live/hls/36/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/36/live.m3u8
+[2026-10-16 00:03:02]    ✅ 北京卫视: http://118.122.144.115:8888/newlive/live/hls/37/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/37/live.m3u8
+[2026-10-16 00:03:02]    ✅ 河南卫视: http://118.122.144.115:8888/newlive/live/hls/38/live.m3u8 -> http://113.57.140.161:10081/newlive/live/hls/38/live.m3u8
+[2026-10-16 00:03:02] 抓取频道: 源3 218.13.139.26:9901 (txiptv)...
+[2026-10-16 00:03:07] 抓取频道: 源4 111.59.139.85:11888 (txiptv)...
+[2026-10-16 00:03:12] 抓取频道: 源5 111.59.139.82:11888 (txiptv)...
+[2026-10-16 00:03:14] 远程源共抓取到 231 条频道记录
+[2026-10-16 00:03:14] ✅ hsmd 更新地址列表已保存: ./hsmd_address_list.updated.txt (37 条)
+[2026-10-16 00:03:14] 📊 数据来源: 远程源
+[2026-10-16 00:03:14]    M3U8: 53780 字节, TXT: 15116 字节
+[2026-10-16 00:03:14] ✅ M3U8 已保存到 output.m3u8 (53780 字节)
+[2026-10-16 00:03:14] ✅ TXT 已保存到 output.txt (15116 字节)
+[2026-10-16 00:03:14] 🎉 更新完成!
