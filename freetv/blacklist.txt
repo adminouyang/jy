@@ -160,3 +160,5 @@ cdn8.123.rr.kg
 168.sryze.cc
 live.hznet.tv
 112.103.141.217
+my1nas.dpdns.org
+115.207.215.244
