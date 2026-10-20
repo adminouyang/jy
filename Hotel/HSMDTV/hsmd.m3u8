@@ -211,9 +211,9 @@ http://118.122.144.115:8888/newlive/live/hls/28/live.m3u8
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://ghfast.top/...hubei.png" group-title="卫视频道",湖北卫视
 http://113.57.140.161:10081/newlive/live/hls/15/live.m3u8
 #EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://ghfast.top/...hubei.png" group-title="卫视频道",湖北卫视
-http://120.40.39.246:352/newlive/live/hls/27/live.m3u8
-#EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://ghfast.top/...hubei.png" group-title="卫视频道",湖北卫视
 http://120.40.39.246:352/newlive/live/hls/24/live.m3u8
+#EXTINF:-1 tvg-id="湖北卫视" tvg-name="湖北卫视" tvg-logo="https://ghfast.top/...hubei.png" group-title="卫视频道",湖北卫视
+http://120.40.39.246:352/newlive/live/hls/27/live.m3u8
 #EXTINF:-1 tvg-id="江西卫视" tvg-name="江西卫视" tvg-logo="https://ghfast.top/...江西卫视.png" group-title="卫视频道",江西卫视
 http://118.122.144.115:8888/newlive/live/hls/24/live.m3u8
 #EXTINF:-1 tvg-id="江西卫视" tvg-name="江西卫视" tvg-logo="https://ghfast.top/...江西卫视.png" group-title="卫视频道",江西卫视
