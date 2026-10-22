@@ -31,11 +31,11 @@ CCTV16,http://118.122.144.115:8888/newlive/live/hls/17/live.m3u8
 北京卫视,http://113.57.140.161:10081/newlive/live/hls/22/live.m3u8
 广东卫视,http://113.57.140.161:10081/newlive/live/hls/16/live.m3u8
 广西卫视,http://221.226.51.220:50081/newlive/live/hls/25/live.m3u8
-东南卫视,http://120.40.39.246:352/newlive/live/hls/19/live.m3u8
+东南卫视,http://118.122.144.115:8888/newlive/live/hls/25/live.m3u8
 河南卫视,http://221.226.51.220:50081/newlive/live/hls/37/live.m3u8
 湖北卫视,http://113.57.140.161:10081/newlive/live/hls/15/live.m3u8
-江西卫视,http://120.40.39.246:352/newlive/live/hls/34/live.m3u8
-四川卫视,http://120.40.39.246:352/newlive/live/hls/33/live.m3u8
+江西卫视,http://118.122.144.115:8888/newlive/live/hls/24/live.m3u8
+四川卫视,http://118.122.144.115:8888/newlive/live/hls/18/live.m3u8
 重庆卫视,http://113.57.140.161:10081/newlive/live/hls/23/live.m3u8
 贵州卫视,http://221.226.51.220:50081/newlive/live/hls/35/live.m3u8
 云南卫视,http://221.226.51.220:50081/newlive/live/hls/33/live.m3u8
@@ -77,6 +77,6 @@ BesTV电影,http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8
 
 其他频道,#genre#
 金鹰纪实,http://221.226.51.220:50081/newlive/live/hls/39/live.m3u8
-劲爆体育,http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
 游戏风云,http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
+劲爆体育,http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
 
