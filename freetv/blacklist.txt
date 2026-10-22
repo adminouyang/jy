@@ -172,3 +172,6 @@ my1nas.dpdns.org
 221.232.14.91
 221.232.14.94
 218.13.170.98
+www.dalitv.com.tw
+183.7.150.46
+dafeng-tv-hls.cm.jstv.com
