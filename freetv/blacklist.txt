@@ -177,3 +177,5 @@ www.dalitv.com.tw
 dafeng-tv-hls.cm.jstv.com
 167.88.62.43
 123.52.8.82
+175.0.78.167
+traffic.jbh.tjbh.com
