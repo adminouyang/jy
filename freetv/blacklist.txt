@@ -181,3 +181,7 @@ dafeng-tv-hls.cm.jstv.com
 traffic.jbh.tjbh.com
 121.19.134.202
 home.scanflove.com
+live.metshop.top
+live.zzyxxw.com
+58.48.104.161
+219.140.7.46
