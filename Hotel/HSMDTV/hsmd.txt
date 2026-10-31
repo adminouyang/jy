@@ -77,6 +77,6 @@ BesTV电影,http://118.122.144.115:8888/newlive/live/hls/39/live.m3u8
 
 其他频道,#genre#
 金鹰纪实,http://221.226.51.220:50081/newlive/live/hls/39/live.m3u8
-游戏风云,http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
 劲爆体育,http://113.57.140.161:10081/newlive/live/hls/35/live.m3u8
+游戏风云,http://113.57.140.161:10081/newlive/live/hls/30/live.m3u8
 
