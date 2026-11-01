@@ -191,3 +191,6 @@ live.zzyxxw.com
 f.123.rr.kg
 182.135.66.163
 49.70.189.172
+cdn.163189.xyz
+cdn8.163189.xyz
+free.cnlive.club
