@@ -1,8 +1,8 @@
 name: IPTV Playlist Auto Update
 
 on:
-  schedule:
-    - cron: '0 22 * * *'   # 每天 UTC 0:00（北京时间 06:00）
+  # schedule:
+  #   - cron: '0 22 * * *'   # 每天 UTC 0:00（北京时间 06:00）
   workflow_dispatch:
 
 permissions:
