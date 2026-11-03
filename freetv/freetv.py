@@ -716,6 +716,7 @@ async def main():
 
     source_urls = [
         "https://sub.ottiptv.cc/yylunbo.m3u",
+        "https://gitee.com/lwr851/live/raw/master/iptv.m3u",
         "https://raw.githubusercontent.com/kakaxi-1/IPTV/refs/heads/main/ipv4.txt",
         "https://raw.githubusercontent.com/wgq11/iptv/refs/heads/main/result.txt",
         "https://raw.githubusercontent.com/lbxxxtw2/iptv/refs/heads/master/output/tv.txt",
