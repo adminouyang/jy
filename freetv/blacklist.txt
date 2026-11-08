@@ -208,3 +208,6 @@ live2.rxip.sc96655.com
 45.192.97.170
 tv.pull.hebtv.com
 d029dcec.kazmazpaz.ru
+pull-hls-f11.douyincdn.com
+tvgslb.hn.chinamobile.com
+pull-hls-f26.douyincdn.com
