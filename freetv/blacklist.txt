@@ -211,3 +211,5 @@ d029dcec.kazmazpaz.ru
 pull-hls-f11.douyincdn.com
 tvgslb.hn.chinamobile.com
 pull-hls-f26.douyincdn.com
+116.52.173.72
+tv.305362.xyz
