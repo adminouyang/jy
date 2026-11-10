@@ -20,7 +20,6 @@ CCTV-17 农业农村,https://raw.githubusercontent.com/adminouyang/jy/refs/heads
 CCTV-4K 超高清,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv4k.js
 CCTV-8K 超高清,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv8k.js
 CGTN,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cgtn.js
-剧场,#genre#
 CCTV-第一剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/dyjc.js
 CCTV-风云剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/fyjc.js
 CCTV-怀旧剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/hjjc.js
