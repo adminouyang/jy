@@ -1,60 +1,60 @@
 央视,#genre#
-CCTV-1 综合,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv1.js
-CCTV-2 财经,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv2.js
-CCTV-3 综艺,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv3.js
-CCTV-4 中文国际,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv4.js
-CCTV-5 体育,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv5.js
-CCTV-5+ 体育赛事,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv5p.js
-CCTV-6 电影,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv6.js
-CCTV-7 国防军事,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv7.js
-CCTV-8 电视剧,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv8.js
-CCTV-9 纪录,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv9.js
-CCTV-10 科教,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv10.js
-CCTV-11 戏曲,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv11.js
-CCTV-12 社会与法,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv12.js
-CCTV-13 新闻,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv13.js
-CCTV-14 少儿,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv14.js
-CCTV-15 音乐,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv15.js
-CCTV-16 奥林匹克,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv16.js
-CCTV-17 农业农村,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv17.js
-CCTV-4K 超高清,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv4k.js
-CCTV-8K 超高清,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cctv8k.js
-CGTN,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cgtn.js
-CCTV-第一剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/dyjc.js
-CCTV-风云剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/fyjc.js
-CCTV-怀旧剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/hjjc.js
-CETV-1 中国教育1台,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cetv1.js
+CCTV-1 综合,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv1.js
+CCTV-2 财经,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv2.js
+CCTV-3 综艺,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv3.js
+CCTV-4 中文国际,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv4.js
+CCTV-5 体育,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv5.js
+CCTV-5+ 体育赛事,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv5p.js
+CCTV-6 电影,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv6.js
+CCTV-7 国防军事,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv7.js
+CCTV-8 电视剧,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv8.js
+CCTV-9 纪录,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv9.js
+CCTV-10 科教,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv10.js
+CCTV-11 戏曲,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv11.js
+CCTV-12 社会与法,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv12.js
+CCTV-13 新闻,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv13.js
+CCTV-14 少儿,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv14.js
+CCTV-15 音乐,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv15.js
+CCTV-16 奥林匹克,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv16.js
+CCTV-17 农业农村,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv17.js
+CCTV-4K 超高清,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv4k.js
+CCTV-8K 超高清,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv8k.js
+CGTN,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cgtn.js
+CCTV-第一剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/dyjc.js
+CCTV-风云剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/fyjc.js
+CCTV-怀旧剧场,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/hjjc.js
+CETV-1 中国教育1台,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cetv1.js
 卫视,#genre#
-北京卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/bjws.js
-东方卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/dfws.js
-江苏卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/jsws.js
-浙江卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/zjws.js
-湖南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/hunws.js
-湖北卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/hbws.js
-广东卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/gdws.js
-广西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/gxws.js
-黑龙江卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/hljws.js
-海南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/haiws.js
-重庆卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/cqws.js
-深圳卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/szws.js
-四川卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/scws.js
-河南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/henanws.js
-东南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/dnws.js
-贵州卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/gzws.js
-江西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/jxws.js
-辽宁卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/lnws.js
-安徽卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ahws.js
-河北卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/hebws.js
-山东卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/sdws.js
-天津卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/tjws.js
-陕西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/shxws.js
-内蒙古卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/nmgws.js
-甘肃卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/gsws.js
-宁夏卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/nxws.js
-山西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/sxws.js
-云南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ynws.js
-吉林卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/jlws.js
-青海卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/qhws.js
-西藏卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/xzws.js
-新疆卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/xjws.js
-兵团卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/btws.js
+北京卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/bjws.js
+东方卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/dfws.js
+江苏卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/jsws.js
+浙江卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/zjws.js
+湖南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/hunws.js
+湖北卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/hbws.js
+广东卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/gdws.js
+广西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/gxws.js
+黑龙江卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/hljws.js
+海南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/haiws.js
+重庆卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cqws.js
+深圳卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/szws.js
+四川卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/scws.js
+河南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/henanws.js
+东南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/dnws.js
+贵州卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/gzws.js
+江西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/jxws.js
+辽宁卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/lnws.js
+安徽卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/ahws.js
+河北卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/hebws.js
+山东卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/sdws.js
+天津卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/tjws.js
+陕西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/shxws.js
+内蒙古卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/nmgws.js
+甘肃卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/gsws.js
+宁夏卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/nxws.js
+山西卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/sxws.js
+云南卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/ynws.js
+吉林卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/jlws.js
+青海卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/qhws.js
+西藏卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/xzws.js
+新疆卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/xjws.js
+兵团卫视,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/btws.js
