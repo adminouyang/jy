@@ -1,5 +1,5 @@
 央视,#genre#
-CCTV-1 综合,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv1.js
+CCTV-1 综合,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js
 CCTV-2 财经,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv2.js
 CCTV-3 综艺,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv3.js
 CCTV-4 中文国际,https://raw.githubusercontent.com/adminouyang/jy/refs/heads/main/migu/ysp.js/cctv4.js
