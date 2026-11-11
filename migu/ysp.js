@@ -1,13 +1,16 @@
 /*
  * ============================================================================
  *  ysp.js  ——  央视频 / 央视影音 直播直链解析脚本
- *  适配：欧阳TV 及其它内置 Rhino + HttpBridge(req) 的播放器
+ *  适配：ouTV 及其它内置 Rhino + HttpBridge(req) 的播放器
  *
  *  原理：本地构造 cKey 签名（TEA + XOR + cksum + 自定义 base64），
  *        向 bkliveinfo.ysp.cctv.cn 发起 GET，取回官方 m3u8 直链。
  *        全程只用到 req()，不依赖任何原生方法。
  *
- *  用法：播放列表频道行写 ——  CCTV-1,local://ysp.js
+ *  用法（二选一）：
+ *     ① CCTV-1,local://ysp.js            ← 播 CH 指定的台
+ *     ② CCTV-5,local://ysp.js/cctv5      ← 用 URL 尾巴指定台（需 App 支持传参）
+ *        写频道键名(cctv5)、中文名(CCTV-5)、或数字ID(600001859 / 2024078201) 都能认
  *  换台：改下面 CH（可选值见 CHANNELS 表）
  *  画质：DEFN = "fhd" 高清 / "shd" 标清（高清失败会自动降级）
  *
@@ -425,9 +428,52 @@ function pickPlayable(urls) {
 
 /* ============================ 入口 ============================ */
 
-function main() {
-    var info = CHANNELS[CH];
-    if (!info) throw new Error("未知频道：" + CH);
+/*
+ * 从入口参数里挑频道。
+ * 摸鱼TV 调 main() 时会传一个参数（URL 里 .js 之后那一段，可能是空的），
+ * 这里做容错：认不出来就退回 CH，绝不因此报错。
+ */
+function pickChannel(p) {
+    if (p === undefined || p === null) return CH;
+    var s = String(p).replace(/^\s+|\s+$/g, "");
+    if (!s) return CH;
+
+    /* 万一传进来的是整条 URL，先截掉 .js 之后的部分 */
+    var m = s.match(/\.js[/?](.*)$/);
+    if (m && m[1]) s = m[1];
+
+    /* 去掉查询串前缀，支持 ?ch=cctv5 这种写法 */
+    s = s.replace(/^[?&/]+/, "");
+    s = s.replace(/^ch=/, "");
+    /* 尾巴后面若还挂着 ?a=b / &a=b，只取第一段 */
+    var cut = s.search(/[?&#]/);
+    if (cut > 0) s = s.substring(0, cut);
+    s = s.replace(/^\s+|\s+$/g, "");
+    if (!s) return CH;
+
+    if (CHANNELS[s]) return s;
+
+    /* 不区分大小写，再试一次 */
+    var low = s.toLowerCase();
+    if (CHANNELS[low]) return low;
+
+    /* 按 cnlid / livepid 反查 */
+    for (var k in CHANNELS) {
+        if (CHANNELS[k][1] === s || CHANNELS[k][2] === s) return k;
+    }
+    /* 按中文显示名反查，支持 "CCTV-5" 这类写法 */
+    for (var k2 in CHANNELS) {
+        if (CHANNELS[k2][0] === s) return k2;
+    }
+
+    console.log("未知频道参数 " + s + "，回落到 " + CH);
+    return CH;
+}
+
+function main(param) {
+    var key = pickChannel(param);
+    var info = CHANNELS[key];
+    if (!info) throw new Error("未知频道：" + key);
 
     /* 第 4 位指定了画质（如付费频道的 shd）就不再试高清 */
     var first = info[3] || DEFN;
