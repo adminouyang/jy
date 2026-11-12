@@ -403,94 +403,125 @@ function fetchPlayUrls(channelId, livePid, defn) {
     }
     if (!out.length) throw new Error("没有解析到 m3u8 地址");
 
-    /* bklive- 前缀的备份 CDN 更稳，优先 */
-    out.sort(function (a, b) {
-        var pa = a.indexOf("bklive-") >= 0 ? 0 : 1;
-        var pb = b.indexOf("bklive-") >= 0 ? 0 : 1;
-        return pa - pb;
-    });
+    /* 保持接口给的顺序：playurl 在前（官方首选），backurl_list 里的 bk 备份在后。
+       不再按 bklive- 重排 —— 两条都是独立签发的地址，交给列表里的 ?l=1 去选。 */
     return out;
 }
 
-/* 逐个试探候选地址，返回第一个真能出清单的；全失败则退回首个 */
-function pickPlayable(urls) {
-    var i, body;
-    for (i = 0; i < urls.length; i++) {
-        try {
-            body = req(urls[i], { method: "GET", headers: { "User-Agent": "qqlive" } });
-            if (body && body.replace(/^\s+/, "").indexOf("#EXTM3U") === 0) return urls[i];
-        } catch (e) { /* 换下一个 */ }
-    }
-    return urls[0];
-}
+/* ===== 故意删除「预取验证」=====
+ * 旧版有个 pickPlayable()：先把候选 m3u8 各取一遍、确认能出 #EXTM3U 才返回。
+ * 这在央视频 CDN 上是致命的：同一条直链 ~30 秒内只放行 1~2 次，
+ * 验证用掉的那次就是播放器要用的那次，播放器随后拿到 403 → 黑屏。
+ * 结论：宁可把可能失效的地址直接交给播放器（失败后 App 会自动换线路），
+ *       也绝不提前请求。此处若将来要加「测速」，请改用接口层 iretcode 判断。
+ */
 
 /* ============================ 入口 ============================ */
 
 /*
- * 从入口参数里挑频道。
- * 摸鱼TV 调 main() 时会传一个参数（URL 里 .js 之后那一段，可能是空的），
- * 这里做容错：认不出来就退回 CH，绝不因此报错。
+ * 解析入口参数。摸鱼TV 调 main() 时会传一个参数（URL 里 .js 之后那一段，可能是空的），
+ * 支持写法：
+ *     cctv1 / CCTV-5 / 600001859 / 2024078201
+ *     cctv1?l=1&q=shd      （l=选第几条候选线路，q=画质）
+ *     cctv1/1              （同上，简写）
+ * 认不出来就退回 CH，绝不因此报错。
  */
-function pickChannel(p) {
-    if (p === undefined || p === null) return CH;
+function parseTail(p) {
+    var out = { key: CH, line: 0, qual: "" };
+    if (p === undefined || p === null) return out;
     var s = String(p).replace(/^\s+|\s+$/g, "");
-    if (!s) return CH;
+    if (!s) return out;
 
     /* 万一传进来的是整条 URL，先截掉 .js 之后的部分 */
     var m = s.match(/\.js[/?](.*)$/);
     if (m && m[1]) s = m[1];
 
-    /* 去掉查询串前缀，支持 ?ch=cctv5 这种写法 */
     s = s.replace(/^[?&/]+/, "");
-    s = s.replace(/^ch=/, "");
-    /* 尾巴后面若还挂着 ?a=b / &a=b，只取第一段 */
-    var cut = s.search(/[?&#]/);
-    if (cut > 0) s = s.substring(0, cut);
-    s = s.replace(/^\s+|\s+$/g, "");
-    if (!s) return CH;
 
-    if (CHANNELS[s]) return s;
+    /* 拆出 ?a=b&c=d 形式的参数 */
+    var q = "", cut = s.search(/[?#]/);
+    if (cut >= 0) { q = s.substring(cut + 1); s = s.substring(0, cut); }
 
-    /* 不区分大小写，再试一次 */
-    var low = s.toLowerCase();
-    if (CHANNELS[low]) return low;
-
-    /* 按 cnlid / livepid 反查 */
-    for (var k in CHANNELS) {
-        if (CHANNELS[k][1] === s || CHANNELS[k][2] === s) return k;
-    }
-    /* 按中文显示名反查，支持 "CCTV-5" 这类写法 */
-    for (var k2 in CHANNELS) {
-        if (CHANNELS[k2][0] === s) return k2;
+    /* 拆出 cctv1/1 形式的线路号 */
+    if (s.indexOf("/") > 0) {
+        var parts = s.split("/");
+        s = parts[0];
+        if (/^\d+$/.test(parts[parts.length - 1])) out.line = parseInt(parts[parts.length - 1], 10);
     }
 
-    console.log("未知频道参数 " + s + "，回落到 " + CH);
-    return CH;
-}
+    s = s.replace(/^ch=/, "").replace(/^\s+|\s+$/g, "");
 
-function main(param) {
-    var key = pickChannel(param);
-    var info = CHANNELS[key];
-    if (!info) throw new Error("未知频道：" + key);
-
-    /* 第 4 位指定了画质（如付费频道的 shd）就不再试高清 */
-    var first = info[3] || DEFN;
-    var defs = [first];
-    if (first !== "shd") defs.push("shd");
-
-    var lastErr = "", d, attempt, list, url;
-    for (d = 0; d < defs.length; d++) {
-        for (attempt = 0; attempt < 2; attempt++) {
-            try {
-                list = fetchPlayUrls(info[1], info[2], defs[d]);
-                url = pickPlayable(list);
-                console.log("[" + info[0] + "] " + defs[d] + " 候选 " + list.length + " 个 → " + url.substring(0, 60));
-                return url;
-            } catch (e) {
-                lastErr = String(e.message || e);
-                sleep(600);
+    if (q) {
+        var kv = q.split(/[&;]/), i, eq, k, v;
+        for (i = 0; i < kv.length; i++) {
+            eq = kv[i].indexOf("=");
+            if (eq < 0) continue;
+            k = kv[i].substring(0, eq).toLowerCase();
+            v = kv[i].substring(eq + 1);
+            if ((k === "l" || k === "line") && /^\d+$/.test(v)) {
+                out.line = parseInt(v, 10);
+            } else if (k === "q" || k === "defn") {
+                if (v === "fhd" || v === "shd" || v === "hd") out.qual = v;
             }
         }
     }
-    throw new Error(info[0] + " 解析失败：" + lastErr);
+
+    if (!s) return out;
+
+    if (CHANNELS[s]) { out.key = s; return out; }
+
+    var low = s.toLowerCase();
+    if (CHANNELS[low]) { out.key = low; return out; }
+
+    var k1;
+    for (k1 in CHANNELS) {
+        if (CHANNELS[k1][1] === s || CHANNELS[k1][2] === s) { out.key = k1; return out; }
+    }
+    /* 按中文名 / 简名反查："CCTV-5" 能命中 "CCTV-5 体育" */
+    for (k1 in CHANNELS) {
+        var full = CHANNELS[k1][0];
+        if (full === s || full.split(" ")[0] === s) { out.key = k1; return out; }
+    }
+
+    console.log("未知频道参数 " + s + "，回落到 " + CH);
+    return out;
+}
+
+function nowMs() { return new Date().getTime(); }
+
+function main(param) {
+    var t0 = nowMs();
+    var p = parseTail(param);
+    var info = CHANNELS[p.key];
+    if (!info) throw new Error("未知频道：" + p.key);
+
+    /* 第 4 位指定了画质（如付费频道的 shd）就不再试高清 */
+    var first = p.qual || info[3] || DEFN;
+    var defs = [first];
+    if (first !== "shd") defs.push("shd");
+
+    var lastErr = "", d, list, url, code;
+    for (d = 0; d < defs.length; d++) {
+        try {
+            list = fetchPlayUrls(info[1], info[2], defs[d]);
+        } catch (e) {
+            lastErr = String((e && e.message) || e);
+            /* 只有「画质不可用 / 需 VIP / 参数不合法」才值得换一档再试；
+               网络异常、超时一律立刻放弃，重试只会把 App 的 30 秒耗尽。 */
+            var m = lastErr.match(/iretcode=(\d+)/);
+            code = m ? parseInt(m[1], 10) : -1;
+            if (code === 25 || code === 14 || code === 8 || code === 400 ||
+                lastErr.indexOf("没有解析到") >= 0) continue;
+            break;
+        }
+
+        url = list[p.line] || list[0];
+        console.log("[" + info[0] + "] " + defs[d] + " 候选 " + list.length +
+                    " 个 线路 " + (p.line + 1) + " 用时 " + (nowMs() - t0) + "ms → " +
+                    url.substring(0, 56));
+        /* 直接返回，绝不再请求 —— 详见上方「故意删除预取验证」 */
+        return url;
+    }
+
+    throw new Error(info[0] + " 解析失败（" + (nowMs() - t0) + "ms）：" + lastErr);
 }
