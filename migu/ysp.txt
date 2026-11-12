@@ -1,29 +1,29 @@
 央视,#genre#
-CCTV-1 综合,local://ysp.js/cctv1
-CCTV-2 财经,local://ysp.js/cctv2
-CCTV-3 综艺,local://ysp.js/cctv3
-CCTV-4 中文国际,local://ysp.js/cctv4
-CCTV-5 体育,local://ysp.js/cctv5
-CCTV-5+ 体育赛事,local://ysp.js/cctv5p
-CCTV-6 电影,local://ysp.js/cctv6
-CCTV-7 国防军事,local://ysp.js/cctv7
-CCTV-8 电视剧,local://ysp.js/cctv8
-CCTV-9 纪录,local://ysp.js/cctv9
-CCTV-10 科教,local://ysp.js/cctv10
-CCTV-11 戏曲,local://ysp.js/cctv11
-CCTV-12 社会与法,local://ysp.js/cctv12
-CCTV-13 新闻,local://ysp.js/cctv13
-CCTV-14 少儿,local://ysp.js/cctv14
-CCTV-15 音乐,local://ysp.js/cctv15
-CCTV-16 奥林匹克,local://ysp.js/cctv16
-CCTV-17 农业农村,local://ysp.js/cctv17
-CCTV-4K 超高清,local://ysp.js/cctv4k
-CCTV-8K 超高清,local://ysp.js/cctv8k
-CGTN,local://ysp.js/cgtn
-CCTV-第一剧场,local://ysp.js/dyjc
-CCTV-风云剧场,local://ysp.js/fyjc
-CCTV-怀旧剧场,local://ysp.js/hjjc
-CETV-1 中国教育1台,local://ysp.js/cetv1
+CCTV-1 综合,local://ysp.js/600001859
+CCTV-2 财经,local://ysp.js/600001800
+CCTV-3 综艺,local://ysp.js/600001801
+CCTV-4 中文国际,local://ysp.js/600001814
+CCTV-5 体育,local://ysp.js/600001818
+CCTV-5+ 体育赛事,local://ysp.js/600001817
+CCTV-6 电影,local://ysp.js/600108442
+CCTV-7 国防军事,local://ysp.js/600004092
+CCTV-8 电视剧,local://ysp.js/600001803
+CCTV-9 纪录,local://ysp.js/600004078
+CCTV-10 科教,local://ysp.js/600001805
+CCTV-11 戏曲,local://ysp.js/600001806
+CCTV-12 社会与法,local://ysp.js/600001807
+CCTV-13 新闻,local://ysp.js/600001811
+CCTV-14 少儿,local://ysp.js/600001809
+CCTV-15 音乐,local://ysp.js/600001815
+CCTV-16 奥林匹克,local://ysp.js/600098637
+CCTV-17 农业农村,local://ysp.js/600001810
+CCTV-4K 超高清,local://ysp.js/600002264
+CCTV-8K 超高清,local://ysp.js/600156816
+CGTN,local://ysp.js/600014550
+CCTV-第一剧场,local://ysp.js/600099655
+CCTV-风云剧场,local://ysp.js/600099658
+CCTV-怀旧剧场,local://ysp.js/600099620
+CETV-1 中国教育1台,local://ysp.js/600171827
 卫视,#genre#
 北京卫视,local://ysp.js/bjws
 东方卫视,local://ysp.js/dfws
