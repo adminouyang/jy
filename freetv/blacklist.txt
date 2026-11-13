@@ -262,3 +262,6 @@ zby.130519.xyz
 live.lalifeier.eu.org
 cctvtxyh5c.liveplay.myqcloud.com
 hwapi.yntv.net
+2.fast.hidns.vip
+120.238.84.45
+cdn2.123.rr.kg
