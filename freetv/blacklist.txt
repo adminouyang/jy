@@ -270,3 +270,5 @@ cdn2.123.rr.kg
 live.iwcmt.cn
 webcast.hkstv.tv
 171.14.94.102
+218.206.193.218
+zmgd.zyrnet.com
