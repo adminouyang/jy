@@ -1,202 +1,151 @@
 #genre#
-更新时间,20261114 02:30:50
+更新时间,20261114 11:01:41
 
 央视频道,#genre#
-CCTV1,https://iptv.yang-1989.xyz/cn/vvzwn3.m3u8
-CCTV1,http://116.237.170.51:7788/608807420
-CCTV1,http://36.24.254.195:85/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV1,http://61.136.172.236:9901/tsfile/live/0001_1.m3u8
 CCTV1,http://61.136.172.236:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV1,http://121.236.168.204:9004/hls/1/index.m3u8
 CCTV1,https://tv123.cc.cd/live.php?ch=465&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6748a5a2b0f789a730989771f269cbc0f646f655ddb789a38b8c4d500e38bdcb
-CCTV1,https://tv123.cc.cd/live.php?ch=1687&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=eee0f769f1c0b5df44ad0b3e03aacdd435ebfb98335c9074bd3e9923a53fc86f
 CCTV1,https://tv123.cc.cd/live.php?ch=689&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a0f2c5af4492514017676b154eb57556c3044d6e680141c49d42e24f2ecbd844
+CCTV1,https://tv123.cc.cd/live.php?ch=1687&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=eee0f769f1c0b5df44ad0b3e03aacdd435ebfb98335c9074bd3e9923a53fc86f
 CCTV1,https://tv123.cc.cd/live.php?ch=2288&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=61f9c0040621c1ecc639264ad4125f7c61f33cb63a9095b9420b3f99bcc0d833
 CCTV1,https://tv123.cc.cd/live.php?ch=2361&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=03eea6a735792284f6c5379522683e732b08db9ea8cc8c8884c8dffc82a700b0
+CCTV1,https://iptv.yang-1989.xyz/cn/vvzwn3.m3u8
 CCTV1,https://php.jdshipin.com/TVOD/iptv.php?id=cctv1
-CCTV1,http://51.75.118.169:20372/cctv1.m3u8
-CCTV2,https://iptv.yang-1989.xyz/cn/4c82xv.m3u8
-CCTV2,http://121.236.168.204:9004/hls/2/index.m3u8
-CCTV2,http://116.237.170.51:7788/631780532
-CCTV2,http://36.24.254.195:85/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0
+CCTV2,http://38.75.136.137:98/gslb/dsdqbv/cctv2hd.m3u8?auth=test20251009
+CCTV2,https://tv123.cc.cd/live.php?ch=1688&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=05e0cd6f033e3a47d8a0357e93e171db888df80e9fda5576c7bf0cb0d4d000d9
 CCTV2,https://tv123.cc.cd/live.php?ch=466&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1cfe18b84af3cbc59df60d9244595163939643bc848eecaff2729a073ca603a6
 CCTV2,https://tv123.cc.cd/live.php?ch=2289&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bae4d00abdc260415c72fd3e1041ee25423741e2814c33ca4fea1584015350b3
-CCTV2,https://tv123.cc.cd/live.php?ch=1688&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=05e0cd6f033e3a47d8a0357e93e171db888df80e9fda5576c7bf0cb0d4d000d9
 CCTV2,https://tv123.cc.cd/live.php?ch=2362&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9fe876237a34d5a7cbca49a90e2900ee427247e679aaa038852da78bc5715d46
+CCTV2,https://iptv.yang-1989.xyz/cn/4c82xv.m3u8
 CCTV2,https://php.jdshipin.com/TVOD/iptv.php?id=cctv2
-CCTV3,https://iptv.yang-1989.xyz/cn/uwqxum.m3u8
-CCTV3,http://49.70.189.149:60001/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV3,http://121.236.168.204:9004/hls/3/index.m3u8
-CCTV3,http://116.237.170.51:7788/624878271
-CCTV3,http://36.24.254.195:85/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV3,https://tv123.cc.cd/live.php?ch=467&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1f67dd28b9cd628bf9e503f0f33e8ba84f38b1e01940c198bf0fdee441caf882
+CCTV3,http://38.75.136.137:98/gslb/dsdqbv/cctv3hd.m3u8?auth=test20251009
 CCTV3,https://tv123.cc.cd/live.php?ch=1689&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=224d5dd80b1ec457f981a831bbee5ce492c988c25b17f2c61f1a22ca5b903da1
-CCTV3,https://tv123.cc.cd/live.php?ch=2290&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5fa011f4d1c0f826a0c82690b0bdf4553b3ab0653e8ee363a657382817c35ff8
+CCTV3,https://tv123.cc.cd/live.php?ch=467&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1f67dd28b9cd628bf9e503f0f33e8ba84f38b1e01940c198bf0fdee441caf882
 CCTV3,https://tv123.cc.cd/live.php?ch=2363&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=97bfa45ae2e0cb8716d74670d0f275fcd7be02906407be98d0adb6629212baf6
+CCTV3,https://tv123.cc.cd/live.php?ch=2290&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5fa011f4d1c0f826a0c82690b0bdf4553b3ab0653e8ee363a657382817c35ff8
+CCTV3,https://iptv.yang-1989.xyz/cn/uwqxum.m3u8
 CCTV3,https://php.jdshipin.com/TVOD/iptv.php?id=cctv3
-CCTV4,https://iptv.yang-1989.xyz/cn/4jaxv3.m3u8
-CCTV4,http://36.24.254.207:85/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV4,http://116.237.170.51:7788/631780421
-CCTV4,http://36.24.254.195:85/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV4,http://121.236.168.204:9004/hls/4/index.m3u8
+CCTV4,http://60.187.246.34:85/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0
+CCTV4,http://38.75.136.137:98/gslb/dsdqbv/cctv4hd.m3u8?auth=test20251009
 CCTV4,https://tv123.cc.cd/live.php?ch=468&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ef0402d68c4f90be44e10b822eaf7066ceb7eb63cf5e9fa416e8dd12d2f40795
 CCTV4,https://tv123.cc.cd/live.php?ch=882&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e3048db1800418fca94561195c023eb22501cd20eb19dd429031f0e945750104
 CCTV4,https://tv123.cc.cd/live.php?ch=1690&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ba30ea8f644e01f7457f82b4fb49d4d1327b1b705445b9626a0e71b15ad6cf04
 CCTV4,https://tv123.cc.cd/live.php?ch=2291&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cceaf3670be7810f3619652aed3da332fb172917d989187f1d84b5ecfd816342
+CCTV4,https://iptv.yang-1989.xyz/cn/4jaxv3.m3u8
 CCTV4,https://php.jdshipin.com/TVOD/iptv.php?id=cctv4
-CCTV4美洲,http://116.237.170.51:7788/608807416
-CCTV4欧洲,http://116.237.170.51:7788/608807419
-CCTV5,https://iptv.yang-1989.xyz/cn/msqftp.m3u8
-CCTV5,http://116.237.170.51:7788/641886683
-CCTV5,http://36.24.254.195:85/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV5,https://tv123.cc.cd/live.php?ch=469&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=516f86f1f73fc6d637289d36f675bfb4e801c99636699bad04d4cc8de5d00b5c
 CCTV5,https://tv123.cc.cd/live.php?ch=470&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8d391864d5baa303c87860d0e657316f8cd18b3be084518175389a84cc33eed7
-CCTV5,https://tv123.cc.cd/live.php?ch=1691&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=93b7c95d8358b95973e7ade37690193e5ee31ddb49641cee4d3d43b0bd2d59ee
+CCTV5,https://tv123.cc.cd/live.php?ch=469&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=516f86f1f73fc6d637289d36f675bfb4e801c99636699bad04d4cc8de5d00b5c
 CCTV5,https://tv123.cc.cd/live.php?ch=2172&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b93c7ae7cb4dcfd01dd4d6ecd513d4fe1b3f7c82f6d5f114ff2224895a06c306
-CCTV5,https://tv123.cc.cd/live.php?ch=2292&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d69a1b210b950aeb4c0660d9c6f6d2a55c8d2900d428868beb2cf89d6fec8741
+CCTV5,https://tv123.cc.cd/live.php?ch=1691&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=93b7c95d8358b95973e7ade37690193e5ee31ddb49641cee4d3d43b0bd2d59ee
 CCTV5,https://tv123.cc.cd/live.php?ch=2293&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=552f8eb4fc506e9bc644dfb307a6e05c14e1be9d75bf1f9ece17afd86e58eb6e
+CCTV5,https://tv123.cc.cd/live.php?ch=2292&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d69a1b210b950aeb4c0660d9c6f6d2a55c8d2900d428868beb2cf89d6fec8741
 CCTV5,https://tv123.cc.cd/live.php?ch=2365&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fea44c089397c283ae4e830147eb1d8278bd0a0d3d4c620acac20c209a976601
+CCTV5,https://iptv.yang-1989.xyz/cn/msqftp.m3u8
 CCTV5,https://php.jdshipin.com/TVOD/iptv.php?id=cctv5
-CCTV5+,https://iptv.yang-1989.xyz/cn/k545tf.m3u8
-CCTV5+,http://116.237.170.51:7788/641886773
 CCTV5+,http://61.136.172.236:9901/tsfile/live/0016_1.m3u8
 CCTV5+,http://61.136.172.236:9901/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0
+CCTV5+,https://tv123.cc.cd/live.php?ch=471&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a2d66596541c4d83e3142fbe05e77d28fad827b8a7397bedd9f8023745503026
+CCTV5+,https://tv123.cc.cd/live.php?ch=472&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6c0ec3baa10700f13b44375789f47df876f83f04107080129ae80e16d5a6a2ff
 CCTV5+,https://tv123.cc.cd/live.php?ch=1692&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cc650face24cebb1bb7b03a0781a77c601aba026081b8cb6e04efb30a715a32c
 CCTV5+,https://tv123.cc.cd/live.php?ch=2173&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=76ab499be9639faf993e41c76ab1046755d251b88d06ebe1582f75fad4b17fbd
-CCTV5+,https://tv123.cc.cd/live.php?ch=472&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6c0ec3baa10700f13b44375789f47df876f83f04107080129ae80e16d5a6a2ff
 CCTV5+,https://tv123.cc.cd/live.php?ch=2294&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1db2b036b71155ae88002755b373ecbf769f8692dc3a6d72b041980040c14078
 CCTV5+,https://tv123.cc.cd/live.php?ch=2295&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4f30200d540e8426b257761412d71bc6861ca6abccc5acb2fb53ccc6dc2afb92
 CCTV5+,https://tv123.cc.cd/live.php?ch=2366&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cffc7bcc207081ce076473ec52183618d338e960b8fe3b47b87a31457c175698
-CCTV5+,https://tv123.cc.cd/live.php?ch=471&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a2d66596541c4d83e3142fbe05e77d28fad827b8a7397bedd9f8023745503026
+CCTV5+,https://iptv.yang-1989.xyz/cn/k545tf.m3u8
 CCTV5+,https://php.jdshipin.com/TVOD/iptv.php?id=cctv5p
-CCTV6,http://49.70.189.149:60001/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV6,http://121.9.14.195:50085/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV6,http://116.237.170.51:7788/624878396
-CCTV6,http://36.24.254.195:85/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV6,http://61.136.172.236:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV6,http://61.136.172.236:9901/tsfile/live/0006_1.m3u8
+CCTV6,http://121.236.168.204:9004/hls/6/index.m3u8
 CCTV6,https://tv123.cc.cd/live.php?ch=473&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6202f7c8c7db0971d90d85e00f0cc6479d80ca9b643967335359bcf57078798b
 CCTV6,https://tv123.cc.cd/live.php?ch=1693&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ef77e3861c50268a537c1ee760fd1cca4ab0a364b67f9eb7b67f035d23411edf
 CCTV6,https://tv123.cc.cd/live.php?ch=2296&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=aa273f0ee96df7012e3163cb13b2ee099cf7e3c5a5ad102f90b7e0986bdc2783
 CCTV6,https://tv123.cc.cd/live.php?ch=2367&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5c373495f7aff9745345241c1f8186b72eddf9e29ddb655af3d5a36eac5dc1c3
 CCTV6,https://iptv.yang-1989.xyz/cn/8bq3z9.m3u8
 CCTV6,https://php.jdshipin.com/TVOD/iptv.php?id=cctv6
-CCTV7,https://iptv.yang-1989.xyz/cn/kv8frv.m3u8
-CCTV7,http://49.70.189.149:60001/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV7,http://116.237.170.51:7788/673168121
-CCTV7,http://121.9.14.195:50085/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV7,http://36.24.254.195:85/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV7,http://121.236.168.204:9004/hls/7/index.m3u8
 CCTV7,https://tv123.cc.cd/live.php?ch=474&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=07e70d3e48a23be94422d154c58f49b020306dade4760bac97a8161f67051a07
 CCTV7,https://tv123.cc.cd/live.php?ch=1694&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=312ce5ec37ef32cdab9e7a93a4a9b3fb1999d8519f84b02a4f3b971b0dc3ba53
 CCTV7,https://tv123.cc.cd/live.php?ch=2297&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=834592e41e6e3d987f4c0d1b591cfd3a0f081703925dc52fdc401d47d3a59c69
 CCTV7,https://tv123.cc.cd/live.php?ch=2368&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ca21b36d9d5e89c0f8898f0e52b4e3ad410a502ec9684c459d728f3e64dd0949
+CCTV7,https://iptv.yang-1989.xyz/cn/kv8frv.m3u8
 CCTV7,https://php.jdshipin.com/TVOD/iptv.php?id=cctv7
-CCTV8,https://iptv.yang-1989.xyz/cn/h6b3vs.m3u8
-CCTV8,http://49.70.189.149:60001/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV8,http://116.237.170.51:7788/624878356
-CCTV8,http://121.9.14.195:50085/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV8,http://36.24.254.195:85/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV8,http://61.136.172.236:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV8,http://121.236.168.204:9004/hls/8/index.m3u8
-CCTV8,https://tv123.cc.cd/live.php?ch=475&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e8b00a39496a7988d50392e72370bf47421e127ada992bb1a1531a20fa9d6fc1
 CCTV8,https://tv123.cc.cd/live.php?ch=1695&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3a20906bc38b17708ae7b3b598ad59ae27cc452c69bcda9157e416c2dfc8ec60
+CCTV8,https://tv123.cc.cd/live.php?ch=475&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e8b00a39496a7988d50392e72370bf47421e127ada992bb1a1531a20fa9d6fc1
 CCTV8,https://tv123.cc.cd/live.php?ch=2298&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=97a4b3f4121eb5239f0b502eb2e058b438a0069aa36b3a8323d466cea4e73aa2
 CCTV8,https://tv123.cc.cd/live.php?ch=2369&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ca2fbabf63c44b4966c541c49fbcc23b6a89b428b9427a6b2bfe60509c20fa16
+CCTV8,https://iptv.yang-1989.xyz/cn/h6b3vs.m3u8
 CCTV8,https://php.jdshipin.com/TVOD/iptv.php?id=cctv8
-CCTV9,https://iptv.yang-1989.xyz/cn/v2gnhx.m3u8
-CCTV9,http://116.237.170.51:7788/673168140
-CCTV9,http://121.9.14.195:50085/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV9,http://36.24.254.195:85/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV9,http://61.136.172.236:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV9,http://61.136.172.236:9901/tsfile/live/0009_1.m3u8
-CCTV9,https://tv123.cc.cd/live.php?ch=476&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3a7ccb7c82bcf7fdb798acc710df4d1521ae908125b9dbeaa0df65f2287d06f9
 CCTV9,https://tv123.cc.cd/live.php?ch=1696&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b50c2c4fdb3aa182421895a87d4b1aa2d1819ba6c63d034366bdcfe5ef031885
+CCTV9,https://tv123.cc.cd/live.php?ch=1397&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ffaa38d9cb17a504e7f10edfc8fbf1e132b1f8a1fad595e45b6b0adfd8829e99
+CCTV9,https://tv123.cc.cd/live.php?ch=476&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3a7ccb7c82bcf7fdb798acc710df4d1521ae908125b9dbeaa0df65f2287d06f9
 CCTV9,https://tv123.cc.cd/live.php?ch=2299&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=582614d8ec84d8c4eeefeb57e22e0dc4343c82ac10d056b7387b49717226fd45
 CCTV9,https://tv123.cc.cd/live.php?ch=2370&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5ec09ebe1b17c7960d8d7c20da9103d35dbc88e9600c85e5714c3a6232fc5aa0
-CCTV9,https://tv123.cc.cd/live.php?ch=1397&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ffaa38d9cb17a504e7f10edfc8fbf1e132b1f8a1fad595e45b6b0adfd8829e99
+CCTV9,https://iptv.yang-1989.xyz/cn/v2gnhx.m3u8
 CCTV9,https://php.jdshipin.com/TVOD/iptv.php?id=cctv9
 CCTV9,https://xykt-fix.github.io/Y77.m3u8
 CCTV10,http://121.236.168.204:9004/hls/10/index.m3u8
-CCTV10,http://116.237.170.51:7788/624878405
 CCTV10,http://61.136.172.236:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV10,http://61.136.172.236:9901/tsfile/live/0010_1.m3u8
-CCTV10,https://tv123.cc.cd/live.php?ch=1398&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=78d3d9a35c820b8ced2372f3efcfb18cd32a7feffa447a4a06dc15b503fde9ab
 CCTV10,https://tv123.cc.cd/live.php?ch=477&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=21a9b9f6a24b33a398ab0ba5d9498f48dc8e566faa5bcb5379d099eef21cf38e
+CCTV10,https://tv123.cc.cd/live.php?ch=1398&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=78d3d9a35c820b8ced2372f3efcfb18cd32a7feffa447a4a06dc15b503fde9ab
 CCTV10,https://tv123.cc.cd/live.php?ch=1697&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9998ea4e1217bd3f36ec80a6b583961671bbe1ca3a269f7aa3cddc1e84d3f5e4
 CCTV10,https://tv123.cc.cd/live.php?ch=2300&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3de6b3901576ba388b234226acf23c442c54065c48e53dc579866707cba0233b
 CCTV10,https://tv123.cc.cd/live.php?ch=2371&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0cc96dde6ade708e7c012099e4ae46631b4ca1dbceb0b6e39839f08fb27697a5
 CCTV10,https://iptv.yang-1989.xyz/cn/tbk728.m3u8
 CCTV10,https://php.jdshipin.com/TVOD/iptv.php?id=cctv10
-CCTV11,https://iptv.yang-1989.xyz/cn/amk337.m3u8
-CCTV11,http://116.237.170.51:7788/667987558
-CCTV11,http://49.70.189.149:60001/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV11,http://121.9.14.195:50085/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV11,http://36.24.254.207:85/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV11,http://36.24.254.195:85/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
+CCTV11,http://60.187.246.34:85/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV11,http://61.136.172.236:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV11,http://61.136.172.236:9901/tsfile/live/0011_1.m3u8
-CCTV11,http://121.236.168.204:9004/hls/11/index.m3u8
+CCTV11,http://180.165.12.42:50001/tsfile/live/0001_11.m3u8?key=txiptv&playlive=1&authid=0
+CCTV11,https://tv123.cc.cd/live.php?ch=478&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=78be57416410215fad2235cb59cee2e420674643825f56336037a6c574d0c935
 CCTV11,https://tv123.cc.cd/live.php?ch=1698&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=297c598e387c353e67b51aaaab9fe7ba48879828d2fd3ab03c2a20890a8bd67f
 CCTV11,https://tv123.cc.cd/live.php?ch=2301&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4022e89bf56c585bc04165911069d8b311412f8d5e508b268c6ca04c9e22f02b
 CCTV11,https://tv123.cc.cd/live.php?ch=2372&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5c9b94aef24a7a1bdb50c21dd72a9c7e8398bac09ad64244980186bbf346f18f
-CCTV11,https://tv123.cc.cd/live.php?ch=478&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=78be57416410215fad2235cb59cee2e420674643825f56336037a6c574d0c935
+CCTV11,https://iptv.yang-1989.xyz/cn/amk337.m3u8
 CCTV11,https://php.jdshipin.com/TVOD/iptv.php?id=cctv11
-CCTV12,https://iptv.yang-1989.xyz/cn/rvf2j3.m3u8
-CCTV12,http://49.70.189.149:60001/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV12,http://116.237.170.51:7788/673168185
-CCTV12,http://36.24.254.195:85/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV12,http://61.136.172.236:9901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV12,http://121.236.168.204:9004/hls/12/index.m3u8
-CCTV12,https://tv123.cc.cd/live.php?ch=1699&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ad5e8dcc258c5e7a39c4120472acd9c5df8ec14e93eb80770f9452e050f64c2c
 CCTV12,https://tv123.cc.cd/live.php?ch=479&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2a166c0bfc42375d721dd0f33fe1bb99f06a25d199c6949a84063f413048b322
+CCTV12,https://tv123.cc.cd/live.php?ch=1699&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ad5e8dcc258c5e7a39c4120472acd9c5df8ec14e93eb80770f9452e050f64c2c
 CCTV12,https://tv123.cc.cd/live.php?ch=2302&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=257acd52cbed2ea43c77d47139a63035c1ca7aba2a1c667caf77f36ccde1e917
 CCTV12,https://tv123.cc.cd/live.php?ch=2373&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a5fcb58ed02012855e5014e08241ec7a405e5dd33d3613ed11f141909f0cfe53
+CCTV12,https://iptv.yang-1989.xyz/cn/rvf2j3.m3u8
 CCTV12,https://php.jdshipin.com/TVOD/iptv.php?id=cctv12
-CCTV13,https://iptv.yang-1989.xyz/cn/uux6rd.m3u8
 CCTV13,http://121.236.168.204:9004/hls/13/index.m3u8
-CCTV13,http://121.9.14.195:50085/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV13,http://116.237.170.51:7788/608807423
-CCTV13,http://36.24.254.207:85/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV13,http://36.24.254.195:85/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV13,http://61.136.172.236:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV13,https://tv123.cc.cd/live.php?ch=398&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a28cf5c54e09480b492c0d8179fafbb71d3d45942e4a27548fc0112568a20afe
 CCTV13,https://tv123.cc.cd/live.php?ch=399&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c385ba8a56f2146ce6973a51fa95639713ba268c58931bbc2310c0989ba6ca67
 CCTV13,https://tv123.cc.cd/live.php?ch=480&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c5382258de5199a95401e8fc8cfaa62f803a727081c135df9850ec2a0cb611e4
 CCTV13,https://tv123.cc.cd/live.php?ch=481&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4a80031a796438d47555c08cfbc1a0a370712dca9dcdf8c973656710b1aef66c
 CCTV13,https://tv123.cc.cd/live.php?ch=1686&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=63e48b8af69da4a4751190b792628ac20e617846034e56a12fc0884decaaf27b
-CCTV13,https://tv123.cc.cd/live.php?ch=2222&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=011f36b0aa7a95b7985eda4442de156c3d2880c10525966cf1d8a7d5b3a3bf6f
 CCTV13,https://tv123.cc.cd/live.php?ch=1700&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2ce124df389730d5cd59380947141bd71f4047d03e6c00dde5830e6106cdb42e
+CCTV13,https://tv123.cc.cd/live.php?ch=2222&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=011f36b0aa7a95b7985eda4442de156c3d2880c10525966cf1d8a7d5b3a3bf6f
 CCTV13,https://tv123.cc.cd/live.php?ch=2303&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d8af1e89460c37b8c7d4c117f7e63516c03b9be4383d5d74343b4047077a5db4
 CCTV13,https://tv123.cc.cd/live.php?ch=2374&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=aacc47f4e428154dbf32b30bcddfc095fc09946db5dd98d66e719f3bd010f2fb
+CCTV13,https://iptv.yang-1989.xyz/cn/uux6rd.m3u8
 CCTV13,https://php.jdshipin.com/TVOD/iptv.php?id=cctv13
+CCTV13,http://51.75.118.151:20299/cctv13.m3u8
 CCTV13,https://10.fast.hidns.vip/163189/cctv13/
-CCTV14,https://iptv.yang-1989.xyz/cn/gdxdah.m3u8
-CCTV14,http://116.237.170.51:7788/624878440
-CCTV14,http://121.9.14.195:50085/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV14,http://36.24.254.195:85/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV14,http://61.136.172.236:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV14,http://61.136.172.236:9901/tsfile/live/0014_1.m3u8
-CCTV14,http://121.236.168.204:9004/hls/14/index.m3u8
 CCTV14,https://tv123.cc.cd/live.php?ch=482&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cba95f736668963a9e5fc7a5f8431293d9fa011f30c8adffbdc79f3957953978
 CCTV14,https://tv123.cc.cd/live.php?ch=1701&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f5f8de06e9cab531c637235acd9cee8ff077e42e9e239d9458439eb73cc44d19
-CCTV14,https://tv123.cc.cd/live.php?ch=2375&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=29b2b38034fb5c66e06a18b56dabae640cbedbbe8a7c3d9b1f7ebe0ad1007d91
 CCTV14,https://tv123.cc.cd/live.php?ch=2304&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4cb1e1a3555ff3865e8cc5a160a20e70e68017d53e89be89eb846daef6b09434
+CCTV14,https://tv123.cc.cd/live.php?ch=2375&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=29b2b38034fb5c66e06a18b56dabae640cbedbbe8a7c3d9b1f7ebe0ad1007d91
+CCTV14,https://iptv.yang-1989.xyz/cn/gdxdah.m3u8
 CCTV14,https://php.jdshipin.com/TVOD/iptv.php?id=cctv14
-CCTV15,https://iptv.yang-1989.xyz/cn/b9z22e.m3u8
-CCTV15,http://116.237.170.51:7788/673168223
-CCTV15,http://121.9.14.195:50085/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV15,http://36.24.254.207:85/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV15,http://36.24.254.195:85/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV15,http://61.136.172.236:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0
-CCTV15,http://121.236.168.204:9004/hls/15/index.m3u8
+CCTV15,http://38.75.136.137:98/gslb/dsdqpub/cctv15hd.m3u8?auth=testpub
 CCTV15,https://tv123.cc.cd/live.php?ch=483&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2f8cbe5918735c16be90f031b0baf120c4b6894d5096b17596b975fcc5a8cd3f
 CCTV15,https://tv123.cc.cd/live.php?ch=1702&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=30cd2bab11108aab7d485e8667396960b7d0cfc32bcebe05b52f5e3ef190be8f
 CCTV15,https://tv123.cc.cd/live.php?ch=2305&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=748fca9f5f50b24ff6cd1a195c5d6cbda59a9cc4a056fe9dde3a33c651529129
 CCTV15,https://tv123.cc.cd/live.php?ch=2376&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2d32d1427b67c4529b31db447784386346a6e92e505b9c98404041d2e82609f0
+CCTV15,https://iptv.yang-1989.xyz/cn/b9z22e.m3u8
 CCTV15,https://php.jdshipin.com/TVOD/iptv.php?id=cctv15
-CCTV16,https://iptv.yang-1989.xyz/cn/grvk2m.m3u8
-CCTV16,http://121.236.168.204:9004/hls/16/index.m3u8
 CCTV16,https://tv123.cc.cd/live.php?ch=400&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1270be83e2bd4767103375ff4b74727dcd52bbaf53f2828f1fea11977cf7c5c7
 CCTV16,https://tv123.cc.cd/live.php?ch=401&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=180d1db9c7c6cce39f63b705ecf1d83294811ab1ed8576e96a98f0b3e3646d55
 CCTV16,https://tv123.cc.cd/live.php?ch=484&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3c8df982c5e78d44ec2ae9204b6f22a3b7720116d7d41f1508e2d9d46900c2e0
@@ -204,163 +153,149 @@ CCTV16,https://tv123.cc.cd/live.php?ch=485&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&
 CCTV16,https://tv123.cc.cd/live.php?ch=1703&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b8816a5fce4751bead36d67c6964f482dd453277d1de4195cb46bb5a7a6919bf
 CCTV16,https://tv123.cc.cd/live.php?ch=2306&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1a87c91c5192392f6bf74dcd355e9316d4dfeab192e09089160a0d2d4f644321
 CCTV16,https://tv123.cc.cd/live.php?ch=2307&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8947dbaa0f054478d9859223972639399ad7cbd4d4afe7a45a7957a8dce446ff
+CCTV16,https://iptv.yang-1989.xyz/cn/grvk2m.m3u8
 CCTV16,https://php.jdshipin.com/TVOD/iptv.php?id=cctv16
-CCTV17,https://iptv.yang-1989.xyz/cn/6nspr4.m3u8
-CCTV17,http://116.237.170.51:7788/673168256
 CCTV17,http://121.236.168.204:9004/hls/17/index.m3u8
 CCTV17,https://tv123.cc.cd/live.php?ch=486&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=55957b35c864d498eeed2d7f666fdbdd2b4c83beaed26c6e3fd8ede656fdddda
 CCTV17,https://tv123.cc.cd/live.php?ch=1704&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b031cb701eeb1502cf6e50484b009c0c30b364a1dd132ab85a859945ad779ca0
-CCTV17,https://tv123.cc.cd/live.php?ch=2377&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=de36ffd5d79d53005bfd308363cb7842b87b44761f7c10fbe7b7ddf85f34546b
 CCTV17,https://tv123.cc.cd/live.php?ch=2308&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a6b3773019b083397d2c598e4015d97b9b7e7231671a76df93a77c7886f9bbb4
+CCTV17,https://tv123.cc.cd/live.php?ch=2377&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=de36ffd5d79d53005bfd308363cb7842b87b44761f7c10fbe7b7ddf85f34546b
+CCTV17,https://iptv.yang-1989.xyz/cn/6nspr4.m3u8
 CCTV17,https://php.jdshipin.com/TVOD/iptv.php?id=cctv17
 CCTV4K,https://tv123.cc.cd/live.php?ch=1705&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=72cd1fec90dca3b5b5ec8a3490a42b58d2f1c2bb5ec1176201bde57d8c077ef4
 CCTV4K,https://iptv.yang-1989.xyz/cn/zwd62w.m3u8
 CCTV8K,https://tv123.cc.cd/live.php?ch=1706&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c8aeaf9dff58da87744afde7b0fb8ac3f1eeb7d9b5a87bac03c5e0064aa5ea18
 CCTV8K,https://iptv.yang-1989.xyz/cn/pr87re.m3u8
-CETV1,http://116.237.170.51:7788/923287154
+CCTV8K,http://51.75.118.169:20372/cctv8k.m3u8
+CCTV8K,http://104.152.209.49:8181/720p/cctv8k.m3u8
 CETV1,https://tv123.cc.cd/live.php?ch=2462&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1bd3c1bd57180355cb4bf7e45a9274a7c25412f3b7b48e94794843e9f4956a65
-CETV2,http://116.237.170.51:7788/923287211
+CETV1,http://51.75.118.151:20299/cetv1.m3u8
 CETV2,https://tv123.cc.cd/live.php?ch=2463&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=60bdd7ecbabcc45306ea7b677c09c208f757894b033800e138d2b8c6ae50e6aa
-CETV4,http://116.237.170.51:7788/923287339
 CETV4,https://tv123.cc.cd/live.php?ch=2464&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e3afd1bb993b16e9d8ab8fa7980463d1c465a1d8faf411ab6584a1939488dd01
 第一剧场,http://104.152.209.49:8181/720p/dyjc.m3u8
+怀旧剧场,http://104.152.209.49:8181/720p/hjjc.m3u8
 风云剧场,http://104.152.209.49:8181/720p/fyjc.m3u8
 风云音乐,http://104.152.209.49:8181/720p/fyyy.m3u8
+兵器科技,http://104.152.209.49:8181/720p/gfjs.m3u8
 风云足球,http://104.152.209.49:8181/720p/fyzq.m3u8
 高尔夫网球,http://104.152.209.49:8181/720p/gefwq.m3u8
 央视台球,http://104.152.209.49:8181/720p/ystq.m3u8
-世界地理,http://104.152.209.49:8181/720p/sjdl.m3u8
-发现之旅,http://116.237.170.51:7788/624878970
 央视文化精品,http://104.152.209.49:8181/720p/ysjp.m3u8
 女性时尚,http://104.152.209.49:8181/720p/nxss.m3u8
 百姓健康,http://104.152.209.49:8181/720p/wsjk.m3u8
-老故事,http://116.237.170.51:7788/884121956
-中学生,http://116.237.170.51:7788/708869532
-中国天气,http://116.237.170.51:7788/959986621
 电影频道,#genre#
-CHC影迷电影,http://116.237.170.51:7788/952383261
-CHC影迷电影,http://113.124.186.195:7788/952383261
 CHC影迷电影,https://tv123.cc.cd/live.php?ch=2455&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=701331ec5a20107bb236e99ed0b7f6881bbf9c33d30cb6bd82ba6ffa38380142
-CHC动作电影,http://112.85.93.6:7788/644368714
-CHC动作电影,http://113.124.186.195:7788/644368714
-CHC动作电影,http://116.237.170.51:7788/644368714
+CHC动作电影,http://182.115.48.79:20002/644368714
 CHC动作电影,https://tv123.cc.cd/live.php?ch=2456&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4cc7af67918b14216d017765506791b1de20fb88c3a43ebfb2dfa4752f342c81
-CHC家庭影院,http://112.85.93.6:7788/644368373
-CHC家庭影院,http://113.124.186.195:7788/644368373
-CHC家庭影院,http://116.237.170.51:7788/644368373
+CHC家庭影院,http://182.115.48.79:20002/644368373
 CHC家庭影院,https://tv123.cc.cd/live.php?ch=2457&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=766c67d2c3141d6b0a1d4199f136602b2c930cd4b8387eaae414f2e15922ca7e
-经典香港电影,http://116.237.170.51:7788/625703337
-经典香港电影,http://113.124.186.195:7788/625703337
-抗战经典影片,http://116.237.170.51:7788/617432318
-抗战经典影片,http://113.124.186.195:7788/617432318
 经典电影,https://tv123.cc.cd/live.php?ch=517&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e4ddd8bbcb588dab88421cb7355dec3aa05690f02d51ac0a5d4d0a6fc8b59cbe
 经典电影,https://tv123.cc.cd/live.php?ch=860&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=56b3302487ab3690922ede1b4b87f591b6852ffd3f774a3f94d035ef6f78322c
 经典电影,https://tv123.cc.cd/live.php?ch=2325&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=acfb6a243f23f4583dc7276fbe4ec43934280d103810bdd8adb5f3a2dbcf1493
 卫视频道,#genre#
-湖南卫视,http://36.24.254.195:85/tsfile/live/0128_1.m3u8?key=txiptv&playlive=1&authid=0
+重温经典,http://cdn16.123.rr.kg/163189/cwjd
+湖南卫视,http://38.75.136.137:98/gslb/dsdqpub/hnwshd.m3u8?auth=testpub
 湖南卫视,http://61.136.172.236:9901/tsfile/live/0128_1.m3u8?key=txiptv&playlive=1&authid=0
-湖南卫视,http://218.13.139.26:9901/tsfile/live/0128_1.m3u8?key=txiptv&playlive=1&authid=0
 湖南卫视,https://tv123.cc.cd/live.php?ch=1717&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=eb65c5ccd618b14a6ab0e634037fa7727bb2b5dd8eacdd169826e27237e234e0
 湖南卫视,https://iptv.yang-1989.xyz/cn/6wsew5.m3u8
-浙江卫视,http://36.24.254.195:85/tsfile/live/0124_1.m3u8?key=txiptv&playlive=1&authid=0
+湖南卫视,http://104.152.209.49:8181/720p/hnws.m3u8
 浙江卫视,http://61.136.172.236:9901/tsfile/live/0124_1.m3u8?key=txiptv&playlive=1&authid=0
 浙江卫视,https://tv123.cc.cd/live.php?ch=1716&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b3dc3195ae98efce7b876d0d582423b0cfa5ed2362a65f9b395e3f1853085dcb
 浙江卫视,https://iptv.yang-1989.xyz/cn/g8bcnx.m3u8
 浙江卫视,http://104.152.209.49:8181/720p/zjws.m3u8
 东方卫视,http://61.136.172.236:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0
-东方卫视,http://218.13.139.26:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0
 东方卫视,https://tv123.cc.cd/live.php?ch=884&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b0884095d631e05478f00321c3371a5be45422a8f28aa85aaeaf17361ad79de8
-东方卫视,https://tv123.cc.cd/live.php?ch=2389&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8d566426eb887a05b58ba139b3f1e783c27a2abf8f07cd7f7d98511c6f8c4feb
 东方卫视,https://tv123.cc.cd/live.php?ch=1715&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=932216f02b0ac4da3d6cac6e5576e39d6d2e34457f955e4130d7c96c461f948b
+东方卫视,https://tv123.cc.cd/live.php?ch=2389&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8d566426eb887a05b58ba139b3f1e783c27a2abf8f07cd7f7d98511c6f8c4feb
 东方卫视,https://iptv.yang-1989.xyz/cn/n3reu4.m3u8
 东方卫视,http://104.152.209.49:8181/720p/dfws.m3u8
-北京卫视,http://171.14.94.102:808/hls/64/index.m3u8
-北京卫视,http://36.24.254.195:85/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0
-北京卫视,http://218.13.139.26:9901/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0
+北京卫视,http://59.172.112.202:8000/hls/22/index.m3u8
 北京卫视,https://tv123.cc.cd/live.php?ch=1713&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5dea951e2c09b34ce5e74e7c651484ac65b26bc062e634144a63a8952301a9b4
 北京卫视,https://tv123.cc.cd/live.php?ch=2392&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e94811f576adfa699579c16376c8f7a349d5e8a9aa22380ad9e3fb1cd5b63811
 北京卫视,https://iptv.yang-1989.xyz/cn/2tsgu9.m3u8
 北京卫视,http://104.152.209.49:8181/720p/bjws.m3u8
-江苏卫视,http://36.24.254.195:85/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0
 江苏卫视,http://61.136.172.236:9901/tsfile/live/0127_1.m3u8
 江苏卫视,http://61.136.172.236:9901/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0
 江苏卫视,https://tv123.cc.cd/live.php?ch=1714&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cdd601938134b0a766422b69641c2dd964e3a2f57a3468ddfec084014910866e
 江苏卫视,https://tv123.cc.cd/live.php?ch=2390&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fb82eef5dcca81f7692cf82bb503e29fe8ce7783d339a8b5dc006b4b5fbbec91
 江苏卫视,https://iptv.yang-1989.xyz/cn/b7q8xh.m3u8
 江苏卫视,http://104.152.209.49:8181/720p/jsws.m3u8
-安徽卫视,http://36.24.254.195:85/tsfile/live/0130_1.m3u8?key=txiptv&playlive=1&authid=0
 安徽卫视,http://61.136.172.236:9901/tsfile/live/0130_1.m3u8?key=txiptv&playlive=1&authid=0
 安徽卫视,http://61.136.172.236:9901/tsfile/live/0130_1.m3u8
-安徽卫视,http://218.13.139.26:9901/tsfile/live/0130_1.m3u8?key=txiptv&playlive=1&authid=0
 安徽卫视,http://121.19.134.33:808/tsfile/live/1023_1.m3u8?key=txiptv&playlive=1&authid=0
 安徽卫视,https://tv123.cc.cd/live.php?ch=1731&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ca3ef5bb310bd5ef1eba4d6d0cb16dfc141dfac26df5b545770e4ae86ccc6801
 安徽卫视,https://iptv.yang-1989.xyz/cn/qvceme.m3u8
 安徽卫视,http://104.152.209.49:8181/720p/ahws.m3u8
+重庆卫视,http://42.94.209.184:7788/738910914
 重庆卫视,http://61.136.172.236:9901/tsfile/live/0142_1.m3u8
 重庆卫视,http://61.136.172.236:9901/tsfile/live/0142_1.m3u8?key=txiptv&playlive=1&authid=0
-重庆卫视,http://218.13.139.26:9901/tsfile/live/0142_1.m3u8?key=txiptv&playlive=1&authid=0
-重庆卫视,https://tv123.cc.cd/live.php?ch=2408&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9c88c9e637fb018a3996699510f6805740d32561944440edea1809109c775d79
 重庆卫视,https://tv123.cc.cd/live.php?ch=1723&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c19517a2ecda66bf4733d795f6c1c92cc1576ac66623900e871b03c76c7f92cc
+重庆卫视,https://tv123.cc.cd/live.php?ch=2408&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9c88c9e637fb018a3996699510f6805740d32561944440edea1809109c775d79
 重庆卫视,https://iptv.yang-1989.xyz/cn/dywymn.m3u8
 四川卫视,http://61.136.172.236:9901/tsfile/live/0123_1.m3u8?key=txiptv&playlive=1&authid=0
 四川卫视,https://iptv.yang-1989.xyz/cn/cyserg.m3u8
+东南卫视,http://42.94.209.184:7788/849116810
 东南卫视,http://61.136.172.236:9901/tsfile/live/0137_1.m3u8?key=txiptv&playlive=1&authid=0
 东南卫视,http://61.136.172.236:9901/tsfile/live/0137_1.m3u8
-东南卫视,http://218.13.139.26:9901/tsfile/live/0137_1.m3u8?key=txiptv&playlive=1&authid=0
+东南卫视,http://27.129.145.110:4433/hls/27/index.m3u8
 东南卫视,https://tv123.cc.cd/live.php?ch=1727&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=14133162f9d2a5c7edef8ddbb2883c88797e6f130c359f54a00ffba2fa89cd1c
 东南卫视,https://tv123.cc.cd/live.php?ch=2402&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=db90a9f426b151500ab41764eaaff8af2d33b3e476b738441b9e7d8d87b4c9eb
 东南卫视,https://iptv.yang-1989.xyz/cn/tzyszj.m3u8
-深圳卫视,http://36.24.254.195:85/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0
+东南卫视,http://51.75.118.169:20372/dnws.m3u8
+深圳卫视,http://60.187.246.34:85/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0
 深圳卫视,http://61.136.172.236:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0
-深圳卫视,http://222.223.41.27:8888/hls/40/index.m3u8
-深圳卫视,http://218.13.139.26:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0
 深圳卫视,https://tv123.cc.cd/live.php?ch=1724&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5f90fc0b96dfbba59e4b323e35d905cd941fbb19c96b76d828906134e3ddbab7
 深圳卫视,https://iptv.yang-1989.xyz/cn/th4d82.m3u8
 深圳卫视,http://104.152.209.49:8181/720p/szws.m3u8
-广东卫视,http://36.24.254.195:85/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0
+广东卫视,http://42.94.209.184:7788/608831231
 广东卫视,http://61.136.172.236:9901/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0
 广东卫视,https://tv123.cc.cd/live.php?ch=1719&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fa28afcb7978bd00e655345c18722fa91a890e8ceb1aeb379828ec30e77f67f6
 广东卫视,https://tv123.cc.cd/live.php?ch=2391&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=916ac0bcdb5694803758871fe6099f48f4ee1be0a63f11173592dadfd90cc77e
 广东卫视,https://iptv.yang-1989.xyz/cn/3bpzu8.m3u8
 广东卫视,http://104.152.209.49:8181/720p/gdws.m3u8
+广西卫视,http://60.187.246.34:85/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0
 广西卫视,http://61.136.172.236:9901/tsfile/live/0113_1.m3u8
 广西卫视,http://61.136.172.236:9901/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0
 广西卫视,https://tv123.cc.cd/live.php?ch=1720&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=874804943adf81cb01ddbd91a4e0dbe776b6950509cc437d6b50220a876d9b40
 广西卫视,https://iptv.yang-1989.xyz/cn/j3wtba.m3u8
+贵州卫视,http://60.187.246.34:85/tsfile/live/0120_1.m3u8?key=txiptv&playlive=1&authid=0
 贵州卫视,http://61.136.172.236:9901/tsfile/live/0120_1.m3u8
 贵州卫视,http://61.136.172.236:9901/tsfile/live/0120_1.m3u8?key=txiptv&playlive=1&authid=0
 贵州卫视,https://tv123.cc.cd/live.php?ch=1728&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5670a8b0b26317be60a66afeb1768e0c4dc21b3615fdb8701f14f42a1373aaf5
 贵州卫视,https://iptv.yang-1989.xyz/cn/v6cg23.m3u8
-河北卫视,http://204.12.221.218:8181/3m1080p/hews.m3u8
+河北卫视,http://60.187.246.34:85/tsfile/live/0117_1.m3u8?key=txiptv&playlive=1&authid=0
 河北卫视,http://61.136.172.236:9901/tsfile/live/0117_1.m3u8
 河北卫视,http://61.136.172.236:9901/tsfile/live/0117_1.m3u8?key=txiptv&playlive=1&authid=0
-河北卫视,http://218.13.139.26:9901/tsfile/live/0117_1.m3u8?key=txiptv&playlive=1&authid=0
 河北卫视,https://tv123.cc.cd/live.php?ch=1732&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e1548fc170fe9159290de4bf24c810bdf6a66a2bbd83f480f60fd977c84dd91b
 河北卫视,https://tv123.cc.cd/live.php?ch=2394&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e86825de6a59e0ecf3a6ca38192504b278ca41146b9f543b3b401b1c73a7c306
 河北卫视,https://iptv.yang-1989.xyz/cn/9brhps.m3u8
+河北卫视,http://104.152.209.49:8181/720p/hews.m3u8
+河南卫视,http://60.187.246.34:85/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0
+河南卫视,http://42.94.209.184:7788/790187291
 河南卫视,http://61.136.172.236:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0
 河南卫视,http://61.136.172.236:9901/tsfile/live/0139_1.m3u8
 河南卫视,https://tv123.cc.cd/live.php?ch=1726&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4c0d610cd9a67be9ae4399671ac50803bd9dabd5942421ce4e7ff46ff0ad8192
 河南卫视,https://tv123.cc.cd/live.php?ch=2396&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d33faace8402a1eb921bd01a7595299ca1a2e710258f5c43ee0fa1320c6150de
 河南卫视,https://iptv.yang-1989.xyz/cn/w6vybe.m3u8
-河南卫视,http://104.152.209.49:8181/720p/haws.m3u8
+黑龙江卫视,http://60.187.246.34:85/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0
+黑龙江卫视,http://204.12.221.218:8181/3m1080p/hljws.m3u8
 黑龙江卫视,http://61.136.172.236:9901/tsfile/live/0143_1.m3u8
 黑龙江卫视,http://61.136.172.236:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0
-黑龙江卫视,http://218.13.139.26:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0
 黑龙江卫视,https://tv123.cc.cd/live.php?ch=1721&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=45a76178a01072010e592aa09ddd776b7b0284fd53c24ddaed595558227ae9e3
 黑龙江卫视,https://iptv.yang-1989.xyz/cn/ah7utx.m3u8
 湖北卫视,http://61.136.172.236:9901/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0
 湖北卫视,http://61.136.172.236:9901/tsfile/live/0132_1.m3u8
-湖北卫视,http://218.13.139.26:9901/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0
 湖北卫视,https://tv123.cc.cd/live.php?ch=1718&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2f03efc4a37b3a1806ba8fee0eea84f51459f61510ba0bab9c98eb634bba2b6a
 湖北卫视,https://tv123.cc.cd/live.php?ch=2399&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=04c27f2f7b4be7cb53c01d35aed50baab842cd3d17ceb0bf3a46667b75012884
 湖北卫视,https://iptv.yang-1989.xyz/cn/a58btv.m3u8
 江西卫视,https://tv123.cc.cd/live.php?ch=1729&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6bdde2d0d99490c577c0b7f70cdd718c38ab8e6e151753986ac3df5479651b47
 江西卫视,https://tv123.cc.cd/live.php?ch=2395&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=af440c744970829e9bb85f21d9f1b28b16355d937300d7a69a6a35e6b9277df8
 江西卫视,https://iptv.yang-1989.xyz/cn/42dy64.m3u8
+吉林卫视,http://60.187.246.34:85/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
+吉林卫视,http://42.94.209.184:7788/947472500
+吉林卫视,http://204.12.221.218:8181/3m1080p/jlws.m3u8
 吉林卫视,http://61.136.172.236:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
 吉林卫视,http://61.136.172.236:9901/tsfile/live/0116_1.m3u8
-吉林卫视,http://218.13.139.26:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
 吉林卫视,http://180.165.12.42:50001/tsfile/live/0001_36.m3u8?key=txiptv&playlive=1&authid=0
 吉林卫视,https://tv123.cc.cd/live.php?ch=1735&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7a4b91b1590d44b894150cea630f9aacc13602afacd211f02f00f8205fd8c3c1
 吉林卫视,https://tv123.cc.cd/live.php?ch=2400&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fe4b6af5fa913322b0990e452762bcddc933431a6cef9230250cf13c12d697d0
@@ -368,58 +303,58 @@ CHC家庭影院,https://tv123.cc.cd/live.php?ch=2457&sid=dfaea1c0f7a811ecde4d60d
 内蒙古卫视,http://204.12.221.218:8181/3m1080p/nmgws.m3u8
 内蒙古卫视,https://tv123.cc.cd/live.php?ch=1738&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9723c6fac88c1d817ed2af3cae43824c2b85ae8e982141c3852c9b2fa24a15fd
 内蒙古卫视,https://iptv.yang-1989.xyz/cn/nfy2e9.m3u8
+辽宁卫视,http://60.187.246.34:85/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0
 辽宁卫视,http://61.136.172.236:9901/tsfile/live/0121_1.m3u8
 辽宁卫视,http://61.136.172.236:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0
-辽宁卫视,http://218.13.139.26:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0
 辽宁卫视,https://tv123.cc.cd/live.php?ch=1730&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3bd782f09235e95244acd5cbcddf7dd93b5943d09d151b2908a580c1bcfeeab5
 辽宁卫视,https://tv123.cc.cd/live.php?ch=2393&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2ab167b30c8491817703192ca5a734928e4fca7bea88a8e05de5cb5022d7a796
 辽宁卫视,https://iptv.yang-1989.xyz/cn/ud85xc.m3u8
+宁夏卫视,http://42.94.209.184:7788/738910535
 宁夏卫视,https://tv123.cc.cd/live.php?ch=1737&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0e9b97d07047f2154ad7bd56f2b700697d7128abdc06ef08dafddfe3a716df7a
 宁夏卫视,https://tv123.cc.cd/live.php?ch=2407&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b8d969c95d243d9addcdf09f5c83b5cfa4209040fee4740c01f51cf4c72be283
 宁夏卫视,https://iptv.yang-1989.xyz/cn/pe9fr7.m3u8
+青海卫视,http://42.94.209.184:7788/947472506
 青海卫视,http://204.12.221.218:8181/3m1080p/qhws.m3u8
-青海卫视,http://218.13.139.26:9901/tsfile/live/0140_1.m3u8?key=txiptv&playlive=1&authid=0
-青海卫视,https://tv123.cc.cd/live.php?ch=2401&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3039f34b0a2aa6aaab878cbd51e1c0ce18be3643a556034b12fa9e482368e74f
+青海卫视,https://tv123.cc.cd/live.php?ch=1741&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5aaffcefb4b6d4ed0773cec5964c08d1d398ba373233deafe49e1746718f4353
 青海卫视,https://iptv.yang-1989.xyz/cn/62246m.m3u8
-山东卫视,http://218.13.139.26:9901/tsfile/live/0131_1.m3u8?key=txiptv&playlive=1&authid=0
 山东卫视,https://iptv.yang-1989.xyz/cn/ef4853.m3u8
 山东卫视,http://104.152.209.49:8181/720p/sdws.m3u8
+山西卫视,http://60.187.246.34:85/tsfile/live/0118_1.m3u8?key=txiptv&playlive=1&authid=0
 山西卫视,https://iptv.yang-1989.xyz/cn/27uxr8.m3u8
 天津卫视,http://61.136.172.236:9901/tsfile/live/0135_1.m3u8?key=txiptv&playlive=1&authid=0
-天津卫视,http://218.13.139.26:9901/tsfile/live/0135_1.m3u8?key=txiptv&playlive=1&authid=0
 天津卫视,https://iptv.yang-1989.xyz/cn/vejzk9.m3u8
 天津卫视,http://104.152.209.49:8181/720p/tjws.m3u8
+海南卫视,http://42.94.209.184:7788/947472502
 海南卫视,https://tv123.cc.cd/live.php?ch=1722&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4787e75f3bba086e4212bcc9e836ef00d8733981454dbdd8e063f7e6dfd49bcf
 海南卫视,https://tv123.cc.cd/live.php?ch=2403&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0e09932e301d07a89facca51a3efe118a6ff223d19e37c1aef3390e5d1bc577c
 海南卫视,https://iptv.yang-1989.xyz/cn/kqev22.m3u8
 新疆卫视,http://204.12.221.218:8181/3m1080p/xjws.m3u8
 新疆卫视,https://iptv.yang-1989.xyz/cn/9ezcwg.m3u8
-云南卫视,http://222.223.41.27:8888/hls/35/index.m3u8
+新疆卫视,http://51.75.118.169:20372/xjws.m3u8
+云南卫视,http://60.187.246.34:85/tsfile/live/1000_1.m3u8?key=txiptv&playlive=1&authid=0
 云南卫视,https://iptv.yang-1989.xyz/cn/hn3vee.m3u8
 西藏卫视,https://iptv.yang-1989.xyz/cn/gfmhcd.m3u8
-海峡卫视,https://10.fast.hidns.vip/163189/hxws/
+西藏卫视,http://51.75.118.169:20372/xizangws.m3u8
 海峡卫视,https://m.italkbbtv.com/live/6a30f74820a80832dc74e2c7
+海峡卫视,https://10.fast.hidns.vip/163189/hxws/
 海峡卫视,http://cdn16.123.rr.kg/163189/hxws
-陕西卫视,http://218.13.139.26:9901/tsfile/live/0136_1.m3u8?key=txiptv&playlive=1&authid=0
 陕西卫视,https://iptv.yang-1989.xyz/cn/zsscet.m3u8
+三沙卫视,http://42.94.209.184:7788/961023778
 三沙卫视,http://204.12.221.218:8181/3m1080p/ssws.m3u8
-大湾区卫视,http://38.75.136.137:98/gslb/dsdqpub/gdgj.m3u8?auth=testpub
 大湾区卫视,https://tv123.cc.cd/live.php?ch=2398&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c0a35c3e0634b54b35350ca6c589ad765f2dff2648c8bbd5dfd0efa14391c528
 大湾区卫视,https://ysp.lml1971.ccwu.cc/gd_dawanquweishi_haiwai/playlist.m3u8
 安徽频道,#genre#
 安徽国际,https://m.italkbbtv.com/live/6a3a3784260d0d240f66a62c
 江苏频道,#genre#
-南京少儿,http://nklive.nbs.cn/hls/e0981f3f-1a20-4a59-b8d1-17feb83a4610/index.m3u8
 沭阳综合,http://shuyang-tv-hls.cm.jstv.com/shuyang-tv/shuyangzh.m3u8
 涟水综合,http://lianshui-tv-hls.cm.jstv.com/lianshui-tv/lsxw.m3u8
-涟水综合,https://lianshui-tv-hls.cm.jstv.com:443/lianshui-tv/lsxw.m3u8
 涟水综合,http://lianshui-tv-hls.cm.jstv.com/lianshui-tv/lsxw.m3u8?zjiangsd
+涟水综合,https://lianshui-tv-hls.cm.jstv.com:443/lianshui-tv/lsxw.m3u8
 广东频道,#genre#
-广东珠江,http://218.13.139.26:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0
 广东珠江,https://tv123.cc.cd/live.php?ch=377&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b383bea482a27ed9b43f8e76f221392cbae4516208b434a419f38ecf37a7a7a4
 广东珠江,https://tv123.cc.cd/live.php?ch=490&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=55e50d1c606cb1c8e942aea802a32e412e6499f112930e06af23e060cff660c6
 广东珠江,https://tv123.cc.cd/live.php?ch=2248&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=456f06deac32ea22a54629bc8947118a50c2b9a3388986a1b759f9a30c8029c8
-广东珠江,http://61.145.188.90:50055/udp/239.77.0.1:5146
+广东体育,http://www.yahao.host:4022/udp/239.77.0.112:5146
 广东体育,https://tv123.cc.cd/live.php?ch=378&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d0727fecdcdad61c433ab4dd6930ccb0c8a3f37ac0e97cc355c368a8dd710180
 广东体育,https://tv123.cc.cd/live.php?ch=491&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fde46a1c2d2c12f520712335311bf553039ae861a5579de662704b710c68ac72
 广东体育,https://tv123.cc.cd/live.php?ch=2213&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bdbb84303b6b53fe4680047d2e73b35f77c6255e603e3447a2a0d30a7da4ff93
@@ -432,23 +367,27 @@ CHC家庭影院,https://tv123.cc.cd/live.php?ch=2457&sid=dfaea1c0f7a811ecde4d60d
 广州综合,http://cdn16.123.rr.kg/163189/gzxw
 广西频道,#genre#
 田东综合,http://pulls.myun.tv/live/0dkp33j5.m3u8
-陕西频道,#genre#
-陕西公共,http://ls.qingting.fm/live/1222.m3u8
 湖北频道,#genre#
 湖北影视,http://107.150.60.122/live/hbys.m3u8
 湖北垄上,http://192.151.150.154/live/hbls.m3u8
 浙江频道,#genre#
 浙江民生休闲,https://ysp.lml1971.ccwu.cc/zj_minshengxiuxian/playlist.m3u8
+萧山新闻综合,https://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8
+萧山新闻综合,https://l.cztvcloud.com/channels/lantian/SXxiaoshan1/720p.m3u8
+绍兴文化影院,http://l.cztvcloud.com/channels/lantian/SXshangyu2/720p.m3u8?zzhed
 四川频道,#genre#
 广安公共,http://live1.gatv.com.cn:85/live/GGPD_ggpdzm.m3u8?zsicd
 广安公共,http://live1.gatv.com.cn:85/live/GGPD_ggpdzm.m3u8
+黑龙江频道,#genre#
+七台河新闻综合,http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8
+辽宁频道,#genre#
+辽宁都市,https://ls.qingting.fm/live/1099/64k.m3u8
 港·澳·台,#genre#
 凤凰中文,http://cc.123.rr.kg/163189/fhzw
-凤凰中文,http://218.13.139.26:9901/tsfile/live/1080_1.m3u8?key=txiptv&playlive=1&authid=0
 凤凰中文,http://r.jdshipin.com/cCCzW
-凤凰中文,https://tv123.cc.cd/live.php?ch=424&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ff8de19f8188543cb8e4b126f9244ade90624433c05d92e3174964851b276c42
 凤凰中文,https://tv123.cc.cd/live.php?ch=369&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=666a349ec2567e395053d8afcd587f8e7a8841aca3ac78b0841d75fd8b722e98
 凤凰中文,https://tv123.cc.cd/live.php?ch=623&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f9ae5d0d6b3b33ab8f8552d7c0a56fb781259953c6f87ef13a29ef084ea1ad9f
+凤凰中文,https://tv123.cc.cd/live.php?ch=424&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ff8de19f8188543cb8e4b126f9244ade90624433c05d92e3174964851b276c42
 凤凰中文,https://tv123.cc.cd/live.php?ch=625&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=02450f27c960887dc8e2ad22fcb4350f1bd8b2a0983997ada2f101220e9a8b5e
 凤凰中文,https://tv123.cc.cd/live.php?ch=1842&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a5094647c2575ab7d22319ac235ae6d4b7ca99262f2de3b359b21c1ece894365
 凤凰中文,https://tv123.cc.cd/live.php?ch=2220&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1159972ec5b82de3149bd8f5aed720671f6a77b2b898e6aaa89052c90a293c67
@@ -457,196 +396,207 @@ CHC家庭影院,https://tv123.cc.cd/live.php?ch=2457&sid=dfaea1c0f7a811ecde4d60d
 凤凰资讯,http://r.jdshipin.com/0Rp07
 凤凰资讯,https://tv123.cc.cd/live.php?ch=370&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8250d3471327854a50d880b4f4f8795b31402aa56f734f08a6d1eebc419b2448
 凤凰资讯,https://tv123.cc.cd/live.php?ch=425&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=65c80ca7d6c77924f172016d09c85d83070b55986dee76ca26c4ec269e569a1b
-凤凰资讯,https://tv123.cc.cd/live.php?ch=626&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=12e5b958c805d5e49440cd30bf9fde690cf2066965c5972c28169d96ba6258f6
 凤凰资讯,https://tv123.cc.cd/live.php?ch=726&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1121b358c7a7c1188841123c134877acd4febd5f24aa7bee4ab5e96f214604c2
+凤凰资讯,https://tv123.cc.cd/live.php?ch=626&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=12e5b958c805d5e49440cd30bf9fde690cf2066965c5972c28169d96ba6258f6
 凤凰资讯,https://tv123.cc.cd/live.php?ch=1843&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4fa4e7aee6174ce00b87ebca3ddd9ff4dab2c957dfdadd9b208465a898ba1ad3
 凤凰资讯,https://tv123.cc.cd/live.php?ch=2239&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=725125283de77748bbf040564ddfd8a8b4742afd88a1d01fd3ba31dbb564b694
 凤凰资讯,http://php.jdshipin.com/TVOD/iptv.php?id=fhzx
 凤凰香港,http://cc.123.rr.kg/163189/fhhk
-凤凰香港,http://r.jdshipin.com/yDoTN
 凤凰香港,http://r.jdshipin.com/NfC0f
+凤凰香港,http://r.jdshipin.com/yDoTN
 凤凰香港,https://tv123.cc.cd/live.php?ch=371&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0e967f7e81c33e80d42f5959daf0568ae3404e2c5f398adead39cc3c613bbd4c
 凤凰香港,https://tv123.cc.cd/live.php?ch=426&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b8dfa6bcc1e1ec14512c80a50314dd87eec306e7e097311c3dff28692397feae
 凤凰香港,https://tv123.cc.cd/live.php?ch=624&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d2ab7e5fa3507e12070a9df38db229966c3dd3516824266e4e07e458f3dcab10
 凤凰香港,https://tv123.cc.cd/live.php?ch=627&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b2629555dfdb1fbc067e379823984c90c1e222a9f854023f124b9949ef64d015
-凤凰香港,https://tv123.cc.cd/live.php?ch=1844&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c7a9d0228faa25dda0b3ba74a3637511c936be5df38242b02145bab97b82c183
 凤凰香港,https://tv123.cc.cd/live.php?ch=2240&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fff6db95207f4d3338805ebda6b1651070f39103cf8b810330d2743a6c71e7d4
+凤凰香港,https://tv123.cc.cd/live.php?ch=1844&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c7a9d0228faa25dda0b3ba74a3637511c936be5df38242b02145bab97b82c183
 凤凰香港,http://php.jdshipin.com/TVOD/iptv.php?id=fhhk
 RTHK 31,https://tv123.cc.cd/live.php?ch=433&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=efdae012807c1517654b4a81bcc9bca2850fd76ce14ce5b128fef3fb75e3054b
 RTHK 31,https://tv123.cc.cd/live.php?ch=361&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e97bd2edff27cbb9c2fe3d62613063dab498d9d32d680f8c7ad20f9e773a4222
-RTHK 31,https://tv123.cc.cd/live.php?ch=723&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=611cd0d4aaaae76e819e0334b145b507b15d072902342cee6a1aabf3cb89bf1d
 RTHK 31,https://tv123.cc.cd/live.php?ch=1766&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=634c3df1232979931a1c52fc914e2ee5f89a9e0fa18244086ea13daf1e1e4515
+RTHK 31,https://tv123.cc.cd/live.php?ch=723&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=611cd0d4aaaae76e819e0334b145b507b15d072902342cee6a1aabf3cb89bf1d
 RTHK 31,https://tv123.cc.cd/live.php?ch=2231&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=14d3b61d6fc881c8ba636fd4848db1120d8b5f5c6c53773eec2609135552b5f1
 RTHK 31,https://fast.hidns.vip/163189/rthk31
 RTHK 31,http://cdn.123.rr.kg/163189/rthk31
 RTHK 32,https://tv123.cc.cd/live.php?ch=362&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=120d4d60edfa2754a73059e09bce7695d8a7cee77ae207c52be771717aed1e24
 RTHK 32,https://tv123.cc.cd/live.php?ch=434&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bcd3449a2e3f81accb5f1afac573b1dcc5607ca58b9fa1b80f98b09c04c3c9aa
-RTHK 32,https://tv123.cc.cd/live.php?ch=2232&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=55e0c2dbced5fade722ce502684e384d7e9fb5790590f76dfb31eb053c3f4ac3
-RTHK 32,https://tv123.cc.cd/live.php?ch=1767&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2a9a083c36c666f92eb6906249e8fd6125e7e72669b84fc5d3e29af92cd1d3a2
 RTHK 32,https://tv123.cc.cd/live.php?ch=724&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fc714ef47b9e8b4a8b58994f84d42b826d7fe4c3fa6d3d35436f68b3f21a0897
+RTHK 32,https://tv123.cc.cd/live.php?ch=1767&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2a9a083c36c666f92eb6906249e8fd6125e7e72669b84fc5d3e29af92cd1d3a2
+RTHK 32,https://tv123.cc.cd/live.php?ch=2232&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=55e0c2dbced5fade722ce502684e384d7e9fb5790590f76dfb31eb053c3f4ac3
 RTHK 32,https://fast.hidns.vip/163189/rthk32
 RTHK 32,http://cdn.123.rr.kg/163189/rthk32
 RTHK 33,https://tv123.cc.cd/live.php?ch=435&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=56b3db4c7f37eff3c5bb7cd78e699aee8ca340b02e167672b26b51eba7a55364
 澳门资讯,https://tv123.cc.cd/live.php?ch=1773&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d893f16cceef8822a79bf1e73f4d99be8a8466520c32920cc2103e074c9fe5d6
+澳门资讯,https://iptv.yang-1989.xyz/hk/enwfag.m3u8
 澳门综艺,https://tv123.cc.cd/live.php?ch=366&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=478e3b94f64c474d297510faeca7993332061470beb5d78a27ef1817b391ee82
 澳门综艺,https://tv123.cc.cd/live.php?ch=452&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=437ac9ce1053d3d5f096d928eeac2b35b5b982f0ae320032124d7355c371124a
-澳门综艺,https://tv123.cc.cd/live.php?ch=2236&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=dede1e884d0688e66778d378422e22adbdcc3369a4552671f6149139d0384cd2
 澳门综艺,https://tv123.cc.cd/live.php?ch=1774&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a988a116b40dbf9985695ba1c600d220213ddf324119b66f59a886ce3cf25a66
+澳门综艺,https://tv123.cc.cd/live.php?ch=2236&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=dede1e884d0688e66778d378422e22adbdcc3369a4552671f6149139d0384cd2
+澳门综艺,https://iptv.yang-1989.xyz/hk/2jf3ep.m3u8
 澳门莲花,https://tv123.cc.cd/live.php?ch=367&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9b16d867ac195e1f54f386f205c851197b128af3ce966e4e6a7998fa368ce2c0
-澳门莲花,https://tv123.cc.cd/live.php?ch=2237&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=57fb8f1af8b8f51c2f660673055d3975155920b4468f16e16aaf1b76251d543d
-澳门莲花,https://tv123.cc.cd/live.php?ch=1769&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bb90b5e8a0abb8e7ac4343cb1026ab682e8722ee4bc23e315fb29b73bfa810e5
 澳门莲花,https://tv123.cc.cd/live.php?ch=453&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4977e4bec7dd4062becfcaf44efa3b05ed0d3eb432d95a2139aff079a4af37e4
-澳视澳门,https://tv123.cc.cd/live.php?ch=1771&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=79d7de1c2cbddd0ece457be0a6f76d4561068e0e246324e6dde4e56d61c6e3f2
+澳门莲花,https://tv123.cc.cd/live.php?ch=1769&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bb90b5e8a0abb8e7ac4343cb1026ab682e8722ee4bc23e315fb29b73bfa810e5
+澳门莲花,https://tv123.cc.cd/live.php?ch=2237&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=57fb8f1af8b8f51c2f660673055d3975155920b4468f16e16aaf1b76251d543d
+澳门莲花,https://iptv.yang-1989.xyz/hk/fmqkn2.m3u8
 澳视澳门,https://tv123.cc.cd/live.php?ch=449&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3e0800078c3cbbc0b8bf741751ef97d8eac154afd90322f27f21af17b6d3e44c
 澳视澳门,https://tv123.cc.cd/live.php?ch=363&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8e85a43bc9395393820a293eaa07699fae13a1a485bca4e6b3e0b970b00ba657
+澳视澳门,https://tv123.cc.cd/live.php?ch=1771&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=79d7de1c2cbddd0ece457be0a6f76d4561068e0e246324e6dde4e56d61c6e3f2
 澳视澳门,https://tv123.cc.cd/live.php?ch=2233&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f8ad9dafe2f7910f244a8b00e39b61209226f93ba0a12a664a59e1159112f5f2
+澳视澳门,https://iptv.yang-1989.xyz/hk/2an3nv.m3u8
 澳视卫星,https://tv123.cc.cd/live.php?ch=364&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2c7e0557d99fe8b9d22815ed6fce0b3a9ac40ca17748c432f8c62fb32e3f0a7c
 澳视卫星,https://tv123.cc.cd/live.php?ch=2234&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1ccb56f1d0d7f3ce06bd690f295d741e3b0134a78460904162fb481699916c0c
-香港卫视,https://webcast.hkstv.tv/livestream/mutfysrq/playlist.m3u8
-香港卫视,https://webcast.hkstv.tv/livestream/mutfysrq/playlist.m3u8?hls_ctx=8o89406w
-香港卫视,http://webcast.hkstv.tv/livestream/mutfysrq/playlist.m3u8
 人间卫视,https://tv123.cc.cd/live.php?ch=759&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f4b04a7714d978abe67867c91fe69a9fb3f7e909ed0ec204dc86851c84edf9be
 美亚C+,https://tv123.cc.cd/live.php?ch=635&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=dc3493e30e210bf6a320b3e4fe0adbcc73d9e53988b3b3fd0e1de92e33e41ec9
 美亚C+,https://tv123.cc.cd/live.php?ch=636&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0607b32f6f524658d639de2baa4ccd56bd2e4abd973c8111141edf9414f69ea8
 美亚C+,https://tv123.cc.cd/live.php?ch=871&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fb5c353137647eec070f0465a0df5bba38ae307e512730fe707bd14ccb37992b
 美亚C+,https://tv123.cc.cd/live.php?ch=2076&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d1adf75d74282fd0476af1f66de5d80acd854951972426ab79f70133d2e2450f
+美亚C+,https://iptv.yang-1989.xyz/hk/y7a8xj.m3u8
 美亚电影台,https://tv123.cc.cd/live.php?ch=637&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d508f2340404437c610070db6daf61d4541ef0a02a6790245818078d10045db9
 美亚电影台,https://tv123.cc.cd/live.php?ch=1752&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9e78d24fa280b3424e2873a2ed64e8463088fbe6598288ebb247d4b248652408
 TVB Plus,https://cdn3.indevs.in/stream/tvb/tvbp/stream_0.php?u=admin&p=69fe3eb1f0b037bc2479cb4fbd56551848343f071f939422ef250f04f68b4cee&uid=
 TVB Plus,https://cdn3.indevs.in/stream/tvb/tvbp/
 TVB Plus,https://10.fast.hidns.vip/163189/tvbp/
 TVB Plus,http://r.jdshipin.com/ndGgS
-TVB Plus,https://tv123.cc.cd/live.php?ch=419&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7fe6954ebe2f38389fa2f35a22f5e80167aba076175f757bff9391b8f2f6be6f
-TVB Plus,https://tv123.cc.cd/live.php?ch=418&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=464fdda62006d925521742cb2913f1d0d3962cd1610766d37ca22599746681b1
 TVB Plus,https://tv123.cc.cd/live.php?ch=417&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0dcab01bcc5fa52b13bedda2c26812c7a37f8c44b5d7db7a9e17cdd92e2079c1
+TVB Plus,https://tv123.cc.cd/live.php?ch=418&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=464fdda62006d925521742cb2913f1d0d3962cd1610766d37ca22599746681b1
+TVB Plus,https://tv123.cc.cd/live.php?ch=419&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7fe6954ebe2f38389fa2f35a22f5e80167aba076175f757bff9391b8f2f6be6f
 TVB Plus,https://tv123.cc.cd/live.php?ch=421&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d627c32f6479c72c1600bb4fe90ae98fd7c1d04b94b0b6743392a6114666ed95
 TVB Plus,https://tv123.cc.cd/live.php?ch=630&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3594f350a226faa666285deac385d2d5302e81be1bdf6473b8889303bee76e9e
-TVB Plus,https://tv123.cc.cd/live.php?ch=2343&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=48e9b0f5a0ee1e9df13e045da4dcd388e532da8ebccfc6f1a914aae46b9d648e
-TVB Plus,https://tv123.cc.cd/live.php?ch=2223&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=95ecaa6e3bfd47ab2357bbc091b79487ccec8c92ce6911ed871df384bebad34c
-TVB Plus,https://tv123.cc.cd/live.php?ch=1750&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0d1ff01dee37c9b739f3f0c6b29bfb4a0961dc807cf221ec7445d44091804bf3
 TVB Plus,https://tv123.cc.cd/live.php?ch=420&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3875cd1d5351e6aac812ea12af37792ccef08b3b20e40f1ccefbcda7f01d9d01
 TVB Plus,https://tv123.cc.cd/live.php?ch=2286&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fa69b2111659bec5da784e5ec49ed7e41f72a4aaae914772da2b2de0b40fc6bf
+TVB Plus,https://tv123.cc.cd/live.php?ch=1750&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0d1ff01dee37c9b739f3f0c6b29bfb4a0961dc807cf221ec7445d44091804bf3
+TVB Plus,https://tv123.cc.cd/live.php?ch=2223&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=95ecaa6e3bfd47ab2357bbc091b79487ccec8c92ce6911ed871df384bebad34c
+TVB Plus,https://tv123.cc.cd/live.php?ch=2343&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=48e9b0f5a0ee1e9df13e045da4dcd388e532da8ebccfc6f1a914aae46b9d648e
 TVB Plus,http://cdn3.123.rr.kg/stream/tvb/tvbp/
+TVB Plus,https://iptv.yang-1989.xyz/hk/a9mdqd.m3u8
 TVB1,http://cc.123.rr.kg/163189/tvb1
-TVB1,https://tv123.cc.cd/live.php?ch=2241&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2948d2272c8af97d296a489c10fe7a1b995178c1e6baf430e13fb4b765817324
-TVB1,https://tv123.cc.cd/live.php?ch=442&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1bc5edeed1d37616b4c854838786760a50c81e9058da4b720361a2400fb83ae8
 TVB1,https://tv123.cc.cd/live.php?ch=372&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=58659125b3c20ce3346daefdf85cb487e9a2e73062d50f658d8f3b727c1d210e
+TVB1,https://tv123.cc.cd/live.php?ch=442&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1bc5edeed1d37616b4c854838786760a50c81e9058da4b720361a2400fb83ae8
+TVB1,https://tv123.cc.cd/live.php?ch=2241&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2948d2272c8af97d296a489c10fe7a1b995178c1e6baf430e13fb4b765817324
 TVB J1,http://cc.123.rr.kg/163189/j1
-TVB J1,https://tv123.cc.cd/live.php?ch=443&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7606e9d64ffc606413b15b0ef18a5988612f529b1d93a25aaf85e5c13fcf0431
 TVB J1,https://tv123.cc.cd/live.php?ch=373&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5b32bb8496ab089484930b5042cf8e7143c520c4604a0c07ec366548e6c03c79
+TVB J1,https://tv123.cc.cd/live.php?ch=443&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7606e9d64ffc606413b15b0ef18a5988612f529b1d93a25aaf85e5c13fcf0431
 TVB J1,https://tv123.cc.cd/live.php?ch=2242&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=335224a186b11d7c1ebcfa15a95a73fb8a9eda03fc90daa21ce75defbfa4324a
 TVB J1,https://tv123.cc.cd/live.php?ch=809&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=8793e823f30aa445703c3af7ce77b607b10c3dc1d051a73a6e14a5e37df31222
 TVB J1,https://tv123.cc.cd/live.php?ch=2017&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2b5e3f2099aa8aa46f0e6b11dc976d81aa8663d0653ed58f3f83042d0c97c78f
-翡翠剧集台,https://tv123.cc.cd/live.php?ch=2243&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ecc1f63552530cc06ee25e36c8c2aa761ed99f048164fc076d4b65a1ec80b0bb
 翡翠剧集台,https://tv123.cc.cd/live.php?ch=374&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4a652496975afb12ab034a416a6929d2073990f44f30a8bea4a8c6b8824c8c7d
-翡翠台,http://cc.123.rr.kg/163189/fct
-翡翠台,http://cc.123.rr.kg/163189/hlfct
-翡翠台,http://cc.123.rr.kg/163189/jade
+翡翠剧集台,https://tv123.cc.cd/live.php?ch=2243&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ecc1f63552530cc06ee25e36c8c2aa761ed99f048164fc076d4b65a1ec80b0bb
 翡翠台,https://cdn3.indevs.in/stream/tvb/fct/stream_0.php?u=admin&p=69fe3eb1f0b037bc2479cb4fbd56551848343f071f939422ef250f04f68b4cee&uid=
 翡翠台,https://cdn3.indevs.in/stream/tvb/fct/
 翡翠台,https://cdn3.indevs.in/stream/live/hlt/stream_0.php?u=admin&p=69fe3eb1f0b037bc2479cb4fbd56551848343f071f939422ef250f04f68b4cee&uid=
-翡翠台,https://cdn3.indevs.in/stream/live/hlt/
 翡翠台,https://cdn3.indevs.in/stream/live/jade/
+翡翠台,https://cdn3.indevs.in/stream/live/hlt/
+翡翠台,http://cc.123.rr.kg/163189/fct
+翡翠台,http://cc.123.rr.kg/163189/hlfct
+翡翠台,http://cc.123.rr.kg/163189/jade
 翡翠台,https://10.fast.hidns.vip/163189/fct/
 翡翠台,http://r.jdshipin.com/62WM7
-翡翠台,http://r.jdshipin.com/GeWKr
 翡翠台,http://r.jdshipin.com/qClQf
 翡翠台,http://r.jdshipin.com/qrfbg
 翡翠台,http://r.jdshipin.com/n90gt
+翡翠台,http://r.jdshipin.com/GeWKr
 翡翠台,https://tv123.cc.cd/live.php?ch=411&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=39b40ad051fec9df63c3340c9014d89084e1f5044dc255b261c526f8293daaf7
-翡翠台,https://tv123.cc.cd/live.php?ch=414&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=43e9c870d261f8ee277eb45f1397d393e1d8d3f3234574ef55e8a463d98a4004
+翡翠台,https://tv123.cc.cd/live.php?ch=375&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=416c1ba99c44f136a5d057f2ee89a0b6ec5d27ff7100eff13013f9de757b8564
 翡翠台,https://tv123.cc.cd/live.php?ch=413&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1b6648be77bef8d02450ca8e0b1c02ee08045312e647ce4436f46e924ad54b0a
 翡翠台,https://tv123.cc.cd/live.php?ch=628&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7973c72aa7321d3441f6179c0f6c904f841b21f050466b2b79558730ba3a39f4
-翡翠台,https://tv123.cc.cd/live.php?ch=375&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=416c1ba99c44f136a5d057f2ee89a0b6ec5d27ff7100eff13013f9de757b8564
+翡翠台,https://tv123.cc.cd/live.php?ch=414&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=43e9c870d261f8ee277eb45f1397d393e1d8d3f3234574ef55e8a463d98a4004
 翡翠台,https://tv123.cc.cd/live.php?ch=1139&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=da98a36655586969d881029724985db3ff2c359db71ad10e8cde481cadf94232
-翡翠台,https://tv123.cc.cd/live.php?ch=1940&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=77cfac05856ec80a0b7abfc5656351538ab49ad6b75debcfd9f4ffa5dc169717
-翡翠台,https://tv123.cc.cd/live.php?ch=1846&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c311b4b386c3513ef44a66a687be2bae2047be9da1cf48fea28e8a3ed9c58393
 翡翠台,https://tv123.cc.cd/live.php?ch=1747&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=18418726ee4ce5640a7f175d5264f3292c0252bdcfbe98534602dc9f975853dc
+翡翠台,https://tv123.cc.cd/live.php?ch=1846&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c311b4b386c3513ef44a66a687be2bae2047be9da1cf48fea28e8a3ed9c58393
+翡翠台,https://tv123.cc.cd/live.php?ch=1940&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=77cfac05856ec80a0b7abfc5656351538ab49ad6b75debcfd9f4ffa5dc169717
+翡翠台,https://tv123.cc.cd/live.php?ch=2244&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3505263619e6834202d6db56fa5c3f549c326c1b6612dd6505af693ff35196c4
 翡翠台,https://tv123.cc.cd/live.php?ch=2245&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=932e497c2fb3603c395df4b0749bff2447955b25d5e26ddc44773bfca971b39e
 翡翠台,https://tv123.cc.cd/live.php?ch=2284&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=518bdc47146112c73efbf0bf0dd16a178ec46e3e8fdb48f7a8b4898412f4406d
-翡翠台,https://tv123.cc.cd/live.php?ch=2244&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3505263619e6834202d6db56fa5c3f549c326c1b6612dd6505af693ff35196c4
 翡翠台,https://tv123.cc.cd/live.php?ch=397&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fa624232955aeb77e604a639ca78c305c256e45954d2e837d9b4ea6131ad3f63
 翡翠台,https://tv123.cc.cd/live.php?ch=440&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=17a3b0cc036b6a88e1aa8d3ebdde571218cde4d0d495be91e4a430bd784c5c9c
-翡翠台,https://tv123.cc.cd/live.php?ch=439&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f267ec099c8090b9cfdb25b4213a2d18a3d4ef93862fb47b71fe22ec8daa619e
 翡翠台,https://tv123.cc.cd/live.php?ch=438&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cd8d25296aeaddb989f741536728c98f6a81ece00a96bea0e8c2483ea1d4dbf1
-翡翠台,https://tv123.cc.cd/live.php?ch=2262&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ef874b98a8a1b058946dcd80b190a96de5f2c33301252aa2270039bd548e33d9
-翡翠台,https://tv123.cc.cd/live.php?ch=2273&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ad23e72b5e26d92c06ced9b4b512749d8c1a4671f12079b54ca6b6eba72317ac
-翡翠台,https://tv123.cc.cd/live.php?ch=2274&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fcadd5b7b29d390d2a87a1a482730d8b6df46a18d0ba97083c0822201be8765e
+翡翠台,https://tv123.cc.cd/live.php?ch=439&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f267ec099c8090b9cfdb25b4213a2d18a3d4ef93862fb47b71fe22ec8daa619e
 翡翠台,https://tv123.cc.cd/live.php?ch=441&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9425064fa999c7eeeb4b3e522f56c813d9de04a2ec49df5ce4d80e7927a0c9a9
+翡翠台,https://tv123.cc.cd/live.php?ch=2273&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ad23e72b5e26d92c06ced9b4b512749d8c1a4671f12079b54ca6b6eba72317ac
+翡翠台,https://tv123.cc.cd/live.php?ch=2262&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ef874b98a8a1b058946dcd80b190a96de5f2c33301252aa2270039bd548e33d9
 翡翠台,https://tv123.cc.cd/live.php?ch=2272&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6b630418be6a2fd9c923760882d5d434f4241f270a889223eb6a69578952f754
+翡翠台,https://tv123.cc.cd/live.php?ch=2274&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fcadd5b7b29d390d2a87a1a482730d8b6df46a18d0ba97083c0822201be8765e
 翡翠台,http://cdn3.123.rr.kg/stream/tvb/fct/
 翡翠台,http://cdn3.123.rr.kg/stream/live/jade/
 翡翠台4K,https://cdn3.indevs.in/stream/tvb/fct4k/stream_0.php
 翡翠台4K,https://cdn3.indevs.in/stream/tvb/fct4k/
+翡翠台4K,https://tv123.cc.cd/live.php?ch=412&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9f7fd270d82922713a06d9ef309895fe07bcb382a316a8729134a35b91c98ebe
 翡翠台4K,https://tv123.cc.cd/live.php?ch=629&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9a31b1cf0f28c59e496767262c63924f42e0aa2f78071aa74ef7fd64f404c8af
 翡翠台4K,https://tv123.cc.cd/live.php?ch=2219&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ae7f29c742efaffa0ce20a3aab30c23386bce1b812102e2f10a797ddd484a30f
-翡翠台4K,https://tv123.cc.cd/live.php?ch=412&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9f7fd270d82922713a06d9ef309895fe07bcb382a316a8729134a35b91c98ebe
+翡翠台4K,https://iptv.yang-1989.xyz/hk/tcvfnr.m3u8
 翡翠台4K,http://o11.163189.xyz/stream/tvb/fct4k/
 黄金翡翠台,https://tv123.cc.cd/live.php?ch=639&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=13a998d0b38349ac62e9c21ba09ca8284f779d4affc55e36fdefedfc184517f9
 明珠台,https://cdn3.indevs.in/stream/tvb/mzt/stream_0.php
 明珠台,https://cdn3.indevs.in/stream/tvb/mzt/
 明珠台,https://10.fast.hidns.vip/163189/mzt/
-明珠台,http://r.jdshipin.com/jUx8K
 明珠台,http://r.jdshipin.com/ZQ4kN
-明珠台,https://tv123.cc.cd/live.php?ch=632&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1b0de30dbe122daa27a02fcb550d5bdaa9b8170f5d338726a390b4dd929eb757
+明珠台,http://r.jdshipin.com/jUx8K
 明珠台,https://tv123.cc.cd/live.php?ch=1749&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=24c5090b477263c98e2b09ef060798a1722800e85f6060e41eabd84e64a803f9
+明珠台,https://tv123.cc.cd/live.php?ch=632&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1b0de30dbe122daa27a02fcb550d5bdaa9b8170f5d338726a390b4dd929eb757
 明珠台,https://tv123.cc.cd/live.php?ch=1847&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=506512b225ae9c9ef4fccba378c1c8abf2076f645ab6b2f470f076ff4b1632bf
-明珠台,https://tv123.cc.cd/live.php?ch=2285&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c50e8e63f3794d5fc8400f73ecd87b42901899f1ebfc02f83a97c593eedb57dc
 明珠台,https://tv123.cc.cd/live.php?ch=2246&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=65846c108960a9d49e70bfc686d34a5b17cb1dc43bee76676007d8a143e380b0
+明珠台,https://tv123.cc.cd/live.php?ch=2285&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c50e8e63f3794d5fc8400f73ecd87b42901899f1ebfc02f83a97c593eedb57dc
 明珠台,http://cdn3.123.rr.kg/stream/tvb/mzt/
+明珠台,https://iptv.yang-1989.xyz/hk/nfqd66.m3u8
 明珠台,http://php.jdshipin.com/TVOD/iptv.php?id=mzt2
 HOY TV,http://cdn.123.rr.kg/163189/hoy
 HOY资讯台,http://cdn.123.rr.kg/163189/hoy78
 HOY 77,https://cc.123.rr.kg/163189/hoy
-HOY 77,https://tv123.cc.cd/live.php?ch=355&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9d5100cc6cc9c9e54084151c93811ae8e500e77015e48a3378d006b7e66849c5
 HOY 77,https://tv123.cc.cd/live.php?ch=354&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3555189169e02eefc39d46824dbb1540789e8cade1120c79fa6628f9d42b7387
-HOY 77,https://tv123.cc.cd/live.php?ch=428&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=96c36d95de193b819e1d044e8832ad3bc48a6f660ad1f5e27769c181a42b2df9
+HOY 77,https://tv123.cc.cd/live.php?ch=355&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9d5100cc6cc9c9e54084151c93811ae8e500e77015e48a3378d006b7e66849c5
 HOY 77,https://tv123.cc.cd/live.php?ch=427&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=895216bbca87b5beedae5586557ddbf13fb7abac0198187fd32d05eb0262a96e
+HOY 77,https://tv123.cc.cd/live.php?ch=428&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=96c36d95de193b819e1d044e8832ad3bc48a6f660ad1f5e27769c181a42b2df9
 HOY 77,https://tv123.cc.cd/live.php?ch=620&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7e9fba8073b335b59f17240d881a68b5998c59d4b48df482e249570a828c6e98
-HOY 77,https://tv123.cc.cd/live.php?ch=2225&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=482269aab15c26fb509f63bf15b230f54434f12794270c9c17a9e1b958199040
 HOY 77,https://tv123.cc.cd/live.php?ch=2224&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c0f2ec4fa0252bf421d496dcec1abd2765d2b68e6b810ea5df5b134e7bfdbe88
+HOY 77,https://tv123.cc.cd/live.php?ch=2225&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=482269aab15c26fb509f63bf15b230f54434f12794270c9c17a9e1b958199040
 HOY 77,https://fast.hidns.vip/163189/hoy
 HOY 77,http://cdn.123.rr.kg/163189/hoy
-HOY 76,https://tv123.cc.cd/live.php?ch=357&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9e0d8eaaec500bdd327130f3a4278fc2cfd027001551fca6dba60eae1f4aeff8
 HOY 76,https://tv123.cc.cd/live.php?ch=720&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c32bdbeb4c026e23a94153f657e9c8b871b0ff10a76896a8105c099f8185311d
+HOY 76,https://tv123.cc.cd/live.php?ch=357&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9e0d8eaaec500bdd327130f3a4278fc2cfd027001551fca6dba60eae1f4aeff8
 HOY 76,https://tv123.cc.cd/live.php?ch=2227&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d4742b5d88ac1f2d7004eb12f59597601608d4579f14ed1d0ed366a78a5faea3
+HOY 78,https://tv123.cc.cd/live.php?ch=356&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bd48877d2bb3b3f9a262b1457c69ebaf8eed80bf50a52b7684eebe7806ec0d30
 HOY 78,https://tv123.cc.cd/live.php?ch=621&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0cca8b62c41c9cd99db7f8fe9fa7c0f9c3d3a968032f2b134ad101c22006efc1
 HOY 78,https://tv123.cc.cd/live.php?ch=2226&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=17f1e787e828a285292f98d94b5001d489e205d4394e39a23e3fa1c1c3c1ca55
-HOY 78,https://tv123.cc.cd/live.php?ch=356&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bd48877d2bb3b3f9a262b1457c69ebaf8eed80bf50a52b7684eebe7806ec0d30
 HOY 78,https://fast.hidns.vip/163189/hoy78
 HOY 78,http://cdn.123.rr.kg/163189/hoy78
 八度空间,https://tv123.cc.cd/live.php?ch=379&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=22dad138bfe82c04d51c2ffa1915e4b0c4f4d77b442bf523a719051fce980822
 八度空间,https://tv123.cc.cd/live.php?ch=461&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=86fcad9266aa2787959433b854816226db69dabbfb9ab48769e389f6244814eb
 八度空间,https://tv123.cc.cd/live.php?ch=1082&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bea58e7b18ed183418cba33fe79e4ee12b9576d89f3f4a60a7550593ca021cad
-八度空间,https://tv123.cc.cd/live.php?ch=2250&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=754908911d8040515a974043792543af969bf77175d5780cccd3857dd008cbef
 八度空间,https://tv123.cc.cd/live.php?ch=1885&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4942d2bd1bc963ade70dff4bd3d61e5f5bb69f4b93db0de2ede8364591edd65b
+八度空间,https://tv123.cc.cd/live.php?ch=2250&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=754908911d8040515a974043792543af969bf77175d5780cccd3857dd008cbef
 龙华电影,https://tv123.cc.cd/live.php?ch=383&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f765858f80c4fe58c9947a5d01873d5523ac8cbc9526c40ba9c5537e9478547a
 龙华电影,https://tv123.cc.cd/live.php?ch=497&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e5778ff1e0503e9577db118b61e136e57389cfaeba21b2e829bcb6515ce17111
-龙华电影,https://tv123.cc.cd/live.php?ch=741&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=aca1723aa56d04c37ba9bb4de964a4f6e4340b09f8028a0eebf1ad73c0c90949
 龙华电影,https://tv123.cc.cd/live.php?ch=2254&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fc796d26c1521ef7f31b7624b011458b4a603ef98bb95cc640ac07e6247218f2
+龙华电影,https://tv123.cc.cd/live.php?ch=741&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=aca1723aa56d04c37ba9bb4de964a4f6e4340b09f8028a0eebf1ad73c0c90949
+龙华电影,https://iptv.yang-1989.xyz/ofiii/e5p6my.m3u8
 龙华电影,https://8.fast.hidns.vip/163189/lhdy
 龙华经典,https://tv123.cc.cd/live.php?ch=384&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=82256f653ee5e92f42d60f319b4783856a30654588ec4b6d0b45a588775a7d12
 龙华经典,https://tv123.cc.cd/live.php?ch=498&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c9472b6c4cebd9e1551b814426421f124e88220df5b2d2e3b8a9defab9ca82ca
 龙华经典,https://tv123.cc.cd/live.php?ch=742&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=37004c731ea9eb9f4e87287e16b4f9d41820582fbcdf4e39a165bc34912663fa
 龙华经典,https://tv123.cc.cd/live.php?ch=2045&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=02dc13b926ba21e51caf34d26c3931c9d8c69cd2c4b526e1ff0def9d6baa8e25
 龙华经典,https://tv123.cc.cd/live.php?ch=2255&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a05954927ad1379e086b5a34a3161dc2c0bc05f7dbce1ba1cc188041879f575b
+龙华经典,https://iptv.yang-1989.xyz/ofiii/rwz7f5.m3u8
 龙华经典,https://8.fast.hidns.vip/163189/lhjd
 龙华日韩,https://tv123.cc.cd/live.php?ch=386&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c58dc51203d4f8cbb6b68176d09b3a3b17e868b9d573d84839ae03142a39c186
 龙华日韩,https://tv123.cc.cd/live.php?ch=500&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=057fd75237352e3edd1e034c0618ed1b0938b3798f74edcac8b3830614d379bb
 龙华日韩,https://tv123.cc.cd/live.php?ch=744&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7d3fd0714fa1c8174302631e5321c0d651bfacf3b08acbe2a23ea85a5aa9afb2
 龙华日韩,https://tv123.cc.cd/live.php?ch=2257&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=09376050f214492b054d481d52c360be403d0b2d03b705e07323ebfdc9e0d3ba
+龙华日韩,https://iptv.yang-1989.xyz/ofiii/c3adey.m3u8
 龙华日韩,https://8.fast.hidns.vip/163189/lhrh
 龙华戏剧,https://tv123.cc.cd/live.php?ch=387&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=43865c1076f925d0816c62d529ac1765cbcbabdcf5b2bd68731f6985b0ff5627
 龙华戏剧,https://tv123.cc.cd/live.php?ch=501&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f2f6d988dd7293ce275773ea43067952d50c028309a2370f1baa19d8dba8b316
 龙华戏剧,https://tv123.cc.cd/live.php?ch=745&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=50d9d8e4e5948f7a9df0e6012f4e1af5cb6a467a332ac41de429ce00085253c8
 龙华戏剧,https://tv123.cc.cd/live.php?ch=2258&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7106c1e7d612b84e87f44b004640b9bdc085fb6d31e799315f4e242555fb651c
+龙华戏剧,https://iptv.yang-1989.xyz/ofiii/2a6a9h.m3u8
 龙华戏剧,https://8.fast.hidns.vip/163189/lhxj
+龙华卡通,https://iptv.yang-1989.xyz/ofiii/6wrdt6.m3u8
 龙华卡通,https://8.fast.hidns.vip/163189/lhkt
 龙华偶像,https://tv123.cc.cd/live.php?ch=385&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b39c4bcdbbe10af8f8cd3b87814b411b89cc2b1c46f4dc1fa388061c2692c374
 龙华偶像,https://tv123.cc.cd/live.php?ch=499&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=861b18356724cf2eb2663be252dcfe8d10392794ca415fc018660207a01df55c
 龙华偶像,https://tv123.cc.cd/live.php?ch=743&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5f4aee27eb4bc873ddac51505cd976297c4dac55ede138dbc992ccc1c395adfc
 龙华偶像,https://tv123.cc.cd/live.php?ch=2046&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6ecc2a201b9e3f9a4af53ed3469d22d16685aed4588267d0e1cdab5a279d466a
 龙华偶像,https://tv123.cc.cd/live.php?ch=2256&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b0980eebf6f79500ec0213a568b95a35e992b366820636d3cadad549b8cd990c
+龙华偶像,https://iptv.yang-1989.xyz/ofiii/9xemzs.m3u8
 龙华偶像,https://8.fast.hidns.vip/163189/lhox
 金光布袋戏,https://tv123.cc.cd/live.php?ch=390&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2858ddd1f3e6bb4bad2d3a008481e115c64c3b72f056c8a39453f8d6fb90a85a
 金光布袋戏,https://tv123.cc.cd/live.php?ch=504&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=60f8dec7c9662b8fee672e3977c0c9922fcb11c0df04e4bfee3f6eb40c8646ac
@@ -664,27 +614,28 @@ TVB娱乐新闻台,https://tv123.cc.cd/live.php?ch=638&sid=dfaea1c0f7a811ecde4d6
 TVB无线新闻台,http://cc.123.rr.kg/163189/wxxw
 TVB无线新闻台,http://cc.123.rr.kg/163189/wxxwt
 TVB无线新闻台,http://r.jdshipin.com/CkuBd
-TVB无线新闻台,https://tv123.cc.cd/live.php?ch=415&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=91657d7699ac8646834d8d2023813bd53c62d3aa5dbc74c4e9e5cdbd9493a222
 TVB无线新闻台,https://tv123.cc.cd/live.php?ch=376&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=55cfddc2e07a5d7082eea742552b3ac27d3ae2e5c88bc9fc9607b4a806e58dce
 TVB无线新闻台,https://tv123.cc.cd/live.php?ch=416&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a6f250353d92412a4fcf9c9eada7861f4959e496a6b39d3fccc74f7dcf30e448
+TVB无线新闻台,https://tv123.cc.cd/live.php?ch=415&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=91657d7699ac8646834d8d2023813bd53c62d3aa5dbc74c4e9e5cdbd9493a222
 TVB无线新闻台,https://tv123.cc.cd/live.php?ch=1748&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f46c0deb29dd7517887f5d3e464bd6f2ec7e59c3f1de04e8361dc30b3bf8cda8
-TVB无线新闻台,https://tv123.cc.cd/live.php?ch=1845&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=74f99435b2e5ad79d533b603e1aebbaabf1103bfa68ce7f390eb3d5c72b9a6a4
-TVB无线新闻台,https://tv123.cc.cd/live.php?ch=2265&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=baf59c2bd7e3bd0c45758cf24da03d01041c5455908e487dedde596da7cc8cde
 TVB无线新闻台,https://tv123.cc.cd/live.php?ch=631&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e3de9df157539a329faab4975b050a5342bf0fc0b183578d70ea3ff5db14faef
 TVB无线新闻台,https://tv123.cc.cd/live.php?ch=2247&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=13639ea815520616a6387a6ee9d7ca634e1e38e13d26c82daca1e4800828457e
+TVB无线新闻台,https://tv123.cc.cd/live.php?ch=1845&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=74f99435b2e5ad79d533b603e1aebbaabf1103bfa68ce7f390eb3d5c72b9a6a4
+TVB无线新闻台,https://tv123.cc.cd/live.php?ch=2265&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=baf59c2bd7e3bd0c45758cf24da03d01041c5455908e487dedde596da7cc8cde
+TVB无线新闻台,https://iptv.yang-1989.xyz/hk/gad4n3.m3u8
 TVB无线新闻台,http://php.jdshipin.com/TVOD/iptv.php?id=wxxw
-TVB星河,http://cc.123.rr.kg/163189/tvbxh
 TVB星河,https://cdn3.indevs.in/stream/live/tvbxh/
+TVB星河,http://cc.123.rr.kg/163189/tvbxh
 TVB星河,https://10.fast.hidns.vip/163189/xinghe/
-TVB星河,http://r.jdshipin.com/sXuuD
 TVB星河,http://r.jdshipin.com/Voac4
+TVB星河,http://r.jdshipin.com/sXuuD
 TVB星河,https://tv123.cc.cd/live.php?ch=392&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=909bcf89e8aaca412423bd32c796dea6ce5047a6dd5be22ee995d20bbe8e9732
 TVB星河,https://tv123.cc.cd/live.php?ch=446&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d3dfd2bd6fff598ddcc4a7d0cba77f24bf05ebde8567e5f669ac1db72a2672aa
 TVB星河,https://tv123.cc.cd/live.php?ch=447&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=08bada1bba309e735c5099695becef9182096adb4108536b2b9a97e814e27288
 TVB星河,https://tv123.cc.cd/live.php?ch=448&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=027571e15e74f35b2ac85a468304d5cbe2d40be37b6c06234492944249da1f90
 TVB星河,https://tv123.cc.cd/live.php?ch=2266&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6dd7581f982f8b158dcb40117905a0a93b88bb98380ce7cd87f3387e878ba8e9
-TVB星河,https://tv123.cc.cd/live.php?ch=2282&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=64e602c39dec2447d4995b1b575b4c2f83e08d7bcef31b306cba4f150ddb06f9
 TVB星河,https://tv123.cc.cd/live.php?ch=2269&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7701de5429ccaa6aeff30b77e1762cf17d544482a8a7ba91cc320b5efa72d6af
+TVB星河,https://tv123.cc.cd/live.php?ch=2282&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=64e602c39dec2447d4995b1b575b4c2f83e08d7bcef31b306cba4f150ddb06f9
 TVB星河,http://cdn3.123.rr.kg/stream/live/tvbxh/
 TVB星河,http://php.jdshipin.com/TVOD/iptv.php?id=xinghe
 TVBS欢乐台,https://tv123.cc.cd/live.php?ch=783&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6fd172e1404f6958727cb49d6a7b8376839d5dc07802f13e072e7025849d63e2
@@ -704,8 +655,8 @@ TVBS新闻台,http://breezy-audrie-zspace-7524863c.koyeb.app/vipsir?token=leifen
 天映經典,https://cdn3.indevs.in/stream/live/ccm/
 天映經典,https://10.fast.hidns.vip/163189/ccm/
 天映經典,https://tv123.cc.cd/live.php?ch=394&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=491a84a8d04b7a6ed9193a14e6753f060672134770f2a3549e5c6e78f183d881
-天映經典,https://tv123.cc.cd/live.php?ch=455&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=08c427eaa535eda757fa243b3f64d657391b0d3b3fa2e9ece602221d92a8cf21
 天映經典,https://tv123.cc.cd/live.php?ch=457&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=bef6fe7c82aa22df82857feece44f29008f29042eaa3ecb97630b8b45a9d9483
+天映經典,https://tv123.cc.cd/live.php?ch=455&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=08c427eaa535eda757fa243b3f64d657391b0d3b3fa2e9ece602221d92a8cf21
 天映經典,https://tv123.cc.cd/live.php?ch=645&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=23bb6bc33541b0dc9a70c644d1f59e47772721a0e1fbfddde1d647af91f17368
 天映經典,https://tv123.cc.cd/live.php?ch=2271&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1187a687343a5a1300f8b89fb9f7c50971773b932660ff242b62101ffad5d772
 天映經典,https://tv123.cc.cd/live.php?ch=2281&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=4f04c0a88c4c7328b9cf9ad85bfc94dca0157758f2da3c5f3fb10e37961fd900
@@ -719,21 +670,25 @@ TVBS新闻台,http://breezy-audrie-zspace-7524863c.koyeb.app/vipsir?token=leifen
 影迷纪实台,https://tv123.cc.cd/live.php?ch=2321&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c9c662185e9791dd09f294ae44cacf5e17af419be0d51d149e89b39f9ee27e03
 东森电影,https://tv123.cc.cd/live.php?ch=525&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9ad276dfa450b37ff9511894138a6aea371d594fb59f70255bd08c78af8f6eac
 东森电影,https://tv123.cc.cd/live.php?ch=2348&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=294a88b80d057b82cf84bd5c4305d643e2285c803c69c20ef08ea23c4ff437f2
+东森电影,https://iptv.yang-1989.xyz/tw/p2jse3.m3u8
 東森新聞,https://tv123.cc.cd/live.php?ch=817&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a01371f791dd9b9f85033713989181af70504d31fec44ec4abc6673d7250484b
 东森戏剧,https://tv123.cc.cd/live.php?ch=526&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=437223ddad3ccf95af979e849b58cbdf684ef37724beb18ed2da9bdb921e4a86
 东森戏剧,https://tv123.cc.cd/live.php?ch=2349&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e24c0b3217a0ff46fa87b902e09cc8ea40b3d01facdfa224107aae622bec108a
+东森戏剧,https://iptv.yang-1989.xyz/tw/nsjq5f.m3u8
 东森洋片,https://tv123.cc.cd/live.php?ch=527&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f9035711c2f7a61d9d9390fd4ed27ade8820f880ec38cbc11d623e7788377cf6
 东森洋片,https://tv123.cc.cd/live.php?ch=2350&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=396bc51a348db7a49c7e5a336ee55bd8203a09765828f8bf3de7f82041583514
+东森洋片,https://iptv.yang-1989.xyz/tw/yj3r4a.m3u8
 东森超视,https://tv123.cc.cd/live.php?ch=1858&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=fa8c8fe16ee830dfa56d7caf604d75be09e4b998be4acf8273a222500779c560
 寰宇新聞台,https://live.corusdigitaldev.com/groupd/live/49a91e7f-1023-430f-8d66-561055f3d0f7/live.isml/master.m3u8
 寰宇新聞台,https://live.corusdigitaldev.com/groupd/live/49a91e7f-1023-430f-8d66-561055f3d0f7/live.isml/master.m3u8?checkedby:iptvcat.com
 寰宇新聞台,https://tv123.cc.cd/live.php?ch=814&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d3dc05f5005f5e8706846ce824c66c658755ae8ccfa773c9318ca14b5c8d10ab
 寰宇新聞台,https://tv123.cc.cd/live.php?ch=2092&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a4dfb312c222610d028e4a3aaac4b616f0df963c46e570b7e7b3ceebc411e514
+台视,https://iptv.yang-1989.xyz/tw/nrzqd4.m3u8
 台视新闻,https://tv123.cc.cd/live.php?ch=1849&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9760e2ab0dc19272d8fde9b0989881e9b538a5d76271c9ac6d3cc66b220d1cc7
 台视综合,https://tv123.cc.cd/live.php?ch=2022&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3fb40f0857c4fd6abd2dd24b872f145f94a5d9f83cb8e7c1954281f807ddfca8
+民視影劇,https://tv123.cc.cd/live.php?ch=859&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=de2c15844378bb2eed21ad91f58abb7a46e25708f0dba1c82e989e5732c09157
 民視影劇,https://tv123.cc.cd/live.php?ch=506&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c129169ca8670597b7f423672546849fc34e36a8c9d92ef47391fe4a7138b293
 民視影劇,https://tv123.cc.cd/live.php?ch=2314&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e8a0fb38e3b6256ada3ca59b831a9744bc77ca4dcae0248b38f94efa78404b15
-民視影劇,https://tv123.cc.cd/live.php?ch=859&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=de2c15844378bb2eed21ad91f58abb7a46e25708f0dba1c82e989e5732c09157
 民视综艺,https://tv123.cc.cd/live.php?ch=784&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=441fcc572cdfac2eab0cb499fffe0397a16566e4d8b62504bb84f93f7439cdf9
 民視台灣台,https://tv123.cc.cd/live.php?ch=773&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=893355e846e1444f0ad4f450f9a3c061a6ad84d7597f478eb3058fa880002f73
 民視台灣台,https://tv123.cc.cd/live.php?ch=2025&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=0cfab00a505724d4fd18b4df926a581c49615dffe579a318178aa7e2bb246bc3
@@ -756,23 +711,28 @@ amc电影台,https://tv123.cc.cd/live.php?ch=2322&sid=dfaea1c0f7a811ecde4d60d89e
 中國電影頻道,https://tv123.cc.cd/live.php?ch=646&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=47615a6e2dfb0b3a57c5a8a54c9cb583d5a1d2c93324972f93ed408fefc52b1e
 纬来电影台,https://tv123.cc.cd/live.php?ch=521&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f237e42dbe9d9b4da3b016299d002c8e5c60d13d6e2ffca86d7eed74884e2950
 纬来电影台,https://tv123.cc.cd/live.php?ch=735&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d4f453cdcfa6bbd54b056d15ffe8114808de148d74adf458a5667b30a99f9f50
-纬来电影台,https://tv123.cc.cd/live.php?ch=2052&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=63c1d9720b5565059f6f06e19c98ca403691cf28c8001a45bde96251c36e8b34
 纬来电影台,https://tv123.cc.cd/live.php?ch=2344&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2da0bdda549626f9b21431a1efc5f61adf10d8af965f735f3d473e0bcc072f76
+纬来电影台,https://tv123.cc.cd/live.php?ch=2052&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=63c1d9720b5565059f6f06e19c98ca403691cf28c8001a45bde96251c36e8b34
+纬来电影台,https://iptv.yang-1989.xyz/tw/z52xma.m3u8
 纬来戏剧台,https://tv123.cc.cd/live.php?ch=522&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5bfd793165c0fe07b564f8d39d9322bf9e294494652219fdefe13d7ff70dacd5
-纬来体育台,https://tv123.cc.cd/live.php?ch=732&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=63042af9a137dfced16a7498cd0517f55a4656ec31f9597bb7acfaa0d85ff3a8
 纬来体育台,https://tv123.cc.cd/live.php?ch=736&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=035a47f901a2816615299e233446743a659648e3f32563824ffa5c61a504d184
+纬来体育台,https://tv123.cc.cd/live.php?ch=732&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=63042af9a137dfced16a7498cd0517f55a4656ec31f9597bb7acfaa0d85ff3a8
 纬来体育台,https://tv123.cc.cd/live.php?ch=1860&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9b589c8d02230c579bb70c0e43f11f8a888a30b9ba317345ac37b635804312cf
 纬来体育台,https://tv123.cc.cd/live.php?ch=2346&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=178b2888fe204b5914095f60e4de0559e5ce67c0ce6bdb96255ad58ecfb147f5
 纬来体育台,https://tv123.cc.cd/live.php?ch=2053&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=932c494b1a35b0bb81e2d537da2ddb545c9aad673ad8648f7bdd0ba74faad598
+纬来体育台,https://iptv.yang-1989.xyz/tw/cpd839.m3u8
 纬来精采,https://tv123.cc.cd/live.php?ch=739&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=a1abbdf489d5f2305a212ebd76b8e7826a3af7d3c975b0a49bfd27708ac916c1
 纬来精采,https://tv123.cc.cd/live.php?ch=2056&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6b453581d4d8c899f4342fb8db9c7dcadef13962222de04199e0d5b47260b705
 龙祥时代,https://tv123.cc.cd/live.php?ch=524&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f65967f9c5988a2363c49691f586e0e1efc83fa16d94b4182240abb7c3b61726
-龙祥时代,https://tv123.cc.cd/live.php?ch=2070&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6d94d123ed5b05c0a58665959b8b9e9f703b033f361c53110e07cc77a4335338
 龙祥时代,https://tv123.cc.cd/live.php?ch=740&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=1e4e5cac3edd4d90a5358ffa5a02b9359c1d48d81844bdb7392c40cd11665a5f
 龙祥时代,https://tv123.cc.cd/live.php?ch=2347&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f8788ef8b7d58cd4adfcc4a85321c04912126490cf72c5059fc832f3ef2f159d
+龙祥时代,https://tv123.cc.cd/live.php?ch=2070&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6d94d123ed5b05c0a58665959b8b9e9f703b033f361c53110e07cc77a4335338
+龙祥时代,https://iptv.yang-1989.xyz/tw/2zfg3n.m3u8
 三立戏剧,https://tv123.cc.cd/live.php?ch=2037&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b9e6e838d6d4c9077dbfb9613a392e10a9aa68226d04da6e5bfadd73a9c6d592
 三立新闻,https://tv123.cc.cd/live.php?ch=811&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e507f92026fcd148c85a500a735ebe564d6be339c32e37454069deecb3925d39
 三立新闻,https://raw.githubusercontent.com/ChiSheng9/iptv/master/TV32.m3u8
+中天综合,https://iptv.yang-1989.xyz/tw/bhxmaw.m3u8
+中天娱乐,https://iptv.yang-1989.xyz/tw/bpvyar.m3u8
 中視,https://tv123.cc.cd/live.php?ch=758&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2a4f550480323af618b56ce31731f6a659f806870c0ec257d0537640e876e831
 中視,https://tv123.cc.cd/live.php?ch=2023&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9b94a85648ccf6544015066b136e6b4eb721d218cb17c5c100fb7772793a4ccd
 中视新闻,https://tv123.cc.cd/live.php?ch=812&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b56219c5af4f95a1f8e27d4e87da64da6307363cca866605fa38172e2de8bf39
@@ -783,19 +743,21 @@ amc电影台,https://tv123.cc.cd/live.php?ch=2322&sid=dfaea1c0f7a811ecde4d60d89e
 now新闻台,https://tv123.cc.cd/live.php?ch=360&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=aeef0e8c33b07cf601d9bba48059f539826313468aeada20c99185c45eb60048
 now新闻台,https://tv123.cc.cd/live.php?ch=423&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7b838c420dbf270716630cebb0e86f9502dc253eac51a90b641b23d6d11ee145
 now新闻台,https://tv123.cc.cd/live.php?ch=622&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=3108e31a0662b5475dc200d593f3293cb2440fa8bb58b825626ad24db54d5841
-now新闻台,https://tv123.cc.cd/live.php?ch=2230&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=49efc8ba476f7e4594d0c054f33a66e6c3a569e3c0b0ee851539e754d73eb998
 now新闻台,https://tv123.cc.cd/live.php?ch=1757&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=358ff73a3f8a27d19946d03abe653778b49c065a212aecc93011eb2687afc44c
+now新闻台,https://tv123.cc.cd/live.php?ch=2230&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=49efc8ba476f7e4594d0c054f33a66e6c3a569e3c0b0ee851539e754d73eb998
+now新闻台,https://iptv.yang-1989.xyz/hk/awtmej.m3u8
 now新闻台,https://fast.hidns.vip/163189/now
 now新闻台,http://cdn.123.rr.kg/163189/now
 TVB黃金華劇,https://tv123.cc.cd/live.php?ch=633&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=67df249ad8d34e35d24cd43dfc0ab0e4307e6b65d92739e155bd81e57f6c8adc
 Now财经台,https://tv123.cc.cd/live.php?ch=1758&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9d905176f92a269e69600c20ba954dcc15e8980d0272e161ddda58a4cdb55305
+Now财经台,https://iptv.yang-1989.xyz/hk/b48vru.m3u8
 八大精彩台,https://tv123.cc.cd/live.php?ch=855&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=48ca6639ff5b6936074634d20e93a7a4ba1028dc30ddcafa0b8bce19bf54584a
 八大綜合台,https://tv123.cc.cd/live.php?ch=760&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2a0d7e9e9fe0d2bcf263bc668e431cf42f2ff0f5a705b649d6401f0b6bb79ae4
 鏡電視新聞台,https://tv123.cc.cd/live.php?ch=821&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e9a2e91249a6b3e60142d083772e9ad536672ceb233185af45069157ab860d2a
-HBO,https://tv123.cc.cd/live.php?ch=1612&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9cdc4201d4a9f69aa8179b44b77d681bdbe63811193a067f297a9f3ddbc6c4d9
 HBO,https://tv123.cc.cd/live.php?ch=1117&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ccbcc9335e3ea2ba7fbdc40d2f3784a291ec31554756203d9c17492496adf49f
-HBO,https://tv123.cc.cd/live.php?ch=1918&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d649bdff271768ba39a13efd798ccc0b534307cca442e3d299266f1ce9314358
+HBO,https://tv123.cc.cd/live.php?ch=1612&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=9cdc4201d4a9f69aa8179b44b77d681bdbe63811193a067f297a9f3ddbc6c4d9
 HBO,https://tv123.cc.cd/live.php?ch=2032&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6b0fc9f75d4b367def21a4d1bbdbdcbc7c437ea47c053074272a11d65fa0757c
+HBO,https://tv123.cc.cd/live.php?ch=1918&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d649bdff271768ba39a13efd798ccc0b534307cca442e3d299266f1ce9314358
 Animax,https://tv123.cc.cd/live.php?ch=938&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=936548f6a8742e7854a05418df05bf386e4132dcff820caff865c35bd4088f5a
 Animax,https://tv123.cc.cd/live.php?ch=1996&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=eacd16b285e32a66a2a968ad25060ec4fc7d582592562fef5b2d5a93468a41af
 Astro AEC,https://cdn3.indevs.in/stream/live/aec/
@@ -816,12 +778,13 @@ ROCK Action,https://tv123.cc.cd/live.php?ch=647&sid=dfaea1c0f7a811ecde4d60d89ef7
 ROCK Action,https://tv123.cc.cd/live.php?ch=852&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5a61e2f701d27fd6a5637687d3d32a8ee334788cb817db92f1bccc5fc75f2b0f
 Love Nature,https://aegis-cloudfront-1.tubi.video/6d6d0f24-8445-4b4c-bdf6-44f9e38beaa4/playlist.m3u8
 Love Nature,https://tv123.cc.cd/live.php?ch=651&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=5152886b12a0cf42cec2fc00e3638b34711cdfe4bb71d9353471b05b2a99951b
-Love Nature,https://tv123.cc.cd/live.php?ch=839&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d666a1b6d5d198ce2cfb63a6711320a26c0cb6541a3e9f7a0efb02c9c314bdd0
 Love Nature,https://tv123.cc.cd/live.php?ch=652&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=2ccf4fecdcb3e1ee82a05310addc68bbbed97e346b0a11026781e0f5a94da5b7
+Love Nature,https://tv123.cc.cd/live.php?ch=839&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=d666a1b6d5d198ce2cfb63a6711320a26c0cb6541a3e9f7a0efb02c9c314bdd0
 Love Nature,https://tv123.cc.cd/live.php?ch=1751&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=b738cc540b8922b01043f1cec4094d49fe0e2ebc6730b2d8a4d9e608fcf70002
+Love Nature,https://iptv.yang-1989.xyz/hk/cq5jph.m3u8
 Love Nature,https://d2wh06mmk97552.cloudfront.net/playlist/bamusaAAA-bamus-lovenature-lg/playlist.m3u8
-NewsWorld,https://tv123.cc.cd/live.php?ch=608&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e5153dbea43c6795a753eb16a7c519deae81d9796a98fb39e19bcb64bf3c13f7
 NewsWorld,https://tv123.cc.cd/live.php?ch=295&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=875eb560932f86d5823f1a29a01ef7bf082df0132a0fd9bc259d3317938e66b6
+NewsWorld,https://tv123.cc.cd/live.php?ch=608&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=e5153dbea43c6795a753eb16a7c519deae81d9796a98fb39e19bcb64bf3c13f7
 NewsWorld,https://tv123.cc.cd/live.php?ch=708&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=28d2843da8bad8ac8e76a4374f17be082cc0a873454afa6585b69ca7a004139d
 NewsWorld,https://tv123.cc.cd/live.php?ch=1004&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c63c344bc9a7aeb84d13f14f9d7676bcde2e6827b5c55f429a5f70a9f942fb5f
 NewsWorld,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-newsworld-rakutenjp/playlist.m3u8
@@ -829,114 +792,122 @@ NOW 70s,https://lightning-now70s-samsungnz.amagi.tv/playlist.m3u8
 NOW 70s,https://tv123.cc.cd/live.php?ch=615&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=ec1cd76064b7f5754d9fddf078cf6c1e6273b92a15a06b481d9155b46b0bc636
 NOW 70s,https://tv123.cc.cd/live.php?ch=715&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=c9f2bb3d6c2d4bbe2e632bf1802a5a38be674ce13c8bcf0a5d600668585ef62e
 NOW 70s,https://lightning-now70s-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-lightning-now70s-rakuten/CDN/playlist.m3u8
-NOW 80s,https://tv123.cc.cd/live.php?ch=616&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f90d6a39aeb62730f079c4b0633b4c9c8063a78bccbc07a831cfd7f575793b6d
 NOW 80s,https://tv123.cc.cd/live.php?ch=716&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=cc87509457ce1fe49d26106fc87ef9c681d7cd02c5cbdeb5c8404634dc861047
+NOW 80s,https://tv123.cc.cd/live.php?ch=616&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=f90d6a39aeb62730f079c4b0633b4c9c8063a78bccbc07a831cfd7f575793b6d
 NOW 80s,https://lightning-now80s-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-lightning-now80s-rakuten/CDN/playlist.m3u8
 体育频道,#genre#
 五星体育,https://tv123.cc.cd/live.php?ch=487&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=6bed6b119ae2e6a6ba300cfb0bdbdf9612d609faa9113665d1610d084ef28a4d
 五星体育,https://tv123.cc.cd/live.php?ch=2214&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=74444529b3632f625cef1c29fc714ef8a56ddd5a83724939dc0277dc69ed99c9
 五星体育,https://tv123.cc.cd/live.php?ch=2313&sid=dfaea1c0f7a811ecde4d60d89ef7d80b&exp=1794629033&sig=7fe8e57d1bae4019b4ad54a46f816b2976ad5617e90baaef68ddf1ab40eeb2f2
 动画频道,#genre#
+优漫卡通,http://42.94.209.184:7788/626064703
+优漫卡通,http://113.124.186.195:7788/626064703
+优漫卡通,http://116.52.173.150:1234/626064703
+优漫卡通,http://116.237.170.51:7788/626064703
+嘉佳卡通,http://116.237.170.51:7788/614952364
+嘉佳卡通,http://116.52.173.150:1234/614952364
+嘉佳卡通,http://42.94.209.184:7788/614952364
+嘉佳卡通,http://113.124.186.195:7788/614952364
 中华小当家,https://live.ottiptv.cc/huya/11342413
 猫和老鼠,https://live.ottiptv.cc/huya/11352879
+经典剧场,#genre#
+神雕侠侣,https://live.ottiptv.cc/yy/1351762426
+新白娘子传奇,https://live.ottiptv.cc/yy/1354490667
+宰相刘罗锅,https://live.ottiptv.cc/yy/1353892468
+笑傲江湖,https://live.ottiptv.cc/yy/1354282410
+鹿鼎记,https://live.ottiptv.cc/yy/1460463356
+闯关东,https://live.ottiptv.cc/yy/1383546866
+狂飙,https://live.ottiptv.cc/yy/1382626335
+情满四合院,https://live.ottiptv.cc/yy/1382736848
 其它,#genre#
 四海钓鱼,http://113.124.186.195:7788/637444975
 四海钓鱼,http://116.237.170.51:7788/637444975
-快乐垂钓,http://116.237.170.51:7788/961930263
 快乐垂钓,http://113.124.186.195:7788/961930263
+快乐垂钓,http://116.237.170.51:7788/961930263
+大唐双龙传,https://live.ottiptv.cc/yy/1354930979
+雍正王朝,https://live.ottiptv.cc/yy/1356043620
+牛叔说电影,https://live.ottiptv.cc/douyu/2758565
 其它频道,#genre#
+二号交通站,https://live.ottiptv.cc/yy/1382735582
+YY用户,https://live.ottiptv.cc/yy/1382736975
+YY用户,https://live.ottiptv.cc/yy/1382745084
 YY用户,https://live.ottiptv.cc/yy/1382851541
 YY用户,https://live.ottiptv.cc/yy/1382851524
-YY用户,https://live.ottiptv.cc/yy/1382745084
-YY用户,https://live.ottiptv.cc/yy/1382851582
 YY用户,https://live.ottiptv.cc/yy/1382736888
-YY用户,https://live.ottiptv.cc/yy/1382851540
-YY用户,https://live.ottiptv.cc/yy/1382736975
 YY用户,https://live.ottiptv.cc/yy/1382851601
-二号交通站,https://live.ottiptv.cc/yy/1382735582
-少年包青天第三部,https://live.ottiptv.cc/yy/1382736814
-西游记后传,https://live.ottiptv.cc/yy/1382736846
-情满四合院-高分电视剧,https://live.ottiptv.cc/yy/1382735541
-知否知否应是绿肥红瘦,https://live.ottiptv.cc/yy/1354936134
+YY用户,https://live.ottiptv.cc/yy/1382851582
+YY用户,https://live.ottiptv.cc/yy/1382851540
 憨豆先生-经典喜剧,https://live.ottiptv.cc/yy/1354936239
+易中天品三国,https://live.ottiptv.cc/yy/1354931498
+知否知否应是绿肥红瘦,https://live.ottiptv.cc/yy/1354936134
+三国演义94年经典版,https://live.ottiptv.cc/yy/1354936241
+情满四合院-高分电视剧,https://live.ottiptv.cc/yy/1382735541
 无敌县令,https://live.ottiptv.cc/yy/1354932390
 亲爱的热爱的,https://live.ottiptv.cc/yy/1354932433
 粟裕大将-影视,https://live.ottiptv.cc/yy/1354926542
-易中天品三国,https://live.ottiptv.cc/yy/1354931498
-洪大哥系列,https://live.ottiptv.cc/yy/1354888743
-三国演义94年经典版,https://live.ottiptv.cc/yy/1354936241
+魔幻手机,https://live.ottiptv.cc/yy/1382735544
+西游记后传,https://live.ottiptv.cc/yy/1382736846
+少年包青天第三部,https://live.ottiptv.cc/yy/1382736814
 郝蕾演绎-情满四合院,https://live.ottiptv.cc/yy/1382745089
 0,https://live.ottiptv.cc/yy/1382851580
-周星星系列,https://live.ottiptv.cc/yy/1354888671
-魔幻手机,https://live.ottiptv.cc/yy/1382735544
 我爱我家,https://live.ottiptv.cc/yy/1382735557
+周星星系列,https://live.ottiptv.cc/yy/1354888671
 哑巴竟然会说话,https://live.ottiptv.cc/yy/1354932427
 穿越时空的爱恋,https://live.ottiptv.cc/yy/1382735567
 第8号当铺,https://live.ottiptv.cc/yy/1382736905
 在悬崖边缘狂舞,https://live.ottiptv.cc/yy/1382749910
-靓剑,https://live.ottiptv.cc/yy/1382658790
-靓剑,https://live.ottiptv.cc/yy/1356043643
-经典抗战剧,https://live.ottiptv.cc/yy/1354555195
-林正英-经典电影,https://live.ottiptv.cc/yy/34229877
-纪晓岚,https://live.ottiptv.cc/yy/1354143978
-古惑仔,https://live.ottiptv.cc/yy/1458015189
-【靓剑】乐乐陪看,https://live.ottiptv.cc/yy/1352946111
-天龙 神雕金庸,https://live.ottiptv.cc/yy/1356043609
-少年包青天,https://live.ottiptv.cc/yy/1356043677
-康熙微服私访记,https://live.ottiptv.cc/yy/1352811698
-豪哥带我们发财,https://live.ottiptv.cc/yy/23402146
-燕双鹰,https://live.ottiptv.cc/yy/1352227153
-燕双鹰,https://live.ottiptv.cc/yy/1354143942
-隋唐英雄传,https://live.ottiptv.cc/yy/1352475619
-小玲儿 正在直播,https://live.ottiptv.cc/yy/1351814644
-83射雕英雄传,https://live.ottiptv.cc/yy/1354210357
-老九门2,https://live.ottiptv.cc/yy/1355171357
-【盗慕笔记】,https://live.ottiptv.cc/yy/29067083
-赌神 港片 喜剧,https://live.ottiptv.cc/yy/1355112116
-军中绿花,https://live.ottiptv.cc/yy/1507704566
-济公,https://live.ottiptv.cc/yy/1355265814
-李连杰功夫 经典武侠,https://live.ottiptv.cc/yy/74613175
-超喜剧地下交通站男神贾贵,https://live.ottiptv.cc/yy/1353428972
-破案港剧,https://live.ottiptv.cc/yy/1350670730
-士兵突击,https://live.ottiptv.cc/yy/1382768483
-老妖鬼片,https://live.ottiptv.cc/yy/1354952229
-赵本山《超清版》,https://live.ottiptv.cc/yy/1382683959
-赵本山《蓝光版》,https://live.ottiptv.cc/yy/32160832
-w_400,h_500,m_mfit/crop,g_north,w_400,h_500" group-title="zonghe", 【新三国】吕布,https://live.ottiptv.cc/yy/1382851459
-我和僵尸有个约会,https://live.ottiptv.cc/yy/1354143966
 朵宝陪你看狄仁杰,https://live.ottiptv.cc/yy/1353753252
 新三国~24h经典好剧,https://live.ottiptv.cc/yy/1354744544
-经典港片动作搞笑,https://live.ottiptv.cc/yy/1459869766
-经典鬼片3000部,https://live.ottiptv.cc/yy/29460894
+靓剑,https://live.ottiptv.cc/yy/1382658790
+靓剑,https://live.ottiptv.cc/yy/1356043643
+少年包青天,https://live.ottiptv.cc/yy/1356043677
+纪晓岚,https://live.ottiptv.cc/yy/1354143978
+经典抗战剧,https://live.ottiptv.cc/yy/1354555195
+林正英-经典电影,https://live.ottiptv.cc/yy/34229877
+古惑仔,https://live.ottiptv.cc/yy/1458015189
+小玲儿 正在直播,https://live.ottiptv.cc/yy/1351814644
+李连杰功夫 经典武侠,https://live.ottiptv.cc/yy/74613175
+康熙微服私访记,https://live.ottiptv.cc/yy/1352811698
+济公,https://live.ottiptv.cc/yy/1355265814
+隋唐英雄传,https://live.ottiptv.cc/yy/1352475619
+燕双鹰,https://live.ottiptv.cc/yy/1352227153
+燕双鹰,https://live.ottiptv.cc/yy/1354143942
+豪哥带我们发财,https://live.ottiptv.cc/yy/23402146
+【靓剑】乐乐陪看,https://live.ottiptv.cc/yy/1352946111
+天龙 神雕金庸,https://live.ottiptv.cc/yy/1356043609
 进来 陪你看动漫,https://live.ottiptv.cc/yy/1352866135
-宝宝 正在直播,https://live.ottiptv.cc/yy/1420843376
+【盗慕笔记】,https://live.ottiptv.cc/yy/29067083
+我和僵尸有个约会,https://live.ottiptv.cc/yy/1354143966
+超喜剧地下交通站男神贾贵,https://live.ottiptv.cc/yy/1353428972
+军中绿花,https://live.ottiptv.cc/yy/1507704566
+破案港剧,https://live.ottiptv.cc/yy/1350670730
+8090.电影一哥,https://live.ottiptv.cc/yy/29197808
 鬼经典老片,https://live.ottiptv.cc/yy/1463783198
-地下交通站,https://live.ottiptv.cc/yy/1352227227
-西游记后传 蓝光,https://live.ottiptv.cc/yy/1353392400
-w_400,h_500,m_mfit/crop,g_north,w_400,h_500" group-title="zonghe", 《武林外传》武侠,https://live.ottiptv.cc/yy/1394000563
-【新三国】,https://live.ottiptv.cc/yy/1382851415
-雪中悍刀行,https://live.ottiptv.cc/yy/1382660835
-【武林客栈】,https://live.ottiptv.cc/yy/1382773728
-鬼怪奇幻恐怖,https://live.ottiptv.cc/yy/1382749525
-斗罗小舞 正在直播,https://live.ottiptv.cc/yy/1354768831
-会打游戏 会喊哥 缺你,https://live.ottiptv.cc/yy/1382788850
-1930年代经典电影,https://live.ottiptv.cc/yy/1356363815
-国漫动漫,https://live.ottiptv.cc/yy/1354768828
+83射雕英雄传,https://live.ottiptv.cc/yy/1354210357
 薛仁贵传奇,https://live.ottiptv.cc/yy/1355260662
-w_400,h_500,m_mfit/crop,g_north,w_400,h_500" group-title="zonghe", 战狼7吴京退役,https://live.ottiptv.cc/yy/1382773714
+老九门2,https://live.ottiptv.cc/yy/1355171357
+士兵突击,https://live.ottiptv.cc/yy/1382768483
+经典港片动作搞笑,https://live.ottiptv.cc/yy/1459869766
+周星驰喜剧武侠恐怖好看,https://live.ottiptv.cc/yy/29945997
+鬼怪奇幻恐怖,https://live.ottiptv.cc/yy/1382749525
+赌神 港片 喜剧,https://live.ottiptv.cc/yy/1355112116
+国漫动漫,https://live.ottiptv.cc/yy/1354768828
+斗罗小舞 正在直播,https://live.ottiptv.cc/yy/1354768831
+西游记后传 蓝光,https://live.ottiptv.cc/yy/1353392400
+老妖鬼片,https://live.ottiptv.cc/yy/1354952229
+宝宝 正在直播,https://live.ottiptv.cc/yy/1420843376
+经典鬼片3000部,https://live.ottiptv.cc/yy/29460894
+地下交通站,https://live.ottiptv.cc/yy/1352227227
 的直播间,https://live.ottiptv.cc/yy/1354129442
 凡人修仙传 ~真人版,https://live.ottiptv.cc/yy/1355052097
-【新三国】日版,https://live.ottiptv.cc/yy/1382851457
-《石敢当》六耳猕猴,https://live.ottiptv.cc/yy/1394156613
-w_400,h_500,m_mfit/crop,g_north,w_400,h_500" group-title="zonghe", 战狼10086,https://live.ottiptv.cc/yy/1382773686
-《东北小品》,https://live.ottiptv.cc/yy/29600150
+经典影视剧,https://live.ottiptv.cc/yy/1353454489
+新主播,https://live.ottiptv.cc/yy/1355179797
 橙記Orange丶,https://live.ottiptv.cc/douyu/4549169
 baby丶贝贝,https://live.ottiptv.cc/douyu/431460
 小毅主播e,https://live.ottiptv.cc/douyu/11851549
 小毅主播q,https://live.ottiptv.cc/douyu/6906628
 奇光主播,https://live.ottiptv.cc/douyu/8009547
 奇光主播e,https://live.ottiptv.cc/douyu/11849873
-奇光主播q,https://live.ottiptv.cc/douyu/12560807
 Poison丶冰冰,https://live.ottiptv.cc/douyu/74374
 怡宝妹妹丶,https://live.ottiptv.cc/douyu/434971
 Only丶邵氏,https://live.ottiptv.cc/douyu/4246519
@@ -944,12 +915,13 @@ Only丶邵氏,https://live.ottiptv.cc/douyu/4246519
 苹果Zei妖,https://live.ottiptv.cc/douyu/2793084
 网神影厅,https://live.ottiptv.cc/douyu/508118
 铁甲影院,https://live.ottiptv.cc/douyu/1274132
+7师傅,https://live.ottiptv.cc/douyu/17732
 伊太刀刀,https://live.ottiptv.cc/douyu/747764
 蓝翔新三国,https://live.ottiptv.cc/douyu/5908256
 竹叶的熊猫,https://live.ottiptv.cc/douyu/3870925
 万事通熊猫,https://live.ottiptv.cc/douyu/7812810
 白了个痴,https://live.ottiptv.cc/douyu/319576
-周星驰的直播间,https://live.ottiptv.cc/douyu/8257039
+武林萌主唐小姐,https://live.ottiptv.cc/huya/11336726
 龍華經典台,https://8.fast.hidns.vip/163189/lhjd
 龍華經典台,https://iptv.yang-1989.xyz/ofiii/rwz7f5.m3u8
 tvN,https://d2zyqoz1zsj2mq.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-i9yul1lyegl6e-ssai-prd/6d07fe2a_003a_4879_acfc_44e3c3c10f03/hls/playlist.m3u8?tvN
@@ -957,12 +929,12 @@ CGTN (中國環球電視網)記錄頻道,https://amg00405-rakutentv-cgtndocument
 CGTN (中國環球電視網)英語頻道,https://iptv.yang-1989.xyz/cn/7zwemf.m3u8
 东森综合,https://iptv.yang-1989.xyz/tw/zthgxu.m3u8
 CINEMAX,https://iptv.yang-1989.xyz/tw/y24tbz.m3u8
-Celestial Movies,https://cdn3.indevs.in/stream/live/typd/
 Celestial Movies,http://cdn3.123.rr.kg/stream/live/typd/
+Celestial Movies,https://cdn3.indevs.in/stream/live/typd/
 PopC,https://iptv.yang-1989.xyz/hk/pxngsc.m3u8
 无线星河,https://cdn3.indevs.in/stream/live/tvbxh/
-无线星河,https://10.fast.hidns.vip/163189/xinghe/
 无线星河,http://cc.123.rr.kg/163189/tvbxh
+无线星河,https://10.fast.hidns.vip/163189/xinghe/
 无线星河,http://r.jdshipin.com/sXuuD
 无线星河,http://r.jdshipin.com/Voac4
 无线星河,http://php.jdshipin.com/TVOD/iptv.php?id=xinghe
@@ -971,6 +943,7 @@ Arirang,https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch
 CBS News,https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8
 CNBC Asia,https://amg01079-nbcuuk-amg01079c2-samsung-gb-1258.playouts.now.amagi.tv/playlist.m3u8
 CNBC_Asia,https://amg01079-nbcuuk-amg01079c2-samsung-gb-1258.playouts.now.amagi.tv/playlist.m3u8
+CNN,https://turnerlive.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_3_1464000.m3u8
 DW English,https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/index.m3u8
 DW English,https://amg01644-amg01644c1-amgplt0343.playout.now3.amagi.tv/ts-eu-w1-n2/playlist/amg01644-amg01644c1-amgplt0343/cb7f3e1a7b7b6f86cbcf6a6cd1f541a2d10f37855d31853265a2059021cb1e0c85e8fb95e843e74aebae62812b53310d0c78ce07de6c199ebe22f70f61770707fafda222b9c14d57e7c870493ab2727154ee524c8b70435fd8ea5a27b67d8d304532f81962530588bf22f4324dc3800f957e378aa8cd7942053e22e3414db9f905f6ef9608168333b8a17a1dd76c1cb8dc5dc8dc02be90a904cc1ada23ee1598e7f18fdb00e1d7c732eb0ead62590c6c2cdbc42892cc5fe6db9b6a749f272e115304b7a5c2b3166ed5430e0aaaa69fe763fd119ddf26d7521cd16ff0e0073ef0098927e5846da8a4b5de302e53c6e56811ec2478c2f09f1420b46781c2a3bd213ff1f2652c851d3a40200a18e90c4608db961baa9669e8957a14398fa24d9a93b58beeb9b797fd4f2da6d997274b426f054dd313f2da25d219d577a6cb48617f7d71ed9365cc89d75b704d7cc6d106eb465bb5d280869f233ac9203469a858901b247cdc38694be02fd2932823df765fcb6473aa0d75c869d48c01d9eb9be90f30b09ee047fc64e0fc4ae4f310ba6433574de2aa620a056172d2e76a087f289660b58792a1440806ede5c4b196036c4968653966e8ebc843e9ea91712243bb174c055500079a01a40cfe10590c2bb378da9c017b8b036341cba83d545669d6f8b98e89d3c027e426832f9c8aebe3ef0591e77c8294d0d7c8915542ffda8d5997/190/1920x1080_5060000/index.m3u8
 FIFA+,https://d2w9q46ikgrcwx.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-of5cbk3sav3w5/v1/sysdata_s_p_a_fifa_7/samsungheadend_us/latest/main/hls/playlist.m3u8

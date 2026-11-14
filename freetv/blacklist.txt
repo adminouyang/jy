@@ -265,3 +265,8 @@ hwapi.yntv.net
 2.fast.hidns.vip
 120.238.84.45
 cdn2.123.rr.kg
+112.85.93.7
+198.204.240.250
+live.iwcmt.cn
+webcast.hkstv.tv
+171.14.94.102
