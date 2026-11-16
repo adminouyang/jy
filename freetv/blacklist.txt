@@ -272,3 +272,11 @@ webcast.hkstv.tv
 171.14.94.102
 218.206.193.218
 zmgd.zyrnet.com
+dcpull.sctvcloud.com
+m3u8channel-ms.yunxya.com
+m3u8channel-bx.yunxya.com
+116.52.173.150
+play.yunxya.com
+mt.itfree.cyb.wiki
+112.85.93.3
+pili-live-hls.227.i2863.com
