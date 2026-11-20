@@ -15,7 +15,7 @@ jobs:
           python-version: '3.10'
       - run: pip install requests
       - run: mkdir -p Hotel/HSMDTV/logs
-      - name: Run IPTV update script
+      - name: Run hsmdtv_scan.py
         env:
           WORK_DIR: ${{ github.workspace }}/Hotel/HSMDTV
           IP_LIST_FILE: ${{ github.workspace }}/Hotel/HSMDTV/ip/hsmd_ip.txt
