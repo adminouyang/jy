@@ -29,7 +29,7 @@ jobs:
       - name: Create logs directory
         run: mkdir -p logs
 
-      - name: Run IPTV update script
+      - name: Run remote_hotel.py
         env:
           EPG_URL: ${{ secrets.EPG_URL || 'https://epg.112114.xyz/pp.xml' }}
           LOGO_BASE_URL: ${{ secrets.LOGO_BASE_URL || 'https://ghfast.top/https://raw.githubusercontent.com/Jarrey/iptv_logo/main/tv/' }}
